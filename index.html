@@ -4,19 +4,16 @@
     <meta charset="UTF-8">
     <title>馥靈之鑰 Hour Light｜芳香能量調頻線上抽牌</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!-- 字型與高級設計樣式 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #f8f0e5, #e4d2c5);
-            font-family: 'Noto Serif TC', serif;
-            color: #6b4f3e;
+            background-color: #f8f5f0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
             text-align: center;
-            padding: 30px;
+            padding: 20px;
         }
         h1 {
-            font-weight: 700;
-            font-size: 36px;
+            color: #6b4f3e;
         }
         button {
             background-color: #a28572;
@@ -25,25 +22,42 @@
             padding: 10px 20px;
             cursor: pointer;
             font-size: 18px;
-            margin: 8px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-        }
-        button:hover {
-            transform: scale(1.05);
+            margin: 5px;
+            border-radius: 10px;
         }
         img {
             max-width: 220px;
-            margin: 12px;
+            height: auto;
+            margin: 10px;
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        #result {
+            margin-top: 20px;
+        }
+
+        /* 手機響應式設計優化 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+            button {
+                padding: 8px 12px;
+                font-size: 16px;
+                margin: 6px 4px;
+            }
+            img {
+                max-width: 45%;
+                margin: 8px 4px;
+            }
+            body {
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <h1>馥靈之鑰 Hour Light｜芳香能量調頻線上抽牌</h1>
-
     <div>
         <button onclick="drawCards(1)">抽 1 張</button>
         <button onclick="drawCards(3)">抽 3 張</button>
@@ -56,11 +70,6 @@
     </div>
 
     <div id="result"></div>
-
-    <div>
-        <button onclick="shareToFB()">分享到 Facebook</button>
-        <button onclick="shareToLINE()">分享到 LINE</button>
-    </div>
 
     <script>
         function drawCards(num) {
@@ -83,17 +92,6 @@
                 img.src = `https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg`;
                 resultDiv.appendChild(img);
             });
-        }
-
-        // 社群分享功能
-        function shareToFB() {
-          let url = encodeURIComponent(location.href);
-          window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
-        }
-
-        function shareToLINE() {
-          let url = encodeURIComponent(location.href);
-          window.open(`https://social-plugins.line.me/lineit/share?url=${url}`, '_blank');
         }
     </script>
 </body>
