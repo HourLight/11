@@ -39,12 +39,6 @@
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-        p {
-            font-size: 16px;
-            color: #4a3b31;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
@@ -69,16 +63,6 @@
     </div>
 
     <script>
-        // 牌卡解析內容（你可以持續補齊至130張牌）
-        const cardDescriptions = {
-          1: "這張牌提醒你，放慢腳步才能看清楚眼前的路，適時休息與放鬆，才有力量繼續前行。",
-          2: "這張牌提醒你，要相信自己的直覺，答案已經在你內心深處。",
-          3: "你擁有獨特的魅力，不需強求就能吸引美好的事物到來。",
-          4: "學會等待時機成熟，耐心與智慧是你此刻的最佳伴侶。",
-          5: "放下過去的包袱，允許新的機會與能量進入你的生命。",
-          // 更多牌卡內容可逐步新增...
-        };
-
         function drawCards(num) {
             alert("請閉上眼睛，深呼吸，專心想著您的問題，再點擊確認");
 
@@ -98,10 +82,6 @@
                 let img = document.createElement('img');
                 img.src = `https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg`;
                 resultDiv.appendChild(img);
-
-                let description = document.createElement('p');
-                description.innerText = cardDescriptions[card] || "牌卡內容建置中，敬請期待…";
-                resultDiv.appendChild(description);
             });
         }
 
