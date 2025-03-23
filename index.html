@@ -53,23 +53,25 @@
 
     <script>
         function drawCards(num) {
-            let totalCards = 130;
-            let cardNumbers = [];
-            for(let i=1; i<=totalCards; i++){
-                cardNumbers.push(i);
+            if(confirm("請先閉上眼睛，默念心中的問題。\n\n深呼吸三次，感覺準備好之後，再按『確認』進行抽牌。")){
+                let totalCards = 130;
+                let cardNumbers = [];
+                for(let i=1; i<=totalCards; i++){
+                    cardNumbers.push(i);
+                }
+
+                cardNumbers.sort(() => Math.random() - 0.5);
+                let selectedCards = cardNumbers.slice(0, num);
+
+                let resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '';
+
+                selectedCards.forEach(card => {
+                    let img = document.createElement('img');
+                    img.src = `https://hourlight.github.io/11/${card}.jpg`;
+                    resultDiv.appendChild(img);
+                });
             }
-
-            cardNumbers.sort(() => Math.random() - 0.5);
-            let selectedCards = cardNumbers.slice(0, num);
-
-            let resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = '';
-
-            selectedCards.forEach(card => {
-                let img = document.createElement('img');
-                img.src = `https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg`;
-                resultDiv.appendChild(img);
-            });
         }
     </script>
 </body>
