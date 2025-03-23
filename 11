@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>馥靈之鑰Hour Light｜芳香能量調頻線上抽牌</title>
+    <style>
+        body {
+            background-color: #f8f5f0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #6b4f3e;
+        }
+        button {
+            background-color: #a28572;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+        img {
+            max-width: 220px;
+            height: auto;
+            margin: 10px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>馥靈之鑰Hour Light｜芳香能量調頻線上抽牌</h1>
+    <div>
+        <button onclick="drawCards(1)">抽 1 張</button>
+        <button onclick="drawCards(3)">抽 3 張</button>
+        <button onclick="drawCards(5)">抽 5 張</button>
+        <button onclick="drawCards(7)">抽 7 張</button>
+        <button onclick="drawCards(9)">抽 9 張</button>
+        <button onclick="drawCards(10)">抽 10 張</button>
+        <button onclick="drawCards(12)">抽 12 張</button>
+        <button onclick="drawCards(15)">抽 15 張</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        function drawCards(num) {
+            let totalCards = 130;
+            let cardNumbers = [];
+            for(let i=1; i<=totalCards; i++){
+                cardNumbers.push(i);
+            }
+
+            cardNumbers.sort(() => Math.random() - 0.5);
+            let selectedCards = cardNumbers.slice(0, num);
+
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+
+            selectedCards.forEach(card => {
+                let img = document.createElement('img');
+                img.src = `https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg`;
+                resultDiv.appendChild(img);
+            });
+        }
+    </script>
+</body>
+</html>
