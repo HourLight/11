@@ -35,8 +35,12 @@
         #result {
             margin-top: 20px;
         }
+        #copy-btn {
+            background-color: #6b4f3e;
+            margin-top: 15px;
+        }
 
-        /* 手機響應式設計優化 */
+        /* 手機響應式設計 */
         @media (max-width: 600px) {
             h1 {
                 font-size: 28px;
@@ -71,26 +75,47 @@
 
     <div id="result"></div>
 
+    <button id="copy-btn" onclick="copyCards()">📋 複製抽牌結果</button>
+
     <script>
+        let selectedCardsGlobal = []; // 全域變數儲存牌號
+
         function drawCards(num) {
             alert("請閉上眼睛，深呼吸，專心想著您的問題，再點擊確認");
 
             let totalCards = 130;
-            let selectedCards = [];
-            while (selectedCards.length < num) {
+            selectedCardsGlobal = [];
+            while (selectedCardsGlobal.length < num) {
                 let cardNum = Math.floor(Math.random() * totalCards) + 1;
-                if (!selectedCards.includes(cardNum)) {
-                    selectedCards.push(cardNum);
+                if (!selectedCardsGlobal.includes(cardNum)) {
+                    selectedCardsGlobal.push(cardNum);
                 }
             }
 
             let resultDiv = document.getElementById('result');
             resultDiv.innerHTML = '';
 
-            selectedCards.forEach(card => {
+            selectedCardsGlobal.forEach(card => {
                 let img = document.createElement('img');
                 img.src = `https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg`;
                 resultDiv.appendChild(img);
+            });
+        }
+
+        function copyCards() {
+            if(selectedCardsGlobal.length === 0){
+                alert('請先抽牌後再複製喔！');
+                return;
+            }
+
+            const cardText = selectedCardsGlobal
+                .map(card => card.toString().padStart(3, '0'))
+                .join('、');
+
+            navigator.clipboard.writeText(cardText).then(() => {
+                alert('已成功複製牌卡編號：' + cardText);
+            }).catch(err => {
+                alert('複製失敗，請手動複製：' + cardText);
             });
         }
     </script>
