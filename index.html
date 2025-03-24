@@ -17,7 +17,6 @@
         h1 {
             color: #6b4f3e;
             font-size: 32px;
-            text-shadow: 0 1px 3px rgba(255,255,255,0.8);
             background-color: rgba(255,255,255,0.8);
             display: inline-block;
             padding: 10px 20px;
@@ -67,7 +66,6 @@
             margin-top: 20px;
             background-color: #cda86e;
         }
-
         @media (max-width: 768px) {
             button {
                 width: 80%;
@@ -93,7 +91,9 @@
         <button onclick="drawCards(1)">抽 1 張</button>
         <button onclick="drawCards(3)">抽 3 張</button>
         <button onclick="drawCards(5)">抽 5 張</button>
+        <button onclick="drawCards(7)">抽 7 張</button>
         <button onclick="drawCards(9)">抽 9 張</button>
+        <button onclick="drawCards(10)">抽 10 張</button>
         <button onclick="drawCards(12)">抽 12 張</button>
         <button onclick="drawCards(15)">抽 15 張</button>
     </div>
@@ -103,6 +103,14 @@
 
     <script>
         let selectedCards = [];
+
+        function formatCardNumber(card) {
+            if (card <= 22) {
+                return String(card - 1).padStart(2, '0'); // 00-21
+            } else {
+                return String(card - 22).padStart(3, '0'); // 001-108
+            }
+        }
 
         function drawCards(num) {
             alert("請閉上眼睛，深呼吸，專心想著您的問題，再點擊確認");
@@ -120,7 +128,7 @@
             resultDiv.innerHTML = '';
 
             selectedCards.forEach(card => {
-                let formattedCardNum = String(card).padStart(3, '0'); // 轉成3位數編號
+                let formattedCardNum = formatCardNumber(card);
                 
                 let img = document.createElement('img');
                 img.src = `https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg`;
@@ -138,7 +146,7 @@
                 alert("請先抽牌後再複製！");
                 return;
             }
-            let formattedNumbers = selectedCards.map(card => String(card).padStart(3, '0'));
+            let formattedNumbers = selectedCards.map(card => formatCardNumber(card));
             navigator.clipboard.writeText(formattedNumbers.join(', '))
                 .then(() => alert('抽牌編號已複製！'))
                 .catch(err => alert('複製失敗，請手動複製：' + formattedNumbers.join(', ')));
