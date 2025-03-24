@@ -6,66 +6,68 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
         body {
-            background: url('https://github.com/HourLight/11/raw/main/background.jpg') center/cover fixed;
+            background: url('https://i.imgur.com/8wE4PpJ.png') no-repeat center center fixed;
+            background-size: cover;
             font-family: 'Arial', sans-serif;
             color: #333;
             text-align: center;
             padding: 20px;
-            margin: 0;
         }
         h1 {
             color: #6b4f3e;
-            background-color: rgba(255,255,255,0.8);
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            font-size: 32px;
+            text-shadow: 0 1px 3px rgba(255,255,255,0.8);
         }
         button {
             background-color: #a28572;
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 15px 25px;
             cursor: pointer;
             font-size: 20px;
-            margin: 5px;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            margin: 8px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.3s;
         }
         button:hover {
-            background-color: #8b6c5b;
+            background-color: #6b4f3e;
+            transform: translateY(-2px);
         }
         img {
-            width: 90%;
-            max-width: 300px;
+            max-width: 220px;
             height: auto;
-            margin: 10px auto;
+            margin: 10px;
             border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.4);
-            display: block;
-        }
-        .card-number {
-            font-size: 24px;
-            font-weight: bold;
-            color: #6b4f3e;
-            margin-top: -10px;
-            margin-bottom: 20px;
-            background-color: rgba(255,255,255,0.8);
-            border-radius: 8px;
-            display: inline-block;
-            padding: 5px 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
         #result {
             margin-top: 20px;
         }
         #copyBtn {
-            background-color: #d4af37;
             font-size: 22px;
-            padding: 15px 30px;
-            margin-top: 25px;
+            padding: 12px 20px;
+            margin-top: 20px;
+            background-color: #cda86e;
         }
-        #copyBtn:hover {
-            background-color: #b4902a;
+
+        /* 手機螢幕進一步優化 */
+        @media (max-width: 768px) {
+            button {
+                width: 80%;
+                display: block;
+                margin: 12px auto;
+                padding: 18px 0;
+                font-size: 24px;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            #copyBtn {
+                width: 80%;
+                font-size: 24px;
+                padding: 15px 0;
+            }
         }
     </style>
 </head>
@@ -77,12 +79,13 @@
         <button onclick="drawCards(5)">抽 5 張</button>
         <button onclick="drawCards(7)">抽 7 張</button>
         <button onclick="drawCards(9)">抽 9 張</button>
+        <button onclick="drawCards(10)">抽 10 張</button>
         <button onclick="drawCards(12)">抽 12 張</button>
         <button onclick="drawCards(15)">抽 15 張</button>
     </div>
 
     <div id="result"></div>
-    <button id="copyBtn" onclick="copyNumbers()" style="display:none;">📋 複製抽到的牌號</button>
+    <button id="copyBtn" onclick="copyResult()">複製抽牌編號</button>
 
     <script>
         let selectedCards = [];
@@ -103,30 +106,20 @@
             resultDiv.innerHTML = '';
 
             selectedCards.forEach(card => {
-                let cardContainer = document.createElement('div');
-
                 let img = document.createElement('img');
                 img.src = `https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg`;
-                cardContainer.appendChild(img);
-
-                let cardNumber = document.createElement('div');
-                cardNumber.className = 'card-number';
-                cardNumber.textContent = `牌卡編號：${card}`;
-                cardContainer.appendChild(cardNumber);
-
-                resultDiv.appendChild(cardContainer);
+                resultDiv.appendChild(img);
             });
-
-            document.getElementById('copyBtn').style.display = 'inline-block';
         }
 
-        function copyNumbers() {
-            let numbersText = selectedCards.map(num => `牌卡編號：${num}`).join('\n');
-            navigator.clipboard.writeText(numbersText).then(() => {
-                alert('牌號複製成功！');
-            }).catch(err => {
-                alert('複製失敗，請手動複製。');
-            });
+        function copyResult() {
+            if (selectedCards.length === 0) {
+                alert("請先抽牌後再複製！");
+                return;
+            }
+            navigator.clipboard.writeText(selectedCards.join(', '))
+                .then(() => alert('抽牌編號已複製！'))
+                .catch(err => alert('複製失敗，請手動複製：' + selectedCards.join(', ')));
         }
     </script>
 </body>
