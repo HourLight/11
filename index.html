@@ -26,37 +26,27 @@
             border-radius: 10px;
         }
         img {
-            max-width: 220px;
+            width: 90%;
+            max-width: 300px;
             height: auto;
-            margin: 10px;
+            margin: 10px auto;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            display: block;
+        }
+        .card-number {
+            font-size: 22px;
+            font-weight: bold;
+            color: #a28572;
+            margin-top: -10px;
+            margin-bottom: 20px;
         }
         #result {
             margin-top: 20px;
         }
-        #copy-btn {
+        #copyBtn {
             background-color: #6b4f3e;
-            margin-top: 15px;
-        }
-
-        /* 手機響應式設計 */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 28px;
-            }
-            button {
-                padding: 8px 12px;
-                font-size: 16px;
-                margin: 6px 4px;
-            }
-            img {
-                max-width: 45%;
-                margin: 8px 4px;
-            }
-            body {
-                padding: 10px;
-            }
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -74,48 +64,50 @@
     </div>
 
     <div id="result"></div>
-
-    <button id="copy-btn" onclick="copyCards()">📋 複製抽牌結果</button>
+    <button id="copyBtn" onclick="copyNumbers()" style="display:none;">複製抽到的牌號</button>
 
     <script>
-        let selectedCardsGlobal = []; // 全域變數儲存牌號
+        let selectedCards = [];
 
         function drawCards(num) {
             alert("請閉上眼睛，深呼吸，專心想著您的問題，再點擊確認");
 
             let totalCards = 130;
-            selectedCardsGlobal = [];
-            while (selectedCardsGlobal.length < num) {
+            selectedCards = [];
+            while (selectedCards.length < num) {
                 let cardNum = Math.floor(Math.random() * totalCards) + 1;
-                if (!selectedCardsGlobal.includes(cardNum)) {
-                    selectedCardsGlobal.push(cardNum);
+                if (!selectedCards.includes(cardNum)) {
+                    selectedCards.push(cardNum);
                 }
             }
 
             let resultDiv = document.getElementById('result');
             resultDiv.innerHTML = '';
 
-            selectedCardsGlobal.forEach(card => {
+            selectedCards.forEach(card => {
+                let cardContainer = document.createElement('div');
+
                 let img = document.createElement('img');
                 img.src = `https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg`;
-                resultDiv.appendChild(img);
+                cardContainer.appendChild(img);
+
+                let cardNumber = document.createElement('div');
+                cardNumber.className = 'card-number';
+                cardNumber.textContent = `牌卡編號：${card}`;
+                cardContainer.appendChild(cardNumber);
+
+                resultDiv.appendChild(cardContainer);
             });
+
+            document.getElementById('copyBtn').style.display = 'inline-block';
         }
 
-        function copyCards() {
-            if(selectedCardsGlobal.length === 0){
-                alert('請先抽牌後再複製喔！');
-                return;
-            }
-
-            const cardText = selectedCardsGlobal
-                .map(card => card.toString().padStart(3, '0'))
-                .join('、');
-
-            navigator.clipboard.writeText(cardText).then(() => {
-                alert('已成功複製牌卡編號：' + cardText);
+        function copyNumbers() {
+            let numbersText = selectedCards.map(num => `牌卡編號：${num}`).join('\n');
+            navigator.clipboard.writeText(numbersText).then(() => {
+                alert('牌號複製成功！');
             }).catch(err => {
-                alert('複製失敗，請手動複製：' + cardText);
+                alert('複製失敗，請手動複製。');
             });
         }
     </script>
