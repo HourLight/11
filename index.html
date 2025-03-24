@@ -101,6 +101,14 @@
     <script>
         let selectedCards = [];
 
+        function formatCardNumber(card) {
+            if (card <= 22) {
+                return (card - 1).toString().padStart(2, '0');
+            } else {
+                return (card - 22).toString().padStart(3, '0');
+            }
+        }
+
         function drawCards(num) {
             alert("請閉上眼睛，深呼吸，專心想著您的問題，再點擊確認");
 
@@ -117,7 +125,7 @@
             resultDiv.innerHTML = '';
 
             selectedCards.forEach(card => {
-                let formattedCardNum = card.toString().padStart(3, '0');
+                let formattedCardNum = formatCardNumber(card);
 
                 let cardContainer = document.createElement('div');
                 cardContainer.className = 'card-container';
@@ -140,7 +148,7 @@
                 alert("請先抽牌後再複製！");
                 return;
             }
-            let formattedNumbers = selectedCards.map(card => card.toString().padStart(3, '0'));
+            let formattedNumbers = selectedCards.map(card => formatCardNumber(card));
             navigator.clipboard.writeText(formattedNumbers.join(', '))
                 .then(() => alert('抽牌編號已複製！'))
                 .catch(() => alert('複製失敗，請手動複製：' + formattedNumbers.join(', ')));
