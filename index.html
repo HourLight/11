@@ -18,10 +18,10 @@
             color: #6b4f3e;
             font-size: 32px;
             text-shadow: 0 1px 3px rgba(255,255,255,0.8);
-            background-color: rgba(255,255,255,0.8); /* 半透明白底 */
+            background-color: rgba(255,255,255,0.8);
             display: inline-block;
             padding: 10px 20px;
-            border-radius: 15px; /* 圓角增加高級感 */
+            border-radius: 15px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             margin-bottom: 15px;
         }
@@ -47,6 +47,16 @@
             margin: 10px;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        .card-number {
+            font-size: 22px;
+            font-weight: bold;
+            color: #6b4f3e;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            padding: 4px 10px;
+            margin: 5px auto 15px auto;
+            display: inline-block;
         }
         #result {
             margin-top: 20px;
@@ -85,6 +95,7 @@
         <button onclick="drawCards(5)">抽 5 張</button>
         <button onclick="drawCards(7)">抽 7 張</button>
         <button onclick="drawCards(9)">抽 9 張</button>
+        <button onclick="drawCards(10)">抽 10 張</button>
         <button onclick="drawCards(12)">抽 12 張</button>
         <button onclick="drawCards(15)">抽 15 張</button>
     </div>
@@ -111,9 +122,16 @@
             resultDiv.innerHTML = '';
 
             selectedCards.forEach(card => {
+                let formattedCardNum = String(card).padStart(3, '0'); // 轉成3位數編號
+                
                 let img = document.createElement('img');
                 img.src = `https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg`;
                 resultDiv.appendChild(img);
+
+                let cardNumberDiv = document.createElement('div');
+                cardNumberDiv.className = 'card-number';
+                cardNumberDiv.textContent = `牌卡編號：${formattedCardNum}`;
+                resultDiv.appendChild(cardNumberDiv);
             });
         }
 
@@ -122,9 +140,10 @@
                 alert("請先抽牌後再複製！");
                 return;
             }
-            navigator.clipboard.writeText(selectedCards.join(', '))
+            let formattedNumbers = selectedCards.map(card => String(card).padStart(3, '0'));
+            navigator.clipboard.writeText(formattedNumbers.join(', '))
                 .then(() => alert('抽牌編號已複製！'))
-                .catch(err => alert('複製失敗，請手動複製：' + selectedCards.join(', ')));
+                .catch(err => alert('複製失敗，請手動複製：' + formattedNumbers.join(', ')));
         }
     </script>
 </body>
