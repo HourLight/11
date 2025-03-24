@@ -6,18 +6,19 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
         body {
-            background: url('https://images.unsplash.com/photo-1602979765361-0c2c7dc48024?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            background: url('https://i.imgur.com/ZhRLleA.jpg') center/cover fixed;
             font-family: 'Arial', sans-serif;
             color: #333;
             text-align: center;
             padding: 20px;
+            margin: 0;
         }
         h1 {
             color: #6b4f3e;
-            background-color: rgba(255,255,255,0.7);
+            background-color: rgba(255,255,255,0.8);
             display: inline-block;
             padding: 10px 20px;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
         button {
@@ -58,13 +59,13 @@
             margin-top: 20px;
         }
         #copyBtn {
-            background-color: #d4af37; /* 金色按鈕 */
-            font-size: 22px; /* 更大的字體 */
+            background-color: #d4af37;
+            font-size: 22px;
             padding: 15px 30px;
             margin-top: 25px;
         }
         #copyBtn:hover {
-            background-color: #b4902a; /* 深金色 */
+            background-color: #b4902a;
         }
     </style>
 </head>
@@ -76,7 +77,6 @@
         <button onclick="drawCards(5)">抽 5 張</button>
         <button onclick="drawCards(7)">抽 7 張</button>
         <button onclick="drawCards(9)">抽 9 張</button>
-        <button onclick="drawCards(10)">抽 10 張</button>
         <button onclick="drawCards(12)">抽 12 張</button>
         <button onclick="drawCards(15)">抽 15 張</button>
     </div>
@@ -88,7 +88,7 @@
         let selectedCards = [];
 
         function drawCards(num) {
-            alert("請閉上眼睛，深呼吸，專心想著您的問題，再點擊確認");
+            alert("請閉上眼睛，深呼吸，專心想著您的問題，在點擊確認");
 
             let totalCards = 130;
             selectedCards = [];
