@@ -103,7 +103,7 @@
 
         function formatCardNumber(card) {
             if (card <= 22) {
-                return (card - 1).toString().padStart(2, '0');
+                return 'A' + (card - 1).toString().padStart(2, '0');
             } else {
                 return (card - 22).toString().padStart(3, '0');
             }
