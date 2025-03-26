@@ -76,23 +76,39 @@
     </div>
 
     <script>
-        function drawCard() {
-            alert("請深呼吸，默念您的心願，點擊確認抽牌");
+        function formatCardNumber(card) {
+            return card <= 22 ? 'A' + (card - 1).toString().padStart(2, '0') : (card - 22).toString().padStart(3, '0');
+        }
 
-            // 你可自由調整卡牌資訊
-            let cardNumber = 'A08';
-            let cardName = '內在力量'; // 自行修改卡牌名稱
-            let cardImage = 'https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_9.jpg';
+        function drawCard() {
+            alert("深呼吸，心中默默詢問:請「馥靈之鑰」幫我調頻，確認我現在最需要的能量。然後點擊確認");
+
+            let totalCards = 130;
+            let card = Math.floor(Math.random() * totalCards) + 1;
+
+            let cardNumber = formatCardNumber(card);
+            let cardImage = `https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg`;
 
             let cardArea = document.getElementById('cardArea');
             cardArea.innerHTML = `
                 <img src="${cardImage}">
-                <div class="card-name">✨ ${cardName} ✨<br>(卡牌編號：${cardNumber})</div>
+                <div class="card-name">✨ 馥靈之鑰 能量卡 ✨<br>(卡牌編號：<span id="cardNumber">${cardNumber}</span>)</div>
+                <br>
+                <button onclick="copyCardNumber()">📋 點我複製牌卡編號</button>
                 <br>
                 <a href="https://chatgpt.com/g/g-67dbfd35223c8191a5b6fe5f91e1fe60-fu-ling-zhi-yao-hour-lightzhi-jian-neng-liang-diao-pin-xi-tong" 
                    target="_blank" class="link-button">🔮 點我獲取指尖能量頻測報告 🔮</a>
                 <br>
                 <button onclick="location.reload()">重新抽牌</button>`;
+        }
+
+        function copyCardNumber() {
+            let cardNumber = document.getElementById('cardNumber').innerText;
+            navigator.clipboard.writeText(cardNumber).then(() => {
+                alert('牌卡編號「' + cardNumber + '」已複製！請在頻測網頁中貼上使用。');
+            }, () => {
+                alert('無法自動複製，請手動複製：' + cardNumber);
+            });
         }
     </script>
 </body>
