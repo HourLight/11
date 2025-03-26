@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>馥靈之鑰 Hour Light Spa｜芳香能量調頻抽牌</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {
+            background: url('https://github.com/HourLight/11/raw/main/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 30px;
+            background-color: rgba(255,255,255,0.8);
+            color: #6b4f3e;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        button, .link-button {
+            background-color: #cda86e;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 22px;
+            border-radius: 15px;
+            margin-top: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        button:hover, .link-button:hover {
+            background-color: #a28572;
+            transform: translateY(-2px);
+        }
+        img {
+            max-width: 220px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            margin: 10px;
+        }
+        .card-number {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #6b4f3e;
+            background-color: rgba(255,255,255,0.8);
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            button, .link-button {
+                width: 80%;
+                padding: 15px 0;
+            }
+            img {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🌿 馥靈之鑰 Hour Light Spa<br>芳香能量調頻抽牌 🌿</h1>
+    <div id="buttonArea">
+        <button onclick="drawCards(3)">抽 3 張</button>
+        <button onclick="drawCards(5)">抽 5 張</button>
+        <button onclick="drawCards(9)">抽 9 張</button>
+    </div>
+    <div id="cardArea"></div>
+
+    <script>
+        function formatCardNumber(card) {
+            return card <= 22 ? 'A' + (card - 1).toString().padStart(2, '0') : (card - 22).toString().padStart(3, '0');
+        }
+
+        function drawCards(num) {
+            alert("深呼吸，默念心中問題，請指引我現在身體最需要的調頻能量。");
+
+            let totalCards = 130;
+            let selectedCards = [];
+            while (selectedCards.length < num) {
+                let card = Math.floor(Math.random() * totalCards) + 1;
+                if (!selectedCards.includes(card)) {
+                    selectedCards.push(card);
+                }
+            }
+
+            let cardArea = document.getElementById('cardArea');
+            let cardNumbersForCopy = selectedCards.map(formatCardNumber).join(', ');
+            
+            let cardHTML = selectedCards.map(card => `
+                <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg">
+                <div class="card-number">${formatCardNumber(card)}</div>
+            `).join('');
+
+            cardArea.innerHTML = cardHTML + `
+                <br><button onclick="copyCardNumbers('${cardNumbersForCopy}')">📋 一鍵複製所有牌卡編號</button>
+                <br><a href="https://chatgpt.com/g/g-67de9b17edac8191b3a38621d000fe5b-fu-ling-zhi-yao-hour-light-spa" target="_blank" class="link-button">🌟 點我進入能量對頻 🌟</a>
+                <br><button onclick="location.reload()">重新抽牌</button>`;
+        }
+
+        function copyCardNumbers(numbers) {
+            navigator.clipboard.writeText(numbers).then(() => {
+                alert('所有牌卡編號已複製：' + numbers);
+            }, () => {
+                alert('無法自動複製，請手動複製：' + numbers);
+            });
+        }
+    </script>
+</body>
+</html>
