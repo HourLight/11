@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>馥靈之鑰｜美甲專屬能量卡抽牌＋頻測報告</title>
+    <style>
+        body {
+            background: url('https://github.com/HourLight/11/raw/main/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 30px;
+            background-color: rgba(255,255,255,0.8);
+            color: #6b4f3e;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        button, .link-button {
+            background-color: #cda86e;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 22px;
+            border-radius: 15px;
+            margin-top: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        button:hover, .link-button:hover {
+            background-color: #a28572;
+            transform: translateY(-2px);
+        }
+        img {
+            max-width: 280px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            margin-top: 20px;
+        }
+        .card-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #6b4f3e;
+            background-color: rgba(255,255,255,0.8);
+            padding: 5px 15px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            img {
+                width: 90%;
+            }
+            button, .link-button {
+                width: 80%;
+                padding: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>💅 馥靈之鑰｜美甲專屬能量卡 💅</h1>
+    <div id="cardArea">
+        <button onclick="drawCard()">點我抽取專屬能量卡</button>
+    </div>
+
+    <script>
+        function drawCard() {
+            alert("請深呼吸，默念您的心願，點擊確認抽牌");
+
+            // 你可自由調整卡牌資訊
+            let cardNumber = 'A08';
+            let cardName = '內在力量'; // 自行修改卡牌名稱
+            let cardImage = 'https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_9.jpg';
+
+            let cardArea = document.getElementById('cardArea');
+            cardArea.innerHTML = `
+                <img src="${cardImage}">
+                <div class="card-name">✨ ${cardName} ✨<br>(卡牌編號：${cardNumber})</div>
+                <br>
+                <a href="https://chatgpt.com/g/g-67dbfd35223c8191a5b6fe5f91e1fe60-fu-ling-zhi-yao-hour-lightzhi-jian-neng-liang-diao-pin-xi-tong" 
+                   target="_blank" class="link-button">🔮 點我獲取指尖能量頻測報告 🔮</a>
+                <br>
+                <button onclick="location.reload()">重新抽牌</button>`;
+        }
+    </script>
+</body>
+</html>
