@@ -69,6 +69,22 @@
             margin-top: 20px;
             background-color: #cda86e;
         }
+        .home-button {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #cda86e;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            font-family: Arial, sans-serif;
+            margin: 25px auto;
+        }
+        .home-button:hover {
+            background-color: #a28572;
+            transform: translateY(-2px);
+        }
         @media (max-width: 768px) {
             button, #copyBtn {
                 width: 80%;
@@ -97,6 +113,12 @@
 
     <div id="result"></div>
     <button id="copyBtn" onclick="copyResult()">📋 複製牌卡編號</button>
+<div style="text-align:center; margin-top:20px;">
+    <a class="home-button" href="https://chatgpt.com/g/g-67de9df8ee9c8191a6fff09a77f24fa0-fu-ling-zhi-yao-jie-pai" target="_blank">🔮 前往馥靈之鑰解牌頁面</a>
+</div>
+    <div style="text-align:center;">
+        <a class="home-button" href="index.html">🏠 返回首頁</a>
+    </div>
 
     <script>
         let selectedCards = [];
