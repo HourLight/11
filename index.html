@@ -95,6 +95,7 @@
 </head>
 <body>
     <h1>馥靈之鑰 Hour Light｜芳香能量調頻線上抽牌</h1>
+
     <div>
         <button onclick="drawCards(1)">抽 1 張</button>
         <button onclick="drawCards(3)">抽 3 張</button>
@@ -105,20 +106,28 @@
         <button onclick="drawCards(15)">抽 15 張</button>
     </div>
 
+    <!-- 缺少的牌卡顯示容器 -->
     <div id="result"></div>
+
+    <!-- 缺少的複製按鈕 -->
     <button id="copyBtn" onclick="copyResult()">📋 複製牌卡編號</button>
 
     <div style="text-align:center; margin-top:20px;">
-        <button class="home-button" onclick="copyURL()">🔮 複製解牌連結</button>
-       
-        <p style="color:#6b4f3e; margin-top:10px; background-color: rgba(255,255,255,0.8); display:inline-block; padding:8px 12px; border-radius:8px;">
-⚠️ 由於連結限制，請複製連結後自行開啟。
-</p>
-
+        <button class="home-button" onclick="copyURL()">🔮 複製解牌連結</button><br>
+        <span style="
+            background-color: rgba(255,255,255,0.8);
+            padding: 5px 10px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #6b4f3e;">
+            ⚠️ 由於連結限制，請複製連結後自行開啟。
+        </span>
     </div>
 
     <div style="text-align:center;">
-       <a class="home-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
+        <a class="home-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
     </div>
 
     <script>
