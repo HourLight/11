@@ -168,13 +168,7 @@
             navigator.clipboard.writeText(formattedNumbers)
                 .then(() => alert('抽牌編號已複製！'))
                 .catch(() => alert('複製失敗，請手動複製：' + formattedNumbers));
-        }
 
-        function copyURL() {
-            const url = "https://chatgpt.com/g/g-67de9df8ee9c8191a6fff09a77f24fa0-fu-ling-zhi-yao-jie-pai";
-            navigator.clipboard.writeText(url)
-                .then(() => alert("解牌連結已複製，請自行在新頁籤貼上開啟！"))
-                .catch(() => alert("複製失敗，請手動複製：" + url));
         }
     </script>
 </body>
