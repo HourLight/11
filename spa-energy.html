@@ -9,73 +9,87 @@
             background: url('https://github.com/HourLight/11/raw/main/background.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Arial', sans-serif;
-            color: #333;
-            margin: 0;
+            color: #6b4f3e;
             padding: 20px;
-            text-align: center;
+            margin: 0;
         }
         .container {
-            background-color: rgba(255,255,255,0.85);
-            max-width: 920px;
+            max-width: 960px;
+            background-color: rgba(255,255,255,0.9);
             margin: auto;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
         }
         h1 {
-            font-size: 30px;
-            color: #6b4f3e;
-            margin-bottom: 10px;
+            font-size: 32px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
         }
         .intro {
             font-size: 18px;
-            margin: 15px auto 25px;
             background: rgba(255,255,255,0.6);
-            color: #6b4f3e;
-            padding: 10px;
-            border-radius: 12px;
+            padding: 12px 20px;
+            border-radius: 15px;
             display: inline-block;
+            margin-bottom: 25px;
         }
         select, button, .link-button {
             background-color: #cda86e;
             color: white;
             border: none;
-            padding: 12px 20px;
-            cursor: pointer;
+            padding: 12px 25px;
             font-size: 18px;
             border-radius: 12px;
-            margin: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            margin: 10px 5px;
+            cursor: pointer;
             transition: 0.3s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        select {
+            width: 90%;
+            max-width: 500px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-align: center;
         }
         button:hover, .link-button:hover {
             background-color: #a28572;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
         .card {
             display: inline-block;
-            margin: 10px;
-            padding: 10px;
+            margin: 15px;
             background-color: rgba(255,255,255,0.8);
+            padding: 12px;
             border-radius: 15px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
         .card img {
-            width: 180px;
-            border-radius: 10px;
+            width: 200px;
+            border-radius: 12px;
         }
         .card-number {
+            font-size: 16px;
             margin-top: 8px;
-            font-size: 18px;
-            color: #6b4f3e;
             font-weight: bold;
         }
+        .reminder {
+            margin-top: 25px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.6);
+            padding: 10px;
+            border-radius: 12px;
+        }
         @media (max-width: 768px) {
-            select, button, .link-button {
-                width: 90%;
-            }
             .card img {
-                width: 90%;
+                width: 80%;
+            }
+            select, button, .link-button {
+                width: 100%;
+                margin: 10px 0;
             }
         }
     </style>
@@ -84,30 +98,30 @@
     <div class="container">
         <h1>🌿 馥靈之鑰 Hour Light Spa<br>芳香能量調頻抽牌 🌿</h1>
         <div class="intro">
-            深呼吸，選一種妳想對身體說的話。這不只是保養，這是妳靈魂在敲門。
+            深呼吸，選一種妳想對身體說的話。<br>這不只是保養，這是妳靈魂在敲門。
         </div>
 
-        <select id="cardSelect">
-            <option value="3">抽 3 張牌｜能量小排陣（局部放鬆）</option>
-            <option value="5">抽 5 張牌｜靈魂導航排陣（身心整合）</option>
-            <option value="7">抽 7 張牌｜臉部升維保養指南（搭配原保養課升級）</option>
-            <option value="9">抽 9 張牌｜脈輪 × 頭肩調頻（情緒解碼＋頻率打通）</option>
-            <option value="12">抽 12 張牌｜全背＋腿部能量展開（深層釋放）</option>
-            <option value="15">抽 15 張牌｜我是誰 × 頻率辨識 × 業力清理 💫</option>
-        </select>
-        <button onclick="drawCards()">立即抽牌</button>
+        <div>
+            <select id="cardSelect">
+                <option value="3">🌱 抽 3 張牌｜能量小排陣（局部放鬆）</option>
+                <option value="5">🌷 抽 5 張牌｜靈魂導航排陣（身心整合）</option>
+                <option value="7">🌸 抽 7 張牌｜臉部升維保養指南</option>
+                <option value="9">🌺 抽 9 張牌｜脈輪 × 頭肩調頻</option>
+                <option value="12">🍃 抽 12 張牌｜全背＋腿部能量展開</option>
+                <option value="15">✨ 抽 15 張牌｜我是誰 × 頻率辨識 × 業力清理</option>
+            </select>
+            <button onclick="drawCards()">✨ 開始抽牌 ✨</button>
+        </div>
 
         <div id="cardArea"></div>
 
-        <button onclick="copyNumbers()">📋 一鍵複製所有牌卡編號</button>
-        <br>
-        <a href="https://chatgpt.com/g/g-67de9b17edac8191b3a38621d000fe5b-fu-ling-zhi-yao-hour-light-spa" target="_blank" class="link-button">🌟 點我前往頻率登入系統 🌟</a>
-        <br>
+        <button onclick="copyNumbers()">📋 一鍵複製牌卡編號</button><br>
+        <a href="https://chatgpt.com/g/g-67de9b17edac8191b3a38621d000fe5b-fu-ling-zhi-yao-hour-light-spa" class="link-button" target="_blank">🔮 前往頻率登入系統 🔮</a><br>
         <button onclick="location.reload()">🔄 重新抽牌</button>
-        
-        <p style="margin-top:15px; font-size:16px; color:#6b4f3e; background:rgba(255,255,255,0.6); padding:8px; border-radius:10px;">
-            💖 <b>提醒：</b>15張牌的「我是誰 × 業力清理排陣」，將以您的名義捐出10%消費金額支持公益。
-        </p>
+
+        <div class="reminder">
+            💖 <strong>溫馨提醒：</strong>選擇15張牌療程的朋友，我們將以您的名義捐出10%消費金額支持公益，讓善的能量流動。
+        </div>
 
         <a class="link-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
     </div>
@@ -116,7 +130,7 @@
         let selectedCards = [];
 
         function formatCardNumber(card) {
-            return card <= 22 ? 'A' + (card - 1).toString().padStart(2, '0') : (card - 22).toString().padStart(3, '0');
+            return card <= 22 ? 'A' + (card - 1).toString().padStart(2,'0') : (card - 22).toString().padStart(3,'0');
         }
 
         function drawCards() {
@@ -124,19 +138,15 @@
             alert("請閉上眼睛，對妳的身體說一句話。然後打開妳的頻率入口。");
 
             selectedCards = [];
-            const totalCards = 130;
             while (selectedCards.length < num) {
-                let card = Math.floor(Math.random() * totalCards) + 1;
-                if (!selectedCards.includes(card)) {
-                    selectedCards.push(card);
-                }
+                let card = Math.floor(Math.random() * 130) + 1;
+                if (!selectedCards.includes(card)) selectedCards.push(card);
             }
 
-            const cardArea = document.getElementById('cardArea');
-            cardArea.innerHTML = selectedCards.map(card => `
+            document.getElementById('cardArea').innerHTML = selectedCards.map(card => `
                 <div class="card">
                     <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg">
-                    <div class="card-number">牌卡編號：${formatCardNumber(card)}</div>
+                    <div class="card-number">編號：${formatCardNumber(card)}</div>
                 </div>
             `).join('');
         }
@@ -146,10 +156,10 @@
                 alert("請先抽牌！");
                 return;
             }
-            const formattedNumbers = selectedCards.map(formatCardNumber).join(', ');
-            navigator.clipboard.writeText(formattedNumbers)
+            const nums = selectedCards.map(formatCardNumber).join(', ');
+            navigator.clipboard.writeText(nums)
                 .then(() => alert('牌卡編號已複製！'))
-                .catch(() => alert('複製失敗，請手動複製：' + formattedNumbers));
+                .catch(() => alert('無法自動複製，請手動複製：' + nums));
         }
     </script>
 </body>
