@@ -30,9 +30,9 @@
             border: none;
             padding: 12px 20px;
             cursor: pointer;
-            font-size: 22px;
+            font-size: 20px;
             border-radius: 15px;
-            margin-top: 15px;
+            margin: 10px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
             transition: 0.3s;
             text-decoration: none;
@@ -71,11 +71,18 @@
 </head>
 <body>
     <h1>🌿 馥靈之鑰 Hour Light Spa<br>芳香能量調頻抽牌 🌿</h1>
+    <p style="font-size:18px; color:#fff; background: rgba(0,0,0,0.4); padding:10px; border-radius: 12px; display:inline-block;">
+        深呼吸，選一種妳想對身體說的話。這不只是保養，這是妳靈魂在敲門。
+    </p>
     <div id="buttonArea">
-        <button onclick="drawCards(3)">抽 3 張</button>
-        <button onclick="drawCards(5)">抽 5 張</button>
-        <button onclick="drawCards(9)">抽 9 張</button>
+        <button onclick="drawCards(3)">抽 3 張牌｜能量小排陣（局部放鬆）</button>
+        <button onclick="drawCards(5)">抽 5 張牌｜靈魂導航排陣（身心整合）</button>
+        <button onclick="drawCards(7)">抽 7 張牌｜臉部升維保養指南（搭配原保養課升級）</button>
+        <button onclick="drawCards(9)">抽 9 張牌｜脈輪 × 頭肩調頻（情緒解碼＋頻率打通）</button>
+        <button onclick="drawCards(12)">抽 12 張牌｜全背＋腿部能量展開（深層釋放）</button>
+        <button onclick="drawCards(15)">抽 15 張牌｜我是誰 × 頻率辨識 × 業力清理 💫</button>
     </div>
+
     <div id="cardArea"></div>
 
     <script>
@@ -84,7 +91,7 @@
         }
 
         function drawCards(num) {
-            alert("深呼吸，默念心中問題，請指引我現在身體最需要的調頻能量。");
+            alert("請閉上眼睛，對妳的身體說一句話。然後打開妳的頻率入口。");
 
             let totalCards = 130;
             let selectedCards = [];
@@ -105,8 +112,9 @@
 
             cardArea.innerHTML = cardHTML + `
                 <br><button onclick="copyCardNumbers('${cardNumbersForCopy}')">📋 一鍵複製所有牌卡編號</button>
-                <br><a href="https://chatgpt.com/g/g-67de9b17edac8191b3a38621d000fe5b-fu-ling-zhi-yao-hour-light-spa" target="_blank" class="link-button">🌟 點我進入能量對頻 🌟</a>
-                <br><button onclick="location.reload()">重新抽牌</button>`;
+                <br><a href="https://chatgpt.com/g/g-67de9b17edac8191b3a38621d000fe5b-fu-ling-zhi-yao-hour-light-spa" target="_blank" class="link-button">🌟 點我前往頻率登入系統 🌟</a>
+                <br><button onclick="location.reload()">重新抽牌</button>
+                <p style="margin-top:15px; font-size:16px; color:#fff;">💖 <b>提醒：</b>15張牌的「我是誰 × 業力清理排陣」，將會以您的名義捐出10%消費金額支持公益。</p>`;
         }
 
         function copyCardNumbers(numbers) {
@@ -118,10 +126,8 @@
         }
     </script>
 
-    <!-- 返回首頁按鈕（已調整位置） -->
     <div style="text-align:center; margin-top:25px;">
         <a class="link-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
     </div>
-
 </body>
 </html>
