@@ -10,91 +10,121 @@
             background-size: cover;
             font-family: 'Arial', sans-serif;
             color: #333;
-            text-align: center;
             margin: 0;
             padding: 20px;
+            text-align: center;
+        }
+        .container {
+            background-color: rgba(255,255,255,0.85);
+            max-width: 920px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         h1 {
             font-size: 30px;
-            background-color: rgba(255,255,255,0.8);
             color: #6b4f3e;
-            padding: 15px 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-            display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
-        button, .link-button {
+        .intro {
+            font-size: 18px;
+            margin: 15px auto 25px;
+            background: rgba(255,255,255,0.6);
+            color: #6b4f3e;
+            padding: 10px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        select, button, .link-button {
             background-color: #cda86e;
             color: white;
             border: none;
             padding: 12px 20px;
             cursor: pointer;
-            font-size: 20px;
-            border-radius: 15px;
+            font-size: 18px;
+            border-radius: 12px;
             margin: 10px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
             transition: 0.3s;
-            text-decoration: none;
-            display: inline-block;
         }
         button:hover, .link-button:hover {
             background-color: #a28572;
             transform: translateY(-2px);
         }
-        img {
-            max-width: 220px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        .card {
+            display: inline-block;
             margin: 10px;
+            padding: 10px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        }
+        .card img {
+            width: 180px;
+            border-radius: 10px;
         }
         .card-number {
-            margin-top: 10px;
+            margin-top: 8px;
             font-size: 18px;
             color: #6b4f3e;
-            background-color: rgba(255,255,255,0.8);
-            padding: 5px 10px;
-            border-radius: 10px;
-            display: inline-block;
+            font-weight: bold;
         }
         @media (max-width: 768px) {
-            button, .link-button {
-                width: 80%;
-                padding: 15px 0;
+            select, button, .link-button {
+                width: 90%;
             }
-            img {
+            .card img {
                 width: 90%;
             }
         }
     </style>
 </head>
 <body>
-    <h1>🌿 馥靈之鑰 Hour Light Spa<br>芳香能量調頻抽牌 🌿</h1>
-    <p style="font-size:18px; color:#fff; background: rgba(0,0,0,0.4); padding:10px; border-radius: 12px; display:inline-block;">
-        深呼吸，選一種妳想對身體說的話。這不只是保養，這是妳靈魂在敲門。
-    </p>
-    <div id="buttonArea">
-        <button onclick="drawCards(3)">抽 3 張牌｜能量小排陣（局部放鬆）</button>
-        <button onclick="drawCards(5)">抽 5 張牌｜靈魂導航排陣（身心整合）</button>
-        <button onclick="drawCards(7)">抽 7 張牌｜臉部升維保養指南（搭配原保養課升級）</button>
-        <button onclick="drawCards(9)">抽 9 張牌｜脈輪 × 頭肩調頻（情緒解碼＋頻率打通）</button>
-        <button onclick="drawCards(12)">抽 12 張牌｜全背＋腿部能量展開（深層釋放）</button>
-        <button onclick="drawCards(15)">抽 15 張牌｜我是誰 × 頻率辨識 × 業力清理 💫</button>
+    <div class="container">
+        <h1>🌿 馥靈之鑰 Hour Light Spa<br>芳香能量調頻抽牌 🌿</h1>
+        <div class="intro">
+            深呼吸，選一種妳想對身體說的話。這不只是保養，這是妳靈魂在敲門。
+        </div>
+
+        <select id="cardSelect">
+            <option value="3">抽 3 張牌｜能量小排陣（局部放鬆）</option>
+            <option value="5">抽 5 張牌｜靈魂導航排陣（身心整合）</option>
+            <option value="7">抽 7 張牌｜臉部升維保養指南（搭配原保養課升級）</option>
+            <option value="9">抽 9 張牌｜脈輪 × 頭肩調頻（情緒解碼＋頻率打通）</option>
+            <option value="12">抽 12 張牌｜全背＋腿部能量展開（深層釋放）</option>
+            <option value="15">抽 15 張牌｜我是誰 × 頻率辨識 × 業力清理 💫</option>
+        </select>
+        <button onclick="drawCards()">立即抽牌</button>
+
+        <div id="cardArea"></div>
+
+        <button onclick="copyNumbers()">📋 一鍵複製所有牌卡編號</button>
+        <br>
+        <a href="https://chatgpt.com/g/g-67de9b17edac8191b3a38621d000fe5b-fu-ling-zhi-yao-hour-light-spa" target="_blank" class="link-button">🌟 點我前往頻率登入系統 🌟</a>
+        <br>
+        <button onclick="location.reload()">🔄 重新抽牌</button>
+        
+        <p style="margin-top:15px; font-size:16px; color:#6b4f3e; background:rgba(255,255,255,0.6); padding:8px; border-radius:10px;">
+            💖 <b>提醒：</b>15張牌的「我是誰 × 業力清理排陣」，將以您的名義捐出10%消費金額支持公益。
+        </p>
+
+        <a class="link-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
     </div>
 
-    <div id="cardArea"></div>
-
     <script>
+        let selectedCards = [];
+
         function formatCardNumber(card) {
             return card <= 22 ? 'A' + (card - 1).toString().padStart(2, '0') : (card - 22).toString().padStart(3, '0');
         }
 
-        function drawCards(num) {
+        function drawCards() {
+            const num = parseInt(document.getElementById('cardSelect').value);
             alert("請閉上眼睛，對妳的身體說一句話。然後打開妳的頻率入口。");
 
-            let totalCards = 130;
-            let selectedCards = [];
+            selectedCards = [];
+            const totalCards = 130;
             while (selectedCards.length < num) {
                 let card = Math.floor(Math.random() * totalCards) + 1;
                 if (!selectedCards.includes(card)) {
@@ -102,32 +132,25 @@
                 }
             }
 
-            let cardArea = document.getElementById('cardArea');
-            let cardNumbersForCopy = selectedCards.map(formatCardNumber).join(', ');
-            
-            let cardHTML = selectedCards.map(card => `
-                <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg">
-                <div class="card-number">${formatCardNumber(card)}</div>
+            const cardArea = document.getElementById('cardArea');
+            cardArea.innerHTML = selectedCards.map(card => `
+                <div class="card">
+                    <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg">
+                    <div class="card-number">牌卡編號：${formatCardNumber(card)}</div>
+                </div>
             `).join('');
-
-            cardArea.innerHTML = cardHTML + `
-                <br><button onclick="copyCardNumbers('${cardNumbersForCopy}')">📋 一鍵複製所有牌卡編號</button>
-                <br><a href="https://chatgpt.com/g/g-67de9b17edac8191b3a38621d000fe5b-fu-ling-zhi-yao-hour-light-spa" target="_blank" class="link-button">🌟 點我前往頻率登入系統 🌟</a>
-                <br><button onclick="location.reload()">重新抽牌</button>
-                <p style="margin-top:15px; font-size:16px; color:#fff;">💖 <b>提醒：</b>15張牌的「我是誰 × 業力清理排陣」，將會以您的名義捐出10%消費金額支持公益。</p>`;
         }
 
-        function copyCardNumbers(numbers) {
-            navigator.clipboard.writeText(numbers).then(() => {
-                alert('所有牌卡編號已複製：' + numbers);
-            }, () => {
-                alert('無法自動複製，請手動複製：' + numbers);
-            });
+        function copyNumbers() {
+            if (!selectedCards.length) {
+                alert("請先抽牌！");
+                return;
+            }
+            const formattedNumbers = selectedCards.map(formatCardNumber).join(', ');
+            navigator.clipboard.writeText(formattedNumbers)
+                .then(() => alert('牌卡編號已複製！'))
+                .catch(() => alert('複製失敗，請手動複製：' + formattedNumbers));
         }
     </script>
-
-    <div style="text-align:center; margin-top:25px;">
-        <a class="link-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
-    </div>
 </body>
 </html>
