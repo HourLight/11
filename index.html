@@ -163,46 +163,45 @@
         <a class="home-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
     </div>
 
-    <script>
-        let selectedCards = [];
+<script>
+    let selectedCards = [];
 
-        function formatCardNumber(card) {
-            return card <= 22 ? 'A' + (card - 1).toString().padStart(2, '0') : (card - 22).toString().padStart(3, '0');
+    function formatCardNumber(card) {
+        return card <= 22 ? 'A' + (card - 1).toString().padStart(2, '0') : (card - 22).toString().padStart(3, '0');
+    }
+
+    function drawCards(num) {
+        alert("請閉上眼睛，深呼吸，專心想著您的問題，再點擊確認。(關閉按下後即抽牌)");
+        selectedCards = [];
+        let totalCards = 130;
+        while (selectedCards.length < num) {
+            let cardNum = Math.floor(Math.random() * totalCards) + 1;
+            if (!selectedCards.includes(cardNum)) selectedCards.push(cardNum);
         }
+        let resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = '';
+        selectedCards.forEach(card => {
+            let formattedCardNum = formatCardNumber(card);
+            let cardContainer = document.createElement('div');
+            cardContainer.className = 'card-container';
+            cardContainer.innerHTML = `
+                <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg">
+                <div class="card-number">編號：${formattedCardNum}</div>
+            `;
+            resultDiv.appendChild(cardContainer);
+        });
+    }
 
-        function drawCards(num) {
-            alert("請閉上眼睛，深呼吸，專心想著您的問題，再點擊確認。(關閉按下後即抽牌");
-            selectedCards = [];
-            let totalCards = 130;
-            while (selectedCards.length < num) {
-                let cardNum = Math.floor(Math.random() * totalCards) + 1;
-                if (!selectedCards.includes(cardNum)) selectedCards.push(cardNum);
-            }
-            let resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = '';
-            selectedCards.forEach(card => {
-                let formattedCardNum = formatCardNumber(card);
-                let cardContainer = document.createElement('div');
-                cardContainer.className = 'card-container';
-                cardContainer.innerHTML = 
-                    <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg">
-                    <div class="card-number">編號：${formattedCardNum}</div>
-                ;
-                resultDiv.appendChild(cardContainer);
-            });
+    function copyResult() {
+        if (selectedCards.length === 0) {
+            alert("請先抽牌後再複製！");
+            return;
         }
-
-        function copyResult() {
-            if (selectedCards.length === 0) {
-                alert("請先抽牌後再複製！");
-                return;
-            }
-            let formattedNumbers = selectedCards.map(formatCardNumber).join(', ');
-            navigator.clipboard.writeText(formattedNumbers)
-                .then(() => alert('抽牌編號已複製！'))
-                .catch(() => alert('複製失敗，請手動複製：' + formattedNumbers));
-
-        }
-    </script>
+        let formattedNumbers = selectedCards.map(formatCardNumber).join(', ');
+        navigator.clipboard.writeText(formattedNumbers)
+            .then(() => alert('抽牌編號已複製！'))
+            .catch(() => alert('複製失敗，請手動複製：' + formattedNumbers));
+    }
+</script>
 </body>
 </html>
