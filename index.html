@@ -94,114 +94,72 @@
     </style>
 </head>
 <body>
-    <div style="max-width: 800px; margin: 40px auto 20px; background: rgba(255,255,255,0.8); padding: 25px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); font-size: 18px; line-height: 1.6;">
+
+<h1>馥靈之鑰 Hour Light｜芳香能量調頻線上抽牌</h1>
+
+<div style="max-width: 800px; margin: 40px auto 20px; background: rgba(255,255,255,0.8); padding: 25px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); font-size: 18px; line-height: 1.6;">
   <h2 style="color:#6b4f3e;">🔮 不知道該抽幾張？</h2>
   <p>選擇妳現在最需要的頻率深度👇</p>
   <ul style="text-align:left; max-width: 700px; margin: 0 auto;">
     <li><strong>1 張卡｜</strong> 當下訊息 × 快速對頻（今天的我需要什麼）</li>
-    <li><strong>3 張卡｜</strong> 過去 × 現在 × 未來能量流（事情的流動與轉向）</li>
-    <li><strong>5 張卡｜</strong> 問題卡點 × 支援力 × 下一步行動（靈魂導航）</li>
-    <li><strong>7 張卡｜</strong> 深層架構掃描（脈輪對應 × 情緒結構 × 身體反應）</li>
-    <li><strong>9 張卡｜</strong> 宇宙頻率地圖（看清人生主題、週期、轉化點）</li>
-    <li><strong>12 張卡｜</strong> 能量場重整、年度規劃、系統優化</li>
-    <li><strong>15 張卡｜</strong> 登入你的靈魂藍圖總整，找回「我是誰」的根源</li>
+    <li><strong>3 張卡｜</strong> 過去 × 現在 × 未來能量流</li>
+    <li><strong>5 張卡｜</strong> 問題卡點 × 支援力 × 下一步行動</li>
+    <li><strong>7 張卡｜</strong> 深層架構掃描（脈輪 × 情緒 × 身體）</li>
+    <li><strong>9 張卡｜</strong> 宇宙頻率地圖（人生主題 × 轉化點）</li>
+    <li><strong>12 張卡｜</strong> 年度規劃、系統優化、能量重整</li>
+    <li><strong>15 張卡｜</strong> 登入靈魂藍圖，找回「我是誰」</li>
   </ul>
-  <p style="margin-top: 18px;"><strong>🎯 小提醒：</strong>沒有對錯，也沒有標準答案。<br>問問你自己：「我想知道多少？我準備好看到什麼？」</p>
+  <p style="margin-top: 18px;"><strong>🎯 小提醒：</strong>沒有標準答案，問問你自己：「我準備好看到什麼？」</p>
 </div>
 
-    <h1>馥靈之鑰 Hour Light｜芳香能量調頻線上抽牌</h1>
-
-    <div>
-        <button onclick="drawCards(1)">抽 1 張</button>
-        <button onclick="drawCards(3)">抽 3 張</button>
-        <button onclick="drawCards(5)">抽 5 張</button>
-        <button onclick="drawCards(7)">抽 7 張</button>
-        <button onclick="drawCards(9)">抽 9 張</button>
-        <button onclick="drawCards(12)">抽 12 張</button>
-        <button onclick="drawCards(15)">抽 15 張</button>
-    </div>
-
-    <!-- 缺少的牌卡顯示容器 -->
-    <div id="result"></div>
-
-    <!-- 缺少的複製按鈕 -->
-    <button id="copyBtn" onclick="copyResult()">📋 複製牌卡編號</button>
-<!-- 解讀步驟說明：Step 3 -->
-<div id="nextStep" style="margin-top: 40px; background: rgba(255,255,255,0.85); padding: 25px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.1); max-width: 800px; margin-left: auto; margin-right: auto; font-size: 18px; line-height: 1.8;">
-  <h2 style="color: #6b4f3e;">🧠 抽完牌了，接下來怎麼做？</h2>
-  <p><strong>Step 1：</strong> 請點擊上方【📋複製牌卡編號】按鈕，把你抽到的卡號複製起來（例如：<code>A13, 045, 066</code>）</p>
-  <p><strong>Step 2：</strong> 點擊下方連結，進入 <strong>【馥靈頻率GPT 解讀室】</strong></p>
-  <p><a href="https://chat.openai.com/g/g-67eb4e3a09fc8191845f66ffe5a8d94d-fu-ling-zhi-yao-sheng-ji-ce-shi-ban" target="_blank" style="display:inline-block; background-color: #a28572; color: #fff; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold;">🌿 點我開啟解讀頻率</a></p>
-  <p><strong>Step 3：</strong> 請將你剛剛抽完牌時，<u>心裡想的那句話，原封不動地打進去</u>。</p>
-
-  <p>不需要重組語法、不需要客套說明，<strong>你內心最真實的那句話，才是最準的頻率對接。</strong></p>
-
-  <p>你可以問什麼？</p>
-  <ul style="text-align: left; max-width: 720px; margin: 0 auto;">
-    <li>🔸 完全往內求：「我是不是又開始假裝我沒事了？」</li>
-    <li>🔸 生活現狀：「我最近心情常卡住，身體也沒力氣，這三張牌在提醒什麼？」</li>
-    <li>🔸 某件事的預測：「我抽到 A06、045、A11，想問和我目前的關係狀況有什麼提示？」</li>
-  </ul>
-
-  <p style="margin-top: 20px;"><strong>💬 記住：</strong><br>
-  這裡不是求答案的地方，而是開始說出你沒說出口的話的地方。</p>
-
-  <p style="font-style: italic; font-size: 15px; color: #777;">✨你可以問預測，也可以問心事，但牌只是反映頻率——<br><strong>預測是預測，改變是人為。</strong><br>你問出來的那一刻，就已經開始轉動你的人生狀態了。</p>
+<div>
+    <button onclick="drawCards(1)">抽 1 張</button>
+    <button onclick="drawCards(3)">抽 3 張</button>
+    <button onclick="drawCards(5)">抽 5 張</button>
+    <button onclick="drawCards(7)">抽 7 張</button>
+    <button onclick="drawCards(9)">抽 9 張</button>
+    <button onclick="drawCards(12)">抽 12 張</button>
+    <button onclick="drawCards(15)">抽 15 張</button>
 </div>
-<div style="margin-top: 50px; background-color: rgba(255,255,255,0.95); padding: 30px 25px; border-radius: 15px; max-width: 800px; margin-left: auto; margin-right: auto; box-shadow: 0 0 20px rgba(0,0,0,0.15);">
-  <h3 style="color: #6b4f3e; font-size: 24px;">🌿 想把頻率真的用起來？</h3>
-  <p style="font-size: 18px; line-height: 1.8; margin-top: 12px;">如果你想讓這次抽牌，變成真正的能量轉化體驗，</p>
-  <p style="font-size: 18px;">我可以幫你設計專屬的 <strong>滾珠香氣 × 能量美甲 × 能量調頻</strong>。</p>
-  <p style="font-size: 18px; margin-top: 18px;"><strong>👉 點這裡預約《HOUR LIGHT 能量調頻》</strong></p>
+
+<div id="result"></div>
+<button id="copyBtn" onclick="copyResult()">📋 複製牌卡編號</button>
+
+<div style="margin-top: 50px; background-color: rgba(255,255,255,0.9); padding: 30px; border-radius: 15px; max-width: 800px; margin: 50px auto; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
+  <h3 style="color: #6b4f3e; font-size: 24px;">🌿 想深入解讀與體驗？</h3>
+  <p style="font-size: 18px;">
+    如果妳想將此次的抽牌，轉化為真正專屬的能量頻率方案，歡迎私訊我，提供妳的抽牌結果與問題。我會根據妳的需求，設計最適合妳的調頻體驗與個人方案，讓這個頻率真正落實到妳的日常生活中。
+  </p>
+  <p style="font-size: 18px; margin-top: 18px;"><strong>✨ 詳細方案與體驗價值，歡迎私訊洽詢 ✨</strong></p>
   <a href="https://lin.ee/ySxUkJK" target="_blank"
      style="display:inline-block; background-color: #a28572; color: #fff; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-size: 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 15px;">
-    🧘‍♀️ 我要預約能量調頻
+    🧘‍♀️ 立即私訊預約體驗
   </a>
 </div>
 
-    <div style="text-align:center;">
-        <a class="home-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
-    </div>
+<div style="text-align:center;">
+    <a class="home-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
+</div>
 
 <script>
-    let selectedCards = [];
+function formatCardNumber(card) {
+    return card <= 22 ? 'A' + (card - 1).toString().padStart(2, '0') : (card - 22).toString().padStart(3, '0');
+}
 
-    function formatCardNumber(card) {
-        return card <= 22 ? 'A' + (card - 1).toString().padStart(2, '0') : (card - 22).toString().padStart(3, '0');
+let selectedCards = [];
+function drawCards(num) {
+    selectedCards = [];
+    while (selectedCards.length < num) {
+        let cardNum = Math.floor(Math.random() * 130) + 1;
+        if (!selectedCards.includes(cardNum)) selectedCards.push(cardNum);
     }
+    document.getElementById('result').innerHTML = selectedCards.map(c => `<div class="card-number">${formatCardNumber(c)}</div>`).join('');
+}
 
-    function drawCards(num) {
-        alert("請閉上眼睛，深呼吸，專心想著您的問題，再點擊確認。(關閉按下後即抽牌)");
-        selectedCards = [];
-        let totalCards = 130;
-        while (selectedCards.length < num) {
-            let cardNum = Math.floor(Math.random() * totalCards) + 1;
-            if (!selectedCards.includes(cardNum)) selectedCards.push(cardNum);
-        }
-        let resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = '';
-        selectedCards.forEach(card => {
-            let formattedCardNum = formatCardNumber(card);
-            let cardContainer = document.createElement('div');
-            cardContainer.className = 'card-container';
-            cardContainer.innerHTML = `
-                <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg">
-                <div class="card-number">編號：${formattedCardNum}</div>
-            `;
-            resultDiv.appendChild(cardContainer);
-        });
-    }
-
-    function copyResult() {
-        if (selectedCards.length === 0) {
-            alert("請先抽牌後再複製！");
-            return;
-        }
-        let formattedNumbers = selectedCards.map(formatCardNumber).join(', ');
-        navigator.clipboard.writeText(formattedNumbers)
-            .then(() => alert('抽牌編號已複製！'))
-            .catch(() => alert('複製失敗，請手動複製：' + formattedNumbers));
-    }
+function copyResult() {
+    navigator.clipboard.writeText(selectedCards.map(formatCardNumber).join(', '));
+    alert('編號已複製！');
+}
 </script>
 </body>
 </html>
