@@ -44,7 +44,6 @@
             display: inline-block;
             margin: 15px;
             text-align: center;
-            vertical-align: top;
         }
         .card-container img {
             width: 220px;
@@ -101,13 +100,13 @@
   <h2 style="color:#6b4f3e;">🔮 不知道該抽幾張？</h2>
   <p>選擇妳現在最需要的頻率深度👇</p>
   <ul style="text-align:left; max-width: 700px; margin: 0 auto;">
-    <li><strong>1 張卡｜</strong> 當下訊息 × 快速對頻（今天的我需要什麼）</li>
+    <li><strong>1 張卡｜</strong> 當下訊息 × 快速對頻</li>
     <li><strong>3 張卡｜</strong> 過去 × 現在 × 未來能量流</li>
-    <li><strong>5 張卡｜</strong> 問題卡點 × 支援力 × 下一步行動</li>
-    <li><strong>7 張卡｜</strong> 深層架構掃描（脈輪 × 情緒 × 身體）</li>
-    <li><strong>9 張卡｜</strong> 宇宙頻率地圖（人生主題 × 轉化點）</li>
-    <li><strong>12 張卡｜</strong> 年度規劃、系統優化、能量重整</li>
-    <li><strong>15 張卡｜</strong> 登入靈魂藍圖，找回「我是誰」</li>
+    <li><strong>5 張卡｜</strong> 問題卡點 × 下一步行動</li>
+    <li><strong>7 張卡｜</strong> 深層架構掃描</li>
+    <li><strong>9 張卡｜</strong> 宇宙頻率地圖</li>
+    <li><strong>12 張卡｜</strong> 年度規劃、能量重整</li>
+    <li><strong>15 張卡｜</strong> 登入靈魂藍圖</li>
   </ul>
   <p style="margin-top: 18px;"><strong>🎯 小提醒：</strong>沒有標準答案，問問你自己：「我準備好看到什麼？」</p>
 </div>
@@ -125,14 +124,9 @@
 <div id="result"></div>
 <button id="copyBtn" onclick="copyResult()">📋 複製牌卡編號</button>
 
-<div style="margin-top: 50px; background-color: rgba(255,255,255,0.9); padding: 30px; border-radius: 15px; max-width: 800px; margin: 50px auto; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
-  <h3 style="color: #6b4f3e; font-size: 24px;">🌿 想深入解讀與體驗？</h3>
-  <p style="font-size: 18px;">
-    如果妳想將此次的抽牌，轉化為真正專屬的能量頻率方案，歡迎私訊我，提供妳的抽牌結果與問題。我會根據妳的需求，設計最適合妳的調頻體驗與個人方案，讓這個頻率真正落實到妳的日常生活中。
-  </p>
-  <p style="font-size: 18px; margin-top: 18px;"><strong>✨ 詳細方案與體驗價值，歡迎私訊洽詢 ✨</strong></p>
+<div style="text-align:center; margin-top:50px;">
   <a href="https://lin.ee/ySxUkJK" target="_blank"
-     style="display:inline-block; background-color: #a28572; color: #fff; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-size: 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 15px;">
+     style="display:inline-block; background-color:#a28572; color:#fff; padding:14px 28px; border-radius:12px; text-decoration:none; font-size:20px; font-weight:bold; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
     🧘‍♀️ 立即私訊預約體驗
   </a>
 </div>
@@ -142,24 +136,39 @@
 </div>
 
 <script>
+let selectedCards = [];
+
 function formatCardNumber(card) {
     return card <= 22 ? 'A' + (card - 1).toString().padStart(2, '0') : (card - 22).toString().padStart(3, '0');
 }
 
-let selectedCards = [];
 function drawCards(num) {
+    alert("請閉上眼睛，深呼吸，專心想著妳的問題，再點擊確認。(確認後即抽牌)");
     selectedCards = [];
     while (selectedCards.length < num) {
         let cardNum = Math.floor(Math.random() * 130) + 1;
         if (!selectedCards.includes(cardNum)) selectedCards.push(cardNum);
     }
-    document.getElementById('result').innerHTML = selectedCards.map(c => `<div class="card-number">${formatCardNumber(c)}</div>`).join('');
+    document.getElementById('result').innerHTML = selectedCards.map(card => `
+        <div class="card-container">
+            <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg">
+            <div class="card-number">編號：${formatCardNumber(card)}</div>
+        </div>`).join('');
 }
 
 function copyResult() {
-    navigator.clipboard.writeText(selectedCards.map(formatCardNumber).join(', '));
-    alert('編號已複製！');
+    if (selectedCards.length === 0) {
+        alert("請先抽牌再複製！");
+        return;
+    }
+    let numbers = selectedCards.map(formatCardNumber).join(', ');
+    navigator.clipboard.writeText(numbers).then(() => {
+        alert('牌卡編號已複製：' + numbers);
+    }, () => {
+        alert('無法自動複製，請手動複製：' + numbers);
+    });
 }
 </script>
+
 </body>
 </html>
