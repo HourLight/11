@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>馥靈之鑰｜美甲專屬能量卡抽牌＋頻測報告</title>
+  <title>馥靈之鑰｜美甲專屬能量卡抽牌</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <style>
     body {
@@ -80,7 +80,7 @@
       <option value="1">1 張牌｜快速對頻</option>
       <option value="3">3 張牌｜過去・現在・未來</option>
       <option value="5">5 張牌｜靈魂導航</option>
-      <option value="9">9 張牌｜靈魂藍圖 × 宇宙訊息 X光掃描</option>
+      <option value="9">9 張牌｜靈魂藍圖 × 宇宙訊息掃描</option>
     </select><br><br>
     <button onclick="drawCards()">點我抽牌</button>
   </div>
@@ -91,7 +91,7 @@
     }
 
     function drawCards() {
-      alert("請深呼吸，默念你現在的感受與需要。然後點選確認，抽出你的靈魂頻率。");
+      alert("請深呼吸，默念你現在的感受與需要，準備好再點擊確認抽牌。");
 
       let count = parseInt(document.getElementById("cardCount").value);
       let totalCards = 130;
@@ -107,17 +107,16 @@
 
         output += `
           <img src="${cardImage}">
-          <div class="card-name">✨ 馥靈之鑰 能量卡 ✨<br>(卡牌編號：<span>${cardNumber}</span>)</div>
-          <br>`;
+          <div class="card-name">✨ 能量卡牌 ✨<br>(編號：${cardNumber})</div><br>`;
       }
 
       output += `
-        <button onclick="copyAllCardNumbers()">📋 點我複製所有牌卡編號</button>
-        <br>
-        <a href="https://chatgpt.com/g/g-67dbfd35223c8191a5b6fe5f91e1fe60-fu-ling-zhi-yao-hour-lightzhi-jian-neng-liang-diao-pin-xi-tong" 
-           target="_blank" class="link-button">🔮 點我獲取指尖能量頻測報告 🔮</a>
-        <br>
-        <button onclick="location.reload()">重新抽牌</button>`;
+        <button onclick="copyAllCardNumbers()">📋 複製牌卡編號</button><br>
+        <div style="margin-top:20px; background: rgba(255,255,255,0.9); padding:20px; border-radius:15px;">
+          <p style="font-size:18px;"><strong>想深入了解你的頻率訊息與專屬美甲設計嗎？</strong><br>歡迎私訊諮詢專屬方案與費用細節，為你量身打造真正能落實在生活的能量美甲。</p>
+          <a href="https://lin.ee/ySxUkJK" target="_blank" class="link-button">💬 點我私訊了解詳情</a>
+        </div>
+        <button onclick="location.reload()">🔄 重新抽牌</button>`;
 
       document.getElementById("cardArea").innerHTML = output;
       window.cardCodes = cards;
@@ -126,9 +125,9 @@
     function copyAllCardNumbers() {
       let text = window.cardCodes.join(", ");
       navigator.clipboard.writeText(text).then(() => {
-        alert("牌卡編號「" + text + "」已複製！請在頻測網頁中貼上使用。");
+        alert("牌卡編號「" + text + "」已複製！");
       }, () => {
-        alert("無法自動複製，請手動複製：" + text);
+        alert("複製失敗，請手動複製：" + text);
       });
     }
   </script>
