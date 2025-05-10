@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>馥靈之鑰 Hour Light 完美體態｜芳香能量體態頻率抽牌</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {
+            background: url('https://github.com/HourLight/11/raw/main/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: #6b4f3e;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 960px;
+            background-color: rgba(255,255,255,0.9);
+            margin: auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        .intro {
+            font-size: 18px;
+            background: rgba(255,255,255,0.6);
+            padding: 12px 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+        select, button, .link-button {
+            background-color: #cda86e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 12px;
+            margin: 10px 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        select {
+            width: 90%;
+            max-width: 500px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-align: center;
+        }
+        button:hover, .link-button:hover {
+            background-color: #a28572;
+            transform: translateY(-3px);
+        }
+        .card {
+            display: inline-block;
+            margin: 15px;
+            background-color: rgba(255,255,255,0.8);
+            padding: 12px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        .card img {
+            width: 200px;
+            border-radius: 12px;
+        }
+        .card-number {
+            font-size: 16px;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .reminder {
+            margin-top: 25px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.6);
+            padding: 10px;
+            border-radius: 12px;
+        }
+        @media (max-width: 768px) {
+            .card img {
+                width: 80%;
+            }
+            select, button, .link-button {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟馥靈之鑰 Hour Light 完美體態🌟<br>芳香能量體態頻率抽牌</h1>
+        <div class="intro">
+            深呼吸，告訴你的身體：「我願意陪你重新開始。」<br>
+            這一次，讓靈魂帶你回家。
+        </div>
+
+        <div>
+            <select id="cardSelect">
+                <option value="3">🌿抽 3 張｜快速能量覺察（每日調頻）</option>
+                <option value="5">🌱抽 5 張｜身體訊息解碼（情緒覺察）</option>
+                <option value="7">🍀抽 7 張｜深層體態調頻（能量代謝）</option>
+                <option value="9">🌸抽 9 張｜脈輪整合 × 完美體態覺察</option>
+                <option value="12">🌺抽 12 張｜全方位身體意識重建</option>
+                <option value="15">✨抽 15 張｜我是誰 × 瘦身頻率重塑 × 業力清理</option>
+            </select>
+            <button onclick="drawCards()">✨ 開始抽牌 ✨</button>
+        </div>
+
+        <div id="cardArea"></div>
+
+        <button onclick="copyNumbers()">📋 一鍵複製牌卡編號</button><br>
+        <a href="https://chatgpt.com/g/g-67de9b17edac8191b3a38621d000fe5b-fu-ling-zhi-yao-hour-light-spa" class="link-button" target="_blank">🔮 前往頻率登入系統 🔮</a><br>
+        <button onclick="location.reload()">🔄 重新抽牌</button>
+
+        <div class="reminder">
+            ⚠️ 本系統僅提供能量覺察與身心頻率調整之建議，非醫療診斷或醫療建議。若有嚴重不適請尋求專業協助。<br>
+            © 馥靈之鑰智慧情緒系統所有權歸逸君與馥靈之鑰團隊所有。
+        </div>
+
+        <a class="link-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
+    </div>
+
+    <script>
+        let selectedCards = [];
+
+        function formatCardNumber(card) {
+            return card <= 22 ? 'A' + (card - 1).toString().padStart(2,'0') : (card - 22).toString().padStart(3,'0');
+        }
+
+        function drawCards() {
+            const num = parseInt(document.getElementById('cardSelect').value);
+            alert("請閉上眼睛，對你的身體許下一個承諾。");
+
+            selectedCards = [];
+            while (selectedCards.length < num) {
+                let card = Math.floor(Math.random() * 130) + 1;
+                if (!selectedCards.includes(card)) selectedCards.push(card);
+            }
+
+            document.getElementById('cardArea').innerHTML = selectedCards.map(card => `
+                <div class="card">
+                    <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${card}.jpg">
+                    <div class="card-number">編號：${formatCardNumber(card)}</div>
+                </div>
+            `).join('');
+        }
+
+        function copyNumbers() {
+            if (!selectedCards.length) {
+                alert("請先抽牌！");
+                return;
+            }
+            const nums = selectedCards.map(formatCardNumber).join(', ');
+            navigator.clipboard.writeText(nums)
+                .then(() => alert('牌卡編號已複製！'))
+                .catch(() => alert('無法自動複製，請手動複製：' + nums));
+        }
+    </script>
+</body>
+</html>
