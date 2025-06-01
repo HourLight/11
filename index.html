@@ -17,35 +17,27 @@
         color:var(--cocoa);
         font-size:2rem;
         background:rgba(255,255,255,.86);
-        display:inline-block;
-        padding:12px 28px;
-        border-radius:18px;
-        box-shadow:0 3px 8px rgba(0,0,0,.25);
+        display:block;
+        padding:12px 28px;border-radius:18px;
+        box-shadow:0 3px 8px rgba(0,0,0,.25);margin:0 auto 14px;
     }
     .sub-title{
-        color:var(--rose-dark);
-        font-size:1.35rem;
-        margin:14px 0 8px;
-        background:rgba(255,255,255,.78);
-        display:inline-block;
-        padding:6px 20px;
-        border-radius:14px;
-        box-shadow:0 2px 6px rgba(0,0,0,.2);
+        color:var(--rose-dark);font-size:1.35rem;
+        background:rgba(255,255,255,.78);display:block;
+        padding:6px 20px;border-radius:14px;
+        box-shadow:0 2px 6px rgba(0,0,0,.2);margin:0 auto 10px;
     }
     .tagline{
-        font-size:17px;
-        margin-bottom:28px;
-        color:var(--cocoa);
-        background:rgba(255,255,255,.83);
-        display:inline-block;
-        padding:6px 18px;
-        border-radius:14px;
+        font-size:17px;color:var(--cocoa);
+        background:rgba(255,255,255,.83);display:block;
+        padding:6px 18px;border-radius:14px;
         box-shadow:0 3px 6px rgba(0,0,0,.25);
+        margin:0 auto 28px;max-width:880px;
     }
     /* ────────── 按鈕 & 牌卡 ────────── */
     button{
-        background:var(--rose);color:#fff;border:none;padding:14px 28px;
-        font-size:20px;margin:8px;border-radius:15px;cursor:pointer;
+        background:var(--rose);color:#fff;border:none;padding:14px 28px;font-size:20px;
+        margin:8px;border-radius:15px;cursor:pointer;
         box-shadow:0 3px 8px rgba(0,0,0,.25);transition:.3s;
     }
     button:hover{background:var(--rose-dark);transform:translateY(-3px)}
@@ -57,15 +49,11 @@
         margin-top:10px;font-size:22px;font-weight:bold;
         background:rgba(255,255,255,.75);padding:6px 12px;border-radius:10px}
     /* ────────── 摺疊說明 ────────── */
-    details{
-        border:1px solid #e4d6c8;border-radius:12px;margin:8px 0;
+    details{border:1px solid #e4d6c8;border-radius:12px;margin:8px 0;
         padding:0 14px;background:rgba(255,255,255,.88);
-        box-shadow:0 2px 6px rgba(0,0,0,.07);
-    }
-    summary{
-        cursor:pointer;list-style:none;font-weight:600;
-        padding:14px 4px;color:var(--rose-dark);
-    }
+        box-shadow:0 2px 6px rgba(0,0,0,.07);}
+    summary{cursor:pointer;list-style:none;font-weight:600;
+        padding:14px 4px;color:var(--rose-dark);}
     summary::-webkit-details-marker{display:none;}
     details[open]{background:rgba(255,255,255,.97);}
     details ul{margin:8px 0 18px 18px;font-size:15px;}
@@ -73,10 +61,9 @@
     .section{
         max-width:880px;margin:36px auto;background:rgba(255,255,255,.9);
         padding:24px;border-radius:16px;box-shadow:0 3px 10px rgba(0,0,0,.15);
-        line-height:1.75;font-size:18px;text-align:left
+        line-height:1.75;font-size:18px;text-align:left;
     }
     .section h2{color:var(--cocoa);margin-bottom:12px;font-size:1.25rem;text-align:center}
-    .section h3{color:var(--rose-dark);margin:18px 0 6px;font-size:1.05rem}
     /* ────────── 價格雙欄 ────────── */
     .price-grid{
         display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;
@@ -91,8 +78,7 @@
     .home-btn{
         display:inline-block;background:var(--rose);color:#fff;padding:12px 28px;
         text-decoration:none;border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.25);
-        transition:.3s;margin:34px auto 0;font-size:18px
-    }
+        transition:.3s;margin:34px auto 0;font-size:18px}
     .home-btn:hover{background:var(--rose-dark);transform:translateY(-3px)}
     @media(max-width:768px){
         button,#copyBtn{width:94%;margin:10px auto;font-size:22px}
@@ -112,47 +98,96 @@
 <div class="section">
   <h2>🔮 抽多少？看這裡</h2>
 
-  <details><summary>1 張｜即時訊息 × 快速對焦</summary>
-    <ul><li>今天最該留意的提示？</li><li>此刻情緒要說什麼？</li></ul>
+  <details>
+    <summary>1 張｜即時訊息 × 快速對焦</summary>
+    <ul>
+      <li>今日亮點提示</li>
+      <li>臨時注意事項</li>
+      <li>情緒小貼士</li>
+      <li>快速助攻關鍵詞</li>
+      <li>小驚喜伏筆</li>
+    </ul>
   </details>
 
-  <details><summary>3 張｜過去・現在・未來 能量流</summary>
-    <ul><li>事件源頭、現況、走向</li><li>感情／職涯節奏</li></ul>
+  <details>
+    <summary>3 張｜過去・現在・未來 能量流</summary>
+    <ul>
+      <li>事件源頭</li>
+      <li>當下狀態</li>
+      <li>可能走向</li>
+      <li>關鍵轉折點</li>
+      <li>調整提醒</li>
+    </ul>
   </details>
 
-  <details><summary>5 張｜卡點掃描 × 行動解方</summary>
-    <ul><li>金錢 / 關係為何卡住？</li><li>下一步行動與支持資源</li></ul>
+  <details>
+    <summary>5 張｜卡點掃描 × 行動解方</summary>
+    <ul>
+      <li>目前阻力源</li>
+      <li>隱藏助力鍵</li>
+      <li>卡住原因解析</li>
+      <li>即刻行動步驟</li>
+      <li>後續支持資源</li>
+    </ul>
   </details>
 
-  <details><summary>7 張｜深層架構掃描</summary>
-    <ul><li>七脈輪檢測</li><li>情緒轉化流程</li><li>關係動力圖</li></ul>
+  <details>
+    <summary>7 張｜深層架構掃描</summary>
+    <ul>
+      <li>七脈輪檢測圖</li>
+      <li>情緒轉化流程</li>
+      <li>關係動力線索</li>
+      <li>內外平衡方法</li>
+      <li>提升小練習</li>
+    </ul>
   </details>
 
-  <details><summary>9 張｜宇宙節拍地圖</summary>
-    <ul><li>近期功課與禮物</li><li>下一站轉折</li></ul>
+  <details>
+    <summary>9 張｜宇宙節拍地圖</summary>
+    <ul>
+      <li>近期功課提示</li>
+      <li>即將到來禮物</li>
+      <li>成長支點定位</li>
+      <li>資源入口座標</li>
+      <li>前進微調建議</li>
+    </ul>
   </details>
 
-  <details><summary>12 張｜年度規劃 × 能量重整</summary>
-    <ul><li>12 月主題提醒</li><li>重大轉折月份</li></ul>
+  <details>
+    <summary>12 張｜年度規劃 × 能量重整</summary>
+    <ul>
+      <li>12 個月主題提醒</li>
+      <li>重大轉折月份</li>
+      <li>季度專注焦點</li>
+      <li>停・看・聽時機</li>
+      <li>整合優化建議</li>
+    </ul>
   </details>
 
-  <details><summary>15 張｜意念藍圖 Ultimate</summary>
-    <ul><li>核心課題 × 隱藏天賦</li><li>高維祝福 × 行動清單</li></ul>
+  <details>
+    <summary>15 張｜意念藍圖 Ultimate</summary>
+    <ul>
+      <li>核心課題 × 隱藏天賦</li>
+      <li>高維祝福 × 行動清單</li>
+      <li>限制信念重置指南</li>
+      <li>年度關鍵人物 & 支援資源</li>
+      <li>30-90 天資源整合路線</li>
+    </ul>
   </details>
 </div>
 
 <!-- ────────── 抽牌按鈕 ────────── -->
 <div>
-    <button onclick="drawCards(1)">抽 1 張</button>
-    <button onclick="drawCards(3)">抽 3 張</button>
-    <button onclick="drawCards(5)">抽 5 張</button>
-    <button onclick="drawCards(7)">抽 7 張</button>
-    <button onclick="drawCards(9)">抽 9 張</button>
-    <button onclick="drawCards(12)">抽 12 張</button>
-    <button onclick="drawCards(15)">抽 15 張</button>
+  <button onclick="drawCards(1)">抽 1 張</button>
+  <button onclick="drawCards(3)">抽 3 張</button>
+  <button onclick="drawCards(5)">抽 5 張</button>
+  <button onclick="drawCards(7)">抽 7 張</button>
+  <button onclick="drawCards(9)">抽 9 張</button>
+  <button onclick="drawCards(12)">抽 12 張</button>
+  <button onclick="drawCards(15)">抽 15 張</button>
 </div>
 
-<!-- ────────── 抽牌結果與複製 ────────── -->
+<!-- ────────── 抽牌結果 ────────── -->
 <div id="result"></div>
 <button id="copyBtn" onclick="copyResult()">📋 複製牌卡編號</button>
 
@@ -182,23 +217,22 @@
 let selectedCards=[];
 function formatCardNumber(n){return n<=22?'A'+(n-1).toString().padStart(2,'0'):(n-22).toString().padStart(3,'0');}
 function drawCards(num){
-    alert("請閉眼深呼吸，心裡默念問題，再點確認。");
-    selectedCards=[];
-    while(selectedCards.length<num){
-        const n=Math.floor(Math.random()*130)+1;
-        if(!selectedCards.includes(n))selectedCards.push(n);
-    }
-    document.getElementById('result').innerHTML=selectedCards.map(c=>`
+  alert("請閉眼深呼吸，心裡默念問題，再點確認。");
+  selectedCards=[];
+  while(selectedCards.length<num){
+      const n=Math.floor(Math.random()*130)+1;
+      if(!selectedCards.includes(n))selectedCards.push(n);}
+  document.getElementById('result').innerHTML=selectedCards.map(c=>`
       <div class="card-container">
         <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${c}.jpg">
         <div class="card-number">編號：${formatCardNumber(c)}</div>
       </div>`).join('');
 }
 function copyResult(){
-    if(!selectedCards.length){alert("請先抽牌再複製！");return;}
-    const txt=selectedCards.map(formatCardNumber).join(', ');
-    navigator.clipboard.writeText(txt).then(()=>alert('已複製：'+txt))
-        .catch(()=>alert('複製失敗，請手動複製：'+txt));
+  if(!selectedCards.length){alert("請先抽牌再複製！");return;}
+  const txt=selectedCards.map(formatCardNumber).join(', ');
+  navigator.clipboard.writeText(txt).then(()=>alert('已複製：'+txt))
+      .catch(()=>alert('複製失敗，請手動複製：'+txt));
 }
 </script>
 </body>
