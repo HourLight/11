@@ -2,95 +2,136 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>馥靈之鑰 Hour Light｜芳香能量調頻線上抽牌</title>
-<link rel="icon" type="image/x-icon" href="favicon.ico">
+<title>馥靈之鑰 Hour Light｜HOUR 線上抽牌</title>
+<link rel="icon" href="favicon.ico">
 <style>
-/* …（原有 CSS 全數保留，為節省篇幅此處省略）… */
+    :root{--milk:#f9f5f0;--cocoa:#6b4f3e;--rose:#cda86e;--rose-dark:#a88257;}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+        background:url('https://github.com/HourLight/11/raw/main/background.jpg') center/cover fixed no-repeat;
+        font-family:"Noto Sans TC","PingFang TC","Arial",sans-serif;
+        color:#333;text-align:center;padding:22px;
+    }
+    h1{
+        color:var(--cocoa);font-size:2rem;background:rgba(255,255,255,.86);
+        display:inline-block;padding:14px 30px;border-radius:18px;
+        margin-bottom:18px;box-shadow:0 3px 8px rgba(0,0,0,.25);
+    }
+    .tagline{font-size:17px;margin-bottom:30px;color:var(--rose-dark)}
+    button{
+        background:var(--rose);color:#fff;border:none;padding:15px 30px;
+        font-size:20px;margin:8px;border-radius:15px;cursor:pointer;
+        box-shadow:0 3px 8px rgba(0,0,0,.25);transition:.3s;
+    }
+    button:hover{background:var(--rose-dark);transform:translateY(-3px)}
+    #copyBtn{background:var(--cocoa)}
+    .card-container{display:inline-block;margin:16px}
+    .card-container img{
+        width:220px;border-radius:15px;box-shadow:0 0 12px rgba(0,0,0,.35)}
+    .card-number{
+        margin-top:10px;font-size:22px;font-weight:bold;
+        background:rgba(255,255,255,.75);padding:6px 12px;border-radius:10px}
+    .section{
+        max-width:880px;margin:38px auto;background:rgba(255,255,255,.9);
+        padding:28px;border-radius:16px;box-shadow:0 3px 10px rgba(0,0,0,.15);
+        line-height:1.75;font-size:18px;text-align:left
+    }
+    .section h2{color:var(--cocoa);margin-bottom:14px;font-size:1.25rem;text-align:center}
+    .section h3{color:var(--rose-dark);margin:20px 0 8px;font-size:1.05rem}
+    .price-list li{margin-left:4px}
+    .home-button{
+        display:inline-block;background:var(--rose);color:#fff;padding:12px 28px;
+        text-decoration:none;border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.25);
+        transition:.3s;margin:34px auto 0;font-size:18px
+    }
+    .home-button:hover{background:var(--rose-dark);transform:translateY(-3px)}
+    @media(max-width:768px){
+        button,#copyBtn{width:94%;margin:10px auto;font-size:22px}
+        .card-container img{width:94%}
+        .section{padding:22px}
+    }
 </style>
 </head>
 <body>
 
-<h1>馥靈之鑰 Hour Light｜芳香能量調頻線上抽牌</h1>
+<h1>馥靈之鑰 Hour Light｜HOUR 線上抽牌</h1>
+<p class="tagline">130 張牌卡 × H-O-U-R 四步節奏 — 快速對焦你的節奏訊息</p>
 
-<!-- ▍牌陣說明 + 延伸提問 -->
-<div style="max-width:900px;margin:40px auto 20px;background:rgba(255,255,255,0.9);padding:28px;border-radius:14px;box-shadow:0 0 10px rgba(0,0,0,0.12);font-size:18px;line-height:1.7;">
-  <h2 style="color:#6b4f3e;">🔮 怎麼選張數？</h2>
-  <p style="margin-bottom:16px;">先問問自己：<em>「我想聚焦哪個層面？」</em> 下面每個牌陣都列出 <strong>5 個最實用提問</strong>，讓你像點餐一樣秒選。</p>
+<!-- 說明區 -->
+<div class="section">
+    <h2>🔮 如何選擇張數？</h2>
+    <p style="text-align:center">先問自己：<em>「我想聚焦哪個層面？」</em></p>
 
-  <!-- 1 張 -->
-  <h3 style="color:#a28572;">🃏 1 張卡｜當下訊息 × 快速對節奏</h3>
-  <ul style="text-align:left;">
-    <li>我此刻的情緒或狀態是什麼？</li>
-    <li>今天最需要留意的提示是？</li>
-    <li>身體最近想跟我說什麼？</li>
-    <li>我現在最該補充哪種能量？</li>
-    <li>此刻的核心目標是什麼？</li>
-  </ul>
+    <!-- 1 張 -->
+    <h3>🃏 1 張｜即時訊息 × 快速對焦</h3>
+    <ul>
+        <li>我此刻的情緒是什麼？</li>
+        <li>今天最需要留意的提示？</li>
+        <li>身體最近想對我說的第一句話？</li>
+        <li>我現在最該補充哪種能量？</li>
+        <li>此刻的核心目標？</li>
+    </ul>
 
-  <!-- 3 張 -->
-  <h3 style="color:#a28572;">🃏 3 張卡｜過去・現在・未來 能量流</h3>
-  <ul style="text-align:left;">
-    <li>這件事從何而來？下一步怎麼走？</li>
-    <li>我的工作／創業方向對嗎？</li>
-    <li>感情目前的節奏與未來發展？</li>
-    <li>內在信念最近有何變化？</li>
-    <li>這次身體不適的源頭在哪裡？</li>
-  </ul>
+    <!-- 3 張 -->
+    <h3>🃏 3 張｜過去・現在・未來 能量流</h3>
+    <ul>
+        <li>這件事的源頭、現況和走向？</li>
+        <li>我的工作或創業方向？</li>
+        <li>感情關係的節奏變化？</li>
+        <li>內在信念最近正在轉什麼彎？</li>
+        <li>這次身體不適的源頭？</li>
+    </ul>
 
-  <!-- 5 張 -->
-  <h3 style="color:#a28572;">🃏 5 張卡｜卡點掃描 × 行動解方</h3>
-  <ul style="text-align:left;">
-    <li>為什麼我老是賺不到錢？真正盲點？</li>
-    <li>我該不該辭職或換跑道？</li>
-    <li>人際／家庭一直循環的劇本怎麼破？</li>
-    <li>行動力低落的底層原因？</li>
-    <li>現在這個選擇能帶我走出困境嗎？</li>
-  </ul>
+    <!-- 5 張 -->
+    <h3>🃏 5 張｜卡點掃描 × 行動解方</h3>
+    <ul>
+        <li>為什麼我一直卡在金錢／職涯？</li>
+        <li>是否要辭職或換跑道？</li>
+        <li>家庭或人際的循環劇本怎麼破？</li>
+        <li>行動力低落的底層原因？</li>
+        <li>這個選擇能否帶我走出困境？</li>
+    </ul>
 
-  <!-- 7 張 -->
-  <h3 style="color:#a28572;">🃏 7 張卡｜深層架構掃描</h3>
-  <p style="margin:8px 0 4px;">三種熱門排法任選：</p>
-  <ul style="text-align:left;">
-    <li><strong>七脈輪檢測：</strong>從安全感到高我連結，快速檢查哪一輪卡住。:contentReference[oaicite:0]{index=0}</li>
-    <li><strong>情緒轉化流程：</strong>起因 → 壓抑感受 → 真正需求 → 內在對話 → 支援資源 → 行動 → 整合結果。</li>
-    <li><strong>關係動力圖：</strong>我的感受 × 對方感受 × 顯性互動 × 隱性投射 × 共同課題 × 未來走向 × 最佳祝福。</li>
-  </ul>
+    <!-- 7 張 -->
+    <h3>🃏 7 張｜深層架構掃描</h3>
+    <p>三種熱門排法：</p>
+    <ul>
+        <li><strong>七脈輪檢測：</strong>快速檢查哪一輪卡住</li>
+        <li><strong>情緒轉化流程：</strong>起因 → 真需求 → 行動</li>
+        <li><strong>關係動力圖：</strong>我的感受 × 對方感受 × 未來走向</li>
+    </ul>
 
-  <!-- 9 張 -->
-  <h3 style="color:#a28572;">🃏 9 張卡｜宇宙節奏地圖 Nine Grid</h3>
-  <ul style="text-align:left;">
-    <li>宇宙最近想給我的功課與禮物？</li>
-    <li>下一站的人生方向與轉折？</li>
-    <li>我與金錢／關係／事業的能量安排？</li>
-    <li>我為何一直吸引同樣事件？</li>
-    <li>當下最值得顯化的目標是什麼？</li>
-  </ul>:contentReference[oaicite:1]{index=1}
+    <!-- 9 張 -->
+    <h3>🃏 9 張｜宇宙節奏地圖</h3>
+    <ul>
+        <li>宇宙最近給我的功課與禮物</li>
+        <li>下一站人生轉折點</li>
+        <li>與金錢／關係／事業的能量安排</li>
+        <li>我重複吸引的事件源頭</li>
+        <li>最值得顯化的目標</li>
+    </ul>
 
-  <!-- 12 張 -->
-  <h3 style="color:#a28572;">🃏 12 張卡｜年度地圖 × 能量重整</h3>
-  <p style="margin:8px 0 4px;">可對應 12 個月份或 12 大人生面向：</p>
-  <ul style="text-align:left;">
-    <li>每月主題與提醒</li>
-    <li>健康 · 情緒 · 財富 · 事業 · 關係 · 自我照顧 · 家庭 · 靈性 · 人脈 · 創造力 · 行動力 · 休息整合</li>
-    <li>今年突破舒適圈的關鍵時段？</li>
-    <li>我需要哪種支持系統？</li>
-    <li>哪些月份是轉折點？</li>
-  </ul>:contentReference[oaicite:2]{index=2}
+    <!-- 12 張 -->
+    <h3>🃏 12 張｜年度規劃 × 能量重整</h3>
+    <ul>
+        <li>12 個月主題提醒</li>
+        <li>12 個人生面向全盤檢視</li>
+        <li>今年突破舒適圈關鍵月份</li>
+    </ul>
 
-  <!-- 15 張 -->
-  <h3 style="color:#a28572;">🃏 15 張卡｜登入意念藍圖 Ultimate Mode</h3>
-  <ul style="text-align:left;">
-    <li>意念原型 × 本生核心課題 × 前世記憶</li>
-    <li>家族系統印記 × 內在小孩真聲</li>
-    <li>已啟動／尚未啟動的天賦包</li>
-    <li>現況能場 × 未來轉折 × 高維祝福</li>
-    <li>具體行動建議 × 意念願景整合</li>
-  </ul>:contentReference[oaicite:3]{index=3}
+    <!-- 15 張 -->
+    <h3>🃏 15 張｜意念藍圖 Ultimate</h3>
+    <ul>
+        <li>意念原型 × 本生核心課題</li>
+        <li>家族印記 × 內在小孩真聲</li>
+        <li>尚未啟動的天賦包</li>
+        <li>現況能場 × 高維祝福 × 行動建議</li>
+    </ul>
 
-  <p style="margin-top:18px;"><strong>🎯 小提醒：</strong>沒有「抽越多越厲害」這回事——選對題目，才是打中紅心。</p>
+    <p style="text-align:center;margin-top:16px;"><strong>🎯 提醒：</strong>抽得多不一定最好；選對題目，才打中紅心。</p>
 </div>
 
-<!-- ▍抽牌按鈕區（原程式不變） -->
+<!-- 抽牌按鈕 -->
 <div>
     <button onclick="drawCards(1)">抽 1 張</button>
     <button onclick="drawCards(3)">抽 3 張</button>
@@ -101,7 +142,67 @@
     <button onclick="drawCards(15)">抽 15 張</button>
 </div>
 
-<!-- …（以下 JS 與返回首頁按鈕維持原樣）… -->
+<!-- 顯示結果 -->
+<div id="result"></div>
+<button id="copyBtn" onclick="copyResult()">📋 複製牌卡編號</button>
+
+<!-- 付費說明 -->
+<div class="section">
+    <h2>💰 線上諮詢費用</h2>
+    <p style="text-align:center">複製編號後 → 點擊連結 → 私訊並完成付款</p>
+    <ul class="price-list">
+        <li>1 張 NT$ 300</li>
+        <li>3 張 NT$ 600</li>
+        <li>5 張 NT$ 900</li>
+        <li>7 張 NT$ 1,200</li>
+        <li>9 張 NT$ 1,500</li>
+        <li>12 張 NT$ 1,800</li>
+        <li>15 張 NT$ 2,200</li>
+        <li>個人節奏手冊 NT$ 3,000（15 張解析後可加購）</li>
+    </ul>
+    <p style="text-align:center;margin-top:12px;">
+        <a href="https://lin.ee/ySxUkJK" target="_blank"
+           style="display:inline-block;background:var(--cocoa);color:#fff;padding:12px 26px;border-radius:28px;
+           text-decoration:none;font-size:18px;box-shadow:0 4px 8px rgba(0,0,0,.25);transition:.3s;">
+            💬 私訊預約付費
+        </a>
+    </p>
+</div>
+
+<a href="https://hourlight.github.io/" class="home-button">🏠 返回首頁</a>
+
+<script>
+let selectedCards=[];
+
+function formatCardNumber(n){
+    return n<=22?'A'+(n-1).toString().padStart(2,'0'):(n-22).toString().padStart(3,'0');
+}
+
+function drawCards(num){
+    alert("請閉眼深呼吸，心裡默念問題，再點確認。");
+    selectedCards=[];
+    while(selectedCards.length<num){
+        let n=Math.floor(Math.random()*130)+1;
+        if(!selectedCards.includes(n))selectedCards.push(n);
+    }
+    const html=selectedCards.map(c=>`
+        <div class="card-container">
+            <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${c}.jpg">
+            <div class="card-number">編號：${formatCardNumber(c)}</div>
+        </div>`).join('');
+    document.getElementById('result').innerHTML=html;
+}
+
+function copyResult(){
+    if(!selectedCards.length){alert("請先抽牌再複製！");return;}
+    const text=selectedCards.map(formatCardNumber).join(', ');
+    navigator.clipboard.writeText(text).then(()=>{
+        alert('牌卡編號已複製：'+text);
+    }).catch(()=>{
+        alert('複製失敗，請手動複製：'+text);
+    });
+}
+</script>
 
 </body>
 </html>
