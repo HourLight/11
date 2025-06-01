@@ -12,28 +12,25 @@
         font-family:"Noto Sans TC","PingFang TC","Arial",sans-serif;
         color:#333;text-align:center;padding:22px;
     }
-    /* ────────── 標題區 ────────── */
-    .main-title{
-        color:var(--cocoa);
-        font-size:2rem;
-        background:rgba(255,255,255,.86);
-        display:block;
-        padding:12px 28px;border-radius:18px;
-        box-shadow:0 3px 8px rgba(0,0,0,.25);margin:0 auto 14px;
-    }
-    .sub-title{
-        color:var(--rose-dark);font-size:1.35rem;
-        background:rgba(255,255,255,.78);display:block;
-        padding:6px 20px;border-radius:14px;
-        box-shadow:0 2px 6px rgba(0,0,0,.2);margin:0 auto 10px;
-    }
-    .tagline{
-        font-size:17px;color:var(--cocoa);
-        background:rgba(255,255,255,.83);display:block;
-        padding:6px 18px;border-radius:14px;
-        box-shadow:0 3px 6px rgba(0,0,0,.25);
-        margin:0 auto 28px;max-width:880px;
-    }
+/* ────────── 標題區 ────────── */
+.main-title,
+.sub-title,
+.tagline{
+    display:block;                   /* 保持斷行 */
+    margin:0 auto 12px;
+    padding:10px 24px;
+    /* ↓ 改成「霧玻璃」半透明質感 ↓ */
+    background:rgba(255,255,255,.35);
+    backdrop-filter:blur(6px);       /* Safari 14+ & 現代瀏覽器 */
+    -webkit-backdrop-filter:blur(6px);
+    border-radius:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+}
+
+/* 個別字級／顏色 */
+.main-title{font-size:2rem;color:#f7f3ee;}
+.sub-title {font-size:1.35rem;color:#ffe4b6;}
+.tagline   {font-size:1rem;color:#f7f3ee;max-width:880px;}
     /* ────────── 按鈕 & 牌卡 ────────── */
     button{
         background:var(--rose);color:#fff;border:none;padding:14px 28px;font-size:20px;
