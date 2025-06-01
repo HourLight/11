@@ -4,176 +4,157 @@
 <meta charset="UTF-8">
 <title>馥靈之鑰 Hour Light｜靈性天使線上抽牌</title>
 <link rel="icon" href="favicon.ico">
+
 <style>
-    :root{--milk:#f9f5f0;--cocoa:#6b4f3e;--rose:#cda86e;--rose-dark:#a88257;}
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-        background:url('https://github.com/HourLight/11/raw/main/background.jpg') center/cover fixed no-repeat;
-        font-family:"Noto Sans TC","PingFang TC","Arial",sans-serif;
-        color:#333;text-align:center;padding:22px;
-    }
-/* ────────── 標題區 ────────── */
-.main-title,
-.sub-title,
-.tagline{
-    display:block;                   /* 保持斷行 */
-    margin:0 auto 12px;
-    padding:10px 24px;
-    /* ↓ 改成「霧玻璃」半透明質感 ↓ */
-    background:rgba(255,255,255,.35);
-    backdrop-filter:blur(6px);       /* Safari 14+ & 現代瀏覽器 */
-    -webkit-backdrop-filter:blur(6px);
-    border-radius:14px;
-    box-shadow:0 4px 12px rgba(0,0,0,.18);
+/* ───── 變數與全域 ───── */
+:root{--milk:#f9f5f0;--cocoa:#6b4f3e;--rose:#cda86e;--rose-dark:#a88257;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    background:url('https://github.com/HourLight/11/raw/main/background.jpg') center/cover fixed no-repeat;
+    font-family:"Noto Sans TC","PingFang TC","Arial",sans-serif;
+    color:#333;text-align:center;              /* 讓 inline-block 標題置中 */
+    padding:22px;
 }
 
-/* 個別字級／顏色 */
+/* ───── 標題 3 行（白底跟字寬）───── */
+.main-title,.sub-title,.tagline{
+    display:inline-block;max-width:100%;
+    margin:0 0 12px;padding:10px 24px;
+    background:rgba(255,255,255,.35);
+    backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
+    border-radius:14px;
+    box-shadow:0 4px 10px rgba(0,0,0,.18);
+}
 .main-title{font-size:2rem;color:#f7f3ee;}
 .sub-title {font-size:1.35rem;color:#ffe4b6;}
 .tagline   {font-size:1rem;color:#f7f3ee;max-width:880px;}
-    /* ────────── 按鈕 & 牌卡 ────────── */
-    button{
-        background:var(--rose);color:#fff;border:none;padding:14px 28px;font-size:20px;
-        margin:8px;border-radius:15px;cursor:pointer;
-        box-shadow:0 3px 8px rgba(0,0,0,.25);transition:.3s;
-    }
-    button:hover{background:var(--rose-dark);transform:translateY(-3px)}
-    #copyBtn{background:var(--cocoa)}
-    .card-container{display:inline-block;margin:16px}
-    .card-container img{
-        width:220px;border-radius:15px;box-shadow:0 0 12px rgba(0,0,0,.35)}
-    .card-number{
-        margin-top:10px;font-size:22px;font-weight:bold;
-        background:rgba(255,255,255,.75);padding:6px 12px;border-radius:10px}
-    /* ────────── 摺疊說明 ────────── */
-    details{border:1px solid #e4d6c8;border-radius:12px;margin:8px 0;
-        padding:0 14px;background:rgba(255,255,255,.88);
-        box-shadow:0 2px 6px rgba(0,0,0,.07);}
-    summary{cursor:pointer;list-style:none;font-weight:600;
-        padding:14px 4px;color:var(--rose-dark);}
-    summary::-webkit-details-marker{display:none;}
-    details[open]{background:rgba(255,255,255,.97);}
-    details ul{margin:8px 0 18px 18px;font-size:15px;}
-    /* ────────── 區塊外殼 ────────── */
-    .section{
-        max-width:880px;margin:36px auto;background:rgba(255,255,255,.9);
-        padding:24px;border-radius:16px;box-shadow:0 3px 10px rgba(0,0,0,.15);
-        line-height:1.75;font-size:18px;text-align:left;
-    }
-    .section h2{color:var(--cocoa);margin-bottom:12px;font-size:1.25rem;text-align:center}
-    /* ────────── 價格雙欄 ────────── */
-    .price-grid{
-        display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;
-        max-width:420px;margin:6px auto;
-    }
-    .price-grid div{
-        background:var(--milk);border-radius:10px;padding:8px 12px;
-        box-shadow:0 2px 4px rgba(0,0,0,.08);
-    }
-    @media(max-width:550px){.price-grid{grid-template-columns:1fr}}
-    /* ────────── 返回首頁 ────────── */
-    .home-btn{
-        display:inline-block;background:var(--rose);color:#fff;padding:12px 28px;
-        text-decoration:none;border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.25);
-        transition:.3s;margin:34px auto 0;font-size:18px}
-    .home-btn:hover{background:var(--rose-dark);transform:translateY(-3px)}
-    @media(max-width:768px){
-        button,#copyBtn{width:94%;margin:10px auto;font-size:22px}
-        .card-container img{width:94%}
-        .section{padding:20px}
-    }
+
+/* ───── 按鈕 & 牌卡 ───── */
+button{
+    background:var(--rose);color:#fff;border:none;padding:14px 28px;font-size:20px;
+    margin:8px;border-radius:15px;cursor:pointer;
+    box-shadow:0 3px 8px rgba(0,0,0,.25);transition:.3s;
+}
+button:hover{background:var(--rose-dark);transform:translateY(-3px)}
+#copyBtn{background:var(--cocoa)}
+.card-container{display:inline-block;margin:16px}
+.card-container img{width:220px;border-radius:15px;box-shadow:0 0 12px rgba(0,0,0,.35)}
+.card-number{
+    margin-top:10px;font-size:22px;font-weight:bold;
+    background:rgba(255,255,255,.75);padding:6px 12px;border-radius:10px;
+}
+
+/* ───── 摺疊說明 ───── */
+details{border:1px solid #e4d6c8;border-radius:12px;margin:8px 0;
+    padding:0 14px;background:rgba(255,255,255,.88);box-shadow:0 2px 6px rgba(0,0,0,.07);}
+summary{cursor:pointer;list-style:none;font-weight:600;padding:14px 4px;color:var(--rose-dark);}
+summary::-webkit-details-marker{display:none;}
+details[open]{background:rgba(255,255,255,.97);}
+details ul{margin:8px 0 18px 18px;font-size:15px;}
+
+/* ───── 區塊外殼 ───── */
+.section{
+    max-width:880px;margin:36px auto;background:rgba(255,255,255,.9);
+    padding:24px;border-radius:16px;box-shadow:0 3px 10px rgba(0,0,0,.15);
+    line-height:1.75;font-size:18px;text-align:left;
+}
+.section h2{color:var(--cocoa);margin-bottom:12px;font-size:1.25rem;text-align:center}
+
+/* ───── 價格雙欄 ───── */
+.price-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;
+    max-width:420px;margin:6px auto;
+}
+.price-grid div{
+    background:var(--milk);border-radius:10px;padding:8px 12px;
+    box-shadow:0 2px 4px rgba(0,0,0,.08);
+}
+@media(max-width:550px){.price-grid{grid-template-columns:1fr}}
+
+/* ───── 返回首頁 ───── */
+.home-btn{
+    display:inline-block;background:var(--rose);color:#fff;padding:12px 28px;
+    text-decoration:none;border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.25);
+    transition:.3s;margin:34px auto 0;font-size:18px}
+.home-btn:hover{background:var(--rose-dark);transform:translateY(-3px)}
+
+/* ───── RWD 按鈕 ───── */
+@media(max-width:768px){
+    button,#copyBtn{width:94%;margin:10px auto;font-size:22px}
+    .card-container img{width:94%}
+    .section{padding:20px}
+}
 </style>
 </head>
 <body>
 
-<!-- ────────── 標題區 ────────── -->
+<!-- 標題區 -->
 <h1 class="main-title">馥靈之鑰 Hour Light</h1>
 <h2 class="sub-title">靈性天使線上抽牌</h2>
-<p class="tagline">130 張牌卡 × 130 位靈性天使 — H-O-U-R 四步快速對焦</p>
+<p  class="tagline">130 張牌卡 × 130 位靈性天使 — H-O-U-R 四步快速對焦</p>
 
-<!-- ────────── 摺疊說明 ────────── -->
+<!-- 摺疊說明（七組牌陣，每組 5 點） -->
 <div class="section">
   <h2>🔮 抽多少？看這裡</h2>
 
-  <details>
-    <summary>1 張｜即時訊息 × 快速對焦</summary>
+  <details><summary>1 張｜即時訊息 × 快速對焦</summary>
     <ul>
-      <li>今日亮點提示</li>
-      <li>臨時注意事項</li>
-      <li>情緒小貼士</li>
-      <li>快速助攻關鍵詞</li>
-      <li>小驚喜伏筆</li>
+      <li>我現在的情緒訊號？</li><li>今日關鍵提醒</li>
+      <li>身體的小聲告白</li><li>關係能量溫度計</li>
+      <li>顯化練習聚焦點</li>
     </ul>
   </details>
 
-  <details>
-    <summary>3 張｜過去・現在・未來 能量流</summary>
+  <details><summary>3 張｜過去・現在・未來 能量流</summary>
     <ul>
-      <li>事件源頭</li>
-      <li>當下狀態</li>
-      <li>可能走向</li>
-      <li>關鍵轉折點</li>
-      <li>調整提醒</li>
+      <li>事件源頭 × 現況 × 走向</li><li>感情 / 職涯節拍</li>
+      <li>轉型卡點 & 轉機</li><li>信念變化檢測</li>
+      <li>身體症狀情緒根源</li>
     </ul>
   </details>
 
-  <details>
-    <summary>5 張｜卡點掃描 × 行動解方</summary>
+  <details><summary>5 張｜卡點掃描 × 行動解方</summary>
     <ul>
-      <li>目前阻力源</li>
-      <li>隱藏助力鍵</li>
-      <li>卡住原因解析</li>
-      <li>即刻行動步驟</li>
-      <li>後續支持資源</li>
+      <li>金錢 / 關係卡住原因</li><li>下一步行動</li>
+      <li>人際衝突五面觀照</li><li>情緒五階段釋放</li>
+      <li>五行失衡快速診斷</li>
     </ul>
   </details>
 
-  <details>
-    <summary>7 張｜深層架構掃描</summary>
+  <details><summary>7 張｜深層架構掃描</summary>
     <ul>
-      <li>七脈輪檢測圖</li>
-      <li>情緒轉化流程</li>
-      <li>關係動力線索</li>
-      <li>內外平衡方法</li>
-      <li>提升小練習</li>
+      <li>七脈輪能量平衡</li><li>情緒轉化七步驟</li>
+      <li>顯性 / 隱性動力</li><li>身心靈全盤檢視</li>
+      <li>靈性通道順暢度</li>
     </ul>
   </details>
 
-  <details>
-    <summary>9 張｜宇宙節拍地圖</summary>
+  <details><summary>9 張｜宇宙頻率地圖</summary>
     <ul>
-      <li>近期功課提示</li>
-      <li>即將到來禮物</li>
-      <li>成長支點定位</li>
-      <li>資源入口座標</li>
-      <li>前進微調建議</li>
+      <li>靈魂 × 內在 × 外在</li><li>九宮格行動策展</li>
+      <li>靈魂地圖星象對照</li><li>內收 / 外放節奏</li>
+      <li>月運 & 季運趨勢</li>
     </ul>
   </details>
 
-  <details>
-    <summary>12 張｜年度規劃 × 能量重整</summary>
+  <details><summary>12 張｜年度規劃 × 能量重整</summary>
     <ul>
-      <li>12 個月主題提醒</li>
-      <li>重大轉折月份</li>
-      <li>季度專注焦點</li>
-      <li>停・看・聽時機</li>
-      <li>整合優化建議</li>
+      <li>12 個月主題導航</li><li>12 面向平衡盤點</li>
+      <li>年度突破轉折</li><li>月亮週期追蹤</li>
+      <li>12 法則落地檢核</li>
     </ul>
   </details>
 
-  <details>
-    <summary>15 張｜意念藍圖 Ultimate</summary>
+  <details><summary>15 張｜登入靈魂藍圖 Ultimate</summary>
     <ul>
-      <li>核心課題 × 隱藏天賦</li>
-      <li>高維祝福 × 行動清單</li>
-      <li>限制信念重置指南</li>
-      <li>年度關鍵人物 & 支援資源</li>
-      <li>30-90 天資源整合路線</li>
+      <li>靈魂原型 × 核心功課</li><li>家族 / 前世殘影</li>
+      <li>天賦寶庫 × 盲點</li><li>高維祝福 × 行動清單</li>
+      <li>30-90 天整合路線</li>
     </ul>
   </details>
 </div>
 
-<!-- ────────── 抽牌按鈕 ────────── -->
+<!-- 抽牌按鈕 -->
 <div>
   <button onclick="drawCards(1)">抽 1 張</button>
   <button onclick="drawCards(3)">抽 3 張</button>
@@ -184,11 +165,11 @@
   <button onclick="drawCards(15)">抽 15 張</button>
 </div>
 
-<!-- ────────── 抽牌結果 ────────── -->
+<!-- 抽牌結果 -->
 <div id="result"></div>
 <button id="copyBtn" onclick="copyResult()">📋 複製牌卡編號</button>
 
-<!-- ────────── 價格區 ────────── -->
+<!-- 價格區 -->
 <div class="section">
   <h2>💰 線上諮詢費用</h2>
   <div class="price-grid">
@@ -206,10 +187,10 @@
   </p>
 </div>
 
-<!-- ────────── 返回首頁 ────────── -->
+<!-- 返回首頁 -->
 <a href="https://hourlight.github.io/" class="home-btn">🏠 返回首頁</a>
 
-<!-- ────────── JavaScript ────────── -->
+<!-- JS -->
 <script>
 let selectedCards=[];
 function formatCardNumber(n){return n<=22?'A'+(n-1).toString().padStart(2,'0'):(n-22).toString().padStart(3,'0');}
