@@ -17,17 +17,22 @@ body{
 }
 
 /* ───── 標題 3 行（白底跟字寬）───── */
-.main-title,.sub-title,.tagline{
-    display:inline-block;max-width:100%;
-    margin:0 0 12px;padding:10px 24px;
-    background:rgba(255,255,255,.35);
-    backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
+.main-title,
+.sub-title,
+.tagline{
+    display:block;                /* 每行獨立 */
+    width:fit-content;            /* 白底跟字寬 */
+    margin:0 auto 12px;           /* 置中 */
+    padding:10px 24px;
+    background:#ffffff;           /* 純白、不透明 */
     border-radius:14px;
     box-shadow:0 4px 10px rgba(0,0,0,.18);
 }
-.main-title{font-size:2rem;color:#f7f3ee;}
-.sub-title {font-size:1.35rem;color:#ffe4b6;}
-.tagline   {font-size:1rem;color:#f7f3ee;max-width:880px;}
+
+/* 個別字色/大小 (若已存在可忽略) */
+.main-title{font-size:2rem;color:#6b4f3e;}
+.sub-title {font-size:1.35rem;color:#cda86e;}
+.tagline   {font-size:1rem;color:#6b4f3e;max-width:880px;}
 
 /* ───── 按鈕 & 牌卡 ───── */
 button{
