@@ -12,16 +12,37 @@
         font-family:"Noto Sans TC","PingFang TC","Arial",sans-serif;
         color:#333;text-align:center;padding:22px;
     }
-    h1{
-        color:var(--cocoa);font-size:2rem;background:rgba(255,255,255,.86);
-        display:inline-block;padding:14px 30px;border-radius:18px;
-        margin-bottom:18px;box-shadow:0 3px 8px rgba(0,0,0,.25);
+    /* ────────── 標題區 ────────── */
+    .main-title{
+        color:var(--cocoa);
+        font-size:2rem;
+        background:rgba(255,255,255,.86);
+        display:inline-block;
+        padding:12px 28px;
+        border-radius:18px;
+        box-shadow:0 3px 8px rgba(0,0,0,.25);
+    }
+    .sub-title{
+        color:var(--rose-dark);
+        font-size:1.35rem;
+        margin:14px 0 8px;
+        background:rgba(255,255,255,.78);
+        display:inline-block;
+        padding:6px 20px;
+        border-radius:14px;
+        box-shadow:0 2px 6px rgba(0,0,0,.2);
     }
     .tagline{
-        font-size:17px;margin-bottom:28px;color:var(--cocoa);
-        background:rgba(255,255,255,.83);display:inline-block;
-        padding:6px 18px;border-radius:14px;box-shadow:0 3px 6px rgba(0,0,0,.25);
+        font-size:17px;
+        margin-bottom:28px;
+        color:var(--cocoa);
+        background:rgba(255,255,255,.83);
+        display:inline-block;
+        padding:6px 18px;
+        border-radius:14px;
+        box-shadow:0 3px 6px rgba(0,0,0,.25);
     }
+    /* ────────── 按鈕 & 牌卡 ────────── */
     button{
         background:var(--rose);color:#fff;border:none;padding:14px 28px;
         font-size:20px;margin:8px;border-radius:15px;cursor:pointer;
@@ -35,7 +56,7 @@
     .card-number{
         margin-top:10px;font-size:22px;font-weight:bold;
         background:rgba(255,255,255,.75);padding:6px 12px;border-radius:10px}
-    /* 摺疊說明 */
+    /* ────────── 摺疊說明 ────────── */
     details{
         border:1px solid #e4d6c8;border-radius:12px;margin:8px 0;
         padding:0 14px;background:rgba(255,255,255,.88);
@@ -48,7 +69,7 @@
     summary::-webkit-details-marker{display:none;}
     details[open]{background:rgba(255,255,255,.97);}
     details ul{margin:8px 0 18px 18px;font-size:15px;}
-    /* 區塊外殼 */
+    /* ────────── 區塊外殼 ────────── */
     .section{
         max-width:880px;margin:36px auto;background:rgba(255,255,255,.9);
         padding:24px;border-radius:16px;box-shadow:0 3px 10px rgba(0,0,0,.15);
@@ -56,7 +77,7 @@
     }
     .section h2{color:var(--cocoa);margin-bottom:12px;font-size:1.25rem;text-align:center}
     .section h3{color:var(--rose-dark);margin:18px 0 6px;font-size:1.05rem}
-    /* 價格雙欄 */
+    /* ────────── 價格雙欄 ────────── */
     .price-grid{
         display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;
         max-width:420px;margin:6px auto;
@@ -66,7 +87,7 @@
         box-shadow:0 2px 4px rgba(0,0,0,.08);
     }
     @media(max-width:550px){.price-grid{grid-template-columns:1fr}}
-    /* 返回首頁 */
+    /* ────────── 返回首頁 ────────── */
     .home-btn{
         display:inline-block;background:var(--rose);color:#fff;padding:12px 28px;
         text-decoration:none;border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.25);
@@ -82,11 +103,12 @@
 </head>
 <body>
 
+<!-- ────────── 標題區 ────────── -->
 <h1 class="main-title">馥靈之鑰 Hour Light</h1>
 <h2 class="sub-title">靈性天使線上抽牌</h2>
 <p class="tagline">130 張牌卡 × 130 位靈性天使 — H-O-U-R 四步快速對焦</p>
 
-<!-- 折疊說明 -->
+<!-- ────────── 摺疊說明 ────────── -->
 <div class="section">
   <h2>🔮 抽多少？看這裡</h2>
 
@@ -95,7 +117,7 @@
   </details>
 
   <details><summary>3 張｜過去・現在・未來 能量流</summary>
-    <ul><li>事件源頭、現況、走向</li><li>感情／職涯節拍</li></ul>
+    <ul><li>事件源頭、現況、走向</li><li>感情／職涯節奏</li></ul>
   </details>
 
   <details><summary>5 張｜卡點掃描 × 行動解方</summary>
@@ -119,7 +141,7 @@
   </details>
 </div>
 
-<!-- 抽牌按鈕 -->
+<!-- ────────── 抽牌按鈕 ────────── -->
 <div>
     <button onclick="drawCards(1)">抽 1 張</button>
     <button onclick="drawCards(3)">抽 3 張</button>
@@ -130,11 +152,11 @@
     <button onclick="drawCards(15)">抽 15 張</button>
 </div>
 
-<!-- 結果與複製 -->
+<!-- ────────── 抽牌結果與複製 ────────── -->
 <div id="result"></div>
 <button id="copyBtn" onclick="copyResult()">📋 複製牌卡編號</button>
 
-<!-- 價格區 -->
+<!-- ────────── 價格區 ────────── -->
 <div class="section">
   <h2>💰 線上諮詢費用</h2>
   <div class="price-grid">
@@ -152,8 +174,10 @@
   </p>
 </div>
 
+<!-- ────────── 返回首頁 ────────── -->
 <a href="https://hourlight.github.io/" class="home-btn">🏠 返回首頁</a>
 
+<!-- ────────── JavaScript ────────── -->
 <script>
 let selectedCards=[];
 function formatCardNumber(n){return n<=22?'A'+(n-1).toString().padStart(2,'0'):(n-22).toString().padStart(3,'0');}
