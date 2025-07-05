@@ -13,10 +13,20 @@ body{
     color:#333;text-align:center;
     padding:22px;
 }
-.main-title,.sub-title,.tagline{
-    display:block;width:fit-content;margin:0 auto 12px;
-    padding:10px 24px;background:#ffffff;border-radius:14px;
-    box-shadow:0 4px 10px rgba(0,0,0,.18);
+.main-title, .sub-title, .tagline {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 12px;
+  padding: 12px 26px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.45);       /* 半透明白底 */
+  border: 1.5px solid rgba(205, 168, 110, 0.6); /* 金色細邊 */
+  backdrop-filter: blur(10px);                 /* 玻璃霧化 */
+  -webkit-backdrop-filter: blur(10px);         /* Safari 支援 */
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(205, 168, 110, 0.12),        /* 金色微暈邊 */
+    inset 0 0 5px rgba(255, 255, 255, 0.4);     /* 內亮光感 */
 }
 .main-title{font-size:2rem;color:#6b4f3e;}
 .sub-title {font-size:1.35rem;color:#cda86e;}
