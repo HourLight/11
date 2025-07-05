@@ -89,6 +89,19 @@ details ul{margin:8px 0 18px 18px;font-size:15px;}
     .card-container img{width:94%}
     .section{padding:20px}
 }
+/* ───── 按鈕垂直堆疊樣式 ───── */
+.button-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 30px;
+}
+/* ───── 逆位圖片旋轉 ───── */
+.card-container.reversed img {
+  transform: rotate(180deg);
+  transition: transform 0.6s ease;
+}
 </style>
 </head>
 <body>
@@ -178,7 +191,7 @@ details ul{margin:8px 0 18px 18px;font-size:15px;}
 <!-- JS -->
 <script>
 let selectedCards = [];
-let cardStates = []; // 新增：記錄每張卡是正位還是逆位
+let cardStates = []; // 記錄每張卡是正位還是逆位
 
 function formatCardNumber(n) {
   return n <= 22 ? 'A' + (n - 1).toString().padStart(2, '0') : (n - 22).toString().padStart(3, '0');
@@ -194,21 +207,24 @@ function drawCards(num) {
     if (!selectedCards.includes(n)) {
       selectedCards.push(n);
       const isReversed = Math.random() < 0.5;
-      cardStates.push(isReversed ? "逆" : "正");
+      cardStates.push(isReversed ? "逆位" : "正位");
     }
   }
 
   document.getElementById('result').innerHTML = selectedCards.map((c, i) => {
-    const orientationIcon = cardStates[i] === "逆" ? "🌑" : "☀️";
-    const orientationText = `${orientationIcon} ${cardStates[i]}`;
-    const cardNumber = formatCardNumber(c);
+    const icon = cardStates[i] === "逆位" ? "🌑" : "☀️";
+    const label = `${icon} ${cardStates[i]}`; // ✅ 補上這行
+    const cardNumber = formatCardNumber(c);    // ✅ 補上這行
+    const reversedClass = cardStates[i] === "逆位" ? "reversed" : "";
+
     return `
-      <div class="card-container">
+      <div class="card-container ${reversedClass}">
         <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${c}.jpg">
-        <div class="card-number">編號：${cardNumber}（${orientationText}）</div>
+        <div class="card-number">編號：${cardNumber}（${label}）</div>
       </div>`;
   }).join('');
 }
+
 
 function copyResult() {
   if (!selectedCards.length) {
