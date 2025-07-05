@@ -12,21 +12,36 @@ body{
     font-family:"Noto Sans TC","PingFang TC","Arial",sans-serif;
     color:#333;text-align:center;
     padding:22px;
-}
 .main-title, .sub-title, .tagline {
   display: block;
   width: fit-content;
   margin: 0 auto 12px;
-  padding: 12px 26px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.45);       /* 半透明白底 */
-  border: 1.5px solid rgba(205, 168, 110, 0.6); /* 金色細邊 */
-  backdrop-filter: blur(10px);                 /* 玻璃霧化 */
-  -webkit-backdrop-filter: blur(10px);         /* Safari 支援 */
+  padding: 14px 28px;
+  border-radius: 18px;
+  background: rgba(255, 240, 245, 0.68); /* 淡粉半透明底 */
+  border: 1.5px solid rgba(221, 182, 200, 0.55); /* 玫瑰粉邊線 */
   box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.1),
-    0 0 0 2px rgba(205, 168, 110, 0.12),        /* 金色微暈邊 */
-    inset 0 0 5px rgba(255, 255, 255, 0.4);     /* 內亮光感 */
+    0 4px 12px rgba(230, 180, 200, 0.2),
+    0 0 0 2px rgba(255, 230, 240, 0.4),
+    inset 0 0 8px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ✨ 花影點綴（加在標題內） */
+.main-title::after, .sub-title::after, .tagline::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background: url('https://i.imgur.com/gz0ufrG.png') no-repeat center/contain;
+  opacity: 0.15;
+  transform: rotate(18deg);
+  pointer-events: none;
 }
 .main-title{font-size:2rem;color:#6b4f3e;}
 .sub-title {font-size:1.35rem;color:#cda86e;}
