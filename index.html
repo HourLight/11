@@ -171,20 +171,23 @@ function drawCards(num) {
   selectedCards = [];
   cardStates = [];
 
+  const allowReversed = [1, 3, 5].includes(num); // ✅ 只有這些開啟逆位
+
   while (selectedCards.length < num) {
     const n = Math.floor(Math.random() * 130) + 1;
     if (!selectedCards.includes(n)) {
       selectedCards.push(n);
-      const isReversed = Math.random() < 0.5;
+      const isReversed = allowReversed && Math.random() < 0.5;
       cardStates.push(isReversed ? "逆位" : "正位");
     }
   }
 
-  document.getElementById('result').innerHTML = selectedCards.map((c, i) => {
+  let resultHTML = selectedCards.map((c, i) => {
     const icon = cardStates[i] === "逆位" ? "🌑" : "☀️";
     const label = `${icon} ${cardStates[i]}`;
     const cardNumber = formatCardNumber(c);
     const reversedClass = cardStates[i] === "逆位" ? "reversed" : "";
+
     return `
       <div class="card-container ${reversedClass}">
         <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${c}.jpg">
@@ -192,7 +195,23 @@ function drawCards(num) {
       </div>`;
   }).join('');
 
-  // 自動滑動到結果區
+  // ✅ 自動計算逆位張數
+  const reversedCount = cardStates.filter(state => state === "逆位").length;
+
+  // ✅ 若有逆位，顯示溫柔提醒
+  if (reversedCount > 0) {
+    resultHTML += `
+      <div style="max-width:760px;margin:24px auto 0;background:rgba(255,255,255,0.88);padding:18px;border-radius:14px;line-height:1.8;text-align:left;font-size:16px;border:1px solid #ddd;">
+        <strong>💡 頻率提醒：</strong><br>
+        你這次抽出了 <strong>${reversedCount} 張逆位牌</strong>，這不是壞事，也不是錯誤。<br><br>
+        這些頻率正在你生命中出現，但可能尚未整合完成。<br>
+        它們代表的是你「正在經歷中但還未熟悉的能量」。請不要急著採取行動，而是靜心覺察，看看最近是否有情緒、身體、決策上的遲滯或卡點。<br><br>
+        🌿 頻率不是好壞，而是流動與否。讓這些提醒成為你的內在指引。
+      </div>
+    `;
+  }
+
+  document.getElementById('result').innerHTML = resultHTML;
   document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
 }
 
