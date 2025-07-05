@@ -179,25 +179,54 @@ details ul{margin:8px 0 18px 18px;font-size:15px;}
 
 <!-- JS -->
 <script>
-let selectedCards=[];
-function formatCardNumber(n){return n<=22?'A'+(n-1).toString().padStart(2,'0'):(n-22).toString().padStart(3,'0');}
-function drawCards(num){
+let selectedCards = [];
+let cardStates = []; // 新增：記錄每張卡是正位還是逆位
+
+function formatCardNumber(n) {
+  return n <= 22 ? 'A' + (n - 1).toString().padStart(2, '0') : (n - 22).toString().padStart(3, '0');
+}
+
+function drawCards(num) {
   alert("請閉眼深呼吸，心裡默念問題，再點確認。");
-  selectedCards=[];
-  while(selectedCards.length<num){
-      const n=Math.floor(Math.random()*130)+1;
-      if(!selectedCards.includes(n))selectedCards.push(n);}
-  document.getElementById('result').innerHTML=selectedCards.map(c=>`
+  selectedCards = [];
+  cardStates = [];
+
+  while (selectedCards.length < num) {
+    const n = Math.floor(Math.random() * 130) + 1;
+    if (!selectedCards.includes(n)) {
+      selectedCards.push(n);
+      const isReversed = Math.random() < 0.5;
+      cardStates.push(isReversed ? "逆位" : "正位");
+    }
+  }
+
+  document.getElementById('result').innerHTML = selectedCards.map((c, i) => {
+    const orientationIcon = cardStates[i] === "逆位" ? "🌑" : "☀️";
+    const orientationText = `${orientationIcon} ${cardStates[i]}`;
+    const cardNumber = formatCardNumber(c);
+    return `
       <div class="card-container">
         <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${c}.jpg">
-        <div class="card-number">編號：${formatCardNumber(c)}</div>
-      </div>`).join('');
+        <div class="card-number">編號：${cardNumber}（${orientationText}）</div>
+      </div>`;
+  }).join('');
 }
-function copyResult(){
-  if(!selectedCards.length){alert("請先抽牌再複製！");return;}
-  const txt=selectedCards.map(formatCardNumber).join(', ');
-  navigator.clipboard.writeText(txt).then(()=>alert('已複製：'+txt))
-      .catch(()=>alert('複製失敗，請手動複製：'+txt));
+
+function copyResult() {
+  if (!selectedCards.length) {
+    alert("請先抽牌再複製！");
+    return;
+  }
+
+  const resultText = selectedCards.map((c, i) => {
+    const cardNumber = formatCardNumber(c);
+    const state = cardStates[i];
+    return `${cardNumber}（${state}）`;
+  }).join(', ');
+
+  navigator.clipboard.writeText(resultText)
+    .then(() => alert('已複製：' + resultText))
+    .catch(() => alert('複製失敗，請手動複製：' + resultText));
 }
 </script>
 </body>
