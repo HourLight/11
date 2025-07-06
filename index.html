@@ -179,25 +179,43 @@ details ul{margin:8px 0 18px 18px;font-size:15px;}
 
 <!-- JS -->
 <script>
-let selectedCards=[];
-function formatCardNumber(n){return n<=22?'A'+(n-1).toString().padStart(2,'0'):(n-22).toString().padStart(3,'0');}
-function drawCards(num){
+let selectedCards = [];
+
+function drawCards(num) {
   alert("請閉眼深呼吸，心裡默念問題，再點確認。");
-  selectedCards=[];
-  while(selectedCards.length<num){
-      const n=Math.floor(Math.random()*130)+1;
-      if(!selectedCards.includes(n))selectedCards.push(n);}
-  document.getElementById('result').innerHTML=selectedCards.map(c=>
-      <div class="card-container">
-        <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${c}.jpg">
-        <div class="card-number">編號：${formatCardNumber(c)}</div>
-      </div>).join('');
+  selectedCards = [];
+  while (selectedCards.length < num) {
+    const n = Math.floor(Math.random() * 130) + 1;
+    if (!selectedCards.includes(n)) selectedCards.push(n);
+  }
+  updateResults();
 }
-function copyResult(){
-  if(!selectedCards.length){alert("請先抽牌再複製！");return;}
-  const txt=selectedCards.map(formatCardNumber).join(', ');
-  navigator.clipboard.writeText(txt).then(()=>alert('已複製：'+txt))
-      .catch(()=>alert('複製失敗，請手動複製：'+txt));
+
+function updateResults() {
+  const resultDiv = document.getElementById('result');
+  resultDiv.innerHTML = selectedCards.map(c => {
+    const cardNumber = formatCardNumber(c);
+    return `
+      <div class="card-container">
+        <img src="https://github.com/HourLight/11/raw/main/LINE_ALBUM_2025.3.23_250323_${c}.jpg" alt="Card Image">
+        <div class="card-number">編號：${cardNumber}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function formatCardNumber(n) {
+  return n <= 22 ? 'A' + (n - 1).toString().padStart(2, '0') : (n - 22).toString().padStart(3, '0');
+}
+
+function copyResult() {
+  if (!selectedCards.length) {
+    alert("請先抽牌再複製！");
+    return;
+  }
+  const txt = selectedCards.map(formatCardNumber).join(', ');
+  navigator.clipboard.writeText(txt).then(() => alert('已複製：' + txt))
+    .catch(() => alert('複製失敗，請手動複製：' + txt));
 }
 </script>
 </body>
