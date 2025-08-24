@@ -55,4 +55,24 @@ p{margin:0 0 12px}
 @media (max-width:960px){
   .hero-grid{grid-template-columns:1fr}
   .links a{display:none}
+.float-cta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.float-cta .btn {
+  display: inline-block;
+  padding: 12px 20px;
+  background: #d4af37; /* 金色 */
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.float-cta .btn:hover {
+  background: #b9972e;
+}
 }
