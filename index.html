@@ -1,214 +1,333 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>馥靈之鑰｜7日情緒GPS體驗｜透明一頁式</title>
-  <meta name="description" content="用H.O.U.R系統在7天內建立你的情緒GPS：每天10分鐘、群組陪跑、結束後提供個人化報告。安全用語＋完整交付＋合規資訊，一頁講清楚。">
-  <link rel="stylesheet" href="styles.css">
-  <style>body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Segoe UI",Arial,sans-serif}</style>
-  <script>
-    // 付款連結：綠界開通後，請替換下列三行；未替換前，一律導向 LINE，避免漏單
-    window.PAY_299 = "https://line.me/ti/p/ExZKz8O2eh";   // ECPay 299
-    window.PAY_36K = "https://line.me/ti/p/ExZKz8O2eh";   // ECPay 36,000
-    window.PAY_88K = "https://line.me/ti/p/ExZKz8O2eh";   // ECPay 88,000
-    window.LINE_URL = "https://line.me/ti/p/ExZKz8O2eh";
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('[data-pay]').forEach(a => a.href = window[a.getAttribute('data-pay')] || window.LINE_URL);
-      document.querySelectorAll('[data-line]').forEach(a => a.href = window.LINE_URL);
-      document.getElementById('year').textContent = new Date().getFullYear();
-    });
-  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>馥靈之鑰｜情緒商業系統 — 把溫暖天賦變成穩定收入</title>
+  <meta name="description" content="HOUR × FULI 四步工具包｜情緒紓解 × 能量調頻 × 壓力管理 × 商業系統化。說明會 NT$399｜認證班 NT$28,800｜授權年費 US$3,000。" />
+  <style>
+    :root{
+      --bg:#0f0f12;
+      --card:#15171b;
+      --text:#f4f4f5;
+      --muted:#bdbfc6;
+      --brand:#f2c94c;
+      --brand-2:#ffd166;
+      --accent:#66e0d6;
+      --ok:#7bd389;
+      --danger:#ff8e72;
+      --stroke:#23242a;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,"Noto Sans TC","PingFang TC",sans-serif;line-height:1.65}
+    a{color:var(--text);text-decoration:none}
+    .wrap{max-width:1100px;margin:auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.5px}
+    .logo .mark{width:28px;height:28px;border:1px solid var(--brand);border-radius:50%;display:grid;place-items:center;color:var(--brand);font-size:14px}
+    nav a{margin-left:18px;color:var(--muted)}
+    nav a.cta{color:#121214;background:linear-gradient(90deg,var(--brand),var(--brand-2));padding:10px 16px;border-radius:999px;font-weight:700}
+    .hero{display:grid;gap:22px;padding:28px;border:1px solid var(--stroke);border-radius:18px;background:radial-gradient(1200px 600px at 100% -10%,#1d1f25 0%,rgba(13,13,17,0) 60%),var(--card)}
+    .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--stroke);border-radius:999px;color:var(--muted);font-size:13px}
+    h1{font-size:32px;margin:4px 0 8px;line-height:1.25}
+    .sub{color:var(--muted);font-size:16px}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:12px;border:1px solid var(--stroke);background:#1a1c21;color:var(--text);font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#111}
+    .btn.ghost{background:transparent;color:var(--muted)}
+    .grid{display:grid;gap:18px}
+    @media(min-width:840px){.grid.cols-3{grid-template-columns:repeat(3,1fr)}.grid.cols-2{grid-template-columns:1.1fr .9fr}}
+    section{margin:42px 0}
+    .card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:22px}
+    h2{font-size:26px;margin:0 0 8px}
+    h3{font-size:18px;margin:0 0 6px}
+    p{margin:8px 0}
+    ul{margin:8px 0 0 18px;color:var(--muted)}
+    .check li{list-style:"✔ ";margin:6px 0}
+    .x li{list-style:"✖ ";color:var(--danger)}
+    .price{font-size:28px;font-weight:800;color:var(--brand)}
+    .muted{color:var(--muted)}
+    .bar{height:1px;background:linear-gradient(90deg,transparent,var(--stroke),transparent);margin:28px 0}
+    .pill{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--stroke);border-radius:999px;padding:6px 10px;color:var(--muted);font-size:12px}
+    .table{width:100%;border-collapse:collapse;margin-top:8px}
+    .table th,.table td{border:1px solid var(--stroke);padding:12px;text-align:left}
+    .note{font-size:13px;color:var(--muted)}
+    .kpi{display:grid;gap:12px}
+    @media(min-width:680px){.kpi{grid-template-columns:repeat(4,1fr)}}
+    .kpi .cell{padding:14px;border:1px solid var(--stroke);border-radius:12px;background:#1b1d22}
+    footer{color:var(--muted);font-size:12px;margin:36px 0 10px}
+    .countdown{font-variant-numeric:tabular-nums;letter-spacing:.5px}
+    .highlight{color:var(--accent);font-weight:700}
+    .badge-row{display:flex;flex-wrap:wrap;gap:8px}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Liberation Mono","Courier New",monospace}
+  </style>
 </head>
 <body>
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <div class="brand">
-        <div class="logo">HL</div>
-        <div class="btxt">
-          <b>馥靈之鑰®</b>
-          <span>情緒紓解 × 能量調頻 × 壓力管理</span>
-        </div>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <span class="mark">★</span>
+        <span>馥靈之鑰 Hour Light</span>
       </div>
-      <nav class="links">
-        <a href="#why">為什麼</a>
-        <a href="#what">你會得到</a>
-        <a href="#days">流程</a>
+      <nav>
+        <a href="#framework">系統</a>
         <a href="#plans">方案</a>
-        <a href="#trust">合規與聯絡</a>
+        <a href="#proof">回饋</a>
+        <a class="cta" href="#buy-ticket">立即購票 NT$399</a>
       </nav>
-      <a class="btn primary sm" data-pay="PAY_299">加入 7 日體驗（NT$299）</a>
-    </div>
-  </header>
+    </header>
 
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="copy">
-        <h1>7 天，把雜訊變小，讓自己穩下來</h1>
-        <p class="sub">這不是呼吸課，是一張體驗票：用 H.O.U.R 四步把資訊變系統、把練習變結果，最後交付一份《個人情緒 GPS 報告》。</p>
-        <div class="cta">
-          <a class="btn primary" data-pay="PAY_299">加入 7 日體驗（NT$299）</a>
-          <a class="btn ghost" data-line>先加 LINE 諮詢</a>
-        </div>
-        <ul class="trust">
-          <li>固定 21:00 群組任務</li>
-          <li>第 7 晚 90 分示範（回放 72 小時）</li>
-          <li>每梯限 120 位｜前 11 位加贈 mini 解讀</li>
-        </ul>
+    <section class="hero">
+      <span class="tag">🔑 情緒商業系統｜情緒紓解 × 能量調頻 × 壓力管理</span>
+      <h1>把你的溫暖天賦，變成穩定收入</h1>
+      <p class="sub">HOUR × FULI 四步工具包：聚焦、系統化、上台說、鎖定年費／授權現金流。</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#buy-ticket">🛒 〈情緒商業說明會〉NT$399（含回看）</a>
+        <a class="btn ghost" href="#plans">查看課程與授權方案</a>
       </div>
-      <div class="card">
-        <h3>H.O.U.R 四步（說人話）</h3>
-        <ol class="ol">
-          <li><b>H｜Heart reset</b>：短音訊＋3 分鐘行動，先把雜訊降下來</li>
-          <li><b>O｜Observe</b>：卡片＋文字，把「我現在怎麼了」說清楚</li>
-          <li><b>U｜Unfold</b>：把訊息翻成一句可落地的行動</li>
-          <li><b>R｜Re‑align</b>：回到現實行動表，穩穩做完</li>
-        </ol>
-        <p class="note">重點不是知道，是每天做完那 1 步。</p>
+      <div class="badge-row">
+        <span class="pill">合規用語｜不涉醫療或心理專業</span>
+        <span class="pill">名錄上架｜授權標章</span>
+        <span class="pill">里程碑分期｜總價不變</span>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="why" class="why">
-    <div class="wrap">
-      <h2>為什麼不是自己做就好？</h2>
-      <div class="grid two">
+    <section id="pain">
+      <div class="grid cols-3">
         <div class="card">
-          <h3>自己做的常見下場</h3>
-          <ul class="ul">
-            <li>第 1 天很有勁，第 3 天就停了</li>
-            <li>資訊過量，不知哪個對自己有效</li>
-            <li>沒有檢視，7 天後也說不出有什麼改變</li>
-          </ul>
-        </div>
-        <div class="card hi">
-          <h3>這張 299「體驗票」在買什麼</h3>
-          <ul class="ul">
-            <li>群組陪跑＋21:00 任務 → <b>真的做滿 7 天</b></li>
-            <li>每日卡片 × 短音訊 × 3 分鐘行動 → <b>方法小但做得完</b></li>
-            <li>第 8 天收到 <b>《個人情緒 GPS 報告》（6–10頁）</b></li>
-          </ul>
-          <p class="note">你不是買呼吸；你買的是「完成度＋報告」。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="what" class="what">
-    <div class="wrap">
-      <h2>你會得到（逐條列明）</h2>
-      <div class="grid three">
-        <div class="card"><h3>每日 10 分鐘</h3><p>1 張當日卡片＋1 段 2–4 分音訊＋1 個 3 分鐘行動（呼吸/伸展/步行/補水/一句實話）。</p></div>
-        <div class="card"><h3>群組陪跑</h3><p>固定 21:00 任務與打卡，彼此見證「我今天真的做完了」。</p></div>
-        <div class="card"><h3>第 7 晚直播</h3><p>90 分示範與 Q&A；無法即時參與可於 72 小時內回看。</p></div>
-        <div class="card"><h3>個人化報告</h3><p>7 日自評曲線、觸發源地圖、有效任務 TOP3、避雷清單、下週可執行清單（5–7 項）。</p></div>
-        <div class="card"><h3>升級建議</h3><p>若你想繼續，清楚說明「自用年版 36,000」與「專業年版 88,000」的差異與選擇。</p></div>
-        <div class="card"><h3>前 11 位加碼</h3><p>贈 1 次 15 分 mini 解讀（30 天內使用）。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="days" class="days">
-    <div class="wrap">
-      <h2>7 天流程（每步做得完）</h2>
-      <ol class="ol days-ol">
-        <li><b>D1 重新連線</b>：呼吸 30 下；睡前伸展 3 分鐘</li>
-        <li><b>D2 輕柔界線</b>：把「不好意思」改成「感謝提醒，我晚點回覆」</li>
-        <li><b>D3 身體雷達</b>：手心覆蓋最緊的部位 60 秒；喝 500ml 溫水</li>
-        <li><b>D4 把霧變成字</b>：我現在是（焦慮/煩躁/擔心/空空的）</li>
-        <li><b>D5 最小行動</b>：完成一件可見成果（折衣/清桌面/寄一封信）</li>
-        <li><b>D6 關係一句話</b>：傳「謝謝你今天出現」給一個人</li>
-        <li><b>D7 整合＋直播</b>：挑出最有用的一步，放進下週行事曆；90 分示範</li>
-      </ol>
-      <p class="note">我們不追求華麗，只追求「真的做完」。</p>
-    </div>
-  </section>
-
-  <section id="plans" class="plans">
-    <div class="wrap">
-      <h2>方案與價格（透明）</h2>
-      <div class="grid three">
-        <div class="card tall">
-          <h3>7 日體驗票</h3>
-          <p class="price">NT$299</p>
-          <ul class="mini">
-            <li>每日卡片 × 短音訊 × 3 分鐘行動</li>
-            <li>群組陪跑 × 21:00 任務</li>
-            <li>第 7 晚直播（回放 72 小時）</li>
-            <li>《個人情緒 GPS 報告》</li>
-          </ul>
-          <a class="btn primary block" data-pay="PAY_299">立即加入</a>
-          <p class="tip">目前按鈕先導向 LINE；綠界通過後改為刷卡頁。</p>
-        </div>
-        <div class="card tall">
-          <h3>自用年版</h3>
-          <p class="price">NT$36,000 / 年</p>
-          <ul class="mini">
-            <li>系統使用權＋更新</li>
-            <li>每月共學 1 次</li>
-            <li>延伸任務與教材</li>
-          </ul>
-          <a class="btn ghost block" data-pay="PAY_36K">我想了解</a>
-        </div>
-        <div class="card tall">
-          <h3>專業年版</h3>
-          <p class="price">NT$88,000 / 年</p>
-          <ul class="mini">
-            <li>含自用年版全項</li>
-            <li>服務腳本、收費話術、素材包</li>
-            <li>可對外提供付費服務</li>
-          </ul>
-          <a class="btn ghost block" data-pay="PAY_88K">我想了解</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="trust" class="trust">
-    <div class="wrap">
-      <h2>我們的態度：清楚、負責、可驗證</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>交付與界線（說清楚）</h3>
-          <ul class="ul">
-            <li><b>內容包含</b>：每日卡片/音訊/行動、群組任務、第 7 晚直播、個人化報告</li>
-            <li><b>不包含</b>：醫療或心理專業服務、一對一長期諮詢（需另洽）</li>
-            <li><b>付款</b>：採綠界（信用卡/超商/ATM）；目前先以 LINE 受理</li>
+          <h3>你是否也遇到…</h3>
+          <ul class="x">
+            <li>很會安撫情緒，卻不知道怎麼合理收費？</li>
+            <li>一對一忙翻，沒時間也沒收入安全感？</li>
+            <li>被當免費倒垃圾，邊界糊掉？</li>
+            <li>想做品牌，不會把能力變成商業系統？</li>
           </ul>
         </div>
         <div class="card">
-          <h3>安心與合規（很重要）</h3>
-          <ul class="ul">
-            <li><b>用途定位</b>：僅提供身心放鬆、情緒紓解、能量調頻、壓力管理</li>
-            <li><b>免責聲明</b>：非醫療行為；若有嚴重身心困擾，請尋求合格專業協助</li>
-            <li><b>退款政策</b>：線上即時使用之數位內容，啟用後依法通常不適用七日鑑賞；重複扣款/技術異常，7 日內來信處理</li>
+          <h3>我們提供的不是「感動」而是「SOP」</h3>
+          <p class="muted">把抽象變成可複製的步驟：流程卡、話術卡、值班檢核、名錄與授權規則。</p>
+          <ul class="check">
+            <li>四步就會用的工具包</li>
+            <li>標準文件＋講義庫</li>
+            <li>每月督導，持續優化</li>
           </ul>
         </div>
-      </div>
-
-      <div class="grid two">
         <div class="card">
-          <h3>聯絡資訊</h3>
-          <p>馥靈之鑰 Hour Light</p>
-          <p>LINE：<a data-line>https://line.me/ti/p/ExZKz8O2eh</a></p>
-          <p>Email：<a href="mailto:judyanee@gmail.com">judyanee@gmail.com</a></p>
-          <p>電話：<a href="tel:+886905723595">0905-723-595</a></p>
-          <p>地址：桃園市桃園區中正路1095號10樓</p>
-        </div>
-        <div class="card">
-          <h3>常見疑問（直球回答）</h3>
-          <details><summary>我自己也能做，為何要付 299？</summary><p>可以。差別在於這裡有陪跑與檢視，並在第 8 天提供一份可執行的個人化報告，讓你知道「接下來怎麼做」。</p></details>
-          <details><summary>會不會很玄？看不懂？</summary><p>不走玄語。每天只有一張卡、一段短音訊、一個 3 分鐘行動。重點是能完成，而且看得懂成果。</p></details>
-          <details><summary>會被強推高價嗎？</summary><p>第 7 晚會說明升級選項，但不關門逼單、不私訊追售。你仍然會收到完整報告。</p></details>
+          <h3>單一行動</h3>
+          <p>先從低門檻開始，拿到你的第一份行動清單與付款連結。</p>
+          <a class="btn primary" href="#buy-ticket">🛒 立即購票 NT$399</a>
         </div>
       </div>
+    </section>
 
-      <p class="fine">© <span id="year"></span> 馥靈之鑰® Hour Light．僅供身心放鬆、情緒紓解、能量調頻、壓力管理之用途。</p>
-    </div>
-  </section>
+    <section id="framework" class="card">
+      <h2>🚦 FULI 四步工具包</h2>
+      <div class="grid cols-4">
+        <div>
+          <h3>F｜Focus 聚焦定位</h3>
+          <p class="muted">挑出你的單一變現題，避免到處救火。</p>
+        </div>
+        <div>
+          <h3>U｜Upgrade 系統升級</h3>
+          <p class="muted">把服務模組化、可複製，交給團隊也能跑。</p>
+        </div>
+        <div>
+          <h3>L｜Launch 舞台啟動</h3>
+          <p class="muted">每週上麥一次，固定節奏＋一頁式銷售。</p>
+        </div>
+        <div>
+          <h3>I｜Income 收入倍增</h3>
+          <p class="muted">年費／授權／企業案＋里程碑分期，現金流穩定。</p>
+        </div>
+      </div>
+      <div class="bar"></div>
+      <p class="note">本系統用於<strong>壓力管理、情緒紓解、能量調頻、氣血循環調理</strong>與商業策略學習；不屬醫療或心理專業。</p>
+    </section>
 
-<div class="float-cta">
-  <a class="btn" href="https://hourlight.github.io/">了解更多</a>
-</div>
+    <section id="plans">
+      <h2>🎓 三種起點，從今天啟動</h2>
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>入門｜情緒商機探索班（4h）</h3>
+          <div class="price">NT$ 2,999</div>
+          <ul class="check">
+            <li>個人情緒商業潛力評量</li>
+            <li>FULI 工具小卡（PDF）</li>
+            <li>30分鐘一對一對焦</li>
+          </ul>
+          <div style="margin-top:10px">
+            <a id="buy-explore" class="btn primary" href="REPLACE_WITH_PAYMENT_LINK_EXPLORER">🛒 報名探索班</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>專業｜馥靈之鑰認證班（16h）</h3>
+          <div class="price">NT$ 28,800</div>
+          <ul class="check">
+            <li>完整系統培訓＋工具包</li>
+            <li>行銷素材庫（可套用）</li>
+            <li>3個月社群督導＋一年重修</li>
+            <li>個人執業認證</li>
+          </ul>
+          <p class="note">支援 3 期分期（里程碑分期，總價不變）</p>
+          <div>
+            <a id="buy-cert" class="btn primary" href="REPLACE_WITH_PAYMENT_LINK_CERT">🛒 報名認證班</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>事業夥伴｜系統授權（年制）</h3>
+          <div class="price">US$ 3,000 / 年</div>
+          <ul class="check">
+            <li>商業使用授權＋授權標章</li>
+            <li>每月一對一策略通話</li>
+            <li>官網名錄上架與官方曝光</li>
+            <li>收益共享機制（白話版）</li>
+          </ul>
+          <p class="note">可季付；名額限量。</p>
+          <div>
+            <a id="apply-license" class="btn primary" href="REPLACE_WITH_PAYMENT_LINK_LICENSE">🛒 申請授權</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid cols-2" style="margin-top:18px">
+        <div class="card">
+          <h3>企業 / 院所｜半日工作坊</h3>
+          <div class="price">NT$ 48,000（20人內）</div>
+          <ul class="check">
+            <li>三呼吸入場 × 壓力管理</li>
+            <li>HOUR × 服務接待SOP</li>
+            <li>情境演練 × 成效回饋表</li>
+          </ul>
+          <a id="book-enterprise" class="btn" href="REPLACE_WITH_BOOKING_LINK">📞 預約評估通話</a>
+        </div>
+        <div class="card">
+          <h3>價目與權益（統一版）</h3>
+          <table class="table">
+            <tr><th>方案</th><th>重點權益</th></tr>
+            <tr><td>探索班</td><td>評量＋工具卡＋30min對焦</td></tr>
+            <tr><td>認證班</td><td>16h＋工具包＋一年重修＋3月督導</td></tr>
+            <tr><td>授權年費</td><td>標章＋名錄上架＋每月策略通話＋分潤規則</td></tr>
+          </table>
+          <p class="note">原則：不打折；可里程碑分期（30%啟動 → 40%中期 → 30%驗收）。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="proof">
+      <h2>💬 夥伴與學員回饋（合規用語）</h2>
+      <div class="grid cols-3">
+        <div class="card">
+          <p class="muted">「客人說這裡是<strong>情緒紓解友善</strong>的空間，回流率明顯提升。」</p>
+          <p>— 心樂｜SPA 經營者</p>
+        </div>
+        <div class="card">
+          <p class="muted">「有一套<strong>壓力管理SOP</strong>，同工與志工更有方向。」</p>
+          <p>— 白鴿｜社群合作單位</p>
+        </div>
+        <div class="card">
+          <p class="muted">「不只精油，還會<strong>情緒對話與服務接待</strong>，客單與好評一起上來。」</p>
+          <p>— 茶茶｜芳療與教學</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="guarantee" class="card">
+      <h2>🛡️ 安心機制</h2>
+      <ul class="check">
+        <li>30 天方案轉換權（探索班 ↔ 認證班）</li>
+        <li>一年重修＋持續督導</li>
+        <li>里程碑分期：30%啟動 → 40%中期 → 30%驗收（總價不變）</li>
+      </ul>
+      <div class="bar"></div>
+      <div class="grid cols-2">
+        <div>
+          <h3>三行合約（白話）</h3>
+          <ol class="muted">
+            <li>範圍：探索班／認證班／授權（以附件價單為準）。</li>
+            <li>分期：30%→40%→30%，逾期自動暫停服務。</li>
+            <li>退費/終止：依已完成里程碑比例結算；教材與使用權不得外借外流。</li>
+          </ol>
+        </div>
+        <div>
+          <h3>合規聲明</h3>
+          <p class="note">本系統用於<strong>壓力管理、情緒紓解、能量調頻、氣血循環調理</strong>與商業策略學習；不屬醫療或心理專業行為。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bonus" class="card">
+      <h2>⏳ 限時早鳥</h2>
+      <p>本月名額有限，倒數計時：</p>
+      <div class="countdown" id="countdown" style="font-size:24px;margin:6px 0 14px">--天 --:--:--</div>
+      <ul class="check">
+        <li>認證班現省 NT$7,000（限早鳥）</li>
+        <li>授權方案首年加贈「個人品牌包裝」</li>
+        <li>企業專案：免費需求評估一次</li>
+      </ul>
+      <div style="margin-top:10px">
+        <a class="btn primary" href="#buy-ticket">🛒 立即購票 NT$399</a>
+      </div>
+      <p class="note">優惠名額用罄即關閉；以實際頁面顯示為準。</p>
+    </section>
+
+    <section id="faq">
+      <h2>📞 常見問題</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>沒有相關背景可以學嗎？</h3>
+          <p class="muted">可以。設計就是給一般人使用，提供SOP與工具包即可上手。</p>
+        </div>
+        <div class="card">
+          <h3>會不會太花時間？</h3>
+          <p class="muted">有回看與分段任務；每次 15 分鐘也能推進。</p>
+        </div>
+        <div class="card">
+          <h3>和別的課程有何不同？</h3>
+          <p class="muted">不只分享概念，更提供「可操作的文件與流程」，搭配授權與名錄。</p>
+        </div>
+        <div class="card">
+          <h3>可以分期嗎？</h3>
+          <p class="muted">可採<strong>里程碑分期</strong>（啟動／中期／驗收），總價不變。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="buy-ticket" class="card">
+      <h2>🛒 〈情緒商業說明會〉NT$399（含回看）</h2>
+      <p class="muted">60–90 分鐘｜拿到你的 HOUR 行動清單與下一步付款連結。</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="REPLACE_WITH_PAYMENT_LINK_TICKET">立即購票</a>
+        <a class="btn" href="#plans">我想先看完整方案</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="bar"></div>
+      <p>© 2025 馥靈之鑰 Hour Light｜品牌與文件僅供學習使用。未經授權不得轉載或散布。</p>
+      <p class="note">聯絡：<a href="mailto:judyanee@gmail.com">judyanee@gmail.com</a> ｜ LINE：@hourlight ｜ Instagram：@hourlight.yichun</p>
+    </footer>
+  </div>
+
+  <script>
+    // 倒數計時（預設至當月最後一天 23:59:00，台北時間）
+    (function(){
+      const el = document.getElementById('countdown');
+      if(!el) return;
+      const now = new Date();
+      const end = new Date(now.getFullYear(), now.getMonth()+1, 0, 23, 59, 0); // 本月最後一日 23:59
+      function pad(n){return n<10?'0'+n:n}
+      function tick(){
+        const t = end - new Date();
+        if(t<=0){ el.textContent = "00天 00:00:00"; return; }
+        const d = Math.floor(t/86400000);
+        const h = Math.floor((t%86400000)/3600000);
+        const m = Math.floor((t%3600000)/60000);
+        const s = Math.floor((t%60000)/1000);
+        el.textContent = d+"天 "+pad(h)+":"+pad(m)+":"+pad(s);
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+  </script>
 </body>
 </html>
