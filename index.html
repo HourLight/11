@@ -3,141 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>馥靈之鑰 Hour Light | 情緒商業系統專家 | 共創夥伴招募中</title>
-    <meta name="description" content="王逸君30年美業經驗，130張專業牌卡系統，提供個人洞察、企業諮詢、夥伴培訓。50%利潤共享，共創豐盛未來。">
-    <meta name="keywords" content="馥靈之鑰,情緒商業,牌卡系統,企業諮詢,共創夥伴,王逸君">
+    <title>馥靈之鑰情緒共振商業系統｜HOUR LIGHT 創新創業計畫</title>
+    <meta name="description" content="非醫療的情緒紓解系統，結合H.O.U.R.方法論、LIGHT品牌價值、綠色永續與AI情緒共振科技，打造華人情緒經濟新模式。">
+    <meta name="keywords" content="馥靈之鑰,情緒共振,情緒商業,預防性心理照護,美業轉型,綠色永續">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Microsoft JhengHei', Arial, sans-serif; line-height:1.6; color:#333; background:#fff; }
+        body { font-family:'Microsoft JhengHei', Arial, sans-serif; line-height:1.7; color:#333; background:#f8f9fa; }
         .container { max-width:1200px; margin:0 auto; padding:0 20px; }
 
         /* Header */
-        .header { background:linear-gradient(135deg,#2c3e50 0%,#34495e 100%); color:#fff; padding:20px 0; position:fixed; width:100%; top:0; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,.1); }
+        .header { background:linear-gradient(135deg,#0f2b36 0%,#234156 100%); color:#fff; padding:16px 0; position:fixed; width:100%; top:0; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,.15); }
         .nav { display:flex; justify-content:space-between; align-items:center; }
-        .logo { font-size:24px; font-weight:bold; color:#f39c12; }
-        .nav-links { display:flex; list-style:none; gap:30px; }
+        .logo { font-size:20px; font-weight:bold; color:#f4c27e; letter-spacing:.16em; }
+        .nav-links { display:flex; list-style:none; gap:24px; font-size:0.9rem; }
         .nav-links a { color:#fff; text-decoration:none; transition:color .3s; }
-        .nav-links a:hover { color:#f39c12; }
+        .nav-links a:hover { color:#f4c27e; }
 
         /* Hero */
-        .hero { background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:#fff; padding:120px 0 80px; text-align:center; margin-top:80px; }
-        .hero h1 { font-size:3.5em; margin-bottom:20px; text-shadow:2px 2px 4px rgba(0,0,0,.3); }
-        .hero .subtitle { font-size:1.5em; margin-bottom:30px; opacity:.9; }
-        .hero .highlight { background:rgba(243,156,18,.9); padding:15px 30px; border-radius:50px; font-size:1.2em; font-weight:bold; display:inline-block; margin:20px 0; animation:pulse 2s infinite; }
-        @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.05)} 100%{transform:scale(1)} }
+        .hero { background:linear-gradient(135deg,#1b4f72 0%,#4a235a 100%); color:#fff; padding:110px 0 70px; text-align:center; margin-top:64px; }
+        .hero h1 { font-size:2.4em; margin-bottom:10px; letter-spacing:.18em; }
+        .hero .subtitle { font-size:1.2em; margin-bottom:14px; opacity:.95; }
+        .hero .tagline { font-size:0.95em; max-width:720px; margin:0 auto 10px; opacity:.9; }
+        .hero .highlight { background:rgba(244,194,126,.95); padding:10px 20px; border-radius:999px; font-size:0.9em; font-weight:bold; display:inline-block; margin-top:16px; }
 
-        /* Countdown */
-        .countdown-section { background:#f8f9fa; padding:60px 0; text-align:center; }
-        .countdown-title { font-size:2.5em; color:#2c3e50; margin-bottom:20px; }
-        .countdown-subtitle { font-size:1.3em; color:#7f8c8d; margin-bottom:40px; }
-        .countdown-timer { display:flex; justify-content:center; gap:30px; margin-bottom:40px; }
-        .countdown-item { background:#fff; padding:30px 20px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,.1); min-width:120px; }
-        .countdown-number { font-size:3em; font-weight:bold; color:#e74c3c; display:block; }
-        .countdown-label { font-size:1.1em; color:#7f8c8d; margin-top:10px; }
-        .early-bird-offer { background:linear-gradient(135deg,#f39c12,#e67e22); color:#fff; padding:30px; border-radius:15px; margin:40px auto; max-width:800px; }
-        .early-bird-offer h3 { font-size:2em; margin-bottom:15px; }
-        .early-bird-offer ul { list-style:none; font-size:1.2em; }
-        .early-bird-offer li { margin:10px 0; padding-left:30px; position:relative; }
-        .early-bird-offer li:before { content:"✓"; position:absolute; left:0; color:#2ecc71; font-weight:bold; font-size:1.2em; }
+        /* Section 通用 */
+        section { padding:60px 0; }
+        section:nth-of-type(even){ background:#ffffff; }
+        section:nth-of-type(odd){ background:#f8f9fb; }
+        h2.section-title { text-align:center; font-size:2em; color:#2c3e50; margin-bottom:20px; }
+        .section-subtitle { text-align:center; font-size:0.98em; color:#7f8c8d; max-width:780px; margin:0 auto 32px; }
 
-        /* About */
-        .about { padding:80px 0; background:#fff; }
-        .about-content { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
-        .about-text h2 { font-size:2.5em; color:#2c3e50; margin-bottom:30px; }
-        .about-text p { font-size:1.2em; line-height:1.8; margin-bottom:20px; color:#555; }
-        .credentials { background:#f8f9fa; padding:30px; border-radius:15px; margin-top:30px; }
-        .credentials h3 { color:#2c3e50; margin-bottom:20px; font-size:1.5em; }
-        .credentials ul { list-style:none; }
-        .credentials li { margin:10px 0; padding-left:25px; position:relative; color:#555; }
-        .credentials li:before { content:"🎓"; position:absolute; left:0; }
+        /* Painpoints */
+        .grid-2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; }
+        .card { background:#fff; border-radius:16px; padding:24px 22px; box-shadow:0 4px 16px rgba(0,0,0,.06); }
+        .card h3 { font-size:1.3em; color:#2c3e50; margin-bottom:10px; }
+        .card h4 { font-size:1.05em; color:#2c3e50; margin:10px 0; }
+        .card p { font-size:0.95em; color:#555; margin-bottom:8px; }
+        .card ul { list-style:none; font-size:0.9em; color:#555; }
+        .card li { margin:6px 0; padding-left:18px; position:relative; }
+        .card li::before { content:"•"; position:absolute; left:4px; color:#3498db; }
 
-        /* Services */
-        .services { padding:80px 0; background:#f8f9fa; }
-        .services h2 { text-align:center; font-size:2.5em; color:#2c3e50; margin-bottom:60px; }
-        .service-categories { display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:40px; margin-bottom:60px; }
-        .service-category { background:#fff; padding:40px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,.1); text-align:center; transition:transform .3s; }
-        .service-category:hover { transform:translateY(-10px); }
-        .service-category h3 { font-size:1.8em; color:#2c3e50; margin-bottom:20px; }
-        .service-category .icon { font-size:3em; margin-bottom:20px; }
-        .service-list { list-style:none; text-align:left; }
-        .service-list li { margin:15px 0; padding:15px; background:#f8f9fa; border-radius:8px; border-left:4px solid #3498db; }
-        .service-list .service-name { font-weight:bold; color:#2c3e50; font-size:1.1em; }
-        .service-list .service-price { color:#e74c3c; font-weight:bold; margin-top:5px; }
-        .service-list .service-desc { color:#7f8c8d; font-size:.9em; margin-top:5px; }
+        /* HOUR */
+        .hour-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-top:12px; }
+        .hour-item { background:#fff; border-radius:14px; padding:18px 16px; box-shadow:0 4px 14px rgba(0,0,0,.06); }
+        .hour-item h3 { font-size:1.1em; color:#2c3e50; margin-bottom:4px; }
+        .hour-item .phase { font-size:0.85em; color:#7f8c8d; margin-bottom:6px; }
 
-        /* Partnership */
-        .partnership { padding:80px 0; background:#fff; }
-        .partnership h2 { text-align:center; font-size:2.5em; color:#2c3e50; margin-bottom:60px; }
-        .profit-sharing { background:linear-gradient(135deg,#2ecc71,#27ae60); color:#fff; padding:40px; border-radius:15px; text-align:center; margin-bottom:60px; }
-        .profit-sharing h3 { font-size:2.5em; margin-bottom:20px; }
-        .profit-sharing p { font-size:1.3em; margin-bottom:30px; }
-        .profit-breakdown { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; margin-top:30px; }
-        .profit-item { background:rgba(255,255,255,.2); padding:20px; border-radius:10px; }
-        .profit-item h4 { font-size:1.2em; margin-bottom:10px; }
-        .profit-item .percentage { font-size:2em; font-weight:bold; color:#f39c12; }
-        .partner-tiers { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
-        .partner-tier { background:#fff; border:2px solid #ecf0f1; border-radius:15px; padding:40px; text-align:center; transition:all .3s; position:relative; }
-        .partner-tier:hover { border-color:#3498db; transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,.1); }
-        .partner-tier.recommended { border-color:#f39c12; background:linear-gradient(135deg,#fff,#fef9e7); }
-        .partner-tier.recommended:before { content:"推薦"; position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:#f39c12; color:#fff; padding:8px 20px; border-radius:20px; font-size:.9em; font-weight:bold; }
-        .tier-name { font-size:1.8em; color:#2c3e50; margin-bottom:20px; }
-        .tier-price { font-size:2.5em; color:#e74c3c; font-weight:bold; margin-bottom:10px; }
-        .tier-period { color:#7f8c8d; margin-bottom:30px; }
-        .tier-features { list-style:none; text-align:left; margin-bottom:30px; }
-        .tier-features li { margin:15px 0; padding-left:25px; position:relative; color:#555; }
-        .tier-features li:before { content:"✓"; position:absolute; left:0; color:#2ecc71; font-weight:bold; }
-        .tier-button { background:linear-gradient(135deg,#3498db,#2980b9); color:#fff; padding:15px 30px; border:none; border-radius:25px; font-size:1.1em; cursor:pointer; transition:all .3s; width:100%; }
-        .tier-button:hover { transform:translateY(-2px); box-shadow:0 5px 15px rgba(52,152,219,.4); }
-        .recommended .tier-button { background:linear-gradient(135deg,#f39c12,#e67e22); }
-        .recommended .tier-button:hover { box-shadow:0 5px 15px rgba(243,156,18,.4); }
+        /* LIGHT & card science */
+        .light-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px; margin-top:16px; }
+        .light-item { background:#fff; padding:18px 16px; border-radius:14px; box-shadow:0 4px 14px rgba(0,0,0,.05); }
+        .light-item h3 { font-size:1.05em; margin-bottom:6px; color:#2c3e50; }
 
-        /* Card System */
-        .card-system { padding:80px 0; background:#f8f9fa; }
-        .card-system h2 { text-align:center; font-size:2.5em; color:#2c3e50; margin-bottom:60px; }
-        .card-showcase { display:grid; grid-template-columns:repeat(auto-fill,minmax(80px,1fr)); gap:15px; margin-bottom:60px; max-height:400px; overflow:hidden; }
-        .card-item { aspect-ratio:1; border-radius:10px; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold; font-size:.9em; transition:transform .3s; }
-        .card-item:hover { transform:scale(1.1); }
-        .card-features { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
-        .card-feature { background:#fff; padding:30px; border-radius:15px; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,.1); }
-        .card-feature h3 { color:#2c3e50; margin-bottom:15px; font-size:1.3em; }
-        .card-feature p { color:#7f8c8d; line-height:1.6; }
+        /* Features row */
+        .features-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:10px; }
 
-        /* Official Report */
-        .official-report { background:linear-gradient(135deg,#8e44ad,#9b59b6); color:#fff; padding:40px; border-radius:15px; margin:60px 0; text-align:center; }
-        .official-report h3 { font-size:2em; margin-bottom:20px; }
-        .official-report p { font-size:1.2em; margin-bottom:20px; }
-        .report-price { font-size:2.5em; font-weight:bold; color:#f39c12; margin:20px 0; }
+        /* Business model */
+        .bm-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:10px; }
+
+        /* Team */
+        .team-grid { display:grid; grid-template-columns:minmax(0,2.5fr) minmax(0,2.5fr); gap:30px; align-items:flex-start; }
+
+        /* Notes */
+        .note { background:#fef9e7; border-left:4px solid #f1c40f; padding:14px 16px; border-radius:10px; font-size:0.9em; color:#7f8c8d; margin-top:16px; }
 
         /* Contact */
-        .contact { padding:80px 0; background:#2c3e50; color:#fff; text-align:center; }
-        .contact h2 { font-size:2.5em; margin-bottom:40px; }
-        .contact-info { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:40px; margin-bottom:40px; }
-        .contact-item { background:rgba(255,255,255,.1); padding:30px; border-radius:15px; }
-        .contact-item h3 { color:#f39c12; margin-bottom:15px; font-size:1.3em; }
-        .contact-item p { font-size:1.1em; }
-        .contact-item a { color:#fff; text-decoration:none; }
-        .contact-item a:hover { color:#f39c12; }
-        .cta-button { background:linear-gradient(135deg,#f39c12,#e67e22); color:#fff; padding:20px 40px; border:none; border-radius:30px; font-size:1.3em; cursor:pointer; transition:all .3s; margin-top:30px; }
-        .cta-button:hover { transform:translateY(-3px); box-shadow:0 10px 25px rgba(243,156,18,.4); }
+        .contact-section { background:#2c3e50; color:#ecf0f1; text-align:center; }
+        .contact-section h2 { color:#f4c27e; }
+        .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; margin-top:24px; }
+        .contact-item { background:rgba(255,255,255,0.05); border-radius:14px; padding:18px; }
+        .contact-item h3 { color:#f4c27e; margin-bottom:6px; font-size:1.05em; }
+        .contact-item p { font-size:0.9em; }
+        .contact-item a { color:#ecf0f1; text-decoration:none; }
+        .contact-item a:hover { color:#f4c27e; }
 
-        /* Back to Top */
-        .back-to-top { position:fixed; bottom:30px; right:30px; background:#f39c12; color:#fff; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .3s; opacity:0; visibility:hidden; }
+        /* Back to top */
+        .back-to-top { position:fixed; bottom:24px; right:24px; background:#f4c27e; color:#2c3e50; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,.25); opacity:0; visibility:hidden; transition:all .25s; }
         .back-to-top.show { opacity:1; visibility:visible; }
-        .back-to-top:hover { background:#e67e22; transform:translateY(-3px); }
+        .back-to-top:hover { background:#f1b25e; transform:translateY(-2px); }
 
-        /* Responsive */
         @media (max-width:768px){
             .nav-links{ display:none; }
-            .hero h1{ font-size:2.5em; }
-            .hero .subtitle{ font-size:1.2em; }
-            .countdown-timer{ flex-wrap:wrap; gap:15px; }
-            .countdown-item{ min-width:100px; padding:20px 15px; }
-            .countdown-number{ font-size:2em; }
-            .about-content{ grid-template-columns:1fr; gap:40px; }
-            .service-categories{ grid-template-columns:1fr; }
-            .partner-tiers{ grid-template-columns:1fr; }
-            .card-showcase{ grid-template-columns:repeat(auto-fill,minmax(60px,1fr)); gap:10px; }
-            .contact-info{ grid-template-columns:1fr; }
+            .hero h1{ font-size:2.1em; }
+            .hero .subtitle{ font-size:1.05em; }
+            .grid-2{ grid-template-columns:1fr; }
+            .team-grid{ grid-template-columns:1fr; }
         }
     </style>
 </head>
@@ -145,13 +94,14 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav container">
-            <div class="logo">馥靈之鑰 Hour Light</div>
+            <div class="logo">馥靈之鑰 HOUR LIGHT</div>
             <ul class="nav-links">
-                <li><a href="#about">關於我們</a></li>
-                <li><a href="#services">服務項目</a></li>
-                <li><a href="#partnership">共創夥伴</a></li>
-                <li><a href="#cards">牌卡系統</a></li>
-                <li><a href="#contact">聯絡我們</a></li>
+                <li><a href="#pain">社會痛點</a></li>
+                <li><a href="#hour">H.O.U.R.</a></li>
+                <li><a href="#light">LIGHT 與牌卡</a></li>
+                <li><a href="#business">商業模式</a></li>
+                <li><a href="#team">團隊與影響</a></li>
+                <li><a href="#contact">聯絡</a></li>
             </ul>
         </nav>
     </header>
@@ -159,402 +109,290 @@
     <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <h1>馥靈之鑰</h1>
-            <p class="subtitle">點亮內在之光，共創豐盛未來</p>
-            <div class="highlight">🌟 共創夥伴招募中 - 即時收入分享最高50% 🌟</div>
-            <p>130張專業牌卡系統 × 30年實戰經驗 × 學術研究基礎</p>
+            <h1>馥靈之鑰情緒共振商業系統</h1>
+            <p class="subtitle">HOUR LIGHT 創新創業計畫</p>
+            <p class="tagline">
+                非醫療的情緒紓解系統，填補「預防性心理照護」的巨大缺口，<br>
+                讓美業與服務業工作者的情緒勞動，變成可被看見、可被收費的專業價值。
+            </p>
+            <div class="highlight">情緒經濟 × 綠色永續 × 就業轉型 × 社會影響力</div>
         </div>
     </section>
 
-    <!-- Countdown -->
-    <section class="countdown-section">
+    <!-- 01 社會痛點與市場需求 -->
+    <section id="pain">
         <div class="container">
-            <h2 class="countdown-title">🔥 早鳥優惠倒數計時</h2>
-            <p class="countdown-subtitle">把握機會，成為首批共創夥伴</p>
-            <div class="countdown-timer">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="days">30</span>
-                    <div class="countdown-label">天</div>
+            <h2 class="section-title">01｜現代社會的情緒痛點與市場缺口</h2>
+            <p class="section-subtitle">
+                台灣每 10 萬人僅約 18 位心理師，遠低於 WHO 建議的 40 位標準，平均等待期 3–6 個月。<br>
+                我們聚焦在「非醫療、預防性」的情緒紓解系統，與政府心理健康政策對接。
+            </p>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>現代人的三大情緒痛點</h3>
+                    <h4>1. 高壓競爭 × 長期失眠與身心緊繃</h4>
+                    <p>職場與學業壓力，讓焦慮與失眠成為常態，卻常常「撐到不得不看醫生」才求助。</p>
+                    <h4>2. 社群熱鬧 × 內心孤單</h4>
+                    <p>外在互動頻繁，內在卻缺乏深度對話與被理解的空間，孤獨感與疏離感加劇。</p>
+                    <h4>3. 未來不確定 × 反覆自我懷疑</h4>
+                    <p>轉職、創業、家庭壓力下，許多人需要的是清晰座標與情緒支撐，而不是一句「加油」。</p>
                 </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="hours">00</span>
-                    <div class="countdown-label">時</div>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="minutes">00</span>
-                    <div class="countdown-label">分</div>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="seconds">00</span>
-                    <div class="countdown-label">秒</div>
+                <div class="card">
+                    <h3>美業與服務業工作者三大困境</h3>
+                    <h4>1. 價格戰與同質化</h4>
+                    <p>傳統美容與服務，多半只能靠降價與加班堆積業績，很難建立品牌價值與忠誠度。</p>
+                    <h4>2. 情緒勞動無法被計價</h4>
+                    <p>美容師、芳療師、服務人員長期扮演「情緒垃圾桶」，付出大量情緒支持，卻無法收費。</p>
+                    <h4>3. 缺乏商業工具與系統</h4>
+                    <p>明明有專業與口碑，卻沒有一套可以複製、可以授權、可以升級的情緒商業系統。</p>
                 </div>
             </div>
-
-            <div class="early-bird-offer">
-                <h3>🎁 早鳥專屬優惠</h3>
-                <ul>
-                    <li>首年夥伴費用享8折優惠</li>
-                    <li>免費獲得價值NT$50,000行銷工具包</li>
-                    <li>專屬一對一創業輔導</li>
-                    <li>優先參與系統升級測試</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>關於創辦人 王逸君</h2>
-                    <p>擁有30年美容產業實戰經驗，結合學術研究背景，創立《馥靈之鑰》情緒商業系統。透過獨創的130張牌卡系統，幫助個人與企業找到內在平衡，實現商業成功。</p>
-                    <p>我們相信，真正的成功來自於內外在的和諧統一。《馥靈之鑰》不只是一套工具，更是一個完整的自我覺察與行動系統，協助大家把專長變現、把故事說清楚。</p>
-                    <div class="credentials">
-                        <h3>專業背景</h3>
-                        <ul>
-                            <li>30年美容產業實戰經驗</li>
-                            <li>芳香應用與情緒紓解專長</li>
-                            <li>壓力管理與體驗設計研究</li>
-                            <li>商業模式設計與授權策略</li>
-                            <li>130張牌卡系統創作者</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <div style="background:linear-gradient(135deg,#667eea,#764ba2);height:400px;border-radius:15px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5em;">
-                        王逸君創辦人照片
-                    </div>
-                </div>
+            <div class="note">
+                衛福部、勞動部、教育部都在談心理健康促進與預防性干預，<br>
+                但「非醫療的情緒紓解系統」仍嚴重供不應求——這就是馥靈之鑰要補上的位置。:contentReference[oaicite:0]{index=0}
             </div>
         </div>
     </section>
 
-    <!-- Services -->
-    <section class="services" id="services">
+    <!-- 02 HOUR -->
+    <section id="hour">
         <div class="container">
-            <h2>專業服務項目</h2>
-            <div class="service-categories">
-                <!-- 個人服務 -->
-                <div class="service-category">
-                    <div class="icon">👤</div>
-                    <h3>個人洞察服務</h3>
-                    <ul class="service-list">
-                        <li>
-                            <div class="service-name">🎯 5張牌 - 核心洞察</div>
-                            <div class="service-price">正價 NT$8,000 | 首次體驗 NT$1,888</div>
-                            <div class="service-desc">30分鐘 | 五芒星牌陣 | 核心問題分析 | 精油調頻</div>
-                        </li>
-                        <li>
-                            <div class="service-name">🧭 9張牌 - 生命導航</div>
-                            <div class="service-price">正價 NT$15,000 | Podcast聽眾 NT$3,888</div>
-                            <div class="service-desc">60分鐘 | 三重三角牌陣 | 生命數字解讀 | 7天追蹤</div>
-                        </li>
-                        <li>
-                            <div class="service-name">🌟 15張牌 - 藍圖精修</div>
-                            <div class="service-price">正價 NT$35,000 | 夥伴推薦 NT$15,888</div>
-                            <div class="service-desc">90分鐘 | 生命之樹牌陣 | 商業藍圖 | 30天指導</div>
-                        </li>
-                    </ul>
+            <h2 class="section-title">02｜H.O.U.R. 情緒轉化框架</h2>
+            <p class="section-subtitle">
+                一套標準化、可複製的四階段流程，把抽象的情緒探索，變成可操作的服務 SOP。:contentReference[oaicite:1]{index=1}
+            </p>
+            <div class="hour-grid">
+                <div class="hour-item">
+                    <h3>H｜Heal 身心校準</h3>
+                    <div class="phase">植物精油 × 深呼吸 × 快閃抽牌</div>
+                    <p>透過氣味與呼吸，快速讓身心從混亂狀態回到「0 狀態」，為後續覺察創造安全空間。</p>
                 </div>
-                <!-- 企業服務 -->
-                <div class="service-category">
-                    <div class="icon">🏢</div>
-                    <h3>企業諮詢服務</h3>
-                    <ul class="service-list">
-                        <li>
-                            <div class="service-name">👥 團隊能量分析</div>
-                            <div class="service-price">NT$25,000 - NT$80,000</div>
-                            <div class="service-desc">協作評估 | 溝通障礙識別 | 管理節奏建議</div>
-                        </li>
-                        <li>
-                            <div class="service-name">📊 企業決策諮詢</div>
-                            <div class="service-price">NT$100,000 - NT$300,000</div>
-                            <div class="service-desc">決策分析 | 機會評估 | 策略方向</div>
-                        </li>
-                        <li>
-                            <div class="service-name">🎯 企業文化診斷</div>
-                            <div class="service-price">NT$200,000 - NT$500,000</div>
-                            <div class="service-desc">現況盤點 | 滿意度 | 文化建設規劃</div>
-                        </li>
-                    </ul>
+                <div class="hour-item">
+                    <h3>O｜Own 智慧辨識</h3>
+                    <div class="phase">130 張牌卡 × 情緒鏡像</div>
+                    <p>以「節奏天使牌」映照當下生理／情緒／關係／意識的狀態，協助個案說出真正的需求。</p>
                 </div>
-                <!-- 夥伴支援 -->
-                <div class="service-category">
-                    <div class="icon">🤝</div>
-                    <h3>夥伴支援服務</h3>
-                    <ul class="service-list">
-                        <li>
-                            <div class="service-name">📋 專業報告製作</div>
-                            <div class="service-price">NT$2,000 - NT$5,000/份</div>
-                            <div class="service-desc">協助製作客戶報告 | 品質審核優化</div>
-                        </li>
-                        <li>
-                            <div class="service-name">📈 業務發展分析</div>
-                            <div class="service-price">NT$10,000 - NT$30,000</div>
-                            <div class="service-desc">個人業務分析 | 市場機會 | 成長策略</div>
-                        </li>
-                        <li>
-                            <div class="service-name">🎓 專業培訓課程</div>
-                            <div class="service-price">包含在夥伴費用中</div>
-                            <div class="service-desc">系統培訓 | 認證考核 | 持續督導</div>
-                        </li>
-                    </ul>
+                <div class="hour-item">
+                    <h3>U｜Unlock 潛能解鎖</h3>
+                    <div class="phase">生命靈數 × 紫微 × 故事轉譯</div>
+                    <p>結合多系統座標，把傳統「凶象」翻譯成「功課入口」，轉成可行動、可選擇的路徑。</p>
                 </div>
-            </div>
-
-            <!-- Official Report -->
-            <div class="official-report">
-                <h3>📋 官方專業報告服務</h3>
-                <p>若夥伴需要官方協助製作專業報告，我們提供高品質的報告製作服務</p>
-                <div class="report-price">每份報告 NT$2,000</div>
-                <p>專業設計 | 品質保證 | 快速交付</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Partnership -->
-    <section class="partnership" id="partnership">
-        <div class="container">
-            <h2>共創夥伴制度</h2>
-            <div class="profit-sharing">
-                <h3>🎯 即時收入分享機制</h3>
-                <p>每筆收入立即按比例分配給相關夥伴，總分配比例最高50%，真正實現共創共榮</p>
-                <div class="profit-breakdown">
-                    <div class="profit-item"><h4>介紹獎勵</h4><div class="percentage">10%</div></div>
-                    <div class="profit-item"><h4>培訓分潤</h4><div class="percentage">10%</div></div>
-                    <div class="profit-item"><h4>服務分潤</h4><div class="percentage">15%</div></div>
-                    <div class="profit-item"><h4>團隊獎勵</h4><div class="percentage">15%</div></div>
-                </div>
-            </div>
-
-            <div class="partner-tiers">
-                <div class="partner-tier">
-                    <h3 class="tier-name">🎯 馥靈調頻師</h3>
-                    <div class="tier-price">NT$100,000</div>
-                    <div class="tier-period">/ 年</div>
-                    <ul class="tier-features">
-                        <li>完整130張牌卡系統授權</li>
-                        <li>標準化服務流程培訓</li>
-                        <li>3個月專業督導支持</li>
-                        <li>官方認證證書</li>
-                        <li>行銷素材提供</li>
-                        <li>客戶服務支援</li>
-                        <li>參與收益共享機制</li>
-                    </ul>
-                    <button class="tier-button" onclick="contactUs('調頻師')">立即加入</button>
-                </div>
-
-                <div class="partner-tier recommended">
-                    <h3 class="tier-name">🧭 馥靈系統導師</h3>
-                    <div class="tier-price">NT$200,000</div>
-                    <div class="tier-period">/ 年</div>
-                    <ul class="tier-features">
-                        <li>完整130張牌卡系統授權</li>
-                        <li>區域經營權</li>
-                        <li>培訓調頻師權利</li>
-                        <li>6個月專業督導支持</li>
-                        <li>高級認證證書</li>
-                        <li>專屬行銷支援</li>
-                        <li>團隊管理培訓</li>
-                        <li>更高分潤比例</li>
-                    </ul>
-                    <button class="tier-button" onclick="contactUs('系統導師')">立即加入</button>
-                </div>
-
-                <div class="partner-tier">
-                    <h3 class="tier-name">🌟 馥靈永續夥伴</h3>
-                    <div class="tier-price">NT$500,000</div>
-                    <div class="tier-period">/ 年</div>
-                    <ul class="tier-features">
-                        <li>完整130張牌卡系統授權</li>
-                        <li>省級經營權</li>
-                        <li>夥伴培訓授權</li>
-                        <li>12個月專業督導支持</li>
-                        <li>頂級認證證書</li>
-                        <li>全方位行銷支援</li>
-                        <li>系統共創參與權</li>
-                        <li>最高分潤權益</li>
-                        <li>全球拓展機會</li>
-                    </ul>
-                    <button class="tier-button" onclick="contactUs('永續夥伴')">立即加入</button>
+                <div class="hour-item">
+                    <h3>R｜Rise 行動進化</h3>
+                    <div class="phase">行動清單 × 日常儀式</div>
+                    <p>設計 7／21／30 天的行動計畫與簡單儀式，讓覺察變成可追蹤、可累積的生活節奏。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Card System -->
-    <section class="card-system" id="cards">
+    <!-- 03 LIGHT & 牌卡科學 -->
+    <section id="light">
         <div class="container">
-            <h2>130張專業牌卡系統</h2>
-            <div class="card-showcase"><!-- 動態生成 --></div>
-            <div class="card-features">
-                <div class="card-feature"><h3>🎨 獨創設計</h3><p>融合東西方智慧，結合彩色心理與符號學原理。</p></div>
-                <div class="card-feature"><h3>🔬 科學基礎</h3><p>30年實務與學術研究支撐，流程清楚、可驗證。</p></div>
-                <div class="card-feature"><h3>🌟 系統化應用</h3><p>從個人到企業，搭配標準化步驟與回饋機制。</p></div>
-                <div class="card-feature"><h3>📈 可複製模式</h3><p>教案化、素材化、任務化，快速上手不走冤枉路。</p></div>
+            <h2 class="section-title">03｜LIGHT 品牌價值 × 130 張牌卡的科學詮釋</h2>
+            <p class="section-subtitle">
+                牌卡不是預測工具，而是連結意識與潛意識的橋樑。<br>
+                我們用科學語言詮釋原本被視為「玄學」的符號系統。:contentReference[oaicite:2]{index=2}
+            </p>
+
+            <div class="light-grid">
+                <div class="light-item">
+                    <h3>L · Listen 聆聽</h3>
+                    <p>傾聽未被說出口的情緒需求，以精準洞察取代華麗話術，減少「硬塞產品」式服務。</p>
+                </div>
+                <div class="light-item">
+                    <h3>I · Inspire 啟發</h3>
+                    <p>透過圖像、色彩與儀式感，啟動內在覺察，讓個案看見自己原本就有的力量。</p>
+                </div>
+                <div class="light-item">
+                    <h3>G · Guide 引導</h3>
+                    <p>提供具體可行的行動清單，從一次對話延伸成 7～90 天的生活改變。</p>
+                </div>
+                <div class="light-item">
+                    <h3>H · Harmonize 和諧</h3>
+                    <p>協助個案在身體、情緒、關係與物質生活之間找到比較舒服的平衡點。</p>
+                </div>
+                <div class="light-item">
+                    <h3>T · Transform 轉化</h3>
+                    <p>把壓力與卡關轉成行動動力，減少自責與內耗，創造可持續的改變循環。</p>
+                </div>
+            </div>
+
+            <div class="features-3" style="margin-top:24px;">
+                <div class="card">
+                    <h3>榮格潛意識理論</h3>
+                    <p>牌卡圖像作為觸發內在原型與集體潛意識的媒介，協助個案以投射方式表達情緒。:contentReference[oaicite:3]{index=3}</p>
+                </div>
+                <div class="card">
+                    <h3>心理投射 × 認知行為</h3>
+                    <p>類似投射測驗，使用者將內心狀態映射在牌面上，再透過語言與行動設計調整認知模式。</p>
+                </div>
+                <div class="card">
+                    <h3>迷走神經與感官科學</h3>
+                    <p>運用圖像、色彩與芳香刺激，協助調節自律神經，達到「身心再平衡」的放鬆效果。</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="contact" id="contact">
+    <!-- 04 綠色永續與全齡情緒智養 -->
+    <section id="sustain">
         <div class="container">
-            <h2>聯絡我們</h2>
-            <p>準備好開始您的《馥靈之鑰》之旅了嗎？</p>
-            <div class="contact-info">
+            <h2 class="section-title">04｜綠色永續 × 全齡情緒智養</h2>
+            <p class="section-subtitle">
+                不只照顧情緒，也照顧土地與世代。從永續精油採購、瓶器回收，到銀髮、偏鄉、青少年情緒支持，<br>
+                讓「情緒共振」變成有溫度的綠色行動。:contentReference[oaicite:4]{index=4}
+            </p>
+            <div class="features-3">
+                <div class="card">
+                    <h3>芳香精油永續循環</h3>
+                    <ul>
+                        <li>優先連結台灣原住民小農與在地植物，支持地方創生。</li>
+                        <li>建立瓶器回收機制與植物副產品再利用（堆肥、生物材料等）。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>低碳情緒商業模式</h3>
+                    <ul>
+                        <li>線上抽牌與諮詢降低通勤碳足跡，推動無紙化作業。</li>
+                        <li>實體空間導入節能設備、自然採光與綠色建材。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>全齡情緒智養方案</h3>
+                    <ul>
+                        <li>銀髮情緒陪伴模組：用香氣與牌卡喚起長者記憶，減少孤獨感。</li>
+                        <li>偏鄉青年調頻師培訓：返鄉創業＋社區照顧雙軌並行。</li>
+                        <li>青少年情緒對焦模組：結合學校輔導與考季壓力支援。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05 商業模式與授權架構（不寫回本速度） -->
+    <section id="business">
+        <div class="container">
+            <h2 class="section-title">05｜商業模式與授權架構</h2>
+            <p class="section-subtitle">
+                從個人服務到 B2B 顧問與 B2G 合作，透過三級授權與 50% 收益共享機制，<br>
+                建立「調頻師 × 導師 × 永續夥伴」共創生態系。:contentReference[oaicite:5]{index=5}
+            </p>
+            <div class="bm-grid">
+                <div class="card">
+                    <h3>多元營運模型</h3>
+                    <ul>
+                        <li><strong>HOUR LIGHT 未來美容學苑：</strong>綠色美業教育與認證課程（如能量美甲、情緒美容學）。</li>
+                        <li><strong>B2C/B2B 顧問服務：</strong>個人核心洞察報告、團隊能量分析、企業文化診斷。</li>
+                        <li><strong>授權 B2P：</strong>調頻師／系統導師／永續夥伴三級授權與收益共享。</li>
+                        <li><strong>政府合作：</strong>與衛福部、勞動部、教育部對接，設計預防性情緒紓解方案。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>授權方案（台幣）</h3>
+                    <ul>
+                        <li><strong>馥靈調頻師：</strong>年費 NT$100,000，適合個人服務者。</li>
+                        <li><strong>馥靈系統導師：</strong>年費 NT$200,000，適合區域講師與帶團隊者。</li>
+                        <li><strong>馥靈永續夥伴：</strong>年費 NT$500,000，適合國家／省級經營者。</li>
+                    </ul>
+                    <p style="font-size:0.88em;color:#7f8c8d;margin-top:8px;">
+                        一對一服務與課程定價（6,800／12,800／36,800／98,000／29,800 等）皆依白皮書正式版統一，<br>
+                        實際收益視每位夥伴投入與經營策略而定，不提供投資報酬保證。:contentReference[oaicite:6]{index=6}
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>AI × 數據 × 永續管理</h3>
+                    <ul>
+                        <li>線上抽牌與報告自動生成，減少人力成本與紙張使用。</li>
+                        <li>情緒數據分析，協助優化服務與預測市場趨勢。</li>
+                        <li>追蹤線上服務碳減排效益，建立綠色情緒商業指標。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 06 團隊與就業創造力 -->
+    <section id="team">
+        <div class="container">
+            <h2 class="section-title">06｜團隊潛力與就業創造力</h2>
+            <p class="section-subtitle">
+                3 年內培育 300 位調頻師、50 位導師，帶動約 1,000 個美業／服務業就業轉型，<br>
+                讓情緒勞動不再是免費的，而是有尊嚴、有專業、有收入的職業選擇。:contentReference[oaicite:7]{index=7}
+            </p>
+            <div class="team-grid">
+                <div class="card">
+                    <h3>創辦人｜王逸君</h3>
+                    <ul>
+                        <li>34 年美業實戰經驗：從美容師到品牌與系統創辦人。</li>
+                        <li>健康產業管理碩士：《美容愉悅感與身體意象相關研究》作者。</li>
+                        <li>整合紫微、八字、占星、人類圖、生命靈數、瑪雅曆等 12 套系統的座標哲學提出者。</li>
+                        <li>「命盤不是判決書，是藏寶圖」座標思維實踐者。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>就業與產業升級願景</h3>
+                    <ul>
+                        <li>3 年內培育 300 位調頻師，每位平均年服務 120 人次，年服務量可達 3.6 萬人次。</li>
+                        <li>每位調頻師平均帶動 3 家美業／芳療店轉型，約 900 家店走向「情緒價值＋綠色美業」。</li>
+                        <li>協助美業工作者平均年收入從 40 萬提升至 80–150 萬，改善「低薪、高勞動、難轉型」困境。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 07 Contact -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>聯絡與合作洽談</h2>
+            <p style="margin-top:6px;font-size:0.96em;">
+                無論你是想加入調頻師培訓、導師體系，還是作為政府／企業合作夥伴，<br>
+                歡迎來信或加 LINE，一起討論最適合的合作方式。
+            </p>
+            <div class="contact-grid" style="margin-top:26px;">
                 <div class="contact-item">
-                    <h3>📞 電話諮詢</h3>
-                    <p><a href="tel:0905723595">0905-723-595</a></p>
-                    <p>王逸君 創辦人</p>
+                    <h3>📞 直接聯絡</h3>
+                    <p>手機：<a href="tel:0905723595">0905-723-595</a></p>
+                    <p>Email：<a href="mailto:judyanee@gmail.com">judyanee@gmail.com</a></p>
                 </div>
                 <div class="contact-item">
-                    <h3>🌐 官方網站</h3>
-                    <p><a href="https://hourlight.github.io/" target="_blank" rel="noopener">hourlight.github.io</a></p>
-                    <p>完整資訊與最新消息</p>
-                </div>
-                <div class="contact-item">
-                    <h3>💬 社群聯絡</h3>
+                    <h3>💬 社群與 LINE 官方</h3>
                     <p>LINE 官方帳號：<a href="https://line.me/R/ti/p/@hourlight" target="_blank" rel="noopener">@hourlight</a></p>
-                    <p>YouTube / IG: judyanee</p>
+                    <p>IG / YouTube：搜尋 <strong>hourlight.yichun</strong></p>
                 </div>
                 <div class="contact-item">
-                    <h3>📧 電子郵件</h3>
-                    <p><a href="mailto:judyanee@gmail.com">judyanee@gmail.com</a></p>
-                    <p>商業合作與諮詢</p>
+                    <h3>🌐 官網與更多資訊</h3>
+                    <p><a href="https://hourlight.github.io/" target="_blank" rel="noopener">hourlight.github.io</a></p>
+                    <p>完整系統介紹與最新計畫進度</p>
                 </div>
             </div>
-            <button class="cta-button" onclick="contactUs('諮詢')">立即預約免費諮詢</button>
         </div>
     </section>
 
     <!-- Back to Top -->
-    <div class="back-to-top" onclick="scrollToTop()">↑</div>
+    <div class="back-to-top" id="backToTop">↑</div>
 
     <script>
-    // === 倒數設定（擇一） ===
-    // 方案A：固定截止日（建議明確帶時區，預設台北時間）
-    const FIXED_DEADLINE = '2025-10-09T23:59:59+08:00';
-
-    // 方案B：第一次造訪起算30天；要啟用把下行改成 true
-    const USE_ROLLING_30DAYS = false;
-    const END_KEY = 'earlyBirdEnd';
-
-    let targetDate = null;
-    if (USE_ROLLING_30DAYS) {
-        const saved = Number(localStorage.getItem(END_KEY));
-        if (saved && saved > Date.now()) {
-            targetDate = saved;
-        } else {
-            targetDate = Date.now() + 30 * 24 * 60 * 60 * 1000;
-            localStorage.setItem(END_KEY, String(targetDate));
-        }
-    } else {
-        targetDate = new Date(FIXED_DEADLINE).getTime();
-    }
-
-    let countdownTimerId = null;
-    function updateCountdown() {
-        const now = Date.now();
-        const distance = targetDate - now;
-
-        const daysEl = document.getElementById('days');
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
-
-        if (distance <= 0) {
-            daysEl.textContent = '00';
-            hoursEl.textContent = '00';
-            minutesEl.textContent = '00';
-            secondsEl.textContent = '00';
-            if (countdownTimerId) clearInterval(countdownTimerId);
-
-            const offer = document.querySelector('.early-bird-offer');
-            if (offer) {
-                offer.innerHTML = '<h3>活動已結束</h3><p>別擔心，下批名額準備中。點下方「立即預約免費諮詢」搶先通知。</p>';
-            }
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // 天數可能超過99，這裡不截斷，直接顯示真實天數
-        daysEl.textContent = String(days).padStart(2, '0');
-        hoursEl.textContent = String(hours).padStart(2, '0');
-        minutesEl.textContent = String(minutes).padStart(2, '0');
-        secondsEl.textContent = String(seconds).padStart(2, '0');
-    }
-    countdownTimerId = setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // 產生牌卡牆
-    function generateCardShowcase() {
-        const cardShowcase = document.querySelector('.card-showcase');
-        const colors = ['#667eea','#764ba2','#f093fb','#f5576c','#4facfe','#00f2fe','#43e97b','#38f9d7','#ffecd2','#fcb69f','#a8edea','#fed6e3','#ff9a9e','#fecfef','#ffeaa7','#fab1a0'];
-        for (let i = 1; i <= 130; i++) {
-            const card = document.createElement('div');
-            card.className = 'card-item';
-            card.style.background = `linear-gradient(135deg, ${colors[i % colors.length]}, ${colors[(i + 1) % colors.length]})`;
-            card.textContent = i.toString().padStart(3, '0');
-            cardShowcase.appendChild(card);
-        }
-    }
-    generateCardShowcase();
-
-    // 導覽平滑捲動
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e){
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
-        });
-    });
-
     // 回頂端
     function scrollToTop(){ window.scrollTo({ top:0, behavior:'smooth' }); }
-    window.scrollToTop = scrollToTop; // 暴露給按鈕onclick
-
-    // 顯示/隱藏回頂端按鈕
+    const back = document.getElementById('backToTop');
+    back.addEventListener('click', scrollToTop);
     window.addEventListener('scroll', function(){
-        const backToTop = document.querySelector('.back-to-top');
-        if (window.pageYOffset > 300) backToTop.classList.add('show');
-        else backToTop.classList.remove('show');
+        if (window.pageYOffset > 300) back.classList.add('show');
+        else back.classList.remove('show');
     });
 
-    // 聯絡
-    function contactUs(type){
-        const phoneUrl = 'tel:0905723595';
-        const lineUrl = 'https://line.me/R/ti/p/@hourlight';
-        const choice = confirm(`您想用哪種方式聯絡我們？\n\n確定：撥打電話 0905-723-595\n取消：開啟 LINE 官方帳號`);
-        if (choice) { window.open(phoneUrl); } else { window.open(lineUrl, '_blank'); }
-    }
-    window.contactUs = contactUs;
-
-    // 捲動進場動畫
-    function animateOnScroll(){
-        const elements = document.querySelectorAll('.service-category, .partner-tier, .card-feature');
-        elements.forEach(el=>{
-            const top = el.getBoundingClientRect().top;
-            const visible = 150;
-            if (top < window.innerHeight - visible) {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
+    // 導覽平滑捲動
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', e=>{
+            const targetId = a.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                e.preventDefault();
+                const el = document.querySelector(targetId);
+                if (el) el.scrollIntoView({behavior:'smooth',block:'start'});
             }
         });
-    }
-    window.addEventListener('scroll', animateOnScroll);
-    document.addEventListener('DOMContentLoaded', function(){
-        const els = document.querySelectorAll('.service-category, .partner-tier, .card-feature');
-        els.forEach(el=>{
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity .6s ease, transform .6s ease';
-        });
-        animateOnScroll();
     });
     </script>
 </body>
