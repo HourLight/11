@@ -4,89 +4,478 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>馥靈之鑰情緒共振商業系統｜HOUR LIGHT 創新創業計畫</title>
-    <meta name="description" content="非醫療的情緒紓解系統，結合H.O.U.R.方法論、LIGHT品牌價值、綠色永續與AI情緒共振科技，打造華人情緒經濟新模式。">
-    <meta name="keywords" content="馥靈之鑰,情緒共振,情緒商業,預防性心理照護,美業轉型,綠色永續">
+    <meta name="description" content="非醫療的情緒紓解與壓力管理系統，結合 H.O.U.R. 方法論、LIGHT 品牌價值、綠色永續與 AI 情緒共振科技，打造華人情緒經濟新模式。">
+    <meta name="keywords" content="馥靈之鑰,情緒共振,情緒商業,預防性情緒照顧,美業轉型,綠色永續">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Microsoft JhengHei', Arial, sans-serif; line-height:1.7; color:#333; background:#f8f9fa; }
-        .container { max-width:1200px; margin:0 auto; padding:0 20px; }
+
+        :root {
+            --bg: #05030a;
+            --bg-alt: #0b0816;
+            --bg-hero: radial-gradient(circle at 0% 0%, #3b2460 0, transparent 55%),
+                        radial-gradient(circle at 100% 0%, #1c4b6d 0, transparent 55%),
+                        #05030a;
+            --card-bg: rgba(10, 8, 25, 0.92);
+            --card-soft-bg: rgba(14, 12, 32, 0.9);
+            --border-gold: rgba(233, 194, 125, 0.25);
+            --border-soft: rgba(255, 255, 255, 0.04);
+            --text-main: #f5f2ff;
+            --text-muted: #a9a3c7;
+            --text-strong: #ffffff;
+            --accent-gold: #e9c27d;
+            --accent-gold-soft: #cda86e;
+            --accent-blue: #69c3ff;
+            --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+            --radius-card: 18px;
+            --transition-fast: 0.22s ease-out;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", sans-serif;
+            line-height: 1.8;
+            color: var(--text-main);
+            background: radial-gradient(circle at 20% -10%, #3c2659 0, transparent 55%),
+                        radial-gradient(circle at 80% -10%, #0c4c63 0, transparent 50%),
+                        var(--bg);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
         /* Header */
-        .header { background:linear-gradient(135deg,#0f2b36 0%,#234156 100%); color:#fff; padding:16px 0; position:fixed; width:100%; top:0; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,.15); }
-        .nav { display:flex; justify-content:space-between; align-items:center; }
-        .logo { font-size:20px; font-weight:bold; color:#f4c27e; letter-spacing:.16em; }
-        .nav-links { display:flex; list-style:none; gap:24px; font-size:0.9rem; }
-        .nav-links a { color:#fff; text-decoration:none; transition:color .3s; }
-        .nav-links a:hover { color:#f4c27e; }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: linear-gradient(120deg, rgba(5,3,16,0.96), rgba(9,7,26,0.96));
+            border-bottom: 1px solid rgba(233, 194, 125, 0.16);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 22px;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 2px;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue));
+            transition: width var(--transition-fast);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
         /* Hero */
-        .hero { background:linear-gradient(135deg,#1b4f72 0%,#4a235a 100%); color:#fff; padding:110px 0 70px; text-align:center; margin-top:64px; }
-        .hero h1 { font-size:2.4em; margin-bottom:10px; letter-spacing:.18em; }
-        .hero .subtitle { font-size:1.2em; margin-bottom:14px; opacity:.95; }
-        .hero .tagline { font-size:0.95em; max-width:720px; margin:0 auto 10px; opacity:.9; }
-        .hero .highlight { background:rgba(244,194,126,.95); padding:10px 20px; border-radius:999px; font-size:0.9em; font-weight:bold; display:inline-block; margin-top:16px; }
+        .hero {
+            background: var(--bg-hero);
+            color: var(--text-main);
+            padding: 120px 0 70px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
 
-        /* Section 通用 */
-        section { padding:60px 0; }
-        section:nth-of-type(even){ background:#ffffff; }
-        section:nth-of-type(odd){ background:#f8f9fb; }
-        h2.section-title { text-align:center; font-size:2em; color:#2c3e50; margin-bottom:20px; }
-        .section-subtitle { text-align:center; font-size:0.98em; color:#7f8c8d; max-width:780px; margin:0 auto 32px; }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12) 0, transparent 55%),
+                radial-gradient(circle at 80% 10%, rgba(255,255,255,0.08) 0, transparent 52%);
+            opacity: 0.9;
+            pointer-events: none;
+        }
 
-        /* Painpoints */
-        .grid-2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; }
-        .card { background:#fff; border-radius:16px; padding:24px 22px; box-shadow:0 4px 16px rgba(0,0,0,.06); }
-        .card h3 { font-size:1.3em; color:#2c3e50; margin-bottom:10px; }
-        .card h4 { font-size:1.05em; color:#2c3e50; margin:10px 0; }
-        .card p { font-size:0.95em; color:#555; margin-bottom:8px; }
-        .card ul { list-style:none; font-size:0.9em; color:#555; }
-        .card li { margin:6px 0; padding-left:18px; position:relative; }
-        .card li::before { content:"•"; position:absolute; left:4px; color:#3498db; }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: var(--text-strong);
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            color: var(--accent-gold);
+        }
+
+        .hero .tagline {
+            font-size: 0.98rem;
+            max-width: 780px;
+            margin: 0 auto 18px;
+            color: var(--text-muted);
+        }
+
+        .hero .highlight {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 9px 22px;
+            border-radius: 999px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.26), transparent 55%),
+                        linear-gradient(120deg, #f4c27e, #e19a5a);
+            color: #2b1a0d;
+            box-shadow: 0 12px 26px rgba(0,0,0,0.45);
+        }
+
+        /* Sections */
+        section {
+            padding: 64px 0;
+            position: relative;
+        }
+
+        section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.02) 0, transparent 55%);
+            pointer-events: none;
+        }
+
+        h2.section-title {
+            text-align: center;
+            font-size: 1.9rem;
+            color: var(--accent-gold);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            max-width: 820px;
+            margin: 0 auto 30px;
+        }
+
+        /* Base Card & Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 26px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-card);
+            padding: 22px 20px;
+            border: 1px solid var(--border-gold);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .card h4 {
+            font-size: 1rem;
+            color: var(--text-strong);
+            margin: 12px 0 4px;
+        }
+
+        .card p {
+            font-size: 0.94rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .card ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .card li {
+            margin: 6px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .card li::before {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 9px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-gold) 0, var(--accent-blue) 100%);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(233,194,125,0.6);
+            box-shadow: 0 22px 55px rgba(0,0,0,0.75);
+            transition: all var(--transition-fast);
+        }
 
         /* HOUR */
-        .hour-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-top:12px; }
-        .hour-item { background:#fff; border-radius:14px; padding:18px 16px; box-shadow:0 4px 14px rgba(0,0,0,.06); }
-        .hour-item h3 { font-size:1.1em; color:#2c3e50; margin-bottom:4px; }
-        .hour-item .phase { font-size:0.85em; color:#7f8c8d; margin-bottom:6px; }
+        .hour-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 10px;
+        }
 
-        /* LIGHT & card science */
-        .light-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px; margin-top:16px; }
-        .light-item { background:#fff; padding:18px 16px; border-radius:14px; box-shadow:0 4px 14px rgba(0,0,0,.05); }
-        .light-item h3 { font-size:1.05em; margin-bottom:6px; color:#2c3e50; }
+        .hour-item {
+            background: var(--card-soft-bg);
+            border-radius: 16px;
+            padding: 18px 16px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.55);
+        }
 
-        /* Features row */
-        .features-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:10px; }
+        .hour-item h3 {
+            font-size: 1.05rem;
+            color: var(--accent-gold);
+            margin-bottom: 4px;
+        }
+
+        .hour-item .phase {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .hour-item p {
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        /* LIGHT & features */
+        .light-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+            margin-top: 16px;
+        }
+
+        .light-item {
+            background: var(--card-soft-bg);
+            padding: 18px 16px;
+            border-radius: 16px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.55);
+        }
+
+        .light-item h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+            color: var(--accent-gold);
+        }
+
+        .light-item p {
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .features-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 18px;
+        }
 
         /* Business model */
-        .bm-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:10px; }
+        .bm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 10px;
+        }
 
         /* Team */
-        .team-grid { display:grid; grid-template-columns:minmax(0,2.5fr) minmax(0,2.5fr); gap:30px; align-items:flex-start; }
+        .team-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 2.5fr) minmax(0, 2.5fr);
+            gap: 26px;
+            align-items: flex-start;
+        }
 
-        /* Notes */
-        .note { background:#fef9e7; border-left:4px solid #f1c40f; padding:14px 16px; border-radius:10px; font-size:0.9em; color:#7f8c8d; margin-top:16px; }
+        /* Note */
+        .note {
+            margin-top: 18px;
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.06), rgba(241, 196, 15, 0.02));
+            border-radius: 14px;
+            border: 1px solid rgba(241, 196, 15, 0.45);
+            padding: 14px 16px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+        }
 
         /* Contact */
-        .contact-section { background:#2c3e50; color:#ecf0f1; text-align:center; }
-        .contact-section h2 { color:#f4c27e; }
-        .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; margin-top:24px; }
-        .contact-item { background:rgba(255,255,255,0.05); border-radius:14px; padding:18px; }
-        .contact-item h3 { color:#f4c27e; margin-bottom:6px; font-size:1.05em; }
-        .contact-item p { font-size:0.9em; }
-        .contact-item a { color:#ecf0f1; text-decoration:none; }
-        .contact-item a:hover { color:#f4c27e; }
+        .contact-section {
+            background: radial-gradient(circle at 0% 0%, #2b2345 0, transparent 55%),
+                        #05030a;
+            color: var(--text-main);
+            text-align: center;
+            border-top: 1px solid rgba(233,194,125,0.18);
+            position: relative;
+        }
+
+        .contact-section h2 {
+            color: var(--accent-gold);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+            margin-top: 26px;
+        }
+
+        .contact-item {
+            background: rgba(15, 12, 36, 0.9);
+            border-radius: 16px;
+            padding: 18px 16px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+        }
+
+        .contact-item h3 {
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .contact-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .contact-item a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Legal notice */
+        .legal-note {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
 
         /* Back to top */
-        .back-to-top { position:fixed; bottom:24px; right:24px; background:#f4c27e; color:#2c3e50; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,.25); opacity:0; visibility:hidden; transition:all .25s; }
-        .back-to-top.show { opacity:1; visibility:visible; }
-        .back-to-top:hover { background:#f1b25e; transform:translateY(-2px); }
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(233,194,125,0.6);
+            background: radial-gradient(circle at 30% 0%, rgba(233,194,125,0.22) 0, transparent 55%),
+                        rgba(5,3,18,0.96);
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.8);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all var(--transition-fast);
+            z-index: 999;
+        }
 
-        @media (max-width:768px){
-            .nav-links{ display:none; }
-            .hero h1{ font-size:2.1em; }
-            .hero .subtitle{ font-size:1.05em; }
-            .grid-2{ grid-template-columns:1fr; }
-            .team-grid{ grid-template-columns:1fr; }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 22px 50px rgba(0,0,0,0.9);
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2rem; letter-spacing: 0.2em; }
+            .hero .subtitle { font-size: 1rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            section { padding: 54px 0; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding-top: 110px; }
+            .hero h1 { font-size: 1.8rem; letter-spacing: 0.16em; }
+            .hero .tagline { font-size: 0.9rem; }
+            .card, .hour-item, .light-item { padding: 18px 16px; }
         }
     </style>
 </head>
@@ -94,11 +483,12 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav container">
-            <div class="logo">馥靈之鑰 HOUR LIGHT</div>
+            <div class="logo">HOUR LIGHT</div>
             <ul class="nav-links">
                 <li><a href="#pain">社會痛點</a></li>
                 <li><a href="#hour">H.O.U.R.</a></li>
                 <li><a href="#light">LIGHT 與牌卡</a></li>
+                <li><a href="#sustain">綠色永續</a></li>
                 <li><a href="#business">商業模式</a></li>
                 <li><a href="#team">團隊與影響</a></li>
                 <li><a href="#contact">聯絡</a></li>
@@ -112,8 +502,8 @@
             <h1>馥靈之鑰情緒共振商業系統</h1>
             <p class="subtitle">HOUR LIGHT 創新創業計畫</p>
             <p class="tagline">
-                非醫療的情緒紓解系統，填補「預防性心理照護」的巨大缺口，<br>
-                讓美業與服務業工作者的情緒勞動，變成可被看見、可被收費的專業價值。
+                非醫療的情緒紓解與壓力管理系統，專注「預防性情緒照顧」，<br>
+                讓美業與服務業工作者的情緒勞動，被看見、被尊重，也可以被好好計價。
             </p>
             <div class="highlight">情緒經濟 × 綠色永續 × 就業轉型 × 社會影響力</div>
         </div>
@@ -125,31 +515,31 @@
             <h2 class="section-title">01｜現代社會的情緒痛點與市場缺口</h2>
             <p class="section-subtitle">
                 台灣每 10 萬人僅約 18 位心理師，遠低於 WHO 建議的 40 位標準，平均等待期 3–6 個月。<br>
-                我們聚焦在「非醫療、預防性」的情緒紓解系統，與政府心理健康政策對接。
+                「馥靈之鑰」聚焦在非醫療、預防性的情緒紓解與壓力管理，與現有心理健康政策互補，而不是取代。
             </p>
             <div class="grid-2">
                 <div class="card">
                     <h3>現代人的三大情緒痛點</h3>
                     <h4>1. 高壓競爭 × 長期失眠與身心緊繃</h4>
-                    <p>職場與學業壓力，讓焦慮與失眠成為常態，卻常常「撐到不得不看醫生」才求助。</p>
+                    <p>職場與學業壓力，讓焦慮與失眠變成日常，很多人都撐到狀況變得很嚴重才願意求助。</p>
                     <h4>2. 社群熱鬧 × 內心孤單</h4>
-                    <p>外在互動頻繁，內在卻缺乏深度對話與被理解的空間，孤獨感與疏離感加劇。</p>
+                    <p>訊息永遠爆滿，但真正能說真話的地方很少，越滑手機，越覺得自己格格不入。</p>
                     <h4>3. 未來不確定 × 反覆自我懷疑</h4>
-                    <p>轉職、創業、家庭壓力下，許多人需要的是清晰座標與情緒支撐，而不是一句「加油」。</p>
+                    <p>轉職、創業、家庭壓力一起來，大家需要的是清楚座標與情緒支撐，而不是一句「你要想開一點」。</p>
                 </div>
                 <div class="card">
                     <h3>美業與服務業工作者三大困境</h3>
                     <h4>1. 價格戰與同質化</h4>
-                    <p>傳統美容與服務，多半只能靠降價與加班堆積業績，很難建立品牌價值與忠誠度。</p>
+                    <p>傳統美容與服務，多半只能靠降價與加班堆積業績，很難穩定建立品牌價值與忠誠度。</p>
                     <h4>2. 情緒勞動無法被計價</h4>
-                    <p>美容師、芳療師、服務人員長期扮演「情緒垃圾桶」，付出大量情緒支持，卻無法收費。</p>
+                    <p>美容師、芳療師、服務人員長期扮演「情緒垃圾桶」，客人聊到哭，服務費卻只能算在手工上。</p>
                     <h4>3. 缺乏商業工具與系統</h4>
-                    <p>明明有專業與口碑，卻沒有一套可以複製、可以授權、可以升級的情緒商業系統。</p>
+                    <p>明明有專業與口碑，卻沒有一套可以複製、可以授權、可以升級的情緒商業系統，只能靠個人硬撐。</p>
                 </div>
             </div>
             <div class="note">
-                衛福部、勞動部、教育部都在談心理健康促進與預防性干預，<br>
-                但「非醫療的情緒紓解系統」仍嚴重供不應求——這就是馥靈之鑰要補上的位置。:contentReference[oaicite:0]{index=0}
+                衛福部、勞動部、教育部都在談心理健康促進與預防性方案，<br>
+                但「非醫療的情緒紓解與壓力管理系統」仍然嚴重供不應求——這就是馥靈之鑰要站出來的地方。
             </div>
         </div>
     </section>
@@ -159,28 +549,28 @@
         <div class="container">
             <h2 class="section-title">02｜H.O.U.R. 情緒轉化框架</h2>
             <p class="section-subtitle">
-                一套標準化、可複製的四階段流程，把抽象的情緒探索，變成可操作的服務 SOP。:contentReference[oaicite:1]{index=1}
+                一套標準化、可複製的四階段流程，把「說不清的情緒」變成「看得懂、做得到」的服務 SOP。
             </p>
             <div class="hour-grid">
                 <div class="hour-item">
                     <h3>H｜Heal 身心校準</h3>
-                    <div class="phase">植物精油 × 深呼吸 × 快閃抽牌</div>
-                    <p>透過氣味與呼吸，快速讓身心從混亂狀態回到「0 狀態」，為後續覺察創造安全空間。</p>
+                    <div class="phase">植物精油 × 呼吸節奏 × 快閃抽牌</div>
+                    <p>透過氣味、呼吸與簡單的牌卡互動，協助從混亂回到比較穩定的「0 狀態」，為後續覺察創造安全空間。</p>
                 </div>
                 <div class="hour-item">
                     <h3>O｜Own 智慧辨識</h3>
-                    <div class="phase">130 張牌卡 × 情緒鏡像</div>
-                    <p>以「節奏天使牌」映照當下生理／情緒／關係／意識的狀態，協助個案說出真正的需求。</p>
+                    <div class="phase">130 張牌卡 × 情緒鏡像 × 座標語言</div>
+                    <p>運用「節奏天使牌」映照當下在生理、情緒、關係與意識層面的狀態，讓個案說出真正的卡點與需求。</p>
                 </div>
                 <div class="hour-item">
                     <h3>U｜Unlock 潛能解鎖</h3>
-                    <div class="phase">生命靈數 × 紫微 × 故事轉譯</div>
-                    <p>結合多系統座標，把傳統「凶象」翻譯成「功課入口」，轉成可行動、可選擇的路徑。</p>
+                    <div class="phase">生命靈數 × 紫微命盤 × 故事轉譯</div>
+                    <p>把多套命理系統當成「座標」，不是「判決書」；凶象視為功課入口，轉成可以選擇、可以調整的路線。</p>
                 </div>
                 <div class="hour-item">
                     <h3>R｜Rise 行動進化</h3>
-                    <div class="phase">行動清單 × 日常儀式</div>
-                    <p>設計 7／21／30 天的行動計畫與簡單儀式，讓覺察變成可追蹤、可累積的生活節奏。</p>
+                    <div class="phase">行動清單 × 7／21／30／90 天節奏</div>
+                    <p>設計可以落實的日常行動與小儀式，讓覺察不是當下感動，而是接下來幾週、幾個月都跟著你一起前進。</p>
                 </div>
             </div>
         </div>
@@ -191,45 +581,45 @@
         <div class="container">
             <h2 class="section-title">03｜LIGHT 品牌價值 × 130 張牌卡的科學詮釋</h2>
             <p class="section-subtitle">
-                牌卡不是預測工具，而是連結意識與潛意識的橋樑。<br>
-                我們用科學語言詮釋原本被視為「玄學」的符號系統。:contentReference[oaicite:2]{index=2}
+                牌卡不是在算好壞，而是把意識與潛意識中本來就有的東西，拉到眼前來對焦。<br>
+                我們用感官科學與心理學語言，重新整理那些原本被貼上「很玄」標籤的符號系統。
             </p>
 
             <div class="light-grid">
                 <div class="light-item">
                     <h3>L · Listen 聆聽</h3>
-                    <p>傾聽未被說出口的情緒需求，以精準洞察取代華麗話術，減少「硬塞產品」式服務。</p>
+                    <p>傾聽那些還沒說出口、但已經壓很久的情緒需求，用精準洞察取代「敷衍安慰」。</p>
                 </div>
                 <div class="light-item">
                     <h3>I · Inspire 啟發</h3>
-                    <p>透過圖像、色彩與儀式感，啟動內在覺察，讓個案看見自己原本就有的力量。</p>
+                    <p>透過圖像、色彩與簡單儀式感，啟動內在覺察，讓對方慢慢記起「自己其實沒那麼糟」。</p>
                 </div>
                 <div class="light-item">
                     <h3>G · Guide 引導</h3>
-                    <p>提供具體可行的行動清單，從一次對話延伸成 7～90 天的生活改變。</p>
+                    <p>給出實際能做的步驟，從一次談話延伸成 7～90 天的生活調整，而不是講完就散場。</p>
                 </div>
                 <div class="light-item">
                     <h3>H · Harmonize 和諧</h3>
-                    <p>協助個案在身體、情緒、關係與物質生活之間找到比較舒服的平衡點。</p>
+                    <p>在身體、情緒、關係與物質生活之間，協助找到一個「目前階段最舒服」的平衡點。</p>
                 </div>
                 <div class="light-item">
                     <h3>T · Transform 轉化</h3>
-                    <p>把壓力與卡關轉成行動動力，減少自責與內耗，創造可持續的改變循環。</p>
+                    <p>把壓力與卡關，轉成行動燃料，減少內耗與自責，讓改變變成可以持續的循環。</p>
                 </div>
             </div>
 
             <div class="features-3" style="margin-top:24px;">
                 <div class="card">
-                    <h3>榮格潛意識理論</h3>
-                    <p>牌卡圖像作為觸發內在原型與集體潛意識的媒介，協助個案以投射方式表達情緒。:contentReference[oaicite:3]{index=3}</p>
+                    <h3>榮格潛意識觀點</h3>
+                    <p>牌卡圖像作為觸發內在原型與集體潛意識的介面，協助用安全的方式說出內在故事。</p>
                 </div>
                 <div class="card">
-                    <h3>心理投射 × 認知行為</h3>
-                    <p>類似投射測驗，使用者將內心狀態映射在牌面上，再透過語言與行動設計調整認知模式。</p>
+                    <h3>心理投射 × 認知調整</h3>
+                    <p>類似投射測驗，使用者把內在狀態映射在牌面上，再透過對話與行動設計，調整既有思考路徑。</p>
                 </div>
                 <div class="card">
                     <h3>迷走神經與感官科學</h3>
-                    <p>運用圖像、色彩與芳香刺激，協助調節自律神經，達到「身心再平衡」的放鬆效果。</p>
+                    <p>運用圖像、色彩與芳香刺激，協助自律神經回到比較平穩的節奏，達到身心放鬆與情緒平衡。</p>
                 </div>
             </div>
         </div>
@@ -240,72 +630,74 @@
         <div class="container">
             <h2 class="section-title">04｜綠色永續 × 全齡情緒智養</h2>
             <p class="section-subtitle">
-                不只照顧情緒，也照顧土地與世代。從永續精油採購、瓶器回收，到銀髮、偏鄉、青少年情緒支持，<br>
-                讓「情緒共振」變成有溫度的綠色行動。:contentReference[oaicite:4]{index=4}
+                不只是照顧情緒，也一起照顧土地與不同世代。<br>
+                從永續精油採購、瓶器回收，到銀髮、偏鄉、青少年情緒支持，讓「情緒共振」變成有溫度的綠色行動。
             </p>
             <div class="features-3">
                 <div class="card">
                     <h3>芳香精油永續循環</h3>
                     <ul>
-                        <li>優先連結台灣原住民小農與在地植物，支持地方創生。</li>
-                        <li>建立瓶器回收機制與植物副產品再利用（堆肥、生物材料等）。</li>
+                        <li>優先連結台灣原住民小農與在地植物，落實地方創生與公平合作。</li>
+                        <li>建立瓶器回收機制與植物副產品再運用（堆肥、生物材料、文創品）。</li>
+                        <li>在 H 階段強調永續精油的感官體驗，讓放鬆同時也兼顧地球。</li>
                     </ul>
                 </div>
                 <div class="card">
                     <h3>低碳情緒商業模式</h3>
                     <ul>
-                        <li>線上抽牌與諮詢降低通勤碳足跡，推動無紙化作業。</li>
-                        <li>實體空間導入節能設備、自然採光與綠色建材。</li>
+                        <li>線上抽牌與諮詢降低通勤需求，推動無紙化作業與低碳服務模式。</li>
+                        <li>實體空間導入節能設備、自然採光與綠色建材，打造「好呼吸」的服務場域。</li>
+                        <li>在 R 階段串聯綠色生活習慣，讓行動計畫同時對自己好、也對地球好。</li>
                     </ul>
                 </div>
                 <div class="card">
                     <h3>全齡情緒智養方案</h3>
                     <ul>
-                        <li>銀髮情緒陪伴模組：用香氣與牌卡喚起長者記憶，減少孤獨感。</li>
-                        <li>偏鄉青年調頻師培訓：返鄉創業＋社區照顧雙軌並行。</li>
-                        <li>青少年情緒對焦模組：結合學校輔導與考季壓力支援。</li>
+                        <li>銀髮情緒陪伴模組：用香氣與牌卡喚起長者記憶，減少孤獨與無力感。</li>
+                        <li>偏鄉青年調頻師培訓：結合在地植物與社區需求，打造「返鄉創業＋照顧社區」雙軌。</li>
+                        <li>青少年情緒對焦模組：結合校園輔導與考季壓力支援，提供低門檻的情緒紓解與壓力管理練習。</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 05 商業模式與授權架構（不寫回本速度） -->
+    <!-- 05 商業模式與授權架構 -->
     <section id="business">
         <div class="container">
             <h2 class="section-title">05｜商業模式與授權架構</h2>
             <p class="section-subtitle">
-                從個人服務到 B2B 顧問與 B2G 合作，透過三級授權與 50% 收益共享機制，<br>
-                建立「調頻師 × 導師 × 永續夥伴」共創生態系。:contentReference[oaicite:5]{index=5}
+                從個人服務到 B2B 顧問與政府合作，透過三級授權與收益共享機制，<br>
+                建立「調頻師 × 系統導師 × 永續夥伴」的共創生態系。
             </p>
             <div class="bm-grid">
                 <div class="card">
                     <h3>多元營運模型</h3>
                     <ul>
-                        <li><strong>HOUR LIGHT 未來美容學苑：</strong>綠色美業教育與認證課程（如能量美甲、情緒美容學）。</li>
-                        <li><strong>B2C/B2B 顧問服務：</strong>個人核心洞察報告、團隊能量分析、企業文化診斷。</li>
-                        <li><strong>授權 B2P：</strong>調頻師／系統導師／永續夥伴三級授權與收益共享。</li>
-                        <li><strong>政府合作：</strong>與衛福部、勞動部、教育部對接，設計預防性情緒紓解方案。</li>
+                        <li><strong>HOUR LIGHT 未來美容學苑：</strong>結合情緒價值與綠色美學，規劃各級認證課程（如能量美甲、情緒美容學）。</li>
+                        <li><strong>B2C／B2B 顧問服務：</strong>設計個人核心洞察報告、團隊能量分析、企業文化診斷等結構化服務。</li>
+                        <li><strong>授權 B2P：</strong>以調頻師、系統導師、永續夥伴三級授權模式串聯全球夥伴。</li>
+                        <li><strong>政府合作：</strong>與衛福部、勞動部、教育部等單位對接，設計預防性情緒紓解與壓力管理方案。</li>
                     </ul>
                 </div>
                 <div class="card">
                     <h3>授權方案（台幣）</h3>
                     <ul>
-                        <li><strong>馥靈調頻師：</strong>年費 NT$100,000，適合個人服務者。</li>
-                        <li><strong>馥靈系統導師：</strong>年費 NT$200,000，適合區域講師與帶團隊者。</li>
-                        <li><strong>馥靈永續夥伴：</strong>年費 NT$500,000，適合國家／省級經營者。</li>
+                        <li><strong>馥靈調頻師：</strong>年費 NT$ 100,000，適合個人服務者與小型工作室。</li>
+                        <li><strong>馥靈系統導師：</strong>年費 NT$ 200,000，適合區域講師與培訓帶隊者。</li>
+                        <li><strong>馥靈永續夥伴：</strong>年費 NT$ 500,000，適合大區域經營與大規模合作方。</li>
                     </ul>
-                    <p style="font-size:0.88em;color:#7f8c8d;margin-top:8px;">
-                        一對一服務與課程定價（6,800／12,800／36,800／98,000／29,800 等）皆依白皮書正式版統一，<br>
-                        實際收益視每位夥伴投入與經營策略而定，不提供投資報酬保證。:contentReference[oaicite:6]{index=6}
+                    <p style="font-size:0.86rem;color:var(--text-muted);margin-top:10px;">
+                        一對一服務與課程定價（NT$ 6,800／12,800／36,800／98,000／29,800 等）皆依 2025 正式版定價表統一，<br>
+                        實際收入依每位夥伴的服務設計與經營策略而定，無任何形式之收益保證或投資回報承諾。
                     </p>
                 </div>
                 <div class="card">
                     <h3>AI × 數據 × 永續管理</h3>
                     <ul>
-                        <li>線上抽牌與報告自動生成，減少人力成本與紙張使用。</li>
-                        <li>情緒數據分析，協助優化服務與預測市場趨勢。</li>
-                        <li>追蹤線上服務碳減排效益，建立綠色情緒商業指標。</li>
+                        <li>線上抽牌與報告自動生成，降低人力負擔，同時減少紙本使用。</li>
+                        <li>情緒與使用數據分析，協助優化服務流程、預測市場需求與顧客回流節奏。</li>
+                        <li>追蹤線上服務減碳效益，打造「情緒經濟 × 綠色指標」的新型商業語言。</li>
                     </ul>
                 </div>
             </div>
@@ -317,25 +709,25 @@
         <div class="container">
             <h2 class="section-title">06｜團隊潛力與就業創造力</h2>
             <p class="section-subtitle">
-                3 年內培育 300 位調頻師、50 位導師，帶動約 1,000 個美業／服務業就業轉型，<br>
-                讓情緒勞動不再是免費的，而是有尊嚴、有專業、有收入的職業選擇。:contentReference[oaicite:7]{index=7}
+                目標三年內培育 300 位調頻師、50 位導師，帶動約 1,000 個美業與服務業就業轉型，<br>
+                讓情緒勞動從「免費、被忽略」變成「有尊嚴、有專業、有收入」的職業選擇。
             </p>
             <div class="team-grid">
                 <div class="card">
                     <h3>創辦人｜王逸君</h3>
                     <ul>
-                        <li>34 年美業實戰經驗：從美容師到品牌與系統創辦人。</li>
-                        <li>健康產業管理碩士：《美容愉悅感與身體意象相關研究》作者。</li>
-                        <li>整合紫微、八字、占星、人類圖、生命靈數、瑪雅曆等 12 套系統的座標哲學提出者。</li>
-                        <li>「命盤不是判決書，是藏寶圖」座標思維實踐者。</li>
+                        <li>34 年美業實戰經驗：從建教合作起步，一路走到自創品牌與系統。</li>
+                        <li>健康產業管理碩士：著有《美容愉悅感與身體意象相關研究》，以學術數據支撐情緒價值與身體感受的連結。</li>
+                        <li>整合紫微、八字、占星、人類圖、生命靈數、瑪雅曆等多系統的「座標哲學」提出者。</li>
+                        <li>主張「命盤與牌卡是座標，不是判決書」，凶象是功課入口，而不是恐嚇工具。</li>
                     </ul>
                 </div>
                 <div class="card">
                     <h3>就業與產業升級願景</h3>
                     <ul>
-                        <li>3 年內培育 300 位調頻師，每位平均年服務 120 人次，年服務量可達 3.6 萬人次。</li>
-                        <li>每位調頻師平均帶動 3 家美業／芳療店轉型，約 900 家店走向「情緒價值＋綠色美業」。</li>
-                        <li>協助美業工作者平均年收入從 40 萬提升至 80–150 萬，改善「低薪、高勞動、難轉型」困境。</li>
+                        <li>三年培育 300 位調頻師，每位平均年服務 120 人次，整體年服務量可達約 3.6 萬人次。</li>
+                        <li>每位調頻師平均帶動 3 家美業／芳療店升級，約 900 家店從「純技術」走向「情緒價值＋綠色美業」。</li>
+                        <li>協助美業工作者平均年收入從約 40 萬提升至 80–150 萬，改善低薪、高勞動、難轉型的產業現況。</li>
                     </ul>
                 </div>
             </div>
@@ -346,9 +738,9 @@
     <section class="contact-section" id="contact">
         <div class="container">
             <h2>聯絡與合作洽談</h2>
-            <p style="margin-top:6px;font-size:0.96em;">
-                無論你是想加入調頻師培訓、導師體系，還是作為政府／企業合作夥伴，<br>
-                歡迎來信或加 LINE，一起討論最適合的合作方式。
+            <p style="margin-top:8px;font-size:0.95rem;color:var(--text-muted);">
+                如果你關心情緒經濟、綠色美業、就業轉型，或想成為馥靈系統的共創夥伴，<br>
+                歡迎聯絡我們，一起設計適合你的合作方式。
             </p>
             <div class="contact-grid" style="margin-top:26px;">
                 <div class="contact-item">
@@ -364,9 +756,14 @@
                 <div class="contact-item">
                     <h3>🌐 官網與更多資訊</h3>
                     <p><a href="https://hourlight.github.io/" target="_blank" rel="noopener">hourlight.github.io</a></p>
-                    <p>完整系統介紹與最新計畫進度</p>
+                    <p>可查看完整系統介紹、服務內容與最新計畫進度</p>
                 </div>
             </div>
+
+            <p class="legal-note">
+                本系統與相關服務僅供壓力管理、情緒紓解、情緒平衡、能量調頻與氣血循環調理等日常指引參考，
+                非醫療行為，亦不等同任何形式之心理專業服務；如有身心健康相關疑慮，請務必尋求合格之醫療或心理專業人員協助。
+            </p>
         </div>
     </section>
 
@@ -375,22 +772,27 @@
 
     <script>
     // 回頂端
-    function scrollToTop(){ window.scrollTo({ top:0, behavior:'smooth' }); }
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     const back = document.getElementById('backToTop');
     back.addEventListener('click', scrollToTop);
-    window.addEventListener('scroll', function(){
-        if (window.pageYOffset > 300) back.classList.add('show');
-        else back.classList.remove('show');
+    window.addEventListener('scroll', function () {
+        if (window.pageYOffset > 300) {
+            back.classList.add('show');
+        } else {
+            back.classList.remove('show');
+        }
     });
 
     // 導覽平滑捲動
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click', e=>{
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
             const targetId = a.getAttribute('href');
             if (targetId && targetId.startsWith('#')) {
                 e.preventDefault();
                 const el = document.querySelector(targetId);
-                if (el) el.scrollIntoView({behavior:'smooth',block:'start'});
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
