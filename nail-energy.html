@@ -5,93 +5,248 @@
   <title>馥靈之鑰｜美甲專屬能量卡抽牌</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <style>
-    body {
-      background: url('https://github.com/HourLight/11/raw/main/background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Arial', sans-serif;
-      color: #333;
-      text-align: center;
+    :root {
+      --bg: #05030a;
+      --card-bg: rgba(8, 6, 25, 0.9);
+      --border-gold: rgba(233, 194, 125, 0.5);
+      --text-main: #f5f2ff;
+      --text-muted: #b5b0d0;
+      --accent-gold: #e9c27d;
+      --accent-gold-soft: #cda86e;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.75);
+      --radius-card: 18px;
+      --transition-fast: 0.22s ease-out;
+    }
+
+    * {
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 0% 0%, #2c2149 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, #123c57 0, transparent 55%),
+        var(--bg);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .page-wrapper {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .card-shell {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.12) 0, transparent 55%),
+        url('https://github.com/HourLight/11/raw/main/background.jpg') center/cover no-repeat fixed;
+      background-blend-mode: multiply;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-gold);
+      box-shadow: var(--shadow-soft);
+      padding: 24px 18px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% -10%, rgba(255,255,255,0.2) 0, transparent 55%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+    }
+
     h1 {
-      font-size: 30px;
-      background-color: rgba(255, 255, 255, 0.8);
-      color: #6b4f3e;
-      padding: 15px 25px;
-      border-radius: 15px;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-      display: inline-block;
-      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: var(--accent-gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
-    button, .link-button {
-      background-color: #cda86e;
-      color: white;
+
+    .subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .label-box {
+      display: inline-block;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-main);
+      background: rgba(5, 3, 18, 0.7);
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      margin-bottom: 10px;
+    }
+
+    #cardCount {
+      font-size: 0.96rem;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+      margin-top: 10px;
+      background: rgba(5, 3, 18, 0.8);
+      color: var(--text-main);
+      outline: none;
+    }
+
+    #cardCount:focus {
+      border-color: var(--accent-gold-soft);
+      box-shadow: 0 0 0 1px rgba(233, 194, 125, 0.5);
+    }
+
+    button,
+    .link-button {
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-soft));
+      color: #201410;
       border: none;
-      padding: 12px 20px;
+      padding: 10px 18px;
       cursor: pointer;
-      font-size: 22px;
-      border-radius: 15px;
-      margin-top: 15px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      transition: 0.3s;
+      font-size: 1rem;
+      border-radius: 999px;
+      margin-top: 14px;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.6);
+      transition: all var(--transition-fast);
       text-decoration: none;
       display: inline-block;
+      font-weight: 600;
+      letter-spacing: 0.05em;
     }
-    button:hover, .link-button:hover {
-      background-color: #a28572;
+
+    button:hover,
+    .link-button:hover {
+      background: linear-gradient(135deg, #f1d49f, #e1a86d);
       transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8);
     }
+
     img {
-      max-width: 280px;
+      max-width: 260px;
       height: auto;
-      border-radius: 15px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8);
       margin-top: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
     }
+
     .card-name {
-      font-size: 24px;
-      font-weight: bold;
-      margin-top: 15px;
-      color: #6b4f3e;
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 5px 15px;
-      border-radius: 10px;
+      font-size: 1.02rem;
+      font-weight: 600;
+      margin-top: 10px;
+      color: var(--accent-gold);
+      background: rgba(5, 3, 18, 0.8);
+      padding: 6px 14px;
+      border-radius: 999px;
       display: inline-block;
+      border: 1px solid rgba(233, 194, 125, 0.4);
     }
+
+    .info-box {
+      margin-top: 20px;
+      background: rgba(5, 3, 18, 0.86);
+      padding: 16px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .info-box strong {
+      color: var(--accent-gold);
+    }
+
+    .footer-link {
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .legal-note {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
     @media (max-width: 768px) {
-      img {
-        width: 90%;
+      .card-shell {
+        padding: 22px 14px 18px;
       }
-      button, .link-button {
-        width: 80%;
-        padding: 15px 0;
+      img {
+        max-width: 100%;
+      }
+      button,
+      .link-button {
+        width: 90%;
+        padding: 11px 0;
       }
     }
   </style>
 </head>
 <body>
-  <h1>💅 馥靈之鑰｜美甲專屬能量卡 💅</h1>
-  <div id="cardArea">
-    <label for="cardCount" style="font-size: 20px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 10px;">
-      選擇你要抽幾張牌：
-    </label><br>
-    <select id="cardCount" style="font-size: 18px; padding: 8px 12px; border-radius: 8px; margin-top: 10px;">
-      <option value="1">1 張牌｜快速對頻</option>
-      <option value="3">3 張牌｜過去・現在・未來</option>
-      <option value="5">5 張牌｜靈魂導航</option>
-      <option value="9">9 張牌｜靈魂藍圖 × 宇宙訊息掃描</option>
-    </select><br><br>
-    <button onclick="drawCards()">點我抽牌</button>
+  <div class="page-wrapper">
+    <div class="card-shell">
+      <div class="card-content">
+        <h1>💅 馥靈之鑰｜美甲專屬能量卡 💅</h1>
+        <p class="subtitle">
+          給指尖一組專屬頻率，用小小一張牌，對焦你此刻的狀態與適合的美甲風格。
+        </p>
+
+        <div id="cardArea">
+          <div class="label-box">
+            選擇你要抽幾張牌：
+          </div>
+          <br />
+          <select id="cardCount">
+            <option value="1">1 張牌｜快速對頻</option>
+            <option value="3">3 張牌｜過去・現在・未來</option>
+            <option value="5">5 張牌｜深度導航</option>
+            <option value="9">9 張牌｜人生藍圖 × 宇宙訊息掃描</option>
+          </select>
+          <br /><br />
+          <button onclick="drawCards()">點我抽牌</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-link">
+      <a class="link-button" href="https://hourlight.github.io/">🏠 返回馥靈之鑰首頁</a>
+      <p class="legal-note">
+        本抽牌工具僅供情緒紓解、能量調頻、壓力管理與日常指引參考，<br>
+        不具任何醫療或專業心理評估功能，亦不替代醫療或心理專業服務。<br>
+        如有身心健康相關疑慮，請務必尋求合格之醫療或心理專業人員協助。
+      </p>
+    </div>
   </div>
 
   <script>
     function formatCardNumber(card) {
-      return card <= 22 ? 'A' + (card - 1).toString().padStart(2, '0') : (card - 22).toString().padStart(3, '0');
+      return card <= 22
+        ? 'A' + (card - 1).toString().padStart(2, '0')
+        : (card - 22).toString().padStart(3, '0');
     }
 
     function drawCards() {
-      alert("請深呼吸，默念你現在的感受與需要，準備好再點擊確認抽牌。");
+      alert("請先深呼吸三次，心裡默默對自己說：『我想看見現在最適合調整的方向。』準備好再點確認抽牌。");
 
       let count = parseInt(document.getElementById("cardCount").value);
       let totalCards = 130;
@@ -106,17 +261,21 @@
         cards.push(cardNumber);
 
         output += `
-          <img src="${cardImage}">
-          <div class="card-name">✨ 能量卡牌 ✨<br>(編號：${cardNumber})</div><br>`;
+          <img src="${cardImage}" alt="馥靈之鑰美甲能量卡 ${cardNumber}">
+          <div class="card-name">✨ 美甲能量卡 ✨<br>(編號：${cardNumber})</div><br>
+        `;
       }
 
       output += `
         <button onclick="copyAllCardNumbers()">📋 複製牌卡編號</button><br>
-        <div style="margin-top:20px; background: rgba(255,255,255,0.9); padding:20px; border-radius:15px;">
-          <p style="font-size:18px;"><strong>想深入了解你的頻率訊息與專屬美甲設計嗎？</strong><br>歡迎私訊諮詢專屬方案與費用細節，為你量身打造真正能落實在生活的能量美甲。</p>
+        <div class="info-box">
+          <p><strong>想把這組頻率變成專屬美甲設計嗎？</strong><br>
+          歡迎私訊了解你的當下狀態、適合的色彩與圖騰，<br>
+          一起為你打造既好看、又照顧情緒節奏的能量美甲。</p>
           <a href="https://lin.ee/ySxUkJK" target="_blank" class="link-button">💬 點我私訊了解詳情</a>
         </div>
-        <button onclick="location.reload()">🔄 重新抽牌</button>`;
+        <button onclick="location.reload()">🔄 重新抽牌</button>
+      `;
 
       document.getElementById("cardArea").innerHTML = output;
       window.cardCodes = cards;
@@ -125,15 +284,11 @@
     function copyAllCardNumbers() {
       let text = window.cardCodes.join(", ");
       navigator.clipboard.writeText(text).then(() => {
-        alert("牌卡編號「" + text + "」已複製！");
+        alert("牌卡編號「" + text + "」已複製，可以貼給設計師或記在筆記裡。");
       }, () => {
-        alert("複製失敗，請手動複製：" + text);
+        alert("複製沒有成功，請改用手動複製這一段編號：" + text);
       });
     }
   </script>
-
-  <div style="text-align:center; margin-top:25px;">
-    <a class="link-button" href="https://hourlight.github.io/">🏠 返回首頁</a>
-  </div>
 </body>
 </html>
