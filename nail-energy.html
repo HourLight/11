@@ -7,10 +7,10 @@
   <style>
     :root {
       --bg: #05030a;
-      --card-bg: rgba(8, 6, 25, 0.9);
+      --card-bg: rgba(8, 6, 20, 0.95);
       --border-gold: rgba(233, 194, 125, 0.5);
       --text-main: #f5f2ff;
-      --text-muted: #b5b0d0;
+      --text-muted: #c5c0e0;
       --accent-gold: #e9c27d;
       --accent-gold-soft: #cda86e;
       --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.75);
@@ -27,8 +27,8 @@
     body {
       min-height: 100vh;
       background:
-        radial-gradient(circle at 0% 0%, #2c2149 0, transparent 55%),
-        radial-gradient(circle at 100% 0%, #123c57 0, transparent 55%),
+        radial-gradient(circle at 20% 20%, rgba(44, 33, 73, 0.6) 0, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(18, 60, 87, 0.4) 0, transparent 50%),
         var(--bg);
       background-attachment: fixed;
       color: var(--text-main);
@@ -45,14 +45,12 @@
     }
 
     .card-shell {
-      background:
-        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.12) 0, transparent 55%),
-        url('https://github.com/HourLight/11/raw/main/background.jpg') center/cover no-repeat fixed;
-      background-blend-mode: multiply;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
       border-radius: var(--radius-card);
       border: 1px solid var(--border-gold);
       box-shadow: var(--shadow-soft);
-      padding: 24px 18px 20px;
+      padding: 28px 22px 24px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -62,8 +60,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 20% -10%, rgba(255,255,255,0.2) 0, transparent 55%);
-      opacity: 0.5;
+      background: radial-gradient(circle at 50% 0%, rgba(233, 194, 125, 0.08) 0, transparent 60%);
       pointer-events: none;
     }
 
@@ -75,56 +72,58 @@
     h1 {
       font-size: 1.5rem;
       color: var(--accent-gold);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     .subtitle {
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
-      margin-bottom: 14px;
+      margin-bottom: 20px;
+      line-height: 1.8;
     }
 
     .label-box {
       display: inline-block;
-      font-size: 0.98rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--text-main);
-      background: rgba(5, 3, 18, 0.7);
-      padding: 8px 14px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.16);
-      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      margin-bottom: 14px;
     }
 
     #cardCount {
-      font-size: 0.96rem;
-      padding: 8px 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.25);
+      font-size: 1rem;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
       margin-top: 10px;
-      background: rgba(5, 3, 18, 0.8);
+      background: rgba(0, 0, 0, 0.6);
       color: var(--text-main);
       outline: none;
+      cursor: pointer;
     }
 
     #cardCount:focus {
       border-color: var(--accent-gold-soft);
-      box-shadow: 0 0 0 1px rgba(233, 194, 125, 0.5);
+      box-shadow: 0 0 0 2px rgba(233, 194, 125, 0.3);
     }
 
     button,
     .link-button {
       background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-soft));
-      color: #201410;
+      color: #1a1208;
       border: none;
-      padding: 10px 18px;
+      padding: 12px 24px;
       cursor: pointer;
       font-size: 1rem;
       border-radius: 999px;
-      margin-top: 14px;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.6);
+      margin-top: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
       transition: all var(--transition-fast);
       text-decoration: none;
       display: inline-block;
@@ -136,39 +135,39 @@
     .link-button:hover {
       background: linear-gradient(135deg, #f1d49f, #e1a86d);
       transform: translateY(-2px);
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
     }
 
     img {
-      max-width: 260px;
+      max-width: 280px;
       height: auto;
       border-radius: 16px;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.7);
       margin-top: 20px;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .card-name {
-      font-size: 1.02rem;
+      font-size: 1rem;
       font-weight: 600;
-      margin-top: 10px;
+      margin-top: 12px;
       color: var(--accent-gold);
-      background: rgba(5, 3, 18, 0.8);
-      padding: 6px 14px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 8px 16px;
       border-radius: 999px;
       display: inline-block;
       border: 1px solid rgba(233, 194, 125, 0.4);
     }
 
     .info-box {
-      margin-top: 20px;
-      background: rgba(5, 3, 18, 0.86);
-      padding: 16px 14px;
+      margin-top: 24px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px 18px;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.16);
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.7;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      font-size: 0.92rem;
+      line-height: 1.8;
     }
 
     .info-box strong {
@@ -177,27 +176,28 @@
 
     .footer-link {
       text-align: center;
-      margin-top: 18px;
+      margin-top: 20px;
     }
 
     .legal-note {
-      margin-top: 10px;
-      font-size: 0.78rem;
+      margin-top: 14px;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     @media (max-width: 768px) {
       .card-shell {
-        padding: 22px 14px 18px;
+        padding: 24px 16px 20px;
       }
       img {
         max-width: 100%;
       }
       button,
       .link-button {
-        width: 90%;
-        padding: 11px 0;
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 0;
       }
     }
   </style>
@@ -208,13 +208,12 @@
       <div class="card-content">
         <h1>💅 馥靈之鑰｜美甲專屬能量卡 💅</h1>
         <p class="subtitle">
-          給指尖一組專屬頻率，用小小一張牌，對焦你此刻的狀態與適合的美甲風格。
+          給指尖一組專屬頻率，用小小一張牌，<br>
+          對焦你此刻的狀態與適合的美甲風格。
         </p>
 
         <div id="cardArea">
-          <div class="label-box">
-            選擇你要抽幾張牌：
-          </div>
+          <div class="label-box">選擇你要抽幾張牌：</div>
           <br />
           <select id="cardCount">
             <option value="1">1 張牌｜快速對頻</option>
@@ -222,7 +221,7 @@
             <option value="5">5 張牌｜深度導航</option>
             <option value="9">9 張牌｜人生藍圖 × 宇宙訊息掃描</option>
           </select>
-          <br /><br />
+          <br />
           <button onclick="drawCards()">點我抽牌</button>
         </div>
       </div>
