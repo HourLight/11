@@ -3133,35 +3133,73 @@ function getZiSect(){
   return 2;
 }
 
-// ═══ AI 框架 API 載入器（取代硬編碼框架）═══
-// 從 app.hourlightkey.com/api/ai-prompt-test?action=all 預載所有系統框架
-// 前端只保留計算資料，框架文字全部從 API 取
-var _hlFWCache = null;
-var _hlFWLoading = false;
+// ═══ AI 框架閘門（框架不進前端，server 端驗證後才回傳）═══
+// 命盤計算資料 = 免費（可看、可複製、可寄信箱）
+// AI 深度解讀指令（框架）= 會員功能（登入 + 扣次數）
 
-(function(){
-  _hlFWLoading = true;
-  fetch('https://app.hourlightkey.com/api/ai-prompt-test?action=all')
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      _hlFWCache = data.systems || {};
-      _hlFWLoading = false;
-    })
-    .catch(function(){
-      _hlFWCache = {};
-      _hlFWLoading = false;
+function copyAIPrompt(preId, system) {
+  // 取得計算資料
+  var pre = document.getElementById(preId);
+  if (!pre) return;
+  var data = pre.textContent;
+  
+  // 檢查 Firebase 登入
+  if (typeof firebase === 'undefined' || !firebase.auth || !firebase.auth().currentUser) {
+    if (confirm('🔮 AI 深度解讀指令為會員功能\n\n請先登入會員帳號（免費註冊）\n\n點「確定」前往登入頁面')) {
+      window.open('member-login.html?from=destiny-engine', '_blank');
+    }
+    return;
+  }
+  
+  var user = firebase.auth().currentUser;
+  var btn = event.target;
+  var origText = btn.textContent;
+  btn.textContent = '🔮 載入中...';
+  btn.disabled = true;
+  
+  // 取得 token → 呼叫閘門 API
+  user.getIdToken().then(function(token) {
+    return fetch('https://app.hourlightkey.com/api/ai-framework-gate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({ system: system })
     });
-})();
-
-// 取得指定系統的完整框架文字（framework + books + navigation）
-function _hlFW(system){
-  if(!_hlFWCache || !_hlFWCache[system]) return '';
-  var s = _hlFWCache[system];
-  var text = '';
-  if(s.framework) text += s.framework;
-  if(s.books) text += '\n\n' + s.books;
-  if(s.navigation) text += '\n\n' + s.navigation;
-  return text;
+  }).then(function(r) { return r.json(); })
+  .then(function(result) {
+    if (result.error) {
+      if (result.code === 'QUOTA_EXCEEDED') {
+        alert('⏰ 今日 AI 額度已用完（' + result.used + '/' + result.limit + '）\n\n' +
+              (result.plan === 'free' ? '免費會員每日 3 次，升級 Plus 可享 15 次/天' : 
+               '升級 Pro 方案享無限次數'));
+      } else if (result.code === 'AUTH_REQUIRED' || result.code === 'TOKEN_INVALID') {
+        alert('🔑 登入已過期，請重新登入');
+      } else {
+        alert(result.error);
+      }
+      btn.textContent = origText;
+      btn.disabled = false;
+      return;
+    }
+    // 組合：計算資料 + 框架 → 複製到剪貼簿
+    var fullText = data + '\n\n' + result.framework;
+    navigator.clipboard.writeText(fullText).then(function() {
+      btn.textContent = '✅ 已複製（剩餘 ' + (result.quota.limit - result.quota.used) + ' 次）';
+      btn.style.background = 'rgba(160,124,220,.25)';
+      setTimeout(function() {
+        btn.textContent = origText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 2500);
+    });
+  }).catch(function(e) {
+    console.error(e);
+    btn.textContent = origText;
+    btn.disabled = false;
+    alert('網路錯誤，請稍後再試');
+  });
 }
 
 function runAll(){
@@ -3362,8 +3400,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   ai1+='十神：年'+s2t(ec.getYearShiShenGan())+' 月'+s2t(ec.getMonthShiShenGan())+' 時'+s2t(ec.getTimeShiShenGan())+'\n';
   ai1+='藏干：年支['+ec.getYearShiShenZhi().map(s2t).join(',')+'] 月支['+ec.getMonthShiShenZhi().map(s2t).join(',')+'] 日支['+ec.getDayShiShenZhi().map(s2t).join(',')+'] 時支['+ec.getTimeShiShenZhi().map(s2t).join(',')+']\n';
   ai1+='起運：'+yunInfo+'\n大運：'+dyArr.join(' / ')+'\n骨重：'+bone.text+'\n\n';
-  ai1+=_hlFW('bazi');
-  h1+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="ai1">'+ai1+'</pre><button class="cp" onclick="copyText(\'ai1\')">📋 複製AI指令</button></div>';
+  
+  h1+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="ai1">'+ai1+'</pre><button class="cp" onclick="copyText(\'ai1\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'ai1\',\'bazi\')">🔮 複製AI指令（會員）</button></div>';
   addP(ps,h1);
 
   // ② 紫微
@@ -3387,8 +3425,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
     h2+='<div class="rs">宮干'+p.tg+'四化：祿～'+p.gsh.祿+' 權～'+p.gsh.權+' 科～'+p.gsh.科+' 忌～'+p.gsh.忌+'</div></div>';
   });
   var zwData='';GN.forEach(function(gn){var p=null;zw.palaces.forEach(function(x){if(x.name==gn)p=x});if(!p)return;zwData+=p.name+'('+p.tg+p.dz+')大限'+p.dx+': '+(p.ms.length?p.ms.map(function(s){return s.n+'('+s.b+')'+(s.h?'化'+s.h:'')}).join(','):'空宮')+' | 吉:'+p.lj.join(',')+' | 煞:'+p.ls.join(',')+' | '+p.cs+' '+p.bs+'\n'});
-  var ai2='【AI解讀指令】請依據《紫微斗數全書》《太微賦》《骨髓賦》及飛星四化體系做深度解讀：\n命宮：'+DZ[zw.ming]+'宮 | 身宮：'+DZ[zw.shen]+'宮（'+zw.shGN+'）\n五行局：'+zw.juS+' | 四化：祿'+zw.sh4.祿+' 權'+zw.sh4.權+' 科'+zw.sh4.科+' 忌'+zw.sh4.忌+'\n\n'+zwData+''+_hlFW('ziwei');
-  h2+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="ai2">'+ai2+'</pre><button class="cp" onclick="copyText(\'ai2\')">📋 複製AI指令</button></div>';
+  var ai2='【AI解讀指令】請依據《紫微斗數全書》《太微賦》《骨髓賦》及飛星四化體系做深度解讀：\n命宮：'+DZ[zw.ming]+'宮 | 身宮：'+DZ[zw.shen]+'宮（'+zw.shGN+'）\n五行局：'+zw.juS+' | 四化：祿'+zw.sh4.祿+' 權'+zw.sh4.權+' 科'+zw.sh4.科+' 忌'+zw.sh4.忌+'\n\n'+zwData+'';
+  h2+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="ai2">'+ai2+'</pre><button class="cp" onclick="copyText(\'ai2\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'ai2\',\'ziwei\')">🔮 複製AI指令（會員）</button></div>';
   var zwN=document.getElementById('zwNotice');if(zwN)zwN.style.display='block';
   addP(ps,h2);
 
@@ -3427,8 +3465,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
     aspects.forEach(function(a){ai3+=a.p1+' '+a.type+' '+a.p2+'（'+a.orb+'°）\n'});
     if(patterns.length){ai3+='\n格局：\n';patterns.forEach(function(p){ai3+=p.type+'：'+p.planets+'\n'})}
     ai3+='\n請分析：日月升三重奏、元素模式分佈、主要相位格局、宮位守護星飛入、2026行運預測。';
-    ai3+=_hlFW('astro');
-    h3+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="ai3">'+ai3+'</pre><button class="cp" onclick="copyText(\'ai3\')">📋 複製AI指令</button></div>';
+    
+    h3+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="ai3">'+ai3+'</pre><button class="cp" onclick="copyText(\'ai3\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'ai3\',\'astro\')">🔮 複製AI指令（會員）</button></div>';
   }else{h3+='<div class="item" style="color:var(--inkm)">星曆資料載入中或不可用</div>'}
   addP(ps,h3);
 
@@ -3447,8 +3485,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
     h4+='<div class="item" style="margin-top:8px"><b>個性水晶：</b></div>';
     for(var k in hd.pGates)h4+='<div class="item">　'+k+'：閘門'+hd.pGates[k]+'</div>';
     var ai4='【AI解讀指令】請依據Ra Uru Hu原傳訊做人類圖深度解讀：\n類型：'+hd.type+' | 策略：'+hd.strategy+' | 權威：'+hd.authority+' | 角色：'+hd.profile+'\n定義：'+hd.defType+' | 輪迴交叉：'+hd.crossFull+'\n通道：'+hd.channels.map(function(c){return c.gates+'('+c.name+')'}).join(', ')+'\n已定義：'+hd.defC.join(',')+'\n未定義：'+hd.undefC.join(',');
-    ai4+=_hlFW('hd');
-    h4+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="ai4">'+ai4+'</pre><button class="cp" onclick="copyText(\'ai4\')">📋 複製AI指令</button></div>';
+    
+    h4+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="ai4">'+ai4+'</pre><button class="cp" onclick="copyText(\'ai4\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'ai4\',\'hd\')">🔮 複製AI指令（會員）</button></div>';
   }else{h4+='<div class="item" style="color:var(--inkm)">需要星曆資料</div>'}
   addP(ps,h4);
 
@@ -3525,8 +3563,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
     ai5+='5. 七政入宮論斷（各星落入何宮的意義）\n';
     ai5+='6. 四餘交會論斷（羅計孛紫的相互作用）\n';
     ai5+='7. 限度吉利順逆推運';
-    ai5+=_hlFW('qizheng');
-    h5+='<div class="ai-box"><h4>📜 AI深度解讀指令（含化曜+生剋完整推算）</h4><pre id="ai5">'+ai5+'</pre><button class="cp" onclick="copyText(\'ai5\')">📋 複製AI指令</button></div>';
+    
+    h5+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀（含化曜+生剋）</h4><pre id="ai5">'+ai5+'</pre><button class="cp" onclick="copyText(\'ai5\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'ai5\',\'qizheng\')">🔮 複製AI指令（會員）</button></div>';
   }else{h5+='<div class="item" style="color:var(--inkm)">需要星曆資料</div>'}
   addP(ps,h5);
 
@@ -3588,8 +3626,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   ai6+='13月亮曆：\n  '+my.ns.yearName+'\n  '+my.nsCoord+'\n';
   if(my.ns.moon>0)ai6+='  '+my.ns.moonName+' 第'+my.ns.day+'天\n  '+my.ns.weekName+' 第'+my.ns.dayOfWeek+'天（'+my.ns.plasma+'）\n  脈輪：'+my.ns.chakra+'\n  力量動物：'+my.ns.powerAnimal+'\n';
   ai6+='\n請分析：\n1. 主印記圖騰的核心能量與天賦\n2. 調性的人生目的與學習方向\n3. 五大神諭的力量關係與啟動方式\n4. 波符13天的位置意義\n5. PSI的高維度課題\n6. 13月亮曆的能量週期與脈輪對應\n7. 力量動物的象徵意義\n8. 與其他命理系統的交叉共振';
-  ai6+=_hlFW('maya');
-  h6+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="ai6">'+ai6+'</pre><button class="cp" onclick="copyText(\'ai6\')">📋 複製AI指令</button></div>';
+  
+  h6+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="ai6">'+ai6+'</pre><button class="cp" onclick="copyText(\'ai6\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'ai6\',\'maya\')">🔮 複製AI指令（會員）</button></div>';
   addP(ps,h6);
 
   // ⑦ 靈數（商用完整版）
@@ -3690,8 +3728,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   ai7+='\n挑戰（往下減 Challenges）：\n';
   nm.stages.forEach(function(s){ai7+=s.name+'('+s.age+'): 挑戰='+s.challenge+'\n'});
   ai7+='\n2026流年：'+nm.py+'\n\n請分析：生命數核心天賦、大師數特殊使命（如有）、九宮格能量分佈、空缺數的隱藏課題與具體修煉方法、四階段禮物如何善用、四階段挑戰如何跨越、當前所在階段的具體建議、時辰經絡對情緒能量的影響、2026流年能量走向。';
-  ai7+=_hlFW('lifepath');
-  h7+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="ai7">'+ai7+'</pre><button class="cp" onclick="copyText(\'ai7\')">📋 複製AI指令</button></div>';
+  
+  h7+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="ai7">'+ai7+'</pre><button class="cp" onclick="copyText(\'ai7\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'ai7\',\'lifepath\')">🔮 複製AI指令（會員）</button></div>';
   addP(ps,h7);
 
   // ⑧ 馥靈秘碼
@@ -3714,7 +3752,7 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
        '4宮 淨化室 = '+fl.pals['4宮_淨化室']+'　　5宮 消化閣 = '+fl.pals['5宮_消化閣']+'　　6宮 信任殿 = '+fl.pals['6宮_信任殿']+'\n' +
        '7宮 心門宮 = '+fl.pals['7宮_心門宮']+'　　8宮 明辨廳 = '+fl.pals['8宮_明辨廳']+'　　9宮 卸載苑 = '+fl.pals['9宮_卸載苑']+'\n' +
        '10宮 志氣殿 = '+fl.pals['10宮_志氣殿']+'　　11宮 敞開閣 = '+fl.pals['11宮_敞開閣']+'　　12宮 平衡室 = '+fl.pals['12宮_平衡室']+
-       _hlFW('fuling')+'</pre><button class="cp-main" onclick="copyResult(\'fl-result\',this)">📋 複製馥靈秘碼</button></div>';
+       '</pre><button class="cp-main" onclick="copyResult(\'fl-result\',this)">📋 複製馥靈秘碼</button></div>';
   h8+='<div class="item" style="margin-top:12px;text-align:center"><a href="fuling-mima.html" style="color:var(--gd);text-decoration:underline">→ 完整版馥靈秘碼（含流年、合盤、雷達圖）</a></div>';
   addP(ps,h8);
 
@@ -4062,7 +4100,7 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   aiA+='其實，是為了看懂「出發的時候，宇宙幫你準備了什麼裝備」。\n';
   aiA+='四課是你的戰術地圖，三傳是你的行軍路線。\n';
   aiA+='讀懂它，不是要你照著走，是讓你知道：出發前，你口袋裡已經有什麼了。\\n\\n【延伸導航·從六壬天地盤到此刻座標】\\n六壬看的是「出生那一刻的天地盤配置」，像一張宇宙給你的戰術地圖。\\n以下工具可以和六壬交叉比對：\\n\\n► 易經覺察占卜（hourlightkey.com/yijing-oracle.html）\\n  → 六壬看先天配置，易經覺察占卜看「今天這個決策」的即時卦象\\n  → 四課五行走勢 × 卦象五行建議，兩套古典系統交叉定位\\n\\n► 馥靈秘碼（hourlightkey.com/fuling-mima.html）\\n  → 三傳五行流向 × 馥靈 H.O.U.R. 四主數：先天動態是否呼應此生課題？\\n  → 日干上神的天將 × 馥靈十二宮位：你的核心能量在哪個生活領域最活躍？\\n\\n► 130張馥靈智慧牌卡（hourlightkey.com/draw-hl.html）\\n  → 每張牌整合星象×塔羅原型×易經卦象×精油×脈輪等20+維度\\n  → 抽7張 H.O.U.R. 啟鑰：六壬告訴你帶了什麼裝備，牌卡告訴你此刻該怎麼用\\n  → 月將對應的精油建議 × 牌卡精油系統，東方術數與芳療的交叉錨定\\n\\n一句話：六壬是你的戰術地圖，易經覺察占卜是即時戰況回報，牌卡是幫你在戰場上找到最佳突破口的鑰匙。\n';
-  hA+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiA">'+aiA+'</pre><button class="cp" onclick="copyText(\'aiA\')">📋 複製AI指令</button></div>';
+  hA+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiA">'+aiA+'</pre><button class="cp" onclick="copyText(\'aiA\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiA\',\'liuren\')">🔮 複製AI指令（會員）</button></div>';
   addP(ps,hA);
 
   // ═══ ⑪ 九星氣學 ═══
@@ -4201,7 +4239,7 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   aiB+='▍馥靈座標哲學\n';
   aiB+='你的房間方位不是迷信，是你跟空間之間的能量對話。\n';
   aiB+='方位對了，不是運氣變好。是你終於不用花力氣對抗環境，可以把力氣用在正事上。\n\n【延伸導航·從九星方位到此刻座標】\n九星氣學看的是「你出生時天地之氣的配置」，像一張你和空間對話的說明書。\n以下工具可以和九星交叉比對：\n\n► 易經覺察占卜（hourlightkey.com/yijing-oracle.html）\n  → 九星看先天方位氣場，易經覺察占卜看「今天在這個位置做這件事」的即時卦象\n  → 五行強弱 × 卦象五行建議，氣學與易經的交叉校準\n\n► 馥靈秘碼（hourlightkey.com/fuling-mima.html）\n  → 年星五行 × 馥靈 H.O.U.R. 四主數：你的核心能量從兩套座標系看是否一致？\n  → 三星配置的優劣勢 × 馥靈十二宮位：哪個生活領域最適合你發力？\n\n► 130張馥靈智慧牌卡（hourlightkey.com/draw-hl.html）\n  → 每張牌整合星象×塔羅原型×易經卦象×精油×脈輪等20+維度\n  → 抽7張 H.O.U.R. 啟鑰：九星告訴你天生的能量屬性，牌卡告訴你此刻如何啟動\n  → 九星對應精油 × 牌卡精油系統：從嗅覺錨定你的方位能量\n\n一句話：九星氣學是你和空間的使用說明書，易經覺察占卜是即時空間能量探測器，牌卡是幫你在對的位置做對的事的鑰匙。\n';
-  hB+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiB">'+aiB+'</pre><button class="cp" onclick="copyText(\'aiB\')">📋 複製AI指令</button></div>';
+  hB+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiB">'+aiB+'</pre><button class="cp" onclick="copyText(\'aiB\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiB\',\'ninestar\')">🔮 複製AI指令（會員）</button></div>';
   addP(ps,hB);
 
   // ═══ ⑫ 生日色彩 ═══
@@ -4301,7 +4339,7 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   aiC+='你不需要讀懂色彩理論。\n';
   aiC+='你只需要走進衣櫃，問自己：今天我想成為什麼顏色的人？\n';
   aiC+='那個答案，就是你的身體在告訴你，它今天需要什麼。\n\n十、四色配對與MBTI性格的交叉\n・生命色紅色系（行動派）× MBTI外向型：雙重加速器\n・生命色藍色系（思考派）× MBTI內向型：深度潛水員\n・四色組合看團隊互補：紅色衝鋒＋藍色策略＋黃色願景＋綠色執行\n\n十一、色彩穿搭的商業實戰\n・提案日穿什麼色？→ 看你要「說服」還是「陪伴」\n・面試穿什麼色？→ 看對方公司文化是紅色（狼性）還是藍色（穩健）\n・約會穿什麼色？→ 你的日色×對方的日色決定最佳化學配色\n・社群頭像/品牌主色的色彩心理學策略\n\n十二、色彩能量的年度節奏\n・春天（木行升發）→ 綠色系能量最強，適合穿綠/青色啟動新計畫\n・夏天（火行極盛）→ 紅色系到頂，穿粉紅/淡橘降溫不失能量\n・秋天（金行收斂）→ 白/金/銀色系，收斂果實期\n・冬天（水行藏蓄）→ 深藍/黑色系，蓄能期不宜過度曝光\n・你的生命色在哪個季節最旺？那就是你一年中最容光煥發的時期\n\n\n\n【延伸導航·從色彩密碼到此刻座標】\n色彩不是裝飾，是你的身體用視覺在跟你說話。\n生日色彩告訴你天生底色，但每天醒來你需要的顏色不一樣。\n\n► 易經覺察占卜（hourlightkey.com/yijing-oracle.html）\n  → 色彩看天生底色，易經覺察占卜看此刻需要補什麼能量\n  → 今天出門前覺得特別想穿某個顏色？那可能就是你的身體在替你選卦\n\n► 馥靈秘碼（hourlightkey.com/fuling-mima.html）\n  → 四色配置（生命色/日色/月色/年色）× H.O.U.R. 四主數的交叉驗證\n  → 色彩能量和數字能量指向同一方向時，那個方向就是你的核心賽道\n\n► 130張馥靈智慧牌卡（hourlightkey.com/draw-hl.html）\n  → 每張牌都有對應色彩×精油×脈輪，和你的生命色呼應時特別有感\n  → 抽到的牌卡色系跟你的空缺色互補？那張牌就是今天的能量處方\n\n一句話：生日色彩是你的天生濾鏡，易經覺察占卜是即時調色盤，牌卡是幫你在混亂日子裡找到自己顏色的鑰匙。\n';
-  hC+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiC">'+aiC+'</pre><button class="cp" onclick="copyText(\'aiC\')">📋 複製AI指令</button></div>';
+  hC+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiC">'+aiC+'</pre><button class="cp" onclick="copyText(\'aiC\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiC\',\'color\')">🔮 複製AI指令（會員）</button></div>';
   addP(ps,hC);
 
   // ═══ ⑬ 凱龍星與莉莉絲 ═══
@@ -4396,7 +4434,7 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   aiD+='你之所以能懂別人的痛，是因為你先痛過了。\n';
   aiD+='而莉莉絲？她從不需要你的允許就存在。\n';
   aiD+='你要做的不是馴服她，是跟她握手。\n\n七、凱龍回歸（49-51歲）：人生最重要的中年轉折\n・凱龍繞行太陽約50年回到出生位置→這是你和核心傷口的「期末考」\n・回歸前後3年的人生事件回顧：工作轉型、健康警訊、關係重組往往集中爆發\n・不是「傷口又裂開了」，是你終於累積了50年的智慧來縫合它\n・凱龍回歸在不同星座的主題差異：\n  牡羊座=重新定義「我是誰」的勇氣\n  金牛座=對物質安全感的根本重構\n  雙子座=表達方式的徹底升級\n  巨蟹座=家庭關係的最終和解\n  獅子座=創造力和自我價值的二次覺醒\n  處女座=完美主義的解套\n  天秤座=關係模式的根本轉型\n  天蠍座=權力與控制的放手練習\n  射手座=信仰體系的重建\n  摩羯座=成就定義的重新校準\n  水瓶座=獨立與歸屬的平衡\n  雙魚座=界線與慈悲的統合\n\n八、莉莉絲的四種天文對應（M. Kelley Hunter系統）\n・黑月莉莉絲（mean apogee）：月亮軌道離地球最遠點→你最深層的叛逆種子\n・真實黑月（osculating apogee）：實際擺動位置→叛逆的即時觸發點\n・小行星莉莉絲（1181）：具體事件層面的莉莉絲經驗\n・恆星 Algol（英仙座β）：最古老的莉莉絲→梅杜莎之眼，被斬首的女性力量\n・四個莉莉絲的位置是否集中在同一星座？集中=這個議題是你此生的核心主軸\n\n九、凱龍×莉莉絲的相位分析\n・凱龍合相莉莉絲：傷口和叛逆長在同一個地方→最痛也最有力量\n・凱龍對分莉莉絲：傷口和叛逆在對面→在關係中被觸發\n・凱龍四分莉莉絲：傷口和叛逆形成張力→行動的催化劑\n・凱龍三分莉莉絲：傷口和叛逆自然流動→天生的療癒者特質\n\n十、凱龍莉莉絲的精油處方\n・凱龍傷口星座的身體對應部位→安撫精油（乳香/檀香/岩蘭草）\n・莉莉絲叛逆星座的情緒積壓區→引導精油（玫瑰/茉莉/依蘭）\n・凱龍回歸期間的專屬精油配方：50歲前後的身心過渡期支持\n・莉莉絲在火象星座→激烈釋放型精油（黑胡椒/薑/迷迭香）\n・莉莉絲在水象星座→深層清理型精油（絲柏/杜松/葡萄柚）\n・莉莉絲在土象星座→接地穩定型精油（岩蘭草/廣藿香/雪松）\n・莉莉絲在風象星座→思維疏通型精油（尤加利/薄荷/檸檬）\n\n\n\n【延伸導航·從傷口密碼到此刻座標】\n凱龍是你最深的傷口，莉莉絲是你最狂的叛逆。\n合在一起，就是你最不想面對、但最有力量的那個部分。\n\n► 易經覺察占卜（hourlightkey.com/yijing-oracle.html）\n  → 凱龍看一輩子的傷口課題，易經覺察占卜看「今天這個痛被觸發了」的即時疏通建議\n  → 莉莉絲被壓住的時候特別想反抗？馥語卦象可能會告訴你：不是反抗，是該換個方向\n\n► 馥靈秘碼（hourlightkey.com/fuling-mima.html）\n  → 凱龍傷口主題 × 馥靈十二宮位：傷口在哪個生活領域最常被觸發？\n  → 莉莉絲叛逆方向 × H.O.U.R. 四主數：你的叛逆其實是在幫你找回什麼？\n\n► 130張馥靈智慧牌卡（hourlightkey.com/draw-hl.html）\n  → 每張牌都有光明面和陰影面，跟凱龍莉莉絲的雙面性完美對應\n  → 抽到的牌如果剛好呼應你的凱龍星座？那張牌就是你此刻的傷口處方\n  → 凱龍精油 × 牌卡精油系統：從嗅覺層面安撫那個最深的痛\n\n一句話：凱龍是你的傷口地圖，莉莉絲是你的叛逆指南，牌卡是幫你把那個最不想碰的傷口變成最獨特超能力的鑰匙。\n';
-  hD+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiD">'+aiD+'</pre><button class="cp" onclick="copyText(\'aiD\')">📋 複製AI指令</button></div>';
+  hD+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiD">'+aiD+'</pre><button class="cp" onclick="copyText(\'aiD\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiD\',\'chiron\')">🔮 複製AI指令（會員）</button></div>';
   addP(ps,hD);
 
   // ═══ ⑭ 吠陀占星 ═══
@@ -4499,7 +4537,7 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   aiE+='同一個你，兩張地圖，看見不同維度的真實。\n';
   aiE+='如果西洋星盤是你的GPS，吠陀星盤就是你的衛星雲圖。\n';
   aiE+='一個告訴你路怎麼走，一個告訴你天氣怎麼樣。\n';
-  hE+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiE">'+aiE+'</pre><button class="cp" onclick="copyText(\'aiE\')">📋 複製AI指令</button></div>';
+  hE+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiE">'+aiE+'</pre><button class="cp" onclick="copyText(\'aiE\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiE\',\'vedic\')">🔮 複製AI指令（會員）</button></div>';
   addP(ps,hE);
 
     // ═══ ⑮ 姓名覺察解碼 ═══
@@ -4617,7 +4655,7 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
     aiF+='名字不是你的命運，是你爸媽在你出生那天，對這個世界許的願。\n';
     aiF+='而你每天聽見自己的名字被叫，就是在不斷接收這個願望的振動。\n';
     aiF+='讀懂它，不是要改名，是讓你知道：這個聲音一直在替你做什麼。\n';
-    hF+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiF">'+aiF+'</pre><button class="cp" onclick="copyText(\'aiF\')">📋 複製AI指令</button></div>';
+    hF+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiF">'+aiF+'</pre><button class="cp" onclick="copyText(\'aiF\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiF\',\'xiuyao\')">🔮 複製AI指令（會員）</button></div>';
     // AI 字形字義分析按鈕
     hF+='<div style="margin:20px 0;text-align:center">';
     hF+='<button id="nameAiBtn" onclick="runNameAnalysis()" style="padding:12px 28px;border:1px solid rgba(176,140,224,.25);border-radius:28px;background:linear-gradient(135deg,rgba(176,140,224,.08),rgba(107,184,176,.05));color:var(--plum);font-family:var(--body);font-size:.85rem;letter-spacing:.1em;cursor:pointer;transition:all .3s">🔮 AI 字形字義深度分析</button>';
@@ -4769,7 +4807,7 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
     aiG+='生命之樹不是一棵長在天上的樹，它長在你的身體裡。\n';
     aiG+='每一個質點，都是你身上的一個器官、一種情緒、一段關係。\n';
     aiG+='把這棵樹讀懂，你就把自己讀懂了。\n';
-    hG+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiG">'+aiG+'</pre><button class="cp" onclick="copyText(\'aiG\')">📋 複製AI指令</button></div>';
+    hG+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiG">'+aiG+'</pre><button class="cp" onclick="copyText(\'aiG\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiG\',\'meihua\')">🔮 複製AI指令（會員）</button></div>';
   }else{
     hG+='<div class="item" style="color:var(--inkm);text-align:center;padding:20px">請在上方輸入中文姓名（自動轉換英文拼音）或直接輸入英文名即可計算</div>';
   }
@@ -4814,8 +4852,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   });
   hH+='</div>';
   hH+='<div class="item" style="padding:12px 14px;border:1px solid rgba(240,212,138,.15);border-radius:8px;margin-top:12px"><div style="font-size:.78rem;color:rgba(249,240,229,.4);line-height:1.7">想看你和另一個人的宿曜相性？未來合盤功能即將上線。</div></div>';
-  var aiH='【AI解讀指令·宿曜占星（v2 擴充版）】\n本命宿：'+xy.name+'宿\n宮位：'+xy.palace+'\n七曜：'+qiyaoLabel+'\n宿守：'+xy.guard+''+_hlFW('xiuyao');
-  hH+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiH">'+aiH+'</pre><button class="cp" onclick="copyText(\'aiH\')">📋 複製AI指令</button></div>';
+  var aiH='【AI解讀指令·宿曜占星（v2 擴充版）】\n本命宿：'+xy.name+'宿\n宮位：'+xy.palace+'\n七曜：'+qiyaoLabel+'\n宿守：'+xy.guard+'';
+  hH+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiH">'+aiH+'</pre><button class="cp" onclick="copyText(\'aiH\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiH\',\'xiuyao\')">🔮 複製AI指令（會員）</button></div>';
   hH+='<div style="margin:16px 0;text-align:center"><a href="draw-light.html" style="display:inline-block;background:linear-gradient(135deg,rgba(240,212,138,.9),rgba(200,170,100,.9));color:#1a1a2e;padding:12px 28px;border-radius:24px;font-size:.92rem;font-weight:600;text-decoration:none;letter-spacing:.05em;box-shadow:0 2px 12px rgba(240,212,138,.25)">✦ AI說得太多？抽一張馥靈指引牌，找回方向</a><div style="font-size:.72rem;color:rgba(249,240,229,.35);margin-top:6px">命盤是座標，指引牌是下一步行動</div></div>';
   addP(ps,hH);
 
@@ -4868,8 +4906,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   hI+='<div style="margin:16px 0 8px;font-size:.95rem;color:var(--gd);border-bottom:1px solid rgba(240,212,138,.2);padding-bottom:8px">✦ 動爻深析：第 '+mh.move+' 爻</div>';
   hI+='<div class="items"><div class="item" style="padding:10px 14px"><span class="rs" style="font-size:.85rem;line-height:1.9;display:block">'+(MOVE_POS[mh.move]||'')+'</span></div></div>';
   hI+='<div class="item" style="padding:12px 14px;border:1px solid rgba(240,212,138,.15);border-radius:8px;margin-top:12px"><div style="font-size:.78rem;color:rgba(249,240,229,.4);line-height:1.7">想知道你的終身卦在今年的流年中怎麼運作？來一場馥靈之鑰的深度解讀。</div></div>';
-  var aiI='【AI解讀指令·梅花易數終身卦（v2 擴充版）】\n終身卦：第'+mh.hexNum+'卦 '+mh.hexName+' '+upperSym+lowerSym+'\n上卦（外）：'+mh.upperName+'（'+mh.upperNature+'·'+mh.upperTrait+'）\n下卦（內）：'+mh.lowerName+'（'+mh.lowerNature+'·'+mh.lowerTrait+'）\n動爻：第'+mh.move+'爻\n體用：'+(mh.move<=3?'體=上卦'+mh.upperName+' 用=下卦'+mh.lowerName:'體=下卦'+mh.lowerName+' 用=上卦'+mh.upperName)+''+_hlFW('meihua');
-  hI+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiI">'+aiI+'</pre><button class="cp" onclick="copyText(\'aiI\')">📋 複製AI指令</button></div>';
+  var aiI='【AI解讀指令·梅花易數終身卦（v2 擴充版）】\n終身卦：第'+mh.hexNum+'卦 '+mh.hexName+' '+upperSym+lowerSym+'\n上卦（外）：'+mh.upperName+'（'+mh.upperNature+'·'+mh.upperTrait+'）\n下卦（內）：'+mh.lowerName+'（'+mh.lowerNature+'·'+mh.lowerTrait+'）\n動爻：第'+mh.move+'爻\n體用：'+(mh.move<=3?'體=上卦'+mh.upperName+' 用=下卦'+mh.lowerName:'體=下卦'+mh.lowerName+' 用=上卦'+mh.upperName)+'';
+  hI+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiI">'+aiI+'</pre><button class="cp" onclick="copyText(\'aiI\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiI\',\'meihua\')">🔮 複製AI指令（會員）</button></div>';
   hI+='<div style="margin:16px 0;text-align:center"><a href="draw-light.html" style="display:inline-block;background:linear-gradient(135deg,rgba(240,212,138,.9),rgba(200,170,100,.9));color:#1a1a2e;padding:12px 28px;border-radius:24px;font-size:.92rem;font-weight:600;text-decoration:none;letter-spacing:.05em;box-shadow:0 2px 12px rgba(240,212,138,.25)">✦ AI說得太多？抽一張馥靈指引牌，找回方向</a><div style="font-size:.72rem;color:rgba(249,240,229,.35);margin-top:6px">命盤是座標，指引牌是下一步行動</div></div>';
   addP(ps,hI);
 
@@ -4935,8 +4973,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   hJ+='<div class="item" style="padding:8px 14px"><span class="rs" style="font-size:.82rem;line-height:1.8">每個 Gene Key 都屬於一個「密碼子環」。一組在 DNA 層面有對應關係的基因天命。您的 Gene Key '+birthGateNum+' 所在的 Codon Ring，代表你與特定一群人有天然的共振波長。這些人不一定是你認識的，但你們在某個深層的能量場裡是一組的。</span></div>';
   hJ+='</div>';
   hJ+='<div class="item" style="padding:12px 14px;border:1px solid rgba(240,212,138,.15);border-radius:8px;margin-top:12px"><div style="font-size:.78rem;color:rgba(249,240,229,.4);line-height:1.7">想深入了解你的陰影是怎麼變成天賦的？馥靈之鑰的 H.O.U.R. 系統就是專門做這件事的。</div></div>';
-  var aiJ='【AI解讀指令·基因天命Gene Keys（v2 擴充版）】\n生命功課（太陽）：Gene Key '+birthGateNum+' 陰影「'+birthGK.s+'」→ 天賦「'+birthGK.g+'」→ 悉地「'+birthGK.d+'」\n進化方向（地球）：Gene Key '+earthGate+' 天賦「'+earthGK.g+'」\n光芒：Gene Key '+radGate+' 天賦「'+radGK.g+'」\n核心目的：Gene Key '+purGate+' 天賦「'+purGK.g+'」\n已啟動閘門：'+allGateNums.join(', ')+''+_hlFW('genekeys');
-  hJ+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiJ">'+aiJ+'</pre><button class="cp" onclick="copyText(\'aiJ\')">📋 複製AI指令</button></div>';
+  var aiJ='【AI解讀指令·基因天命Gene Keys（v2 擴充版）】\n生命功課（太陽）：Gene Key '+birthGateNum+' 陰影「'+birthGK.s+'」→ 天賦「'+birthGK.g+'」→ 悉地「'+birthGK.d+'」\n進化方向（地球）：Gene Key '+earthGate+' 天賦「'+earthGK.g+'」\n光芒：Gene Key '+radGate+' 天賦「'+radGK.g+'」\n核心目的：Gene Key '+purGate+' 天賦「'+purGK.g+'」\n已啟動閘門：'+allGateNums.join(', ')+'';
+  hJ+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiJ">'+aiJ+'</pre><button class="cp" onclick="copyText(\'aiJ\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiJ\',\'genekeys\')">🔮 複製AI指令（會員）</button></div>';
   hJ+='<div style="margin:16px 0;text-align:center"><a href="draw-light.html" style="display:inline-block;background:linear-gradient(135deg,rgba(240,212,138,.9),rgba(200,170,100,.9));color:#1a1a2e;padding:12px 28px;border-radius:24px;font-size:.92rem;font-weight:600;text-decoration:none;letter-spacing:.05em;box-shadow:0 2px 12px rgba(240,212,138,.25)">✦ AI說得太多？抽一張馥靈指引牌，找回方向</a><div style="font-size:.72rem;color:rgba(249,240,229,.35);margin-top:6px">命盤是座標，指引牌是下一步行動</div></div>';
   addP(ps,hJ);
 
@@ -5043,8 +5081,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
     hK+='<div class="item" style="padding:6px 14px"><span class="rs" style="font-size:.78rem;color:rgba(249,240,229,.5)">與多個相鄰格子都有數字連線的樞紐。這是你的能量匯聚點，是你最有整合力的領域。</span></div>';
   }
   hK+='<div class="item" style="padding:12px 14px;border:1px solid rgba(240,212,138,.15);border-radius:8px;margin-top:12px"><div style="font-size:.78rem;color:rgba(249,240,229,.4);line-height:1.7">看到了自己的九宮格，卻不知道下一步？來抽一張馥靈指引牌，把座標變成行動。</div></div>';
-  var aiK='【AI解讀指令·彩虹數字九宮格（v2 擴充版）】\n數字分佈：'+Object.keys(rb.counts).map(function(k){return k+'×'+rb.counts[k]}).join(' ')+'\n缺少：'+(rb.missing.length?rb.missing.join('、'):'無')+'\n天賦箭頭：'+(rb.activeArrows.length?rb.activeArrows.map(function(a){return a.name}).join('、'):'無')+'\n缺失箭頭：'+(missingArrows.length<8?missingArrows.map(function(a){return a.name}).join('、'):'幾乎全缺')+'\n隔離數字：'+(isolated.length?isolated.join('、'):'無')+'\n樞紐數字：'+(connected.length?connected.join('、'):'無')+''+_hlFW('rainbow');
-  hK+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiK">'+aiK+'</pre><button class="cp" onclick="copyText(\'aiK\')">📋 複製AI指令</button></div>';
+  var aiK='【AI解讀指令·彩虹數字九宮格（v2 擴充版）】\n數字分佈：'+Object.keys(rb.counts).map(function(k){return k+'×'+rb.counts[k]}).join(' ')+'\n缺少：'+(rb.missing.length?rb.missing.join('、'):'無')+'\n天賦箭頭：'+(rb.activeArrows.length?rb.activeArrows.map(function(a){return a.name}).join('、'):'無')+'\n缺失箭頭：'+(missingArrows.length<8?missingArrows.map(function(a){return a.name}).join('、'):'幾乎全缺')+'\n隔離數字：'+(isolated.length?isolated.join('、'):'無')+'\n樞紐數字：'+(connected.length?connected.join('、'):'無')+'';
+  hK+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiK">'+aiK+'</pre><button class="cp" onclick="copyText(\'aiK\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiK\',\'rainbow\')">🔮 複製AI指令（會員）</button></div>';
   hK+='<div style="margin:16px 0;text-align:center"><a href="draw-light.html" style="display:inline-block;background:linear-gradient(135deg,rgba(240,212,138,.9),rgba(200,170,100,.9));color:#1a1a2e;padding:12px 28px;border-radius:24px;font-size:.92rem;font-weight:600;text-decoration:none;letter-spacing:.05em;box-shadow:0 2px 12px rgba(240,212,138,.25)">✦ AI說得太多？抽一張馥靈指引牌，找回方向</a><div style="font-size:.72rem;color:rgba(249,240,229,.35);margin-top:6px">命盤是座標，指引牌是下一步行動</div></div>';
   addP(ps,hK);
 
@@ -5085,8 +5123,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   hL+='<div class="item" style="padding:8px 14px"><span class="lbl">守護牌（Guardian Card）</span><span class="rs" style="font-size:.82rem;line-height:1.7">同時你也有一張守護牌，代表你的保護能量。在困難時刻，這個能量會自動啟動。</span></div>';
   hL+='</div>';
   hL+='<div class="item" style="padding:12px 14px;border:1px solid rgba(240,212,138,.15);border-radius:8px;margin-top:12px"><div style="font-size:.78rem;color:rgba(249,240,229,.4);line-height:1.7">想知道你的完整行星排列和業力牌？來一場馥靈之鑰的深度解讀。</div></div>';
-  var aiL='【AI解讀指令·撲克牌命理Cardology（v2 擴充版）】\n本命牌：'+cd.display+' 花色：'+cd.suitName+' 元素：'+cd.suitElement+''+_hlFW('cardology');
-  hL+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiL">'+aiL+'</pre><button class="cp" onclick="copyText(\'aiL\')">📋 複製AI指令</button></div>';
+  var aiL='【AI解讀指令·撲克牌命理Cardology（v2 擴充版）】\n本命牌：'+cd.display+' 花色：'+cd.suitName+' 元素：'+cd.suitElement+'';
+  hL+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiL">'+aiL+'</pre><button class="cp" onclick="copyText(\'aiL\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiL\',\'cardology\')">🔮 複製AI指令（會員）</button></div>';
   hL+='<div style="margin:16px 0;text-align:center"><a href="draw-light.html" style="display:inline-block;background:linear-gradient(135deg,rgba(240,212,138,.9),rgba(200,170,100,.9));color:#1a1a2e;padding:12px 28px;border-radius:24px;font-size:.92rem;font-weight:600;text-decoration:none;letter-spacing:.05em;box-shadow:0 2px 12px rgba(240,212,138,.25)">✦ AI說得太多？抽一張馥靈指引牌，找回方向</a><div style="font-size:.72rem;color:rgba(249,240,229,.35);margin-top:6px">命盤是座標，指引牌是下一步行動</div></div>';
   addP(ps,hL);
 
@@ -5127,8 +5165,8 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
     hM+='</div>';
   }
   hM+='<div class="item" style="padding:12px 14px;border:1px solid rgba(240,212,138,.15);border-radius:8px;margin-top:12px"><div style="font-size:.78rem;color:rgba(249,240,229,.4);line-height:1.7">覺得最近被人生課題卡住了？來體驗一場 H.O.U.R. 身心校準，找到屬於你這棵樹的生長方向。</div></div>';
-  var aiM='【AI解讀指令·居爾特樹曆（v2 擴充版）】\n對應樹木：'+ct.name+'（Celtic: '+ct.celtic+'）\n歐甘符文：'+ogham+'\n守護神：'+deity+'\n對應星座帶：'+zodiac+'\n對應精油（主）：'+ct.oil+'\n'+(extraOils.length?'三時精油：'+extraOils.join(' / ')+'\n':'')+'\n【解讀框架】\n壹、'+ct.name+'的自然智慧\n・這種樹在自然界中的生長特性（季節、地理、形態）\n・德魯伊文化中這種樹的神聖象徵\n・歐甘符文'+ogham+'的刻寫傳統和咒語用途\n\n二、守護神：'+deity+'\n・這位凱爾特神祇的神話故事\n・祂代表的原型能量如何展現在你的日常生活中\n・當你需要這位守護神的力量時，你會在什麼情境下感受到？\n\n三、精油與樹木的深度連結\n・主精油'+ct.oil+'的香氣分子與'+ct.name+'樹的化學成分關聯\n・三時精油建議的使用場景\n・白天精油：提振工作能量\n・夜晚精油：安撫身心準備休息\n・壓力精油：緊急時刻的快速重啟\n\n四、星座交叉比對\n・居爾特樹曆的'+zodiac+'區間與西洋占星的共振點\n・你的太陽星座如何與這棵樹的能量互補或衝突？\n\n五、課題與精油的實踐\n・課題：「'+ct.challenge+'」\n・當感覺被這個課題卡住時，'+ct.oil+'精油怎麼幫助你重新出發？'+_hlFW('celtic');
-  hM+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiM">'+aiM+'</pre><button class="cp" onclick="copyText(\'aiM\')">📋 複製AI指令</button></div>';
+  var aiM='【AI解讀指令·居爾特樹曆（v2 擴充版）】\n對應樹木：'+ct.name+'（Celtic: '+ct.celtic+'）\n歐甘符文：'+ogham+'\n守護神：'+deity+'\n對應星座帶：'+zodiac+'\n對應精油（主）：'+ct.oil+'\n'+(extraOils.length?'三時精油：'+extraOils.join(' / ')+'\n':'')+'\n【解讀框架】\n壹、'+ct.name+'的自然智慧\n・這種樹在自然界中的生長特性（季節、地理、形態）\n・德魯伊文化中這種樹的神聖象徵\n・歐甘符文'+ogham+'的刻寫傳統和咒語用途\n\n二、守護神：'+deity+'\n・這位凱爾特神祇的神話故事\n・祂代表的原型能量如何展現在你的日常生活中\n・當你需要這位守護神的力量時，你會在什麼情境下感受到？\n\n三、精油與樹木的深度連結\n・主精油'+ct.oil+'的香氣分子與'+ct.name+'樹的化學成分關聯\n・三時精油建議的使用場景\n・白天精油：提振工作能量\n・夜晚精油：安撫身心準備休息\n・壓力精油：緊急時刻的快速重啟\n\n四、星座交叉比對\n・居爾特樹曆的'+zodiac+'區間與西洋占星的共振點\n・你的太陽星座如何與這棵樹的能量互補或衝突？\n\n五、課題與精油的實踐\n・課題：「'+ct.challenge+'」\n・當感覺被這個課題卡住時，'+ct.oil+'精油怎麼幫助你重新出發？';
+  hM+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiM">'+aiM+'</pre><button class="cp" onclick="copyText(\'aiM\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiM\',\'celtic\')">🔮 複製AI指令（會員）</button></div>';
   hM+='<div style="margin:16px 0;text-align:center"><a href="draw-light.html" style="display:inline-block;background:linear-gradient(135deg,rgba(240,212,138,.9),rgba(200,170,100,.9));color:#1a1a2e;padding:12px 28px;border-radius:24px;font-size:.92rem;font-weight:600;text-decoration:none;letter-spacing:.05em;box-shadow:0 2px 12px rgba(240,212,138,.25)">✦ AI說得太多？抽一張馥靈指引牌，找回方向</a><div style="font-size:.72rem;color:rgba(249,240,229,.35);margin-top:6px">命盤是座標，指引牌是下一步行動</div></div>';
   addP(ps,hM);
 
@@ -5258,7 +5296,7 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   aiN+='本系統提供的是方向性參考，不是預言。\n';
   aiN+='鑰匙遞給你，城堡自己開。';
 
-  hN+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiN">'+aiN+'</pre><button class="cp" onclick="copyText(\'aiN\')">📋 複製AI指令</button></div>';
+  hN+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiN">'+aiN+'</pre><button class="cp" onclick="copyText(\'aiN\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiN\',\'tieban\')">🔮 複製AI指令（會員）</button></div>';
   hN+='<div style="margin:16px 0;text-align:center"><a href="draw-light.html" style="display:inline-block;background:linear-gradient(135deg,rgba(240,212,138,.9),rgba(200,170,100,.9));color:#1a1a2e;padding:12px 28px;border-radius:24px;font-size:.92rem;font-weight:600;text-decoration:none;letter-spacing:.05em;box-shadow:0 2px 12px rgba(240,212,138,.25)">✦ AI說得太多？抽一張馥靈指引牌，找回方向</a><div style="font-size:.72rem;color:rgba(249,240,229,.35);margin-top:6px">命盤是座標，指引牌是下一步行動</div></div>';
   addP(ps,hN);
 
@@ -5337,7 +5375,7 @@ function doCalc(Y,M,D,H,min,gen,lat,lon,sect){
   aiTY+='命盤是座標，行動才是導航。\n';
   aiTY+='鑰匙遞給你，城堡自己開。';
 
-  hTY+='<div class="ai-box"><h4>📜 AI深度解讀指令</h4><pre id="aiTY">'+aiTY+'</pre><button class="cp" onclick="copyText(\'aiTY\')">📋 複製AI指令</button></div>';
+  hTY+='<div class="ai-box"><h4>📜 命盤資料 / AI深度解讀</h4><pre id="aiTY">'+aiTY+'</pre><button class="cp" onclick="copyText(\'aiTY\')">📋 複製命盤資料</button><button class="cp" style="margin-left:8px;background:rgba(160,124,220,.15);border-color:rgba(160,124,220,.3)" onclick="copyAIPrompt(\'aiTY\',\'taiyi\')">🔮 複製AI指令（會員）</button></div>';
   hTY+='<div style="margin:16px 0;text-align:center"><a href="draw-light.html" style="display:inline-block;background:linear-gradient(135deg,rgba(240,212,138,.9),rgba(200,170,100,.9));color:#1a1a2e;padding:12px 28px;border-radius:24px;font-size:.92rem;font-weight:600;text-decoration:none;letter-spacing:.05em;box-shadow:0 2px 12px rgba(240,212,138,.25)">✦ 算完了？抽一張馥靈指引牌，看今年第一步</a><div style="font-size:.72rem;color:rgba(249,240,229,.35);margin-top:6px">太乙定方向，指引牌定行動</div></div>';
   addP(ps,hTY);
 

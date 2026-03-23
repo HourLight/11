@@ -179,25 +179,7 @@ module.exports = function handler(req, res) {
     return res.status(200).json({ available: available, count: Object.keys(available).length });
   }
 
-  // action=all → 回傳所有系統的完整框架（destiny-engine 前端用）
-  if (req.query.action === 'all') {
-    var all = {};
-    Object.keys(SYSTEMS).forEach(function(sys) {
-      var s = SYSTEMS[sys];
-      if (s.framework) {
-        all[sys] = {
-          title: s.title || '',
-          framework: s.framework || '',
-          books: s.books || '',
-          navigation: s.navigation || '',
-          tone: s.tone || ''
-        };
-      }
-    });
-    // 設定快取 1 小時（框架不會頻繁變動）
-    res.setHeader('Cache-Control', 'public, max-age=3600');
-    return res.status(200).json({ systems: all, count: Object.keys(all).length });
-  }
+  // action=all 已移除（框架改由 ai-framework-gate.js 閘門控制，不再公開）
 
   if (!system) return res.status(400).json({ error: '需要 system 參數' });
 
