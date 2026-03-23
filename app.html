@@ -1287,15 +1287,38 @@ input,select,textarea{font-family:var(--body)}
       <div class="page hide" id="page-subscription">
         <button class="subpage-back" onclick="goBack()">‹ 返回</button>
         <div class="page-head"><h1>訂閱方案</h1><p>選擇最適合您現在階段的方案。</p></div>
+
+        <!-- 目前方案狀態 -->
+        <div id="sub-status" style="margin-bottom:20px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);font-size:.9rem;line-height:1.8"></div>
+
         <div class="plan-list" id="plan-cards">
           <div class="plan-item" id="plan-guest"><div class="plan-icon-wrap plan-icon-free">🌱</div><div class="plan-info"><div class="plan-name">免費會員</div><div class="plan-desc">AI 深度解讀指令每天 3 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">免費</div><div class="plan-unit">永久</div></div></div>
-          <div class="plan-item popular" id="plan-member"><div class="plan-badge pb-hot">推薦</div><div class="plan-icon-wrap plan-icon-member">🔑</div><div class="plan-info"><div class="plan-name">馥靈鑰友</div><div class="plan-desc">AI 深度解讀指令每天 15 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$399</div><div class="plan-unit">/ 月</div></div></div>
-          <div class="plan-item" id="plan-premium"><div class="plan-icon-wrap plan-icon-premium">👑</div><div class="plan-info"><div class="plan-name">馥靈大師</div><div class="plan-desc">AI 深度解讀指令無每日上限｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$999</div><div class="plan-unit">/ 月</div></div></div>
+          <div class="plan-item popular" id="plan-member"><div class="plan-badge pb-hot">推薦</div><div class="plan-icon-wrap plan-icon-member">🔑</div><div class="plan-info"><div class="plan-name">馥靈鑰友</div><div class="plan-desc">AI 深度解讀指令每天 15 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$399</div><div class="plan-unit">/ 月</div></div><button class="btn-subscribe" id="btn-sub-plus" onclick="subscribePlan('plus')" style="margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#c9a060,#a8813c);color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:all .3s">💳 立即訂閱</button></div>
+          <div class="plan-item" id="plan-premium"><div class="plan-icon-wrap plan-icon-premium">👑</div><div class="plan-info"><div class="plan-name">馥靈大師</div><div class="plan-desc">AI 深度解讀指令無每日上限｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$999</div><div class="plan-unit">/ 月</div></div><button class="btn-subscribe" id="btn-sub-pro" onclick="subscribePlan('pro')" style="margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#7a6a55,#5c4a35);color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:all .3s">💳 立即訂閱</button></div>
         </div>
-        <div class="upgrade-cta">
-          <p>升級方案請透過 LINE 聯繫，我們在 24 小時內為您處理。</p>
-          <a href="https://lin.ee/RdQBFAN" target="_blank" class="btn-line-upgrade">💬 LINE 聯繫升級</a>
+
+        <div style="margin-top:16px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);font-size:.82rem;color:var(--mid);line-height:2">
+          ► 付款後自動開通 30 天，到期自動恢復免費會員<br>
+          ► 不綁定自動扣款，到期不續費就停，不會多收錢<br>
+          ► 到期前 3 天會寄 Email 提醒，您可以自行決定是否續訂<br>
+          ► 信用卡付款支援 Visa / Mastercard / JCB
         </div>
+
+        <!-- 銀行轉帳替代方案 -->
+        <div style="margin-top:16px;padding:18px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius)">
+          <div style="font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:10px">🏦 沒有信用卡？也可以用銀行轉帳</div>
+          <div style="font-size:.82rem;color:var(--mid);line-height:2">
+            ► 銀行：國泰世華銀行 同德分行（銀行代碼 013）<br>
+            ► 帳號：<span style="font-family:monospace;letter-spacing:.06em;color:var(--text);font-weight:700">248-50-624013-3</span><br>
+            ► 戶名：<span style="color:var(--text);font-weight:700">王逸君</span><br>
+            ► 轉帳金額：鑰友 $399 / 大師 $999<br>
+            ► 轉帳後將 <strong style="color:var(--gold)">匯款截圖 + 您的會員 Email</strong> 傳到 LINE<br>
+            ► 上班時間 <strong style="color:var(--gold)">30 分鐘內</strong>為您手動開通｜下班時間次營業日處理<br>
+            ► 急件請加 LINE ID <strong style="color:var(--gold)">judyanee</strong> 直接聯繫
+          </div>
+          <div style="margin-top:12px"><a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;border-radius:10px;font-size:.9rem;font-weight:700;color:var(--text);background:rgba(201,160,96,.1);border:1px solid rgba(201,160,96,.25);text-decoration:none">💬 LINE 傳送匯款截圖</a></div>
+        </div>
+
         <div class="birthday-card">
           <div class="bc-title">🎂 生日月限定 · 生日禮</div>
           <div class="bc-sub">21 張牌卡全盤矩陣解析＋流年座標哲學＋Ruby 親選神祕禮物</div>
@@ -1694,6 +1717,8 @@ input,select,textarea{font-family:var(--body)}
           <button class="admin-tab" onclick="switchAdminTab('announce')" data-tab="announce">📢 公告</button>
           <button class="admin-tab" onclick="switchAdminTab('permissions')" data-tab="permissions">🔐 權限</button>
           <button class="admin-tab" onclick="switchAdminTab('links')" data-tab="links">🔗 資源</button>
+          <button class="admin-tab" onclick="switchAdminTab('activate')" data-tab="activate">🎫 開通</button>
+          <button class="admin-tab" onclick="switchAdminTab('referral')" data-tab="referral">📱 推薦碼</button>
         </div>
         <div class="admin-sub on" id="admin-dashboard">
           <!-- Row 1: 核心指標 -->
@@ -1855,6 +1880,103 @@ input,select,textarea{font-family:var(--body)}
         </div>
         <div class="admin-sub" id="admin-permissions">
           <div class="card"><div class="card-body"><div class="matrix-wrap"><table class="matrix-table" id="permission-matrix-table"><thead id="matrix-head"></thead><tbody id="matrix-body"></tbody></table></div><div class="matrix-save"><button class="btn-matrix-save" onclick="savePermMatrix()">儲存變更</button></div></div></div>
+        </div>
+
+        <!-- 🎫 快速開通會員 -->
+        <div class="admin-sub" id="admin-activate">
+          <div class="card">
+            <div class="card-body">
+              <h3 style="font-size:1.1rem;margin-bottom:16px;color:var(--text)">🎫 快速開通會員方案</h3>
+              <p style="font-size:.85rem;color:var(--mid);margin-bottom:20px;line-height:1.7">輸入會員 Email，即可開通付費方案。到期後自動降回免費會員，並發送提醒信件。</p>
+
+              <div style="display:flex;flex-direction:column;gap:14px;max-width:480px">
+                <div>
+                  <label style="font-size:.82rem;color:var(--mid);margin-bottom:4px;display:block">會員 Email</label>
+                  <input type="email" id="act-email" placeholder="輸入會員的 Email" class="member-search" style="width:100%"/>
+                </div>
+                <div style="display:flex;gap:12px">
+                  <div style="flex:1">
+                    <label style="font-size:.82rem;color:var(--mid);margin-bottom:4px;display:block">方案</label>
+                    <select class="modal-select" id="act-plan">
+                      <option value="plus">🔑 馥靈鑰友（$399/月）</option>
+                      <option value="pro">👑 馥靈大師（$999/月）</option>
+                    </select>
+                  </div>
+                  <div style="flex:1">
+                    <label style="font-size:.82rem;color:var(--mid);margin-bottom:4px;display:block">天數</label>
+                    <select class="modal-select" id="act-days">
+                      <option value="7">7 天（體驗）</option>
+                      <option value="30" selected>30 天</option>
+                      <option value="60">60 天</option>
+                      <option value="90">90 天</option>
+                      <option value="180">180 天</option>
+                      <option value="365">365 天</option>
+                      <option value="0">永久</option>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn-matrix-save" onclick="activateMember()" id="act-btn" style="align-self:flex-start;padding:12px 32px">🎫 開通會員</button>
+                <div id="act-result" style="display:none;padding:14px 16px;border-radius:10px;font-size:.88rem;line-height:1.8"></div>
+              </div>
+
+              <!-- 已開通紀錄 -->
+              <div style="margin-top:30px;border-top:1px solid var(--border);padding-top:20px">
+                <h4 style="font-size:.95rem;color:var(--text);margin-bottom:12px">📋 最近開通紀錄</h4>
+                <div id="act-history" style="font-size:.85rem;color:var(--mid)">載入中⋯</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 📱 推薦碼 QR Code -->
+        <div class="admin-sub" id="admin-referral">
+          <div class="card">
+            <div class="card-body">
+              <h3 style="font-size:1.1rem;margin-bottom:16px;color:var(--text)">📱 推薦碼 QR Code 產生器</h3>
+              <p style="font-size:.85rem;color:var(--mid);margin-bottom:20px;line-height:1.7">為合作夥伴產生專屬 QR Code。使用者掃碼進入官網後註冊，就自動綁定為該夥伴的推薦會員。</p>
+
+              <div style="display:flex;flex-direction:column;gap:14px;max-width:480px">
+                <div>
+                  <label style="font-size:.82rem;color:var(--mid);margin-bottom:4px;display:block">推薦碼（英文數字，3-12 字元）</label>
+                  <input type="text" id="ref-code" placeholder="例如：yupingteacher" class="member-search" style="width:100%" maxlength="12"/>
+                </div>
+                <div>
+                  <label style="font-size:.82rem;color:var(--mid);margin-bottom:4px;display:block">夥伴名稱（顯示用）</label>
+                  <input type="text" id="ref-name" placeholder="例如：玉萍老師" class="member-search" style="width:100%"/>
+                </div>
+                <div>
+                  <label style="font-size:.82rem;color:var(--mid);margin-bottom:4px;display:block">目標頁面</label>
+                  <select class="modal-select" id="ref-page">
+                    <option value="">首頁（hourlightkey.com）</option>
+                    <option value="draw-hl.html">馥靈智慧牌抽牌</option>
+                    <option value="destiny-engine.html">命盤引擎</option>
+                    <option value="fuling-mima.html">馥靈秘碼</option>
+                    <option value="quiz-hub.html">覺察評估中心</option>
+                    <option value="member-login.html">會員註冊</option>
+                  </select>
+                </div>
+                <button class="btn-matrix-save" onclick="generateRefQR()" style="align-self:flex-start;padding:12px 32px">📱 產生 QR Code</button>
+              </div>
+
+              <div id="ref-result" style="display:none;margin-top:24px;text-align:center">
+                <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;display:inline-block">
+                  <img id="ref-qr-img" src="" alt="QR Code" style="width:220px;height:220px;border-radius:8px"/>
+                  <div id="ref-qr-name" style="font-size:1rem;font-weight:700;color:var(--text);margin-top:12px"></div>
+                  <div id="ref-qr-url" style="font-size:.78rem;color:var(--mid);margin-top:6px;word-break:break-all"></div>
+                  <div style="margin-top:14px;display:flex;gap:8px;justify-content:center">
+                    <button class="btn-matrix-save" onclick="copyRefURL()" style="padding:8px 20px;font-size:.85rem">📋 複製連結</button>
+                    <button class="btn-matrix-save" onclick="downloadRefQR()" style="padding:8px 20px;font-size:.85rem">💾 下載 QR</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 已建立的推薦碼 -->
+              <div style="margin-top:30px;border-top:1px solid var(--border);padding-top:20px">
+                <h4 style="font-size:.95rem;color:var(--text);margin-bottom:12px">📋 已建立的推薦碼</h4>
+                <div id="ref-list" style="font-size:.85rem;color:var(--mid)">載入中⋯</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2685,9 +2807,87 @@ async function deleteNote(id) {
 /* ═══ 訂閱頁 ═══ */
 function loadSubscription() {
   document.querySelectorAll('.plan-item').forEach(el=>el.classList.remove('current'));
-  const planMap={guest:'plan-guest',member:'plan-member',premium:'plan-premium'};
-  const el = document.getElementById(planMap[userRole]||'plan-guest');
-  if (el) el.classList.add('current');
+  var planMap={guest:'plan-guest',member:'plan-member',premium:'plan-premium'};
+  var userPlan = 'guest';
+  // 從 Firestore 讀取方案狀態
+  if (currentUser && db) {
+    db.collection('users').doc(currentUser.uid).get().then(function(doc) {
+      if (!doc.exists) return;
+      var d = doc.data();
+      var plan = d.plan || 'free';
+      var expiry = d.planExpiry;
+      var statusEl = document.getElementById('sub-status');
+
+      if (plan === 'free' || !plan) {
+        userPlan = 'guest';
+        if (statusEl) statusEl.innerHTML = '🌱 目前方案：<strong>免費會員</strong>｜升級後可使用更多 AI 深度解讀次數';
+      } else {
+        var pInfo = HL_PLANS[plan] || {};
+        var expiryText = '';
+        if (expiry === 'permanent') {
+          expiryText = '永久有效';
+        } else if (expiry) {
+          var ed = new Date(expiry);
+          var left = Math.ceil((ed - new Date()) / 86400000);
+          expiryText = ed.toLocaleDateString('zh-TW') + '（剩 ' + left + ' 天）';
+          if (left <= 0) expiryText = '<span style="color:#d93025">已過期</span>';
+        }
+        userPlan = plan === 'plus' ? 'member' : plan === 'pro' ? 'premium' : 'guest';
+        if (statusEl) statusEl.innerHTML = (pInfo.icon||'') + ' 目前方案：<strong>' + (pInfo.name||plan) + '</strong>｜到期日：' + expiryText;
+      }
+
+      // 高亮目前方案
+      var el = document.getElementById(planMap[userPlan] || 'plan-guest');
+      if (el) el.classList.add('current');
+
+      // 隱藏目前方案的按鈕
+      var btnPlus = document.getElementById('btn-sub-plus');
+      var btnPro = document.getElementById('btn-sub-pro');
+      if (plan === 'plus' && btnPlus) { btnPlus.textContent = '✅ 目前方案'; btnPlus.disabled = true; btnPlus.style.opacity = '.5'; }
+      if (plan === 'pro' && btnPro) { btnPro.textContent = '✅ 目前方案'; btnPro.disabled = true; btnPro.style.opacity = '.5'; }
+      // 如果是 pro，plus 按鈕改為「降級」不太合理，直接隱藏
+      if (plan === 'pro' && btnPlus) { btnPlus.style.display = 'none'; }
+    });
+  }
+}
+
+function subscribePlan(plan) {
+  if (!currentUser) {
+    showToast('請先登入會員');
+    showPage('mine');
+    return;
+  }
+
+  var planInfo = { plus: { name: '馥靈鑰友', price: 399 }, pro: { name: '馥靈大師', price: 999 } };
+  var info = planInfo[plan];
+  if (!info) return;
+
+  // 建立表單導向綠界
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://app.hourlightkey.com/api/ecpay-create';
+  form.target = '_blank';
+
+  var fields = {
+    type: 'subscription',
+    plan: plan,
+    uid: currentUser.uid,
+    email: currentUser.email || '',
+    name: currentUser.displayName || ''
+  };
+
+  var keys = Object.keys(fields);
+  for (var i = 0; i < keys.length; i++) {
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = keys[i];
+    input.value = fields[keys[i]];
+    form.appendChild(input);
+  }
+
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
 }
 
 /* ═══ 帳號設定 ═══ */
@@ -2899,6 +3099,8 @@ function switchAdminTab(tab) {
   if (tab==='permissions') buildPermissionsMatrix();
   if (tab==='dashboard') loadAdminDashboard();
   if (tab==='announce') loadAnnouncements();
+  if (tab==='activate') loadActivateHistory();
+  if (tab==='referral') loadRefList();
 }
 
 async function loadAdmin() {
@@ -3337,11 +3539,247 @@ async function checkPlanExpiry(uid){
     const d=snap.data();
     if(!d.plan||d.plan==='free'||!d.planExpiry||d.planExpiry==='permanent')return;
     const exp=new Date(d.planExpiry);
-    if(exp<new Date()){
+    const now=new Date();
+    const daysLeft=Math.ceil((exp-now)/(86400000));
+
+    if(exp<now){
+      // 已過期 → 降回免費 + 發到期通知
       await db.collection('users').doc(uid).update({plan:'free',planExpiry:null});
       console.log('Plan expired, downgraded to free');
+      if(d.email){
+        try{
+          const pName=(HL_PLANS[d.plan]||{}).name||d.plan;
+          await fetch('https://app.hourlightkey.com/api/send-report',{
+            method:'POST',headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({
+              email:d.email,
+              name:d.displayName||'',
+              subject:'馥靈之鑰｜您的「'+pName+'」方案已到期',
+              system:'會員系統',
+              content:'親愛的 '+(d.displayName||'馥靈夥伴')+'：\n\n您的「'+pName+'」方案已於 '+d.planExpiry.split('T')[0]+' 到期，系統已自動調整為免費會員。\n\n► 免費會員仍可使用所有命盤計算工具、複製資料、寄送信箱\n► 如需繼續使用 AI 深度解讀指令，歡迎續訂方案\n\n👉 立即續訂：https://app.hourlightkey.com/app.html\n（登入後前往「訂閱方案」即可刷卡續訂）\n\n有任何問題歡迎聯繫：\nLINE 官方帳號 @hourlight\nEmail：info@hourlightkey.com\n\n馥靈之鑰 Hour Light 敬上'
+            })
+          });
+        }catch(mailErr){console.warn('Expiry email failed',mailErr);}
+      }
+    } else if(daysLeft<=3 && daysLeft>0){
+      // 快到期 → 發提醒（每次登入只發一次，用 localStorage 控制）
+      var reminderKey='hl_expiry_reminder_'+d.planExpiry.split('T')[0];
+      if(!localStorage.getItem(reminderKey)){
+        localStorage.setItem(reminderKey,'sent');
+        if(d.email){
+          try{
+            const pName=(HL_PLANS[d.plan]||{}).name||d.plan;
+            await fetch('https://app.hourlightkey.com/api/send-report',{
+              method:'POST',headers:{'Content-Type':'application/json'},
+              body:JSON.stringify({
+                email:d.email,
+                name:d.displayName||'',
+                subject:'馥靈之鑰｜您的「'+pName+'」方案將在 '+daysLeft+' 天後到期',
+                system:'會員系統',
+                content:'親愛的 '+(d.displayName||'馥靈夥伴')+'：\n\n提醒您，您的「'+pName+'」方案將在 '+daysLeft+' 天後（'+d.planExpiry.split('T')[0]+'）到期。\n\n到期後系統將自動調整為免費會員。如果您想繼續享有完整的 AI 深度解讀服務，歡迎續訂！\n\n👉 立即續訂：https://app.hourlightkey.com/app.html\n（登入後前往「訂閱方案」即可刷卡續訂）\n\n馥靈之鑰 Hour Light 敬上'
+              })
+            });
+          }catch(mailErr){console.warn('Reminder email failed',mailErr);}
+        }
+        // 頁面也顯示提醒
+        showToast('您的方案將在 '+daysLeft+' 天後到期，請記得續訂 💡');
+      }
     }
   }catch(e){console.warn('checkPlanExpiry error',e);}
+}
+
+/* ═══ 🎫 快速開通會員 ═══ */
+async function activateMember(){
+  const email=document.getElementById('act-email').value.trim().toLowerCase();
+  const plan=document.getElementById('act-plan').value;
+  const days=parseInt(document.getElementById('act-days').value);
+  const resultEl=document.getElementById('act-result');
+  const btn=document.getElementById('act-btn');
+
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    resultEl.style.display='block';
+    resultEl.style.background='rgba(217,48,37,.08)';
+    resultEl.style.color='#d93025';
+    resultEl.textContent='請輸入正確的 Email';
+    return;
+  }
+
+  btn.disabled=true; btn.textContent='處理中⋯';
+  try{
+    // 用 email 查找用戶
+    const snap=await db.collection('users').where('email','==',email).limit(1).get();
+    if(snap.empty){
+      resultEl.style.display='block';
+      resultEl.style.background='rgba(217,48,37,.08)';
+      resultEl.style.color='#d93025';
+      resultEl.textContent='找不到此 Email 的會員。請確認對方已註冊帳號。';
+      btn.disabled=false; btn.textContent='🎫 開通會員';
+      return;
+    }
+
+    const userDoc=snap.docs[0];
+    const uid=userDoc.id;
+    const userData=userDoc.data();
+    const pInfo=HL_PLANS[plan]||HL_PLANS.plus;
+
+    // 計算到期日
+    const data={plan:plan};
+    let expiryLabel='';
+    if(days===0){
+      data.planExpiry='permanent';
+      expiryLabel='永久';
+    }else{
+      const exp=new Date();
+      exp.setDate(exp.getDate()+days);
+      data.planExpiry=exp.toISOString();
+      expiryLabel=exp.toLocaleDateString('zh-TW')+'（'+days+' 天）';
+    }
+
+    // 寫入 Firestore
+    await db.collection('users').doc(uid).update(data);
+
+    // 記錄開通紀錄
+    await db.collection('admin').doc('activate_log').set({
+      logs: firebase.firestore.FieldValue.arrayUnion({
+        email:email,
+        name:userData.displayName||'',
+        plan:plan,
+        days:days,
+        expiry:data.planExpiry,
+        activatedAt:new Date().toISOString(),
+        activatedBy:currentUser.email
+      })
+    },{merge:true});
+
+    // 發送開通通知信
+    try{
+      await fetch('https://app.hourlightkey.com/api/send-report',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          email:email,
+          name:userData.displayName||'',
+          subject:'馥靈之鑰｜您的「'+pInfo.name+'」方案已開通 🎉',
+          system:'會員系統',
+          content:'親愛的 '+(userData.displayName||'馥靈夥伴')+'：\n\n恭喜！您的「'+pInfo.name+'」方案已成功開通 🎉\n\n► 方案：'+pInfo.icon+' '+pInfo.name+'\n► 有效期：'+expiryLabel+'\n► AI 深度解讀指令：'+(plan==='pro'?'無限次':'每天 15 次')+'\n\n現在就前往體驗：\nhttps://hourlightkey.com/destiny-engine.html\n\n使用方式：\n1. 在命盤引擎輸入生辰資料\n2. 按「🔮 複製AI指令（會員）」\n3. 貼到 ChatGPT 或 Claude，獲得深度解讀\n\n有任何問題歡迎聯繫：\nLINE 官方帳號 @hourlight\n\n馥靈之鑰 Hour Light 敬上'
+        })
+      });
+    }catch(mailErr){console.warn('Activate email failed',mailErr);}
+
+    resultEl.style.display='block';
+    resultEl.style.background='rgba(52,168,83,.08)';
+    resultEl.style.color='#34a853';
+    resultEl.innerHTML='✅ 開通成功！<br>'+pInfo.icon+' <strong>'+(userData.displayName||email)+'</strong> → '+pInfo.name+'<br>到期：'+expiryLabel+'<br>📧 已發送開通通知信至 '+email;
+    document.getElementById('act-email').value='';
+    loadActivateHistory();
+  }catch(e){
+    resultEl.style.display='block';
+    resultEl.style.background='rgba(217,48,37,.08)';
+    resultEl.style.color='#d93025';
+    resultEl.textContent='開通失敗：'+e.message;
+  }
+  btn.disabled=false; btn.textContent='🎫 開通會員';
+}
+
+async function loadActivateHistory(){
+  const el=document.getElementById('act-history');
+  if(!el)return;
+  try{
+    const snap=await db.collection('admin').doc('activate_log').get();
+    if(!snap.exists||!snap.data().logs||!snap.data().logs.length){
+      el.textContent='尚無開通紀錄';return;
+    }
+    const logs=snap.data().logs.slice().reverse().slice(0,20);
+    el.innerHTML=logs.map(function(l){
+      const p=HL_PLANS[l.plan]||{icon:'?',name:l.plan};
+      const exp=l.expiry==='permanent'?'永久':l.expiry?new Date(l.expiry).toLocaleDateString('zh-TW'):'?';
+      const dt=l.activatedAt?new Date(l.activatedAt).toLocaleString('zh-TW'):'';
+      const isExpired=l.expiry!=='permanent'&&l.expiry&&new Date(l.expiry)<new Date();
+      const badge=isExpired?'<span style="color:#d93025;font-size:.75rem">（已過期）</span>':'<span style="color:#34a853;font-size:.75rem">（有效）</span>';
+      return '<div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px"><div>'+p.icon+' <strong>'+(l.name||l.email)+'</strong> → '+p.name+' '+badge+'</div><div style="font-size:.78rem;color:var(--light)">到期 '+exp+' ｜ 開通 '+dt+'</div></div>';
+    }).join('');
+  }catch(e){el.textContent='載入失敗：'+e.message;}
+}
+
+/* ═══ 📱 推薦碼 QR Code ═══ */
+function generateRefQR(){
+  const code=document.getElementById('ref-code').value.trim().toLowerCase().replace(/[^a-z0-9]/g,'');
+  const name=document.getElementById('ref-name').value.trim();
+  const page=document.getElementById('ref-page').value;
+
+  if(!code||code.length<3){
+    showToast('推薦碼至少 3 個字元（英文數字）');return;
+  }
+  if(!name){
+    showToast('請輸入夥伴名稱');return;
+  }
+
+  const base='https://hourlightkey.com/'+(page||'');
+  const url=base+(base.includes('?')?'&':'?')+'ref='+encodeURIComponent(code);
+  const qrAPI='https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data='+encodeURIComponent(url);
+
+  document.getElementById('ref-qr-img').src=qrAPI;
+  document.getElementById('ref-qr-name').textContent=name+' 的專屬推薦碼：'+code;
+  document.getElementById('ref-qr-url').textContent=url;
+  document.getElementById('ref-result').style.display='block';
+
+  // 儲存到 Firestore partners collection
+  savePartnerToFirestore(code, name, url);
+}
+
+async function savePartnerToFirestore(code, name, url){
+  try{
+    await db.collection('partners').doc(code).set({
+      referral_code:code,
+      name:name,
+      url:url,
+      status:'active',
+      createdAt:new Date().toISOString(),
+      createdBy:currentUser.email
+    },{merge:true});
+    loadRefList();
+  }catch(e){console.warn('Save partner failed',e);}
+}
+
+function copyRefURL(){
+  const url=document.getElementById('ref-qr-url').textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(function(){showToast('已複製推薦連結');});
+  }else{
+    var t=document.createElement('textarea');t.value=url;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);
+    showToast('已複製推薦連結');
+  }
+}
+
+function downloadRefQR(){
+  const img=document.getElementById('ref-qr-img');
+  if(!img.src)return;
+  const a=document.createElement('a');
+  a.href=img.src;
+  a.download='qrcode-'+document.getElementById('ref-code').value.trim()+'.png';
+  a.target='_blank';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+
+async function loadRefList(){
+  const el=document.getElementById('ref-list');
+  if(!el)return;
+  try{
+    const snap=await db.collection('partners').orderBy('createdAt','desc').limit(20).get();
+    if(snap.empty){el.textContent='尚無推薦碼';return;}
+    el.innerHTML=snap.docs.map(function(doc){
+      const d=doc.data();
+      const qrURL='https://api.qrserver.com/v1/create-qr-code/?size=120x120&margin=6&data='+encodeURIComponent(d.url||'https://hourlightkey.com/?ref='+d.referral_code);
+      return '<div style="padding:12px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;flex-wrap:wrap">'
+        +'<img src="'+qrURL+'" style="width:60px;height:60px;border-radius:6px;border:1px solid var(--border)"/>'
+        +'<div style="flex:1;min-width:180px">'
+        +'<div style="font-weight:700;color:var(--text)">'+d.name+'</div>'
+        +'<div style="font-size:.78rem;color:var(--mid)">推薦碼：'+d.referral_code+'</div>'
+        +'<div style="font-size:.75rem;color:var(--light);word-break:break-all">'+(d.url||'')+'</div>'
+        +'</div>'
+        +'<div style="font-size:.75rem;color:var(--light)">'+(d.createdAt?new Date(d.createdAt).toLocaleDateString('zh-TW'):'')+'</div>'
+        +'</div>';
+    }).join('');
+  }catch(e){el.textContent='載入失敗：'+e.message;}
 }
 
 /* 權限矩陣 */

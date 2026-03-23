@@ -1107,9 +1107,9 @@
     <h3 class="hl-v2-section-title">✨ 選擇抽牌張數</h3>
     <div class="hl-v2-mode-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 600px; margin: 0 auto 12px;">
       <button class="hl-v2-mode-btn free" data-n="1">抽 1 張<small>✨ 免費</small></button>
-      <button class="hl-v2-mode-btn" data-n="3">抽 3 張<small>$199 AI自助解讀</small></button>
-      <button class="hl-v2-mode-btn" data-n="5">抽 5 張<small>$399 AI自助解讀</small></button>
-      <button class="hl-v2-mode-btn" data-n="7">抽 7 張<small>$599 AI自助解讀</small></button>
+      <button class="hl-v2-mode-btn" data-n="3">抽 3 張<small>$199 深度解讀</small></button>
+      <button class="hl-v2-mode-btn" data-n="5">抽 5 張<small>$399 深度解讀</small></button>
+      <button class="hl-v2-mode-btn" data-n="7">抽 7 張<small>$599 深度解讀</small></button>
     </div>
     <div class="hl-v2-mode-grid" style="grid-template-columns: repeat(5, 1fr); max-width: 700px; margin: 0 auto 16px;">
       <button class="hl-v2-mode-btn" data-n="9">抽 9 張<small>$1,800 覺察師解讀</small></button>
@@ -1118,14 +1118,14 @@
       <button class="hl-v2-mode-btn" data-n="21">抽 21 張<small>$5,400 對談60分</small></button>
       <button class="hl-v2-mode-btn" data-n="28">抽 28 張<small>$6,800 完整90分</small></button>
     </div>
-    <p class="hl-v2-hint">💡 <strong>1張免費</strong>｜<strong>3-7張 AI 自助解讀</strong>（即時交付）｜<strong>9張以上 覺察師深度解讀</strong>（需預約）<br>
+    <p class="hl-v2-hint">💡 <strong>1張免費</strong>｜<strong>3-7張 深度解讀</strong>（付款後交付）｜<strong>9張以上 覺察師深度解讀</strong>（需預約）<br>
     <a href="draw-hl-guide.html" style="color:rgba(233,194,125,.7);text-decoration:underline;font-size:.85rem">📋 各牌陣適合問什麼問題？</a></p>
     <div style="margin-top:12px;padding:14px 16px;border-radius:12px;background:rgba(233,194,125,.04);border:1px solid rgba(233,194,125,.12);font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.9">
       <div style="color:rgba(233,194,125,.8);font-weight:700;margin-bottom:6px">💳 付款方式</div>
       ► 匯款帳號：國泰世華同德分行（013）<br>
       ► 帳號：248-50-624013-3 / 戶名：王逸君<br>
       ► 付款完成後，請將<strong>匯款截圖 + 抽牌結果複製內容</strong>一起貼到 LINE<br>
-      ► <strong>3-7張</strong>：AI 即時解讀，付款後自動交付<br>
+      ► <strong>3-7張</strong>：深度解讀，付款確認後 30 分鐘內交付<br>
       ► <strong>9張以上</strong>：覺察師人工深度解讀，24小時內回覆<br>
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(233,194,125,.08);font-size:.78rem;color:rgba(255,255,255,.45);line-height:2">
         📌 一次抽牌限問一個問題（問題性質不同，牌卡分析容易混濁）<br>
@@ -1144,36 +1144,113 @@
       <button class="hl-v2-btn hl-v2-btn-secondary" id="clearBtn">🔄 清除重抽</button>
       <a class="hl-v2-btn hl-v2-btn-primary" href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener">🌿 LINE 預約</a>
     </div>
-    <p class="hl-v2-hint" id="guideHint">💫 抽牌後會顯示卡圖與卡號<br><strong>1張免費</strong>｜<strong>3-7張 AI自助</strong>｜<strong>9張+ 覺察師解讀</strong><br><a href="draw-hl-guide.html" style="color:rgba(233,194,125,.7);font-size:.82rem">各牌陣適合問什麼？→</a></p>
+    <p class="hl-v2-hint" id="guideHint">💫 抽牌後會顯示卡圖與卡號<br><strong>1張免費</strong>｜<strong>3-7張 深度解讀</strong>｜<strong>9張+ 覺察師解讀</strong><br><a href="draw-hl-guide.html" style="color:rgba(233,194,125,.7);font-size:.82rem">各牌陣適合問什麼？→</a></p>
     <div id="grid" class="hl-v2-card-grid"></div>
   </section>
 
   <!-- ========== AI 即時解讀區塊 ========== -->
   <section class="hl-v2-glass" id="aiReadingSection" style="display:none">
-    <h3 class="hl-v2-section-title" id="aiSectionTitle">🔮 AI 深度解讀</h3>
+    <h3 class="hl-v2-section-title" id="aiSectionTitle">🔮 深度解讀</h3>
 
     <!-- 1張免費：直接觸發 -->
     <div id="aiFreeBlock" style="display:none;text-align:center">
-      <p style="color:rgba(255,255,255,.6);font-size:.88rem;margin-bottom:16px">馥靈 AI 為您解讀這張牌的訊息</p>
+      <p style="color:rgba(255,255,255,.6);font-size:.88rem;margin-bottom:16px">馥靈 為您解讀這張牌的訊息</p>
       <button class="hl-v2-btn hl-v2-btn-primary" id="aiFreeBtn" onclick="triggerAIReading()">✨ 免費 AI 解讀</button>
     </div>
 
-    <!-- 3-7張付費：解鎖碼輸入 -->
+    <!-- 3-7張付費：轉帳 + 深度解讀 -->
     <div id="aiPaidBlock" style="display:none">
-      <div style="background:rgba(240,212,138,.04);border:1px solid rgba(240,212,138,.1);border-radius:12px;padding:16px;margin-bottom:16px">
-        <div style="color:rgba(240,212,138,.8);font-weight:700;font-size:.9rem;margin-bottom:10px">💳 取得 AI 解讀</div>
-        <div style="font-size:.82rem;color:rgba(255,255,255,.55);line-height:2">
-          ► 匯款至國泰世華同德分行（013）248-50-624013-3 / 王逸君<br>
-          ► 將匯款截圖傳到 <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener" style="color:rgba(240,212,138,.7);text-decoration:underline">LINE @hourlight</a><br>
-          ► 確認後會收到 6 位解鎖碼，輸入即可獲得 AI 深度解讀
+
+      <!-- 步驟說明 -->
+      <div style="background:rgba(240,212,138,.04);border:1px solid rgba(240,212,138,.12);border-radius:14px;padding:20px 18px;margin-bottom:18px">
+        <div style="color:rgba(240,212,138,.85);font-weight:700;font-size:.95rem;margin-bottom:14px">🔮 深度解讀服務｜三步驟完成</div>
+        <div style="font-size:.85rem;color:rgba(255,255,255,.6);line-height:2.2">
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px">
+            <span style="flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(240,212,138,.12);color:rgba(240,212,138,.85);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700">1</span>
+            <span>點擊上方「📋 複製抽牌結果」，複製您的牌卡資料</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px">
+            <span style="flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(240,212,138,.12);color:rgba(240,212,138,.85);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700">2</span>
+            <span>匯款至下方帳戶，將<strong style="color:rgba(240,212,138,.8)">匯款截圖 + 抽牌結果</strong>傳到 LINE</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <span style="flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(240,212,138,.12);color:rgba(240,212,138,.85);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700">3</span>
+            <span>確認付款後，您將收到完整的深度解讀文字報告</span>
+          </div>
         </div>
       </div>
-      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-        <input type="text" id="unlockCodeInput" placeholder="輸入 6 位解鎖碼" maxlength="6"
-          style="flex:1;min-width:160px;background:#141020;border:1px solid rgba(240,212,138,.25);border-radius:10px;color:#f0d48a;padding:14px 16px;font-size:1.1rem;font-family:'Courier New',monospace;letter-spacing:.25em;text-transform:uppercase;text-align:center;-webkit-appearance:none"/>
-        <button class="hl-v2-btn hl-v2-btn-primary" id="aiUnlockBtn" onclick="triggerAIReading()" style="white-space:nowrap">🔓 解鎖並解讀</button>
+
+      <!-- 匯款資訊 -->
+      <div style="background:rgba(240,212,138,.06);border:1px solid rgba(240,212,138,.18);border-radius:14px;padding:18px;margin-bottom:18px">
+        <div style="color:rgba(240,212,138,.85);font-weight:700;font-size:.9rem;margin-bottom:12px">💳 匯款資訊</div>
+        <div style="font-size:.88rem;color:rgba(255,255,255,.7);line-height:2.2">
+          ► 銀行：國泰世華銀行 同德分行（銀行代碼 013）<br>
+          ► 帳號：<span style="color:#f0d48a;font-family:monospace;letter-spacing:.08em;font-weight:700">248-50-624013-3</span><br>
+          ► 戶名：<span style="color:#f0d48a;font-weight:700">王逸君</span>
+        </div>
+        <div style="margin-top:12px;padding:10px 14px;background:rgba(240,212,138,.04);border-radius:10px;display:flex;align-items:center;gap:10px">
+          <span style="font-size:1.2rem">💰</span>
+          <span style="font-size:1rem;color:#f0d48a;font-weight:700" id="aiPriceDisplay">$199</span>
+          <span style="font-size:.82rem;color:rgba(255,255,255,.5)" id="aiPriceDesc">（3 張牌卡深度解讀）</span>
+        </div>
       </div>
-      <p id="aiCodeError" style="display:none;color:rgba(255,100,100,.8);font-size:.82rem;margin-top:8px;text-align:center"></p>
+
+      <!-- 付款方式選擇 -->
+      <div style="margin-bottom:20px">
+        <div style="color:rgba(240,212,138,.75);font-weight:700;font-size:.9rem;margin-bottom:14px;text-align:center">請選擇付款方式</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+          <!-- 信用卡付款（綠界）-->
+          <button onclick="payWithECPay()" id="ecpayBtn"
+            style="flex:1;min-width:200px;max-width:280px;padding:16px 20px;border-radius:14px;border:2px solid rgba(240,212,138,.4);background:linear-gradient(135deg,rgba(240,212,138,.12),rgba(240,212,138,.04));color:#f0d48a;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s;letter-spacing:.04em">
+            💳 信用卡付款
+            <div style="font-size:.75rem;font-weight:400;color:rgba(255,255,255,.45);margin-top:4px">Visa / Mastercard / JCB</div>
+          </button>
+          <!-- 銀行轉帳 -->
+          <button onclick="toggleBankTransfer()" id="bankBtn"
+            style="flex:1;min-width:200px;max-width:280px;padding:16px 20px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:rgba(255,255,255,.7);font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s;letter-spacing:.04em">
+            🏦 銀行轉帳
+            <div style="font-size:.75rem;font-weight:400;color:rgba(255,255,255,.35);margin-top:4px">手動匯款＋LINE 傳截圖</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- 銀行轉帳詳細（預設隱藏）-->
+      <div id="bankTransferBlock" style="display:none">
+      <!-- LINE 傳送按鈕 -->
+      <div style="text-align:center;margin-bottom:20px">
+        <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener"
+          style="display:inline-block;padding:14px 36px;border-radius:12px;font-size:1rem;font-weight:700;color:#1a1520;background:linear-gradient(135deg,#f0d48a,#e9c27d);text-decoration:none;letter-spacing:.06em;box-shadow:0 4px 16px rgba(240,212,138,.25);transition:all .3s">
+          💬 LINE 傳送匯款截圖 + 抽牌結果
+        </a>
+      </div>
+      </div>
+
+      <!-- 服務承諾 -->
+      <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px 18px;margin-bottom:14px">
+        <div style="color:rgba(240,212,138,.75);font-weight:700;font-size:.85rem;margin-bottom:10px">⏰ 服務承諾</div>
+        <div style="font-size:.82rem;color:rgba(255,255,255,.55);line-height:2">
+          ► 上班時間（週一至週五 10:00-18:00）：確認付款後 <strong style="color:rgba(240,212,138,.8)">30 分鐘內</strong>回覆解讀結果<br>
+          ► 下班時間或假日：解讀將於次營業日處理<br>
+          ► 急件需求：請加 LINE ID <strong style="color:rgba(240,212,138,.8)">judyanee</strong> 直接聯繫，將優先為您安排
+        </div>
+      </div>
+
+      <!-- 消費者保護條款 -->
+      <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px 18px">
+        <div style="color:rgba(240,212,138,.75);font-weight:700;font-size:.85rem;margin-bottom:10px">🛡️ 消費者權益保障</div>
+        <div style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:2">
+          ► <strong style="color:rgba(255,255,255,.6)">服務內容</strong>：依據您所抽取的牌卡組合，提供個人化的深度文字解讀報告（約 800-2,500 字）<br>
+          ► <strong style="color:rgba(255,255,255,.6)">交付方式</strong>：透過 LINE 官方帳號以文字訊息交付，可永久保存於對話紀錄中<br>
+          ► <strong style="color:rgba(255,255,255,.6)">延伸提問</strong>：解讀交付後，如有看不懂的部分，可延伸提問 <strong style="color:rgba(240,212,138,.7)">3 次</strong>，不另收費<br>
+          ► <strong style="color:rgba(255,255,255,.6)">退款政策</strong>：付款後尚未收到解讀報告前，可申請全額退款。解讀報告交付後恕不退費，因每份報告皆為針對您的牌卡組合獨立撰寫<br>
+          ► <strong style="color:rgba(255,255,255,.6)">隱私保護</strong>：您的個人資料與抽牌內容僅用於本次解讀服務，不會儲存、轉載或分享給第三方<br>
+          ► <strong style="color:rgba(255,255,255,.6)">服務提供者</strong>：馥靈之鑰國際有限公司（統編：60303284）<br>
+          ► <strong style="color:rgba(255,255,255,.6)">聯絡方式</strong>：LINE 官方帳號 <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener" style="color:rgba(240,212,138,.6);text-decoration:underline">@hourlight</a>｜Email：info@hourlightkey.com
+        </div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.04);font-size:.75rem;color:rgba(255,255,255,.3);line-height:1.8">
+          📌 本服務為「個人覺察輔助工具」，非心理諮商、醫療診斷或投資建議。牌卡解讀結果僅供自我覺察參考，不應作為重大人生決策的唯一依據。
+        </div>
+      </div>
     </div>
 
     <!-- 9張+：LINE 覺察師 -->
@@ -1733,6 +1810,59 @@ function restoreFromURL() {
   }
 }
 
+// ===== 綠界 ECPay 付款 =====
+
+var ECPAY_API = 'https://app.hourlightkey.com/api/ecpay-create';
+
+function payWithECPay() {
+  var n = selected.length;
+  if (!n) return;
+
+  var priceMap = { 3: 199, 5: 399, 7: 599 };
+  if (!priceMap[n]) {
+    alert('此張數暫不支援線上付款');
+    return;
+  }
+
+  // 收集卡牌資料摘要
+  var cardSummary = selected.map(function(idx) {
+    var file = allFiles[idx];
+    return file.replace('.png', '');
+  }).join(', ');
+
+  // 開新視窗導向綠界
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = ECPAY_API;
+  form.target = '_blank';
+
+  var fields = {
+    n: n,
+    cards: cardSummary,
+    question: userQuestion || ''
+  };
+
+  var keys = Object.keys(fields);
+  for (var i = 0; i < keys.length; i++) {
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = keys[i];
+    input.value = fields[keys[i]];
+    form.appendChild(input);
+  }
+
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
+}
+
+function toggleBankTransfer() {
+  var block = document.getElementById('bankTransferBlock');
+  if (block) {
+    block.style.display = block.style.display === 'none' ? 'block' : 'none';
+  }
+}
+
 // ===== AI 即時解讀功能 =====
 
 var AI_READING_API = 'https://app.hourlightkey.com/api/ai-draw-reading';
@@ -1756,10 +1886,14 @@ function showAISection(n) {
 
   if (n === 1) {
     document.getElementById('aiFreeBlock').style.display = 'block';
-    document.getElementById('aiSectionTitle').textContent = '🔮 AI 為您解讀這張牌';
+    document.getElementById('aiSectionTitle').textContent = '🔮 為您解讀這張牌';
   } else if (n >= 3 && n <= 7) {
     document.getElementById('aiPaidBlock').style.display = 'block';
-    document.getElementById('aiSectionTitle').textContent = '🔮 AI 深度解讀（' + n + ' 張｜' + (priceMap[n]||'') + '）';
+    var priceEl = document.getElementById('aiPriceDisplay');
+    var descEl = document.getElementById('aiPriceDesc');
+    if (priceEl) priceEl.textContent = priceMap[n] || '';
+    if (descEl) descEl.textContent = '（' + n + ' 張牌卡深度解讀）';
+    document.getElementById('aiSectionTitle').textContent = '🔮 深度解讀（' + n + ' 張｜' + (priceMap[n]||'') + '）';
     var codeInput = document.getElementById('unlockCodeInput');
     if (codeInput) codeInput.value = '';
   } else if (n >= 9) {
