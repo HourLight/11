@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5"/>
+<title>女巫原力｜探索你的神秘潛能｜馥靈之鑰 Hour Light</title>
+<meta name="description" content="輸入生日，憑直覺選擇五種氣味。認知芳療×生命靈數交叉分析，找出你天生的巫力原型與對應精油。馥靈之鑰 Hour Light 獨家系統。"/>
+<meta property="og:title" content="女巫原力｜你是哪種女巫？"/>
+<meta property="og:description" content="輸入生日，憑直覺選五種氣味。認知芳療×生命靈數，解讀你天生的巫力原型。"/>
+<meta property="og:image" content="https://hourlightkey.com/og-image.jpg"/>
+<meta property="og:url" content="https://hourlightkey.com/witch-power.html"/>
+<link rel="canonical" href="https://hourlightkey.com/witch-power.html"/>
+<link rel="icon" href="favicon.ico"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#0a0510"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"/>
+<link rel="stylesheet" href="assets/css/hourlight-global.css?v=20260318"/>
+<link rel="stylesheet" href="assets/css/hl-design-tokens.css">
+<!-- html2canvas for screenshot -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+/* ══════════════════════════════════
+   WITCH POWER｜全頁主題樣式
+   三色框架：#0a0510 深黑 ／ #f8dfa5 金 ／ #c8bcdc 紫銀
+   ══════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-deep:    #0a0510;
+  --bg-card:    #1a1430;
+  --bg-panel:   #1a1228;
+  --gold:       #f8dfa5;
+  --gold-dim:   #e0c080;
+  --gold-glow:  rgba(248,223,165,0.18);
+  --silver:     #ddd4ee;
+  --silver-dim: #beb4d0;
+  --white:      #ffffff;
+  --purple:     #9b7bd4;
+  --purple-soft:#5a4080;
+  --text:       #ffffff;
+  --text-dim:   #a095b8;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── 星空背景 ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 40% at 20% 10%, rgba(80,40,120,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(40,20,80,0.3) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 0%, rgba(15,8,30,0.8) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 星星 */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(248,223,165,0.8) 1px, transparent 1px),
+    radial-gradient(circle, rgba(200,188,220,0.5) 1px, transparent 1px),
+    radial-gradient(circle, rgba(248,223,165,0.4) 1px, transparent 1px);
+  background-size: 180px 180px, 120px 120px, 240px 240px;
+  background-position: 30px 40px, 90px 70px, 150px 20px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.page-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center;
+  padding: 60px 0 40px;
+}
+
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #ffffff 0%, var(--gold) 40%, var(--silver) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+
+.hero-sub {
+  font-size: 0.95rem;
+  color: var(--silver-dim);
+  line-height: 1.7;
+  max-width: 380px;
+  margin: 0 auto 8px;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  margin: 28px auto;
+}
+
+/* ─── 步驟卡片 ─── */
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(248,223,165,0.05);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  opacity: 0.6;
+}
+
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-num::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(248,223,165,0.05);
+}
+
+.step-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.step-desc {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+/* ─── 表單元素 ─── */
+.form-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 140px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--silver-dim);
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  background: var(--bg-panel);
+  border: 1px solid rgba(200,188,220,0.2);
+  border-radius: 8px;
+  padding: 11px 14px;
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 0 3px rgba(248,223,165,0.08);
+}
+
+.form-select option {
+  background: #1a1228;
+  color: var(--text);
+}
+
+/* 生命靈數顯示 */
+.life-path-badge {
+  display: none;
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: rgba(248,223,165,0.06);
+  border: 1px solid rgba(248,223,165,0.2);
+  border-radius: 10px;
+  font-size: 0.82rem;
+  color: var(--gold);
+  line-height: 1.6;
+}
+
+.life-path-badge.visible { display: block; }
+
+.life-path-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+
+/* 拍照按鈕 */
+.camera-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 9px 18px;
+  background: var(--purple-soft);
+  border: 1px solid rgba(155,123,212,0.5);
+  border-radius: 8px;
+  color: var(--silver);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.camera-btn:hover {
+  background: var(--purple);
+  color: white;
+}
+
+/* ─── 主要 CTA 按鈕 ─── */
+.cta-btn {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #7b5cbf 0%, #5a3a90 100%);
+  border: 1px solid rgba(248,223,165,0.3);
+  border-radius: 12px;
+  color: var(--gold);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  margin-top: 24px;
+  box-shadow: 0 4px 20px rgba(90,58,138,0.4);
+}
+
+.cta-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #6b4fa0 0%, #6b4fa0 100%);
+  box-shadow: 0 6px 30px rgba(155,123,212,0.5), 0 0 0 1px rgba(248,223,165,0.3);
+  transform: translateY(-1px);
+}
+
+.cta-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(248,223,165,0.1) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.cta-btn:hover:not(:disabled)::before {
+  transform: translateX(100%);
+}
+
+/* ─── Loading ─── */
+.loading-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,5,16,0.9);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  backdrop-filter: blur(6px);
+}
+
+.loading-overlay.active { display: flex; }
+
+.loading-orb {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(248,223,165,0.6), rgba(155,123,212,0.4));
+  box-shadow: 0 0 40px rgba(248,223,165,0.3), 0 0 80px rgba(155,123,212,0.2);
+  animation: orbPulse 2s ease-in-out infinite;
+}
+
+@keyframes orbPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(248,223,165,0.3), 0 0 80px rgba(155,123,212,0.2); }
+  50% { transform: scale(1.15); box-shadow: 0 0 60px rgba(248,223,165,0.5), 0 0 120px rgba(155,123,212,0.35); }
+}
+
+.loading-text {
+  color: var(--gold);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  animation: textFade 2s ease-in-out infinite;
+}
+
+.loading-sub {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  margin-top: -16px;
+}
+
+@keyframes textFade {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* ─── 結果卡片 ─── */
+#result-section {
+  display: none;
+  margin-top: 12px;
+}
+
+#result-section.visible { display: block; }
+
+/* 可截圖的卡片區域 */
+.result-card {
+  background: linear-gradient(145deg, #342460 0%, #2d1f55 50%, #302058 100%);
+  border: 1px solid rgba(248,223,165,0.25);
+  border-radius: 20px;
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 卡片裝飾角落 */
+.result-card::before,
+.result-card::after {
+  content: '';
+  position: absolute;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.result-card::before {
+  top: -40px; right: -40px;
+  background: radial-gradient(circle, rgba(155,123,212,0.08), transparent 70%);
+}
+.result-card::after {
+  bottom: -40px; left: -40px;
+  background: radial-gradient(circle, rgba(248,223,165,0.05), transparent 70%);
+}
+
+.card-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* 原型大標 */
+.archetype-name {
+  text-align: center;
+  font-size: clamp(1.8rem, 7vw, 2.4rem);
+  font-weight: 700;
+  color: #f8dfa5;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.archetype-en {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--silver);
+  margin-bottom: 20px;
+  letter-spacing: 0.08em;
+}
+
+.archetype-symbol {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--gold);
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  border-top: 1px solid rgba(248,223,165,0.12);
+  border-bottom: 1px solid rgba(248,223,165,0.12);
+  letter-spacing: 0.05em;
+}
+
+/* 核心句 */
+.core-line {
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--white);
+  font-weight: 600;
+  line-height: 1.6;
+  margin: 24px 0;
+  padding: 16px 20px;
+  background: rgba(248,223,165,0.05);
+  border-left: 2px solid var(--gold-dim);
+  border-right: 2px solid var(--gold-dim);
+  border-radius: 6px;
+}
+
+/* 分析區塊 */
+.analysis-block {
+  margin-bottom: 20px;
+}
+
+.analysis-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.analysis-label-x::before {
+  content: '';
+  width: 16px; height: 1px;
+  background: var(--gold-dim);
+}
+.analysis-label::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: rgba(248,223,165,0.12);
+}
+
+.analysis-text {
+  font-size: 0.88rem;
+  color: #ffffff;
+  line-height: 1.8;
+}
+
+/* 天賦 & 陷阱 雙欄 */
+.gift-shadow-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.gift-box,
+.shadow-box {
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.gift-box {
+  background: rgba(248,223,165,0.06);
+  border: 1px solid rgba(248,223,165,0.05);
+}
+
+.shadow-box {
+  background: rgba(155,123,212,0.1);
+  border: 1px solid rgba(155,123,212,0.08);
+}
+
+.gift-shadow-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.gift-box .gift-shadow-label { color: var(--gold); }
+.shadow-box .gift-shadow-label { color: var(--silver); }
+
+.gift-shadow-text {
+  font-size: 0.83rem;
+  line-height: 1.65;
+}
+
+.gift-box .gift-shadow-text { color: #fff; }
+.shadow-box .gift-shadow-text { color: rgba(237,232,245,.85); }
+
+/* 儀式 */
+.ritual-box {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(200,188,220,0.15);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 24px;
+}
+
+.ritual-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--silver-dim);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.ritual-text {
+  font-size: 0.85rem;
+  color: #f8dfa5;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* 浮水印 */
+.watermark {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.68rem;
+  color: rgba(200,188,220,0.35);
+  letter-spacing: 0.2em;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(248,223,165,0.08);
+}
+
+/* ─── 分享按鈕群 ─── */
+.share-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.share-btn {
+  flex: 1;
+  padding: 13px;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.share-btn-primary {
+  background: linear-gradient(135deg, #7b5cbf, #5a3a90);
+  border: 1px solid rgba(248,223,165,0.3);
+  color: var(--gold);
+}
+
+.share-btn-primary:hover {
+  background: linear-gradient(135deg, #6b4fa0, #6b4fa0);
+  box-shadow: 0 4px 16px rgba(155,123,212,0.4);
+}
+
+.share-btn-secondary {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,188,220,0.2);
+  color: var(--silver);
+}
+
+.share-btn-secondary:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(200,188,220,0.4);
+}
+
+/* 再測一次 */
+.retry-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  background: transparent;
+  border: 1px solid rgba(200,188,220,0.15);
+  border-radius: 10px;
+  color: var(--text-dim);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.retry-btn:hover {
+  border-color: rgba(200,188,220,0.3);
+  color: var(--text);
+}
+
+/* ─── 錯誤訊息 ─── */
+.error-msg {
+  display: none;
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: rgba(180,60,60,0.12);
+  border: 1px solid rgba(200,100,100,0.25);
+  border-radius: 8px;
+  color: #e89090;
+  font-size: 0.83rem;
+  line-height: 1.6;
+}
+
+.error-msg.visible { display: block; }
+
+/* ─── Responsive ─── */
+@media (max-width: 400px) {
+  .form-row { flex-direction: column; }
+  .gift-shadow-row { grid-template-columns: 1fr; }
+  .share-buttons { flex-direction: column; }
+}
+
+/* ─── 進場動畫 ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.step-card { animation: fadeUp 0.5s ease both; }
+.step-card:nth-child(2) { animation-delay: 0.1s; }
+.step-card:nth-child(3) { animation-delay: 0.2s; }
+
+.result-card { animation: fadeUp 0.7s ease both; }
+
+
+/* ═══ 氣味直覺選擇 ═══ */
+.scent-intro{text-align:center;margin-bottom:20px}
+.scent-intro p{font-size:.85rem;color:var(--text-dim);line-height:1.8}
+.scent-progress{display:flex;gap:6px;justify-content:center;margin-bottom:24px}
+.scent-dot{width:10px;height:10px;border-radius:50%;background:rgba(200,188,220,.15);transition:all .4s}
+.scent-dot.active{background:var(--gold);box-shadow:0 0 8px rgba(248,223,165,.4)}
+.scent-dot.done{background:var(--purple);box-shadow:0 0 6px rgba(155,123,212,.3)}
+.scent-question{text-align:center;margin-bottom:20px}
+.scent-question p{font-family:'LXGW WenKai TC',serif;font-size:.95rem;color:var(--gold-dim);letter-spacing:.08em}
+.scent-qnum{font-size:.7rem;color:var(--purple);letter-spacing:.3em;margin-bottom:8px}
+.scent-choices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.scent-choices{gap:10px}}
+.scent-choice{
+  background:rgba(155,123,212,.06);border:1px solid rgba(155,123,212,.2);border-radius:16px;
+  padding:24px 16px;text-align:center;cursor:pointer;transition:all .4s;position:relative;overflow:hidden}
+.scent-choice::before{
+  content:'';position:absolute;inset:0;border-radius:16px;
+  background:radial-gradient(ellipse at 50% 100%,rgba(248,223,165,.06),transparent 70%);opacity:0;transition:opacity .4s}
+.scent-choice:hover::before{opacity:1}
+.scent-choice:hover{border-color:rgba(248,223,165,.35);transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(155,123,212,.15)}
+.scent-choice:active{transform:translateY(-1px)}
+.scent-emoji{font-size:2rem;margin-bottom:10px;display:block}
+.scent-label{font-size:.88rem;color:var(--text);line-height:1.6;font-weight:500;margin-bottom:6px}
+.scent-hint{font-size:.72rem;color:var(--text-dim);line-height:1.5;font-style:italic}
+.scent-vs{display:flex;align-items:center;justify-content:center;padding:8px 0}
+.scent-vs span{font-size:.7rem;color:var(--purple-soft);letter-spacing:.2em}
+.scent-fade-in{animation:scentIn .5s ease both}
+@keyframes scentIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#scentQuiz{min-height:200px}
+
+/* 結果精油推薦 */
+.oil-recommend{
+  margin-top:20px;padding:18px 20px;
+  background:linear-gradient(135deg,rgba(248,223,165,.08),rgba(155,123,212,.06));
+  border:1px solid rgba(248,223,165,.2);border-radius:12px}
+.oil-recommend-label{font-size:.68rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.oil-recommend-text{font-size:.85rem;color:var(--text);line-height:1.8}
+.oil-tag{display:inline-block;padding:5px 14px;border-radius:20px;font-size:.78rem;
+  background:rgba(248,223,165,.15);border:1px solid rgba(248,223,165,.35);color:var(--gold);margin:3px 3px;font-weight:500}
+
+/* ═══ 星空粒子 ═══ */
+#witch-stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ═══ 五種原型預告 ═══ */
+.archetype-preview{padding:48px 0 32px;text-align:center}
+.archetype-preview h2{
+  font-family:'LXGW WenKai TC','Noto Serif TC',serif;
+  font-size:1rem;color:var(--gold-dim);letter-spacing:.25em;font-weight:400;margin-bottom:8px}
+.archetype-preview .preview-sub{font-size:.82rem;color:var(--text-dim);margin-bottom:28px;line-height:1.8}
+.archetype-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:600px;margin:0 auto}
+@media(max-width:600px){.archetype-grid{grid-template-columns:repeat(3,1fr)}}
+.arch-card{
+  background:rgba(155,123,212,.06);border:1px solid rgba(155,123,212,.18);border-radius:14px;
+  padding:18px 8px 14px;text-align:center;cursor:default;transition:all .4s;position:relative;overflow:hidden}
+.arch-card::before{
+  content:'';position:absolute;inset:0;border-radius:14px;
+  background:radial-gradient(ellipse at 50% 0%,rgba(248,223,165,.08),transparent 70%);opacity:0;transition:opacity .4s}
+.arch-card:hover::before{opacity:1}
+.arch-card:hover{border-color:rgba(248,223,165,.3);transform:translateY(-4px)}
+.arch-icon{font-size:1.5rem;margin-bottom:6px;filter:grayscale(.3)}
+.arch-name{font-size:.72rem;color:var(--gold-dim);letter-spacing:.1em;font-weight:500;line-height:1.4}
+.arch-hint{font-size:.62rem;color:var(--text-dim);margin-top:4px;opacity:.7;line-height:1.3}
+
+/* ═══ 結果前的過場呼吸 ═══ */
+.reveal-breath{text-align:center;padding:32px 0 16px;opacity:0;animation:breathIn 1.2s .3s ease both}
+.reveal-breath p{font-size:.88rem;color:var(--gold-dim);font-style:italic;letter-spacing:.08em;line-height:1.8}
+@keyframes breathIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ═══════════════════════════════════════
+   結果卡片視覺升級 v3.0
+   高對比實色系 — html2canvas 友善
+   ═══════════════════════════════════════ */
+
+/* ── 卡片主體 ── */
+.result-card{
+  background:linear-gradient(165deg, #2e1e5a 0%, #231245 40%, #1e0e3a 100%) !important;
+  border:2px solid rgba(248,223,165,.35) !important;
+  border-radius:24px !important;
+  padding:48px 30px 40px !important;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 50px rgba(155,123,212,.12) !important;
+}
+.result-card::before{
+  width:250px !important; height:250px !important;
+  top:-100px !important; right:-100px !important;
+  background:radial-gradient(circle, rgba(248,223,165,.08), transparent 60%) !important;
+}
+.result-card::after{
+  width:220px !important; height:220px !important;
+  bottom:-80px !important; left:-80px !important;
+  background:radial-gradient(circle, rgba(155,123,212,.06), transparent 60%) !important;
+}
+
+/* ── 頂部裝飾 ── */
+.card-ornament{
+  text-align:center; margin-bottom:20px;
+  font-size:1rem; color:rgba(248,223,165,.5);
+  letter-spacing:.7em;
+}
+.card-eyebrow{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.78rem; letter-spacing:.4em;
+  color:#f8dfa5 !important;
+  text-align:center; margin-bottom:28px;
+}
+
+/* ── 原型名稱 ── */
+.archetype-name{
+  text-align:center;
+  font-size:clamp(2.2rem,9vw,2.8rem) !important;
+  font-weight:700;
+  color:#f8dfa5 !important;
+  margin-bottom:6px;
+  text-shadow:0 0 20px rgba(248,223,165,.4), 0 2px 4px rgba(0,0,0,.5);
+}
+.archetype-en{
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1rem !important;
+  color:#c8c0d8 !important;
+  margin-bottom:22px;
+  letter-spacing:.12em;
+}
+.archetype-symbol{
+  text-align:center;
+  font-size:.85rem;
+  color:#f8dfa5 !important;
+  margin-bottom:28px;
+  padding:12px 20px;
+  border-top:1px solid rgba(248,223,165,.3);
+  border-bottom:1px solid rgba(248,223,165,.3);
+  letter-spacing:.06em;
+  background:rgba(248,223,165,.04);
+}
+
+/* ── 核心金句 ── */
+.core-line{
+  text-align:center;
+  font-size:1.1rem !important;
+  color:#ffffff !important;
+  font-weight:600;
+  line-height:1.75;
+  margin:28px 0 32px !important;
+  padding:22px 24px !important;
+  background:#1a0e30 !important;
+  border:2px solid rgba(248,223,165,.3) !important;
+  border-left:4px solid #f8dfa5 !important;
+  border-right:4px solid #9b7bd4 !important;
+  border-radius:10px !important;
+}
+
+/* ═══ 分析區塊 — 每塊用實色底板拉開 ═══ */
+.analysis-block{
+  margin-bottom:16px !important;
+  padding:18px 20px !important;
+  background:#1c1238 !important;
+  border-radius:12px !important;
+  border:1px solid rgba(155,123,212,.25) !important;
+  border-left:4px solid #d4b978 !important;
+}
+.analysis-label{
+  font-size:.73rem !important;
+  letter-spacing:.3em;
+  color:#f8dfa5 !important;
+  margin-bottom:10px;
+  display:flex; align-items:center; gap:8px;
+  font-weight:700;
+}
+.analysis-label::after{
+  content:'';
+  flex:1; height:1px;
+  background:rgba(248,223,165,.3) !important;
+}
+.analysis-text{
+  font-size:.92rem !important;
+  color:#ffffff !important;
+  line-height:1.85 !important;
+}
+
+/* ═══ 天賦 & 陷阱 — 雙色硬拉 ═══ */
+.gift-shadow-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:8px 0 24px !important;
+}
+.gift-box{
+  border-radius:12px !important;
+  padding:16px !important;
+  background:#221a10 !important;
+  border:2px solid rgba(248,223,165,.35) !important;
+}
+.shadow-box{
+  border-radius:12px !important;
+  padding:16px !important;
+  background:#1a1535 !important;
+  border:2px solid rgba(155,123,212,.35) !important;
+}
+.gift-shadow-label{
+  font-size:.7rem !important;
+  letter-spacing:.2em;
+  margin-bottom:8px;
+  font-weight:700;
+}
+.gift-box .gift-shadow-label{color:#f8dfa5 !important}
+.shadow-box .gift-shadow-label{color:#c8b8e8 !important}
+.gift-shadow-text{
+  font-size:.85rem !important;
+  line-height:1.7 !important;
+}
+.gift-box .gift-shadow-text{color:#ffffff !important}
+.shadow-box .gift-shadow-text{color:#ffffff !important}
+
+/* ═══ 小儀式 ═══ */
+.ritual-box{
+  background:#1a1030 !important;
+  border:1px solid rgba(248,223,165,.25) !important;
+  border-radius:12px !important;
+  padding:18px 20px !important;
+  margin-bottom:24px !important;
+}
+.ritual-label{
+  font-size:.7rem !important;
+  letter-spacing:.25em;
+  color:#c8c0d8 !important;
+  margin-bottom:8px;
+  font-weight:600;
+}
+.ritual-text{
+  font-size:.9rem !important;
+  color:#f8dfa5 !important;
+  line-height:1.75 !important;
+  font-style:italic;
+}
+
+/* ═══ 對應精油 — 金底反轉 ═══ */
+.oil-recommend{
+  margin-top:20px !important;
+  padding:22px 24px !important;
+  background:#1a1030 !important;
+  border:2px solid rgba(248,223,165,.3) !important;
+  border-radius:14px !important;
+  text-align:center;
+}
+.oil-recommend-label{
+  font-size:.72rem !important;
+  letter-spacing:.3em;
+  color:#f8dfa5 !important;
+  margin-bottom:14px;
+  font-weight:700;
+}
+.oil-tag{
+  display:inline-block;
+  padding:8px 20px !important;
+  border-radius:24px !important;
+  font-size:.85rem !important;
+  background:#d4b978 !important;
+  border:none !important;
+  color:#1a0e2a !important;
+  margin:4px 5px !important;
+  font-weight:700 !important;
+  letter-spacing:.05em;
+}
+
+/* ── 浮水印 ── */
+.watermark{
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:.72rem;
+  color:rgba(220,210,240,.6) !important;
+  letter-spacing:.25em;
+  margin-top:24px;
+  padding-top:18px;
+  border-top:1px solid rgba(248,223,165,.15);
+}
+
+/* ═══ 截圖優化（html2canvas 實色模式） ═══ */
+.result-card.capturing{
+  background:linear-gradient(165deg, #2e1e5a, #231245, #1e0e3a) !important;
+  box-shadow:none !important;
+  border:3px solid #c9a96e !important;
+}
+.capturing .archetype-name{
+  background:none !important;
+  -webkit-text-fill-color:#f8dfa5 !important;
+  color:#f8dfa5 !important;
+  text-shadow:none !important;
+}
+.capturing .card-ornament{color:rgba(248,223,165,.5) !important}
+.capturing .card-eyebrow{color:#f8dfa5 !important}
+.capturing .archetype-en{color:#c8c0d8 !important}
+.capturing .archetype-symbol{color:#f8dfa5 !important;border-color:rgba(248,223,165,.3) !important;background:rgba(248,223,165,.04) !important}
+.capturing .core-line{
+  background:#1a0e30 !important;
+  border:2px solid rgba(248,223,165,.3) !important;
+  border-left:4px solid #f8dfa5 !important;
+  border-right:4px solid #9b7bd4 !important;
+  color:#ffffff !important;
+}
+.capturing .analysis-block{background:#1c1238 !important;border:1px solid rgba(155,123,212,.25) !important;border-left:4px solid #d4b978 !important}
+.capturing .analysis-label{color:#f8dfa5 !important}
+.capturing .analysis-label::after{background:rgba(248,223,165,.3) !important}
+.capturing .analysis-text{color:#ffffff !important}
+.capturing .gift-box{background:#221a10 !important;border:2px solid rgba(248,223,165,.35) !important}
+.capturing .shadow-box{background:#1a1535 !important;border:2px solid rgba(155,123,212,.35) !important}
+.capturing .gift-box .gift-shadow-label{color:#f8dfa5 !important}
+.capturing .shadow-box .gift-shadow-label{color:#c8b8e8 !important}
+.capturing .gift-box .gift-shadow-text{color:#ffffff !important}
+.capturing .shadow-box .gift-shadow-text{color:#ffffff !important}
+.capturing .ritual-box{background:#1a1030 !important;border-color:rgba(248,223,165,.25) !important}
+.capturing .ritual-text{color:#f8dfa5 !important}
+.capturing .oil-recommend{background:#1a1030 !important;border:2px solid rgba(248,223,165,.3) !important}
+.capturing .oil-tag{background:#d4b978 !important;color:#1a0e2a !important;border:none !important}
+
+
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXP7K53QG6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-BXP7K53QG6');</script>
+</head>
+<body>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-orb"></div>
+  <div class="loading-text" id="loadingText">正在解讀氣味密碼</div>
+  <div class="loading-sub" id="loadingSub">三軸交叉分析中</div>
+</div>
+
+<canvas id="witch-stars"></canvas>
+
+<div class="page-wrap">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-eyebrow">Hour Light × Scent Witch</div>
+    <h1 class="hero-title">女巫原力</h1>
+    <p class="hero-sub">你聞到什麼，就是什麼樣的人。<br>五個氣味，測出你天生的巫力。</p>
+    <p class="hero-tagline">你的鼻子在聞，但大腦在記憶。<br>氣味會帶你找到自己。</p>
+    <div class="hero-divider"></div>
+  </header>
+
+  <!-- 五種原型預告 -->
+  <div class="archetype-preview">
+    <h2>✦ 五種巫力原型 ✦</h2>
+    <p class="preview-sub">每個人天生帶著一種巫力。你選的氣味會告訴我們，你是哪一種。</p>
+    <div class="archetype-grid">
+      <div class="arch-card">
+        <div class="arch-icon">🔮</div>
+        <div class="arch-name">覺察女巫</div>
+        <div class="arch-hint">讀懂空氣的人</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">📖</div>
+        <div class="arch-name">解讀女巫</div>
+        <div class="arch-hint">翻譯世界的人</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">🛡️</div>
+        <div class="arch-name">守護女巫</div>
+        <div class="arch-hint">穩住場面的人</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">🔥</div>
+        <div class="arch-name">催化女巫</div>
+        <div class="arch-hint">點燃改變的人</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">🌊</div>
+        <div class="arch-name">擺渡女巫</div>
+        <div class="arch-hint">走在邊界的人</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 主要表單區 -->
+  <div id="input-section">
+
+    <!-- Step 1：生日 -->
+    <div class="step-card">
+      <div class="step-num">Step 01</div>
+      <div class="step-title">輸入你的生日</div>
+      <p class="step-desc">系統計算你的生命靈數與星座元素，作為交叉分析的第一軸。</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="birthdayInput">出生日期</label>
+          <input
+            type="date"
+            id="birthdayInput"
+            class="form-input"
+            placeholder="YYYY-MM-DD"
+            max="2015-12-31"
+            min="1920-01-01"
+          />
+        </div>
+      </div>
+
+      <div class="life-path-badge" id="lifePathBadge">
+        <span class="life-path-num" id="lifePathNum">—</span>
+        <span id="lifePathDesc">生命靈數</span>
+        <br>
+        <span id="zodiacDesc" style="color:var(--silver-dim); font-size:0.78rem;"></span>
+      </div>
+    </div>
+
+    <!-- Step 2：氣味直覺 -->
+    <div class="step-card">
+      <div class="step-num">Step 02</div>
+      <div class="step-title">氣味直覺選擇</div>
+      <p class="step-desc">閉上眼睛三秒。然後看每一題，憑第一直覺選你現在比較想靠近的氣味。</p>
+
+      <div class="scent-progress" id="scentProgress">
+        <div class="scent-dot"></div>
+        <div class="scent-dot"></div>
+        <div class="scent-dot"></div>
+        <div class="scent-dot"></div>
+        <div class="scent-dot"></div>
+      </div>
+
+      <div id="scentQuiz"></div>
+    </div>
+
+    <!-- 錯誤訊息 -->
+    <div class="error-msg" id="errorMsg"></div>
+
+    <!-- 啟動按鈕 -->
+    <button class="cta-btn" id="analyzeBtn" disabled type="button">
+      ✦ 解鎖你的巫力原型
+    </button>
+
+  </div><!-- /input-section -->
+
+
+  <!-- 結果區 -->
+  <div id="result-section">
+
+        <!-- 過場呼吸 -->
+    <div class="reveal-breath" id="revealBreath">
+      <p>你的氣味直覺已經說話了。</p>
+    </div>
+
+<!-- 可截圖的卡片 -->
+    <div class="result-card" id="resultCard">
+      <div class="card-ornament">✦ · ✦ · ✦ · ✦ · ✦</div>
+      <div class="card-eyebrow">馥靈之鑰｜女巫原力</div>
+
+      <div class="archetype-name" id="archetypeName">—</div>
+      <div class="archetype-en" id="archetypeEn">—</div>
+      <div class="archetype-symbol" id="archetypeSymbol">—</div>
+
+      <div class="core-line" id="coreLine">—</div>
+
+      <div class="analysis-block">
+        <div class="analysis-label">直覺觀察</div>
+        <div class="analysis-text" id="palmObservation">—</div>
+      </div>
+
+      <div class="analysis-block">
+        <div class="analysis-label">深層解讀</div>
+        <div class="analysis-text" id="palmInsight">—</div>
+      </div>
+
+      <div class="analysis-block">
+        <div class="analysis-label">生命密碼</div>
+        <div class="analysis-text" id="lifePathNote">—</div>
+      </div>
+
+      <div class="analysis-block">
+        <div class="analysis-label">元素特質</div>
+        <div class="analysis-text" id="elementNote">—</div>
+      </div>
+
+      <div class="gift-shadow-row">
+        <div class="gift-box">
+          <div class="gift-shadow-label">隱藏天賦</div>
+          <div class="gift-shadow-text" id="hiddenGift">—</div>
+        </div>
+        <div class="shadow-box">
+          <div class="gift-shadow-label">要注意的陷阱</div>
+          <div class="gift-shadow-text" id="shadowSide">—</div>
+        </div>
+      </div>
+
+      <div class="ritual-box">
+        <div class="ritual-label">適合你的小儀式</div>
+        <div class="ritual-text" id="ritual">—</div>
+      </div>
+
+      <div class="oil-recommend">
+        <div class="oil-recommend-label">對應精油</div>
+        <div class="oil-recommend-text" id="oilRecommend">—</div>
+      </div>
+
+      <div class="watermark">馥靈之鑰 Hour Light® hourlightkey.com</div>
+    </div>
+
+    <!-- 分享按鈕 -->
+    <div class="share-buttons">
+      <button class="share-btn share-btn-primary" id="saveImageBtn" type="button">
+        📥 儲存圖片
+      </button>
+      <button class="share-btn share-btn-secondary" id="copyTextBtn" type="button">
+        📋 複製文字
+      </button>
+    </div>
+
+    <button class="retry-btn" id="retryBtn" type="button">↺ 重新解讀</button>
+
+  </div><!-- /result-section -->
+
+</div><!-- /page-wrap -->
+
+<!-- 全站 JS -->
+<script src="assets/js/hourlight-global.js?v=20260318"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/hl-referral.js?v=20260323"></script>
+<script src="assets/js/hl-ai-gate.js"></script>
+<script src="assets/js/hl-gate.js"></script>
+<script src="assets/js/hl-record.js"></script>
+<script src="assets/js/hl-topnav.js"></script>
+<script src="assets/js/hl-bottomnav.js"></script>
+<script src="assets/js/hl-chat.js"></script>
+<script src="assets/js/hl-aroma-fx.js" defer></script>
+
+<script>
+// ══════════════════════════════════
+//  WITCH POWER｜主邏輯（認知芳療版 v2.0）
+//  氣味直覺 × 生命靈數 → 巫力原型
+// ══════════════════════════════════
+
+var API_BASE = 'https://app.hourlightkey.com';
+
+// ── 生命靈數計算 ──
+function reduceToSingle(n) {
+  while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+    var s = 0; String(n).split('').forEach(function(d){ s += parseInt(d); }); n = s;
+  }
+  return n;
+}
+function calcLifePath(dateStr) {
+  if (!dateStr) return null;
+  var parts = dateStr.split('-');
+  if (parts.length !== 3) return null;
+  var yR = reduceToSingle(parts[0].split('').reduce(function(a,c){ return a+parseInt(c); },0));
+  var mR = reduceToSingle(parseInt(parts[1]));
+  var dR = reduceToSingle(parseInt(parts[2]));
+  return reduceToSingle(yR + mR + dR);
+}
+function getZodiac(dateStr) {
+  if (!dateStr) return null;
+  var p = dateStr.split('-'), m = parseInt(p[1]), d = parseInt(p[2]);
+  var signs = [
+    {name:'摩羯座',el:'土',s:1,e:119},{name:'水瓶座',el:'風',s:120,e:218},
+    {name:'雙魚座',el:'水',s:219,e:320},{name:'牡羊座',el:'火',s:321,e:419},
+    {name:'金牛座',el:'土',s:420,e:520},{name:'雙子座',el:'風',s:521,e:621},
+    {name:'巨蟹座',el:'水',s:622,e:722},{name:'獅子座',el:'火',s:723,e:822},
+    {name:'處女座',el:'土',s:823,e:922},{name:'天秤座',el:'風',s:923,e:1023},
+    {name:'天蠍座',el:'水',s:1024,e:1122},{name:'射手座',el:'火',s:1123,e:1221},
+    {name:'摩羯座',el:'土',s:1222,e:1231}
+  ];
+  var md = m * 100 + d;
+  for (var i = 0; i < signs.length; i++) { if (md >= signs[i].s && md <= signs[i].e) return signs[i]; }
+  return signs[0];
+}
+
+// ── 五種氣味直覺題 ──
+// 每題兩個選項，各帶一個分數向量 [herbal, floral, citrus, woody, resin]
+// 0=草本(解讀) 1=花香(覺察) 2=柑橘(催化) 3=木質(守護) 4=樹脂(擺渡)
+var SCENT_QS = [
+  {
+    q: '現在，想像你走進一個空間，',
+    a: { emoji:'🌿', label:'清晨森林裡的濕泥土', hint:'帶著蕨類和苔蘚的氣息', score:[1,0,0,2,0] },
+    b: { emoji:'🌙', label:'深夜窗邊飄進來的茉莉花', hint:'濃郁但不膩，帶一點涼', score:[0,2,0,0,1] }
+  },
+  {
+    q: '你更想伸手碰觸的是，',
+    a: { emoji:'🍋', label:'剛切開的檸檬皮噴出來的那股勁', hint:'銳利、清醒、像被叫醒', score:[0,0,2,0,0] },
+    b: { emoji:'🪵', label:'老木頭家具上淡淡的木頭味', hint:'沉穩、安靜、像回到老家', score:[0,0,0,2,1] }
+  },
+  {
+    q: '下雨天，你比較想待在，',
+    a: { emoji:'🌾', label:'曬過太陽的草地旁邊', hint:'青草混著一點點泥土的暖', score:[2,0,0,1,0] },
+    b: { emoji:'🕯️', label:'點著沉香的小房間', hint:'煙裡有時間的味道', score:[0,0,0,0,3] }
+  },
+  {
+    q: '有人遞給你一杯熱飲，',
+    a: { emoji:'🫖', label:'帶著薰衣草和洋甘菊的花茶', hint:'溫溫的，像被毯子包住', score:[0,2,0,0,1] },
+    b: { emoji:'🍊', label:'肉桂加了一點橙皮的熱酒', hint:'辛香衝上來，整個人都暖了', score:[0,0,2,0,0] }
+  },
+  {
+    q: '最後。如果你的內在有一種氣味，',
+    a: { emoji:'📖', label:'翻開很久沒動的舊書頁', hint:'紙張、墨水、和時間', score:[2,0,0,0,1] },
+    b: { emoji:'🌸', label:'路過花店門口那一秒', hint:'不知道是什麼花，但你停下來了', score:[0,2,1,0,0] }
+  }
+];
+
+// ── 五種原型完整資料 ──
+var ARCHETYPES = {
+  sensing: {
+    name: '覺察女巫', en: 'Sensing Witch', symbol: '深海裡發光的水母',
+    coreLine: '別人還沒開口，你已經讀到三層。',
+    palmObservation: '你的直覺不是來自思考，是來自身體。你的皮膚在幫你收訊。',
+    palmInsight: '你能感受到房間裡看不見的東西，誰在裝沒事，誰在硬撐，誰正在崩潰的邊緣。這不是超能力，是你的神經系統天生比別人多裝了幾根天線。',
+    lifePathNote: '你的生命靈數強化了這份敏銳度。數字越高，感知越深，但也越容易被別人的情緒淹沒。',
+    elementNote: '你的星座元素決定了你怎麼處理這些感知，火象會立刻反應，水象會默默吸收，風象會分析，土象會壓下去。',
+    hiddenGift: '你可以在三分鐘內判斷一個人有沒有在說真話。',
+    shadowSide: '容易把別人的情緒裝進自己身體裡，然後以為那是自己的。',
+    ritual: '每天睡前用薰衣草精油塗在手腕內側，做三次深呼吸。這是在告訴你的身體：「現在收工了，這些不是我的。」',
+    oils: ['薰衣草', '洋甘菊', '乳香', '佛手柑'],
+    oilNote: '花香與草本系精油幫助你清理一天吸收的情緒殘留。薰衣草是你的基本配備。'
+  },
+  translator: {
+    name: '解讀女巫', en: 'Translator Witch', symbol: '在圖書館裡會自己翻頁的書',
+    coreLine: '複雜的東西到你手上，自動變成人人能懂的語言。',
+    palmObservation: '你的大腦是一台翻譯機。別人說了十句，你聽出第十一句沒說的。',
+    palmInsight: '你天生有拆解複雜系統的能力。塔羅、命理、心理學，這些在你手上不是玄學，是工具。你能把別人覺得「好深奧」的東西，用一句日常的話說清楚。',
+    lifePathNote: '你的生命靈數影響你翻譯的方式。有些人用文字，有些人用畫面，有些人用一個眼神。',
+    elementNote: '你的星座元素決定你偏好的「翻譯工具」，火象靠直覺一擊，水象靠感受共鳴，風象靠邏輯拆解，土象靠具體舉例。',
+    hiddenGift: '你能在五分鐘內把一個人講不清楚的混亂，整理成三個可以處理的問題。',
+    shadowSide: '講太多，反而讓人聽不見重點。有時候安靜比翻譯更有力。',
+    ritual: '每天早上聞一次迷迭香精油，在腦子裡默念今天最重要的一件事。這是在幫你的翻譯機「校準頻道」。',
+    oils: ['迷迭香', '尤加利', '薄荷', '檸檬'],
+    oilNote: '草本與柑橘系精油保持你的思路清晰。迷迭香是你的大腦充電器。'
+  },
+  anchor: {
+    name: '守護女巫', en: 'Anchor Witch', symbol: '暴風雨裡不會倒的燈塔',
+    coreLine: '你一站定，旁邊的人就穩了。',
+    palmObservation: '你不是那種會站在最前面的人。但你是那個「少了你就塌了」的人。',
+    palmInsight: '你天生有一種讓人安心的磁場。你在的房間，空氣會慢下來。你不需要說什麼大道理，你只要在，別人就知道，這裡是安全的。',
+    lifePathNote: '你的生命靈數決定你守護的方式。有些人用行動，有些人用陪伴，有些人用一句「我在」就夠了。',
+    elementNote: '你的星座元素影響你的守護範圍，土象守護家，水象守護情感，火象守護正義，風象守護自由。',
+    hiddenGift: '你能讓一個正在崩潰的人，因為你的存在而慢慢安靜下來。',
+    shadowSide: '太會守護別人，忘記守護自己。你最後一次讓別人照顧你是什麼時候？',
+    ritual: '每週末用雪松精油泡一次腳。這是在告訴你自己：「守護者也需要被接住。」',
+    oils: ['雪松', '檀香', '廣藿香', '岩蘭草'],
+    oilNote: '木質系精油幫你扎根。雪松是你的地基，穩住自己，才能穩住別人。'
+  },
+  catalyst: {
+    name: '催化女巫', en: 'Catalyst Witch', symbol: '流星劃過天空的那一秒',
+    coreLine: '你一出現，沉睡的事情就開始動。',
+    palmObservation: '你不是慢慢推進的人。你是那種「一句話就讓人動起來」的人。',
+    palmInsight: '你天生帶火。不是燒毀的那種火，是點燃的那種。你走進一個卡住的團隊，不用一個小時就能讓大家重新動起來。你說的話不一定最多，但永遠是最點到位的那句。',
+    lifePathNote: '你的生命靈數影響你點燃的方式。有些人靠激勵，有些人靠挑釁，有些人只是問了一個所有人不敢問的問題。',
+    elementNote: '你的星座元素決定你的火焰形態，火象是明火，風象是電流，水象是暗流，土象是地熱。',
+    hiddenGift: '你能讓一個猶豫了三年的人，在跟你聊完之後直接去做。',
+    shadowSide: '點燃之後收不住。有時候該讓火自己燒，你不用一直加柴。',
+    ritual: '每天出門前在手掌滴一滴甜橙精油搓開，深吸一口。這是你的「啟動儀式」，今天又要去點燃什麼了。',
+    oils: ['甜橙', '葡萄柚', '肉桂', '黑胡椒'],
+    oilNote: '柑橘與辛香系精油是你的燃料。甜橙讓你保持快樂的點燃，不是憤怒的點燃。'
+  },
+  bridge: {
+    name: '擺渡女巫', en: 'Bridge Witch', symbol: '兩個世界之間的一道薄霧',
+    coreLine: '你活在邊界上。一腳在這裡，一腳在別人看不見的地方。',
+    palmObservation: '你不完全屬於任何一個世界。這讓你孤獨，也讓你自由。',
+    palmInsight: '你天生有跨越邊界的能力。理性與感性、科學與靈性、現實與直覺，這些在別人眼中是對立的東西，在你身上可以同時存在。你是翻譯者，但不是語言的翻譯，是「維度」的翻譯。',
+    lifePathNote: '你的生命靈數影響你擺渡的方向。有些人連結人與人，有些人連結過去與未來，有些人連結看得見和看不見的。',
+    elementNote: '你的星座元素影響你在哪個邊界遊走，水象在情感維度，風象在思想維度，火象在行動維度，土象在物質維度。',
+    hiddenGift: '你能在完全不相關的兩件事之間找到連結，而且說出來別人會覺得「對欸，為什麼我沒想到」。',
+    shadowSide: '兩個世界都想留住你。你不知道自己該落腳在哪裡。',
+    ritual: '睡前在枕頭上滴一滴乳香精油。這是你的「歸航燈」，不管今天去了多遠的地方，你都能找到回來的路。',
+    oils: ['乳香', '沒藥', '安息香', '穗甘松'],
+    oilNote: '樹脂系精油是你的定錨。乳香幫你在兩個世界之間找到呼吸的節奏。'
+  }
+};
+
+// ── 分數→原型映射 ──
+// [herbal, floral, citrus, woody, resin]
+var ARCH_MAP = ['translator','sensing','catalyst','anchor','bridge'];
+
+function getArchetype(scores, lifePath) {
+  var max = -1, maxIdx = 0;
+  for (var i = 0; i < 5; i++) { if (scores[i] > max) { max = scores[i]; maxIdx = i; } }
+  // 同分用生命靈數打破
+  var ties = [];
+  for (var i = 0; i < 5; i++) { if (scores[i] === max) ties.push(i); }
+  if (ties.length > 1 && lifePath) {
+    var tiebreaker = {
+      1:'catalyst',2:'sensing',3:'translator',4:'anchor',5:'catalyst',
+      6:'anchor',7:'bridge',8:'catalyst',9:'bridge',11:'sensing',22:'anchor',33:'bridge'
+    };
+    var tb = tiebreaker[lifePath];
+    if (tb) {
+      var tbIdx = ARCH_MAP.indexOf(tb);
+      if (ties.indexOf(tbIdx) >= 0) maxIdx = tbIdx;
+    }
+  }
+  return ARCH_MAP[maxIdx];
+}
+
+// ── DOM ──
+var birthdayInput = document.getElementById('birthdayInput');
+var lifePathBadge = document.getElementById('lifePathBadge');
+var lifePathNum   = document.getElementById('lifePathNum');
+var lifePathDesc  = document.getElementById('lifePathDesc');
+var zodiacDesc    = document.getElementById('zodiacDesc');
+var scentQuiz     = document.getElementById('scentQuiz');
+var scentDots     = document.querySelectorAll('.scent-dot');
+var analyzeBtn    = document.getElementById('analyzeBtn');
+var errorMsg      = document.getElementById('errorMsg');
+
+var _lifePath = null, _zodiac = null, _scentScores = [0,0,0,0,0], _currentQ = 0, _scentDone = false;
+
+// ── 生日輸入 ──
+birthdayInput.addEventListener('change', function() {
+  var v = birthdayInput.value;
+  _lifePath = calcLifePath(v);
+  _zodiac = getZodiac(v);
+  if (_lifePath) {
+    lifePathNum.textContent = _lifePath;
+    lifePathDesc.textContent = '生命靈數' + (_lifePath >= 11 ? '（大師數）' : '');
+    zodiacDesc.textContent = _zodiac ? _zodiac.name + '（' + _zodiac.el + '象）' : '';
+    lifePathBadge.classList.add('visible');
+    // 生日填完自動開始氣味測驗
+    if (_currentQ === 0) renderScentQ(0);
+  } else {
+    lifePathBadge.classList.remove('visible');
+  }
+  checkReady();
+});
+
+// ── 氣味測驗 ──
+function renderScentQ(idx) {
+  if (idx >= SCENT_QS.length) {
+    _scentDone = true;
+    scentQuiz.innerHTML = '<div class="scent-fade-in" style="text-align:center;padding:20px 0"><div style="font-size:1.5rem;margin-bottom:8px">✦</div><div style="font-size:.88rem;color:var(--gold-dim);line-height:1.8">五種氣味都選完了。<br>你的直覺已經說話了。</div></div>';
+    checkReady();
+    return;
+  }
+  _currentQ = idx;
+  var q = SCENT_QS[idx];
+  // Update dots
+  scentDots.forEach(function(d, i) {
+    d.className = 'scent-dot' + (i < idx ? ' done' : '') + (i === idx ? ' active' : '');
+  });
+
+  var html = '<div class="scent-fade-in">';
+  html += '<div class="scent-qnum">第 ' + (idx+1) + ' 題／共 5 題</div>';
+  html += '<div class="scent-question"><p>' + q.q + '</p></div>';
+  html += '<div class="scent-choices">';
+  html += '<div class="scent-choice" onclick="pickScent(' + idx + ',\'a\')">';
+  html += '<span class="scent-emoji">' + q.a.emoji + '</span>';
+  html += '<div class="scent-label">' + q.a.label + '</div>';
+  html += '<div class="scent-hint">' + q.a.hint + '</div></div>';
+  html += '<div class="scent-choice" onclick="pickScent(' + idx + ',\'b\')">';
+  html += '<span class="scent-emoji">' + q.b.emoji + '</span>';
+  html += '<div class="scent-label">' + q.b.label + '</div>';
+  html += '<div class="scent-hint">' + q.b.hint + '</div></div>';
+  html += '</div></div>';
+  scentQuiz.innerHTML = html;
+}
+
+function pickScent(idx, choice) {
+  var q = SCENT_QS[idx];
+  var s = choice === 'a' ? q.a.score : q.b.score;
+  for (var i = 0; i < 5; i++) _scentScores[i] += s[i];
+  renderScentQ(idx + 1);
+}
+
+function checkReady() {
+  analyzeBtn.disabled = !(_lifePath && _scentDone);
+}
+
+// ── 主分析（純前端，不呼叫 API）──
+analyzeBtn.addEventListener('click', function() {
+  if (analyzeBtn.disabled) return;
+  errorMsg.classList.remove('visible');
+
+  // Show loading briefly for ceremony
+  var overlay = document.getElementById('loadingOverlay');
+  var loadingText = document.getElementById('loadingText');
+  var loadingSub = document.getElementById('loadingSub');
+  overlay.style.display = 'flex';
+  loadingText.textContent = '解讀你的氣味密碼';
+  loadingSub.textContent = '生命靈數 × 氣味直覺 交叉分析中';
+
+  var msgs = [
+    ['辨識你的氣味偏好', '五種選擇正在排列組合'],
+    ['比對巫力原型資料庫', '找出你最靠近的那一種'],
+    ['校準精油推薦', '每個原型都有專屬的氣味配方'],
+    ['生成你的巫力卡片', '準備好了']
+  ];
+  var mi = 0;
+  var msgTimer = setInterval(function() {
+    mi++;
+    if (mi < msgs.length) {
+      loadingText.textContent = msgs[mi][0];
+      loadingSub.textContent = msgs[mi][1];
+    }
+  }, 800);
+
+  setTimeout(function() {
+    clearInterval(msgTimer);
+    overlay.style.display = 'none';
+
+    // Calculate result
+    var archKey = getArchetype(_scentScores, _lifePath);
+    var arch = ARCHETYPES[archKey];
+    window._currentArch = arch;
+
+    // Fill result card
+    function setText(id, txt) { var el = document.getElementById(id); if (el) el.textContent = txt; }
+    setText('archetypeName', arch.name);
+    setText('archetypeEn', arch.en);
+    setText('archetypeSymbol', '象徵：' + arch.symbol);
+    setText('coreLine', arch.coreLine);
+    setText('palmObservation', arch.palmObservation);
+    setText('palmInsight', arch.palmInsight);
+    setText('lifePathNote', arch.lifePathNote);
+    setText('elementNote', arch.elementNote);
+    setText('hiddenGift', arch.hiddenGift);
+    setText('shadowSide', arch.shadowSide);
+    setText('ritual', arch.ritual);
+
+    // Oil recommend
+    var oilHtml = arch.oils.map(function(o) { return '<span class="oil-tag">' + o + '</span>'; }).join(' ');
+    oilHtml += '<div style="margin-top:8px;font-size:.82rem;color:var(--text-dim);line-height:1.7">' + arch.oilNote + '</div>';
+    document.getElementById('oilRecommend').innerHTML = oilHtml;
+
+    // Show result
+    document.getElementById('input-section').style.display = 'none';
+    document.getElementById('result-section').classList.add('visible');
+    document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 3500);
+});
+
+// ── 儲存圖片（Canvas 手繪版） ──
+document.getElementById('saveImageBtn').addEventListener('click', function() {
+  var arch = window._currentArch;
+  if (!arch) return;
+
+  var S = 2, W = 720*S, PAD = 44*S, CW = W - PAD*2;
+  var GOLD = '#f8dfa5', WHITE = '#fff', SILVER = '#c8c0d8';
+  var BG1 = '#2a1852', BG2 = '#1a0e30', SEC = '#1c1238';
+  var GIFT_BG = '#28200f', SHAD_BG = '#1a1535', OIL_BG = '#d4b978', OIL_TXT = '#1a0e2a';
+
+  // helpers
+  function wrap(ctx, txt, mw) {
+    var lines=[], line='';
+    for(var i=0;i<txt.length;i++){
+      var ch=txt[i]; if(ch==='\n'){lines.push(line);line='';continue;}
+      var t=line+ch;
+      if(ctx.measureText(t).width>mw && line){lines.push(line);line=ch;}else{line=t;}
+    }
+    if(line) lines.push(line); return lines;
+  }
+  function rrect(ctx,x,y,w,h,r){
+    ctx.beginPath(); ctx.moveTo(x+r,y);
+    ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+  }
+  function drawLines(ctx,lines,x,y,lh){for(var i=0;i<lines.length;i++){ctx.fillText(lines[i],x,y+i*lh);}return y+lines.length*lh;}
+
+  // temp canvas
+  var c = document.createElement('canvas');
+  c.width = W; c.height = 5000*S;
+  var ctx = c.getContext('2d');
+  var y = 0;
+
+  // ── background ──
+  var grd = ctx.createLinearGradient(0,0,0,c.height);
+  grd.addColorStop(0, BG1); grd.addColorStop(0.4, '#231445'); grd.addColorStop(1, BG2);
+  ctx.fillStyle = grd; ctx.fillRect(0,0,W,c.height);
+
+  // ── outer border ──
+  rrect(ctx, 6*S, 6*S, W-12*S, c.height-12*S, 24*S);
+  ctx.strokeStyle = GOLD; ctx.lineWidth = 3*S; ctx.stroke();
+
+  y = 52*S;
+
+  // ── ornament ──
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  ctx.font = (14*S)+'px "Cormorant Garamond", Georgia, serif';
+  ctx.fillStyle = 'rgba(248,223,165,0.5)';
+  ctx.fillText('✦  ·  ✦  ·  ✦  ·  ✦  ·  ✦', W/2, y);
+  y += 36*S;
+
+  // ── brand ──
+  ctx.font = (13*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = GOLD; ctx.letterSpacing = (4*S)+'px';
+  ctx.fillText('馥靈之鑰｜女巫原力', W/2, y);
+  ctx.letterSpacing = '0px';
+  y += 48*S;
+
+  // ── name ──
+  ctx.font = 'bold '+(40*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = GOLD;
+  ctx.shadowColor = 'rgba(248,223,165,0.4)'; ctx.shadowBlur = 20*S;
+  ctx.fillText(arch.name, W/2, y);
+  ctx.shadowBlur = 0;
+  y += 52*S;
+
+  // ── english ──
+  ctx.font = 'italic '+(16*S)+'px "Cormorant Garamond", Georgia, serif';
+  ctx.fillStyle = SILVER;
+  ctx.fillText(arch.en, W/2, y);
+  y += 36*S;
+
+  // ── symbol line ──
+  ctx.fillStyle = 'rgba(248,223,165,0.3)';
+  ctx.fillRect(PAD, y, CW, 1*S);
+  y += 14*S;
+  ctx.font = (14*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = GOLD;
+  ctx.fillText('象徵：' + arch.symbol, W/2, y);
+  y += 22*S;
+  ctx.fillStyle = 'rgba(248,223,165,0.3)';
+  ctx.fillRect(PAD, y, CW, 1*S);
+  y += 36*S;
+
+  // ── core line box ──
+  ctx.textAlign = 'left';
+  ctx.font = 'bold '+(18*S)+'px "Noto Serif TC", serif';
+  var coreLines = wrap(ctx, arch.coreLine, CW - 52*S);
+  var coreLH = 34*S;
+  var coreH = coreLines.length * coreLH + 40*S;
+  // box background
+  rrect(ctx, PAD, y, CW, coreH, 12*S);
+  ctx.fillStyle = BG2; ctx.fill();
+  // left gold accent
+  ctx.fillStyle = GOLD; ctx.fillRect(PAD, y+10*S, 4*S, coreH-20*S);
+  // right purple accent
+  ctx.fillStyle = '#9b7bd4'; ctx.fillRect(PAD+CW-4*S, y+10*S, 4*S, coreH-20*S);
+  // text
+  ctx.fillStyle = WHITE;
+  ctx.textAlign = 'center';
+  drawLines(ctx, coreLines, W/2, y+20*S, coreLH);
+  y += coreH + 28*S;
+
+  // ── 4 analysis blocks ──
+  var blocks = [
+    {label:'直 覺 觀 察', text: arch.palmObservation},
+    {label:'深 層 解 讀', text: arch.palmInsight},
+    {label:'生 命 密 碼', text: arch.lifePathNote},
+    {label:'元 素 特 質', text: arch.elementNote}
+  ];
+  ctx.textAlign = 'left';
+  for(var bi=0; bi<blocks.length; bi++){
+    var b = blocks[bi];
+    ctx.font = (15*S)+'px "Noto Serif TC", serif';
+    var bLines = wrap(ctx, b.text, CW - 46*S);
+    var bLH = 30*S;
+    var bH = 28*S + bLines.length * bLH + 16*S;
+    // section bg
+    rrect(ctx, PAD, y, CW, bH, 10*S);
+    ctx.fillStyle = SEC; ctx.fill();
+    // left gold line
+    ctx.fillStyle = GOLD; ctx.fillRect(PAD, y+8*S, 4*S, bH-16*S);
+    // label
+    ctx.font = 'bold '+(11*S)+'px "Noto Serif TC", serif';
+    ctx.fillStyle = GOLD;
+    ctx.fillText(b.label, PAD+20*S, y+14*S);
+    // label underline
+    var lw = ctx.measureText(b.label).width;
+    ctx.fillStyle = 'rgba(248,223,165,0.2)';
+    ctx.fillRect(PAD+20*S+lw+8*S, y+20*S, CW-46*S-lw-8*S, 1*S);
+    // text
+    ctx.font = (15*S)+'px "Noto Serif TC", serif';
+    ctx.fillStyle = WHITE;
+    drawLines(ctx, bLines, PAD+20*S, y+34*S, bLH);
+    y += bH + 14*S;
+  }
+  y += 8*S;
+
+  // ── gift & shadow ──
+  var colW = (CW - 14*S) / 2;
+  var colPad = 16*S;
+  ctx.font = (14*S)+'px "Noto Serif TC", serif';
+  var gLines = wrap(ctx, arch.hiddenGift, colW - colPad*2);
+  var sLines = wrap(ctx, arch.shadowSide, colW - colPad*2);
+  var gsLH = 28*S;
+  var gH = 30*S + gLines.length * gsLH + colPad;
+  var sH = 30*S + sLines.length * gsLH + colPad;
+  var maxH = Math.max(gH, sH);
+  // gift box
+  rrect(ctx, PAD, y, colW, maxH, 10*S);
+  ctx.fillStyle = GIFT_BG; ctx.fill();
+  ctx.strokeStyle = 'rgba(248,223,165,0.35)'; ctx.lineWidth = 2*S; ctx.stroke();
+  // shadow box
+  rrect(ctx, PAD+colW+14*S, y, colW, maxH, 10*S);
+  ctx.fillStyle = SHAD_BG; ctx.fill();
+  ctx.strokeStyle = 'rgba(155,123,212,0.35)'; ctx.lineWidth = 2*S; ctx.stroke();
+  // gift label + text
+  ctx.font = 'bold '+(11*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = GOLD;
+  ctx.fillText('隱 藏 天 賦', PAD+colPad, y+14*S);
+  ctx.font = (14*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = WHITE;
+  drawLines(ctx, gLines, PAD+colPad, y+34*S, gsLH);
+  // shadow label + text
+  ctx.font = 'bold '+(11*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = '#c8b8e8';
+  ctx.fillText('要 注 意 的 陷 阱', PAD+colW+14*S+colPad, y+14*S);
+  ctx.font = (14*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = WHITE;
+  drawLines(ctx, sLines, PAD+colW+14*S+colPad, y+34*S, gsLH);
+  y += maxH + 20*S;
+
+  // ── ritual ──
+  ctx.font = (15*S)+'px "Noto Serif TC", serif';
+  var rLines = wrap(ctx, arch.ritual, CW - 40*S);
+  var rLH = 30*S;
+  var rH = 28*S + rLines.length * rLH + 16*S;
+  rrect(ctx, PAD, y, CW, rH, 10*S);
+  ctx.fillStyle = '#1a1030'; ctx.fill();
+  rrect(ctx, PAD, y, CW, rH, 10*S);
+  ctx.strokeStyle = 'rgba(248,223,165,0.2)'; ctx.lineWidth = 1.5*S; ctx.stroke();
+  ctx.font = 'bold '+(11*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = SILVER;
+  ctx.fillText('適 合 你 的 小 儀 式', PAD+20*S, y+14*S);
+  ctx.font = (15*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = GOLD;
+  drawLines(ctx, rLines, PAD+20*S, y+34*S, rLH);
+  y += rH + 20*S;
+
+  // ── oils ──
+  var oilH = 100*S;
+  rrect(ctx, PAD, y, CW, oilH, 12*S);
+  ctx.fillStyle = '#1a1030'; ctx.fill();
+  rrect(ctx, PAD, y, CW, oilH, 12*S);
+  ctx.strokeStyle = 'rgba(248,223,165,0.3)'; ctx.lineWidth = 2*S; ctx.stroke();
+  ctx.textAlign = 'center';
+  ctx.font = 'bold '+(11*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = GOLD;
+  ctx.fillText('對 應 精 油', W/2, y+16*S);
+  // oil tags
+  var oTagY = y + 38*S;
+  var totalTagW = 0;
+  var tagPadX = 18*S, tagPadY = 8*S, tagGap = 10*S, tagR = 20*S;
+  ctx.font = 'bold '+(14*S)+'px "Noto Serif TC", serif';
+  var tagWidths = arch.oils.map(function(o){return ctx.measureText(o).width + tagPadX*2;});
+  totalTagW = tagWidths.reduce(function(a,b){return a+b;},0) + (arch.oils.length-1)*tagGap;
+  var tagX = (W - totalTagW) / 2;
+  for(var oi=0; oi<arch.oils.length; oi++){
+    var tw = tagWidths[oi], th = 14*S + tagPadY*2;
+    rrect(ctx, tagX, oTagY, tw, th, tagR);
+    ctx.fillStyle = OIL_BG; ctx.fill();
+    ctx.fillStyle = OIL_TXT;
+    ctx.textAlign = 'center';
+    ctx.fillText(arch.oils[oi], tagX+tw/2, oTagY+tagPadY);
+    tagX += tw + tagGap;
+  }
+  // oil note
+  ctx.font = (12*S)+'px "Noto Serif TC", serif';
+  ctx.fillStyle = SILVER;
+  ctx.textAlign = 'center';
+  ctx.fillText(arch.oilNote.substring(0,30)+'…', W/2, oTagY+40*S);
+  y += oilH + 28*S;
+
+  // ── watermark ──
+  ctx.font = (12*S)+'px "Cormorant Garamond", Georgia, serif';
+  ctx.fillStyle = 'rgba(200,188,220,0.45)';
+  ctx.textAlign = 'center';
+  ctx.fillText('馥靈之鑰 Hour Light® hourlightkey.com', W/2, y);
+  y += 50*S;
+
+  // ── trim & export ──
+  var finalH = y;
+  // redraw border on trimmed height
+  var fc = document.createElement('canvas');
+  fc.width = W; fc.height = finalH;
+  var fctx = fc.getContext('2d');
+  // re-draw background
+  var g2 = fctx.createLinearGradient(0,0,0,finalH);
+  g2.addColorStop(0, BG1); g2.addColorStop(0.4, '#231445'); g2.addColorStop(1, BG2);
+  fctx.fillStyle = g2; fctx.fillRect(0,0,W,finalH);
+  // copy content (without the excess background)
+  fctx.drawImage(c, 0, 0, W, finalH, 0, 0, W, finalH);
+  // redraw border on final canvas
+  rrect(fctx, 6*S, 6*S, W-12*S, finalH-12*S, 24*S);
+  fctx.strokeStyle = GOLD; fctx.lineWidth = 3*S; fctx.stroke();
+
+  var link = document.createElement('a');
+  link.download = '馥靈之鑰_女巫原力_' + arch.name + '.png';
+  link.href = fc.toDataURL('image/png');
+  link.click();
+});
+
+
+// ── 複製文字 ──
+document.getElementById('copyTextBtn').addEventListener('click', function() {
+  var r = {};
+  ['archetypeName','archetypeEn','coreLine','palmObservation','palmInsight',
+   'lifePathNote','elementNote','hiddenGift','shadowSide','ritual'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) r[id] = el.textContent;
+  });
+  var text = '🔮 我的巫力原型：' + r.archetypeName + '（' + r.archetypeEn + '）\n\n';
+  text += '「' + r.coreLine + '」\n\n';
+  text += '隱藏天賦：' + r.hiddenGift + '\n';
+  text += '要注意的陷阱：' + r.shadowSide + '\n\n';
+  text += '你也來測測看 👉 https://hourlightkey.com/witch-power.html\n';
+  text += '#女巫原力 #馥靈之鑰 #認知芳療';
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById('copyTextBtn');
+    btn.textContent = '✅ 已複製！';
+    setTimeout(function() { btn.innerHTML = '📋 複製文字'; }, 2000);
+  });
+});
+
+// ── 重新測驗 ──
+document.getElementById('retryBtn').addEventListener('click', function() {
+  _lifePath = null; _zodiac = null; _scentScores = [0,0,0,0,0]; _currentQ = 0; _scentDone = false;
+  birthdayInput.value = '';
+  lifePathBadge.classList.remove('visible');
+  scentQuiz.innerHTML = '';
+  scentDots.forEach(function(d) { d.className = 'scent-dot'; });
+  analyzeBtn.disabled = true;
+  document.getElementById('result-section').classList.remove('visible');
+  document.getElementById('input-section').style.display = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+</script>
+
+<!-- 星空粒子引擎 -->
+<script>
+(function(){
+  var cv=document.getElementById('witch-stars');if(!cv)return;
+  var ctx=cv.getContext('2d'),w,h,stars=[];
+  function resize(){w=cv.width=window.innerWidth;h=cv.height=window.innerHeight}
+  window.addEventListener('resize',resize);resize();
+  var colors=['rgba(248,223,165,','rgba(200,188,220,','rgba(155,123,212,','rgba(255,255,255,'];
+  for(var i=0;i<120;i++){
+    stars.push({
+      x:Math.random()*w,y:Math.random()*h*3,
+      r:Math.random()*1.2+.2,
+      baseA:Math.random()*.35+.05,
+      sp:Math.random()*.008+.002,
+      ph:Math.random()*Math.PI*2,
+      ci:Math.floor(Math.random()*colors.length)
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    var sc=window.scrollY*.15,t=Date.now()*.001;
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i],y=(s.y-sc)%(h*3);
+      if(y<0)y+=h*3;if(y>h)continue;
+      var a=s.baseA*(0.4+0.6*Math.sin(t*s.sp*50+s.ph));
+      ctx.beginPath();ctx.arc(s.x,y,s.r,0,Math.PI*2);
+      ctx.fillStyle=colors[s.ci]+a+')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+
+<script src="assets/js/hl-share.js"></script>
+<script src="assets/js/hl-tracker.js" data-tool="witch-power" data-tool-name="女巫力量" data-tool-type="tool"></script>
+</body>
+</html>
