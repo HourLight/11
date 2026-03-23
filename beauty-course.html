@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXP7K53QG6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BXP7K53QG6');
+</script>
+<!-- Facebook Pixel -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1333106288588347');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1333106288588347&ev=PageView&noscript=1" loading="lazy"></noscript>
+<!-- End Facebook Pixel -->
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>美容證照課程｜丙級・乙級｜HOUR LIGHT 未來美容學苑</title>
+<link rel="icon" href="favicon.ico" />
+<meta name="description" content="美容丙級乙級證照課程。丙級16小時詳洽、乙級90小時詳洽。線上無限回看、輔導報名考試。115年度考試日程、報名資訊完整提供。HOUR LIGHT 未來美容學苑・嗨執甲概念美學。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/hourlight-global.css">
+<link rel="stylesheet" href="assets/css/hl-design-tokens.css">
+<style>
+:root {
+  --font-main:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --font-serif:"Noto Serif TC",serif;
+  
+  /* 米+金+深咖+白 配色 - 金色調亮 */
+  --bg-cream:transparent;
+  --bg-white:rgba(12, 8, 24, 0.85);
+  --gold:#f8dfa5;
+  --gold-bright:#b8922a;
+  --gold-dark:#b8922a;
+  --gold-glow:rgba(233,194,125,0.5);
+  --brown:#ffffff;
+  --brown-light:#ffffff;
+  --brown-soft:rgba(255,255,255,.7);
+  --text-dark:#ffffff;
+  --text-soft:#ffffff;
+  --text-muted:rgba(255,255,255,.7);
+  --border:rgba(233,194,125,0.15);
+  --border-light:rgba(233,194,125,0.1);
+  --shadow:0 4px 20px rgba(233,194,125,0.08);
+  --shadow-hover:0 8px 30px rgba(233,194,125,0.15);
+  --ease:.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* 強制淺色主題：隱藏深色宇宙背景 */
+body {
+  background: var(--bg-cream);
+  color: var(--text-dark);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: var(--font-main);
+  background: var(--bg-cream);
+  color: var(--text-dark);
+  line-height: 1.9;
+  font-weight: 500;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+/* ====== 卡片區塊 ====== */
+.card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+/* ====== Hero 區 ====== */
+.hero {
+  text-align: center;
+  padding: 60px 40px 50px;
+  background: transparent;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--gold-dark);
+  border: 1.5px solid var(--gold);
+  padding: 8px 20px;
+  border-radius: 999px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 600;
+  color: var(--brown);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.hero-title .highlight {
+  color: var(--gold-dark);
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--gold-dark);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.hero-desc {
+  font-size: 0.95rem;
+  max-width: 650px;
+  margin: 0 auto 32px;
+  color: var(--text-soft);
+  line-height: 2;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.hero-tag {
+  font-size: 0.8rem;
+  color: #3d2814;
+  background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 40%, var(--gold-dark) 100%); color: #1a1510;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px var(--gold-glow);
+}
+
+/* ====== Section 通用 ====== */
+.section {
+  padding: 40px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.section-label {
+  font-size: 0.72rem;
+  color: var(--gold-dark);
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  font-weight: 600;
+  color: var(--brown);
+  margin-bottom: 14px;
+  letter-spacing: 0.05em;
+}
+
+.section-desc {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 2;
+}
+
+/* ====== Grid ====== */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+
+/* ====== 課程導覽卡片 ====== */
+.course-nav-card {
+  display: block;
+  background: var(--bg-cream);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px;
+  text-align: center;
+  text-decoration: none;
+  transition: var(--ease);
+  position: relative;
+}
+
+.course-nav-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: var(--shadow-hover), 0 0 20px rgba(212,160,23,0.15);
+}
+
+.course-nav-card .nav-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #3d2814;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 999px;
+}
+
+.course-nav-card .nav-icon {
+  font-size: 2.5rem;
+  margin-bottom: 14px;
+}
+
+.course-nav-card .nav-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.course-nav-card .nav-info {
+  font-size: 1rem;
+  color: var(--gold-dark);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.course-nav-card .nav-desc {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+/* ====== 課程分隔標題 ====== */
+.course-divider {
+  text-align: center;
+  padding: 50px 40px 20px;
+  background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-white) 100%);
+}
+
+.course-divider .divider-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.course-divider .divider-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.course-divider .divider-sub {
+  font-size: 1rem;
+  color: var(--gold-dark);
+  font-weight: 500;
+}
+
+/* ====== 特色卡片 ====== */
+.feature-card {
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: var(--ease);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover), 0 0 15px rgba(212,160,23,0.15);
+  border-color: var(--gold);
+}
+
+.feature-card .icon {
+  font-size: 2.2rem;
+  margin-bottom: 14px;
+}
+
+.feature-card .title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--brown);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.feature-card .text {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+/* ====== 價格卡片 ====== */
+.price-card {
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--ease);
+}
+
+.price-card.featured {
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 20px rgba(212,160,23,0.15);
+}
+
+.price-card.featured::before {
+  content: '推薦';
+  position: absolute;
+  top: 16px;
+  right: -32px;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #3d2814;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 40px;
+  transform: rotate(45deg);
+}
+
+.price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover), 0 0 15px rgba(212,160,23,0.15);
+}
+
+.price-card .plan-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--brown);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.price-card .original-price {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  margin-bottom: 4px;
+}
+
+.price-card .price {
+  font-size: 2rem;
+  color: var(--gold-dark);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.price-card .price span {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.price-card .installment {
+  background: rgba(212,160,23,0.1);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.price-card .installment-title {
+  font-size: 0.8rem;
+  color: var(--gold-dark);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.price-card .installment-item {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+.price-card .note {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+/* ====== 課程內容區塊 ====== */
+.course-block {
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 20px;
+}
+
+.course-block .block-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--brown);
+  margin-bottom: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.course-block .block-title .icon {
+  font-size: 1.3rem;
+}
+
+.course-item {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 12px;
+}
+
+.course-item:last-child {
+  margin-bottom: 0;
+}
+
+.course-item h4 {
+  font-size: 0.95rem;
+  color: var(--brown);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.course-item p {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+/* ====== 福利標籤 ====== */
+.benefit-card {
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: var(--ease);
+}
+
+.benefit-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--gold);
+}
+
+.benefit-card .icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.benefit-card .title {
+  font-size: 0.95rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.benefit-card .text {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+/* ====== 講師區塊 ====== */
+.instructor-section {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.instructor-photo {
+  flex-shrink: 0;
+  width: 100px;
+  height: 130px;
+  border-radius: 50px;
+  overflow: hidden;
+  border: 3px solid var(--gold);
+  box-shadow: 0 4px 15px var(--gold-glow);
+}
+
+.instructor-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.instructor-info {
+  flex: 1;
+}
+
+.instructor-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--brown);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.instructor-title {
+  font-size: 0.8rem;
+  color: var(--gold-dark);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.instructor-bio {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+/* ====== 提示框 ====== */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(245,215,110,0.15), rgba(212,160,23,0.08));
+  border: 1px solid rgba(212,160,23,0.3);
+  border-radius: 14px;
+  padding: 24px 28px;
+  text-align: center;
+  margin: 28px 0;
+}
+
+.highlight-box .icon {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.highlight-box .title {
+  font-size: 1rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.highlight-box .text {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+/* ====== 聯絡資訊 ====== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.contact-item {
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.contact-item .icon {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.contact-item .label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.contact-item .value {
+  font-size: 0.95rem;
+  color: var(--brown);
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* ====== 按鈕 ====== */
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: var(--ease);
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 40%, var(--gold-dark) 100%);
+  color: #ffffff;
+  box-shadow: 
+    0 4px 15px var(--gold-glow),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+  border: 1px solid var(--gold);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 25px var(--gold-glow),
+    0 0 20px rgba(245,215,110,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--brown);
+  border: 2px solid var(--gold);
+  box-shadow: 0 2px 8px rgba(212,160,23,0.15);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(180deg, rgba(245,215,110,0.2), rgba(212,160,23,0.1));
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold-dark);
+}
+
+/* ====== CTA 區塊 ====== */
+.cta-box {
+  background: linear-gradient(135deg, rgba(245,215,110,0.2), rgba(212,160,23,0.1));
+  border: 2px solid var(--gold);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.cta-box .icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.cta-box .title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--brown);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.cta-box .text {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  margin-bottom: 24px;
+  line-height: 1.9;
+}
+
+.cta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ====== Footer ====== */
+.footer {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 2;
+}
+
+.footer strong {
+  color: var(--brown);
+}
+
+.footer a {
+  color: var(--gold-dark);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ====== RWD ====== */
+@media(max-width:768px) {
+  .container { padding: 24px 16px 50px; }
+  .hero { padding: 40px 24px 36px; }
+  .section { padding: 28px 20px; }
+  .course-divider { padding: 40px 24px 16px; }
+  .btn { width: 100%; max-width: 280px; text-align: center; }
+  .instructor-section { flex-direction: column; text-align: center; padding: 24px 20px; }
+  .instructor-photo { margin: 0 auto 12px; }
+  .cta-box { padding: 28px 20px; }
+  .price-card.featured::before { display: none; }
+  .course-nav-card { padding: 28px 20px; }
+  .course-nav-card .nav-badge { top: -10px; font-size: 0.75rem; padding: 3px 12px; }
+}
+
+/* ====== 考試資訊專區 ====== */
+.exam-info-section {
+  padding: 40px;
+}
+
+.exam-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.exam-schedule-card {
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  transition: var(--ease);
+}
+
+.exam-schedule-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--gold);
+}
+
+.exam-schedule-card.featured-schedule {
+  border: 2px solid var(--gold);
+  background: linear-gradient(180deg, rgba(245,215,110,0.08), var(--bg-cream));
+  box-shadow: 0 4px 20px rgba(212,160,23,0.12);
+}
+
+.schedule-highlight-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold-dark);
+  background: rgba(212,160,23,0.15);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.exam-schedule-card .schedule-badge {
+  position: absolute;
+  top: -10px;
+  left: 24px;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #3d2814;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+
+.exam-schedule-card .schedule-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-top: 8px;
+}
+
+.exam-schedule-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 0.85rem;
+}
+
+.exam-schedule-item:last-child {
+  border-bottom: none;
+}
+
+.exam-schedule-item .item-label {
+  color: var(--text-soft);
+  flex-shrink: 0;
+  width: 90px;
+}
+
+.exam-schedule-item .item-value {
+  color: var(--brown);
+  font-weight: 500;
+  text-align: right;
+  flex: 1;
+}
+
+.exam-schedule-item .item-value.highlight {
+  color: var(--gold-dark);
+  font-weight: 600;
+}
+
+.exam-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.exam-link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 16px;
+  text-decoration: none;
+  transition: var(--ease);
+  text-align: center;
+}
+
+.exam-link-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  box-shadow: var(--shadow-hover);
+}
+
+.exam-link-card .link-icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.exam-link-card .link-title {
+  font-size: 0.85rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.exam-link-card .link-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.exam-link-card.primary {
+  border: 2px solid var(--gold);
+  background: linear-gradient(135deg, rgba(245,215,110,0.15), rgba(212,160,23,0.08));
+}
+
+.exam-highlight-notice {
+  background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(184,134,11,0.1));
+  border: 2px solid var(--gold);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-top: 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(212,160,23,0.15);
+}
+
+.highlight-notice-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.highlight-notice-content {
+  flex: 1;
+}
+
+.highlight-notice-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.highlight-notice-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.highlight-notice-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.notice-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.notice-badge.gold {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #3d2814;
+  box-shadow: 0 2px 8px var(--gold-glow);
+}
+
+.notice-badge.brown {
+  background: linear-gradient(180deg, var(--brown-light), var(--brown));
+  color:#ffffff;
+}
+
+.highlight-notice-item .notice-text {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.highlight-notice-item .notice-text strong {
+  color: var(--gold-dark);
+  font-weight: 700;
+}
+
+.highlight-notice-tip {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+
+.exam-notice {
+  background: linear-gradient(135deg, rgba(156, 110, 219, 0.08), rgba(92, 58, 128, 0.05));
+  border: 1px solid rgba(156, 110, 219, 0.25);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-top: 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.exam-notice .notice-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.exam-notice .notice-content {
+  flex: 1;
+}
+
+.exam-notice .notice-title {
+  font-size: 0.9rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.exam-notice .notice-text {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+/* ====== 即測即評專區 ====== */
+.instant-exam-section {
+  margin-top: 40px;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(212,160,23,0.08), rgba(184,134,11,0.04));
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.instant-exam-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold-bright), var(--gold), var(--gold-dark));
+}
+
+.instant-exam-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.instant-exam-badge {
+  display: inline-block;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #3d2814;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px var(--gold-glow);
+}
+
+.instant-exam-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.instant-exam-desc {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+}
+
+/* 即測即評時程表 */
+.instant-exam-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 28px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.instant-exam-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-white);
+  font-size: 0.9rem;
+}
+
+.instant-exam-table th,
+.instant-exam-table td {
+  padding: 14px 18px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.instant-exam-table th {
+  background: linear-gradient(180deg, rgba(212,160,23,0.15), rgba(212,160,23,0.08));
+  color: var(--brown);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.instant-exam-table tbody tr:hover {
+  background: rgba(212,160,23,0.05);
+}
+
+.instant-exam-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.instant-exam-table td strong {
+  color: var(--gold-dark);
+  font-weight: 700;
+}
+
+.batch-num {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  background: var(--brown);
+  color:#ffffff;
+  border-radius: 50%;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* 報名注意事項 */
+.instant-exam-notes {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.notes-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+}
+
+/* 基本資訊 2欄 */
+.notes-basic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.note-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: var(--bg-cream);
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+}
+
+.note-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.note-content {
+  flex: 1;
+}
+
+.note-content strong {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.note-content span {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+/* 應備資料 - 橫向標籤 */
+.notes-documents {
+  background: linear-gradient(135deg, rgba(212,160,23,0.08), rgba(184,134,11,0.04));
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.documents-label {
+  font-size: 0.88rem;
+  color: var(--brown);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.documents-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.doc-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+/* 重要須知警告框 */
+.notes-warning-box {
+  background: linear-gradient(135deg, rgba(220,53,69,0.06), rgba(220,53,69,0.02));
+  border: 1px solid rgba(220,53,69,0.25);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.warning-header {
+  background: rgba(220,53,69,0.1);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(220,53,69,0.15);
+}
+
+.warning-icon {
+  font-size: 1.1rem;
+}
+
+.warning-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #b02a37;
+}
+
+.warning-list {
+  list-style: none;
+  padding: 16px 20px;
+  margin: 0;
+}
+
+.warning-list li {
+  position: relative;
+  padding: 10px 0 10px 20px;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+  border-bottom: 1px dashed var(--border-light);
+}
+
+.warning-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.warning-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.warning-list li strong {
+  color: var(--brown);
+  font-weight: 600;
+}
+
+/* 考試資訊 RWD */
+@media (max-width: 768px) {
+  .exam-info-section { padding: 28px 20px; }
+  .exam-schedule-card { padding: 20px 18px; }
+  .exam-schedule-item { flex-direction: column; gap: 4px; }
+  .exam-schedule-item .item-label { width: auto; }
+  .exam-schedule-item .item-value { text-align: left; }
+  .exam-highlight-notice { flex-direction: column; gap: 12px; padding: 20px; }
+  .highlight-notice-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .exam-notice { flex-direction: column; gap: 10px; }
+  .exam-links-grid { grid-template-columns: repeat(2, 1fr); }
+  
+  /* 即測即評 RWD */
+  .instant-exam-section { padding: 24px 18px; margin-top: 32px; }
+  .instant-exam-title { font-size: 1.1rem; }
+  .instant-exam-table th,
+  .instant-exam-table td { padding: 12px 10px; font-size: 0.82rem; }
+  .notes-basic-grid { grid-template-columns: 1fr; }
+  .note-item { padding: 14px; }
+  .notes-documents { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .documents-list { gap: 8px; }
+  .warning-list li { padding-left: 16px; font-size: 0.8rem; }
+}
+
+/* ===== 奶油浮雕底圖 ===== */
+.hl-cosmos {
+  background: transparent;
+}
+.hl-stars-layer, .hl-meteors, .hl-aura { opacity: 0.85; }
+
+/* ── 馥靈之鑰 LOGO 圖標 ── */
+.hl-logo-icon {
+  height: 1.15em;
+  width: 1.15em;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+  margin-right: 4px;
+  display: inline-block;
+  position: relative;
+  top: -0.08em;
+}
+.hl-logo-hero {
+  display: block;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 14px auto;
+  filter: drop-shadow(0 0 18px rgba(233,194,125,0.55));
+}
+
+/* light bg */
+.hl-bg-castle {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:#05030a;
+  opacity: 1;
+  filter: saturate(1.1) brightness(.72);
+  pointer-events: none;
+}
+</style>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hourlightkey.com/beauty-course.html">
+    <meta property="og:title" content="美容證照課程｜丙級・乙級｜HOUR LIGHT 未來美容學苑">
+    <meta property="og:description" content="美容證照課程｜丙級、乙級證照輔導，HOUR LIGHT 未來美容學苑專業培訓。">
+    <meta property="og:image" content="https://hourlightkey.com/og-image.jpg">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="馥靈之鑰 Hour Light">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="美容證照課程｜丙級・乙級｜HOUR LIGHT 未來美容學苑">
+    <meta name="twitter:description" content="美容證照課程｜丙級、乙級證照輔導，HOUR LIGHT 未來美容學苑專業培訓。">
+    <meta name="twitter:image" content="https://hourlightkey.com/og-image.jpg">
+
+    
+    <link rel="canonical" href="https://hourlightkey.com/beauty-course.html">
+    <meta name="keywords" content="美容證照, 美容丙級, 美容乙級, 美容課程">
+    <!-- Schema.org 結構化資料 -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://hourlightkey.com/#organization",
+  "name": "馥靈之鑰國際有限公司",
+  "alternateName": [
+    "Hour Light International Co., Ltd.",
+    "馥靈之鑰",
+    "Hour Light"
+  ],
+  "url": "https://hourlightkey.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://hourlightkey.com/logo.svg",
+    "width": "200",
+    "height": "200"
+  },
+  "image": "https://hourlightkey.com/og-image.jpg",
+  "description": "馥靈之鑰 Hour Light｜讀懂自己，活對人生。結合感官科學與情緒覺察的自我認識系統，免費線上工具與一對一深度陪伴。",
+  "foundingDate": "2024",
+  "founder": {
+    "@type": "Person",
+    "@id": "https://hourlightkey.com/#founder",
+    "name": "王逸君",
+    "alternateName": "Ruby Wang"
+  },
+  "sameAs": [
+    "https://www.youtube.com/@judyanee",
+    "https://www.facebook.com/SUFUYASPA",
+    "https://www.instagram.com/hourlight",
+    "https://lin.ee/RdQBFAN"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "email": "info@hourlightkey.com",
+    "url": "https://lin.ee/RdQBFAN",
+    "availableLanguage": [
+      "zh-TW",
+      "zh-CN"
+    ]
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Taiwan"
+  },
+  "knowsAbout": [
+    "芳香療法",
+    "能量覺察",
+    "情緒管理",
+    "美容美業",
+    "生命靈數",
+    "塔羅牌"
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://hourlightkey.com/beauty-course.html",
+  "name": "美容證照課程",
+  "description": "丙級、乙級證照輔導，HOUR LIGHT 未來美容學苑專業培訓",
+  "provider": {
+    "@id": "https://hourlightkey.com/#organization"
+  },
+  "educationalLevel": "Beginner to Advanced",
+  "educationalCredentialAwarded": "美容丙級/乙級證照"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首頁",
+      "item": "https://hourlightkey.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "課程",
+      "item": "https://hourlightkey.com/courses.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "美容證照",
+      "item": "https://hourlightkey.com/beauty-course.html"
+    }
+  ]
+}
+    </script>
+<link rel="stylesheet" href="assets/css/hl-cosmos.css">
+<link rel="stylesheet" href="assets/css/hl-music.css">
+<script src="assets/js/hl-analytics.js?v=20260309" defer></script>
+<!-- MailerLite Universal -->
+<script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2060689');
+</script>
+<!-- End MailerLite Universal -->
+<style>
+/* ========== 浮動 LINE 按鈕（玻璃擬態）========== */
+
+@media(max-width:768px){}@media(min-width:769px) and (max-width:900px){}
+</style>
+<style>
+/* ========== 背景音樂控制按鈕 ========== */
+</style>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0a0612">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="馥靈之鑰">
+</head>
+<body>
+
+
+<!-- ========== 背景音樂 ========== -->
+<!-- 星空背景 -->
+<div class="hl-bg-castle"></div>
+<div class="hl-cosmos">
+  <div class="hl-stars-layer hl-stars-1"></div>
+  <div class="hl-stars-layer hl-stars-2"></div>
+  <div class="hl-stars-layer hl-stars-3"></div>
+  <div class="hl-meteors">
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+  </div>
+  <div class="hl-aura hl-aura-1"></div>
+  <div class="hl-aura hl-aura-2"></div>
+  <div class="hl-aura hl-aura-3"></div>
+</div>
+
+
+<div class="container">
+
+  <!-- ========== Hero ========== -->
+  <div class="card">
+    <section class="hero">
+      <div class="hero-badge">HOUR LIGHT 未來美容學苑｜專業證照培訓</div>
+      <h1 class="hero-title">美容<span class="highlight">證照</span>全能課程</h1>
+      <p class="hero-sub">丙級入門 ✕ 乙級進階｜一站式考照規劃</p>
+      <p class="hero-desc">
+        無論您是美容產業新手、計畫考取證照的學員，或是想提升專業技能的從業者，<br>
+        我們提供完整的丙級與乙級證照課程，搭配線上學習平台，<br>
+        讓您輕鬆通過國家美容技術士檢定考試。考照這條路，有人帶真的差很多。
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">丙級 16小時</span>
+        <span class="hero-tag">乙級 90小時</span>
+        <span class="hero-tag">線上無限回看</span>
+        <span class="hero-tag">輔導報名考試</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========== 課程選擇導覽 ========== -->
+  <div class="card">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">COURSE OPTIONS</div>
+        <h2 class="section-title">選擇適合您的課程</h2>
+        <p class="section-desc">
+          丙級是入行基礎，乙級是專業進階。<br>
+          依照您的目標與程度，選擇最適合的起點。
+        </p>
+      </div>
+      
+      <div class="grid-2">
+        <a href="#level-c" class="course-nav-card">
+          <div class="nav-badge">入門推薦</div>
+          <div class="nav-icon">🌱</div>
+          <div class="nav-title">美容丙級證照班</div>
+          <div class="nav-info">16小時｜詳洽</div>
+          <p class="nav-desc">適合美容新手、想取得入行基本認證的學員</p>
+        </a>
+        <a href="#level-b" class="course-nav-card">
+          <div class="nav-badge">專業進階</div>
+          <div class="nav-icon">⭐</div>
+          <div class="nav-title">美容乙級證照班</div>
+          <div class="nav-info">90小時｜詳洽</div>
+          <p class="nav-desc">適合想成為美容講師、進階提升的從業者</p>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== ⭐ 新增：115年考試資訊專區 ==================== -->
+  <div class="card" id="exam-info">
+    <section class="exam-info-section">
+      <div class="section-header">
+        <div class="section-label">EXAM SCHEDULE 2026</div>
+        <h2 class="section-title">115年度考試資訊專區</h2>
+        <p class="section-desc">
+          全國技術士技能檢定美容丙級／乙級考試日程一覽。<br>
+          提早規劃報名，搭配課程進度，輕鬆應考！
+        </p>
+      </div>
+      
+      <!-- 三梯次考試日程 -->
+      <div class="exam-schedule-grid">
+        <!-- 第一梯次 -->
+        <div class="exam-schedule-card">
+          <div class="schedule-badge">第一梯次</div>
+          <div class="schedule-title">115年 第一梯次</div>
+          <div class="exam-schedule-item">
+            <span class="item-label">簡章發售</span>
+            <span class="item-value">114/12/26 ～ 115/01/13</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">報名日期</span>
+            <span class="item-value highlight">115/01/02 ～ 01/13</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">准考證寄送</span>
+            <span class="item-value">115/02/24</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">學科測試</span>
+            <span class="item-value highlight">115/03/15（日）</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">成績公告</span>
+            <span class="item-value">115/04/10</span>
+          </div>
+        </div>
+        
+        <!-- 第二梯次 -->
+        <div class="exam-schedule-card featured-schedule">
+          <div class="schedule-badge">第二梯次</div>
+          <div class="schedule-highlight-tag">✨ 美容乙級唯一梯次</div>
+          <div class="schedule-title">115年 第二梯次</div>
+          <div class="exam-schedule-item">
+            <span class="item-label">簡章發售</span>
+            <span class="item-value">115/04/17 ～ 115/05/05</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">報名日期</span>
+            <span class="item-value highlight">115/04/24 ～ 05/05</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">准考證寄送</span>
+            <span class="item-value">115/06/16</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">學科測試</span>
+            <span class="item-value highlight">115/07/05（日）</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">成績公告</span>
+            <span class="item-value">115/07/31</span>
+          </div>
+        </div>
+        
+        <!-- 第三梯次 -->
+        <div class="exam-schedule-card">
+          <div class="schedule-badge">第三梯次</div>
+          <div class="schedule-title">115年 第三梯次</div>
+          <div class="exam-schedule-item">
+            <span class="item-label">簡章發售</span>
+            <span class="item-value">115/08/20 ～ 115/09/07</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">報名日期</span>
+            <span class="item-value highlight">115/08/27 ～ 09/07</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">准考證寄送</span>
+            <span class="item-value">115/10/20</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">學科測試</span>
+            <span class="item-value highlight">115/11/08（日）</span>
+          </div>
+          <div class="exam-schedule-item">
+            <span class="item-label">成績公告</span>
+            <span class="item-value">115/12/04</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 重要提醒：報名梯次限制 -->
+      <div class="exam-highlight-notice">
+        <div class="highlight-notice-icon">⚠️</div>
+        <div class="highlight-notice-content">
+          <div class="highlight-notice-title">重要！報名梯次限制</div>
+          <div class="highlight-notice-items">
+            <div class="highlight-notice-item">
+              <span class="notice-badge gold">美容乙級</span>
+              <span class="notice-text">僅 <strong>第二梯次</strong> 開放報名（115/04/24 ～ 05/05）</span>
+            </div>
+            <div class="highlight-notice-item">
+              <span class="notice-badge brown">美髮乙級</span>
+              <span class="notice-text">僅 <strong>第三梯次</strong> 開放報名（115/08/27 ～ 09/07）</span>
+            </div>
+          </div>
+          <div class="highlight-notice-tip">💡 丙級三梯次皆可報名，請依個人準備進度選擇適合的梯次</div>
+        </div>
+      </div>
+      
+      <!-- ==================== 即測即評專區 ==================== -->
+      <div class="instant-exam-section">
+        <div class="instant-exam-header">
+          <div class="instant-exam-badge">🎯 即測即評</div>
+          <h3 class="instant-exam-title">美容丙級｜115年即測即評及發證</h3>
+          <p class="instant-exam-desc">現場報名、當天測試、即時發證！適合想快速取得證照的學員</p>
+        </div>
+        
+        <!-- 即測即評時程表 -->
+        <div class="instant-exam-table-wrap">
+          <table class="instant-exam-table">
+            <thead>
+              <tr>
+                <th>梯次</th>
+                <th>報名日期</th>
+                <th>測試日期（起）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="batch-num">01</span></td>
+                <td>1/12 ～ 1/19</td>
+                <td><strong>3/9</strong> 起</td>
+              </tr>
+              <tr>
+                <td><span class="batch-num">02</span></td>
+                <td>3/16 ～ 3/23</td>
+                <td><strong>5/11</strong> 起</td>
+              </tr>
+              <tr>
+                <td><span class="batch-num">03</span></td>
+                <td>5/18 ～ 5/25</td>
+                <td><strong>7/13</strong> 起</td>
+              </tr>
+              <tr>
+                <td><span class="batch-num">04</span></td>
+                <td>6/24 ～ 6/30</td>
+                <td><strong>8/17</strong> 起</td>
+              </tr>
+              <tr>
+                <td><span class="batch-num">05</span></td>
+                <td>8/17 ～ 8/24</td>
+                <td><strong>10/5</strong> 起</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- 報名注意事項 -->
+        <div class="instant-exam-notes">
+          <div class="notes-title">📋 報名須知與準備資料</div>
+          
+          <!-- 基本資訊 - 2欄 -->
+          <div class="notes-basic-grid">
+            <div class="note-item">
+              <span class="note-icon">📍</span>
+              <div class="note-content">
+                <strong>報名地點</strong>
+                <span>莊敬高職 現場報名</span>
+              </div>
+            </div>
+            <div class="note-item">
+              <span class="note-icon">🕐</span>
+              <div class="note-content">
+                <strong>報名時間</strong>
+                <span>上午 08:00-12:00｜下午 13:00-16:00<br>（含例假日受理，逾時不候）</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 準備資料 - 橫向 -->
+          <div class="notes-documents">
+            <div class="documents-label">📄 應備資料</div>
+            <div class="documents-list">
+              <span class="doc-tag">身分證</span>
+              <span class="doc-tag">照片</span>
+              <span class="doc-tag">報名表</span>
+              <span class="doc-tag">報名費用</span>
+            </div>
+          </div>
+          
+          <!-- 重要須知 - 警告框 -->
+          <div class="notes-warning-box">
+            <div class="warning-header">
+              <span class="warning-icon">⚠️</span>
+              <span class="warning-title">重要須知（請務必詳閱）</span>
+            </div>
+            <ul class="warning-list">
+              <li><strong>資料不齊不受理</strong>｜當場不受理報名，且不接受事後補件，請考生留意</li>
+              <li><strong>測試日期無法自選</strong>｜日期由單位排定，應檢人不得要求指定或變更日期</li>
+              <li><strong>日期以准考證為準</strong>｜表格上的測試日期(起)為開考日，實際日期請依准考證為準</li>
+              <li><strong>考程約二個月</strong>｜每梯次考程編排約二個月，如有重要活動請斟酌報名</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- ==================== 即測即評專區 End ==================== -->
+      
+      <!-- 考試資源快速連結 -->
+      <div class="exam-links-grid">
+        <a href="https://eservice.wdasec.gov.tw/ExamNet/ConsentBookLogin" target="_blank" rel="noopener" class="exam-link-card primary">
+          <div class="link-icon">📝</div>
+          <div class="link-title">網路報名</div>
+          <div class="link-desc">技能檢定中心</div>
+        </a>
+        <a href="https://eservice.wdasec.gov.tw/WWW/C101Q" target="_blank" rel="noopener" class="exam-link-card">
+          <div class="link-icon">🔍</div>
+          <div class="link-title">成績查詢</div>
+          <div class="link-desc">考試成績查詢系統</div>
+        </a>
+        <a href="https://eservice.wdasec.gov.tw/ExamNet/ConsentBookLogin" target="_blank" rel="noopener" class="exam-link-card">
+          <div class="link-icon">📖</div>
+          <div class="link-title">丙級學科測驗</div>
+          <div class="link-desc">線上題庫練習</div>
+        </a>
+        <a href="https://owinform.wdasec.gov.tw/owInform/DLowFile/100003B15.pdf?25" target="_blank" rel="noopener" class="exam-link-card">
+          <div class="link-icon">📄</div>
+          <div class="link-title">丙級術科</div>
+          <div class="link-desc">試題下載 PDF</div>
+        </a>
+        <a href="https://owinform.wdasec.gov.tw/owInform/DLowFile/100002B16.pdf?25" target="_blank" rel="noopener" class="exam-link-card">
+          <div class="link-icon">🎨</div>
+          <div class="link-title">乙級紙圖</div>
+          <div class="link-desc">紙圖試題下載</div>
+        </a>
+        <a href="https://owinform.wdasec.gov.tw/owInform/DLowFile/100002B11.pdf?25" target="_blank" rel="noopener" class="exam-link-card">
+          <div class="link-icon">💄</div>
+          <div class="link-title">乙級術科</div>
+          <div class="link-desc">試題下載 PDF</div>
+        </a>
+      </div>
+      
+      <!-- 提醒框 -->
+      <div class="exam-notice">
+        <div class="notice-icon">💡</div>
+        <div class="notice-content">
+          <div class="notice-title">貼心提醒</div>
+          <div class="notice-text">
+            並非所有職類、級別每梯次皆有辦理，建議至勞動部技能檢定中心官網查詢最新資訊。<br>
+            報名課程即享「輔導報名考試」服務，我們會協助您處理報名流程！
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- ==================== 考試資訊專區 End ==================== -->
+
+  <!-- ==================== 丙級課程區塊 ==================== -->
+  <div class="card" id="level-c">
+    <div class="course-divider">
+      <div class="divider-icon">🌱</div>
+      <div class="divider-title">美容丙級證照班</div>
+      <div class="divider-sub">入門基礎｜16小時完整培訓</div>
+    </div>
+    
+    <section class="section">
+      <div class="section-header">
+        <p class="section-desc">
+          美容丙級是入行美容業的基本認證，學習基本護膚流程與彩妝技術。<br>
+          擁有丙級證照，可以往美容師、新娘秘書、彩妝師等職涯方向發展。
+        </p>
+      </div>
+      
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="icon">⏰</div>
+          <div class="title">16小時實體課程</div>
+          <p class="text">精實培訓，涵蓋學科與術科所有考試項目</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📱</div>
+          <div class="title">線上重複學習</div>
+          <p class="text">課堂錄製重點教學，不限次數回看複習</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📝</div>
+          <div class="title">輔導報名考試</div>
+          <p class="text">協助處理報名流程，讓您專心準備考試</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 丙級費用 -->
+  <div class="card">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">PRICING · 丙級</div>
+        <h2 class="section-title">丙級課程費用</h2>
+      </div>
+      
+      <div class="price-card featured" style="max-width:400px; margin:0 auto;">
+        <div class="plan-name">美容丙級全修班</div>
+        <div class="price">詳洽</div>
+        <div class="installment">
+          <div class="installment-title">課程包含</div>
+          <div class="installment-item">► 16小時實體課程</div>
+          <div class="installment-item">► 線上課程無限回看</div>
+          <div class="installment-item">► 共用材料（上課使用）</div>
+          <div class="installment-item">► 輔導報名考試</div>
+        </div>
+        <p class="note">※ 若有衛生考量請自備個人工具</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- 丙級課程內容 -->
+  <div class="card">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">CURRICULUM · 丙級</div>
+        <h2 class="section-title">丙級考試內容</h2>
+        <p class="section-desc">
+          丙級檢定著重於職業道德、皮膚認識、化妝品知識、衛生常識，<br>
+          以及基本的護膚與彩妝技能。
+        </p>
+      </div>
+      
+      <!-- 學科 -->
+      <div class="course-block">
+        <div class="block-title"><span class="icon">📖</span> 學科考試範圍</div>
+        <div class="grid-3" style="margin-top:16px;">
+          <div class="course-item">
+            <h4>皮膚認識</h4>
+            <p>皮膚構造、類型判斷、常見問題分析</p>
+          </div>
+          <div class="course-item">
+            <h4>化妝品認識</h4>
+            <p>成分辨識、產品選擇、安全使用</p>
+          </div>
+          <div class="course-item">
+            <h4>護膚與彩妝</h4>
+            <p>基礎護膚流程、彩妝技巧與設計</p>
+          </div>
+          <div class="course-item">
+            <h4>公共衛生</h4>
+            <p>消毒方法、傳染病預防、環境衛生</p>
+          </div>
+          <div class="course-item">
+            <h4>職業倫理</h4>
+            <p>職業道德、服務態度、專業規範</p>
+          </div>
+          <div class="course-item">
+            <h4>環保節能</h4>
+            <p>環境保護、節能減碳、永續實踐</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 術科 -->
+      <div class="course-block">
+        <div class="block-title"><span class="icon">💄</span> 術科考試項目</div>
+        <div class="grid-2" style="margin-top:16px;">
+          <div class="course-item">
+            <h4>化妝技能</h4>
+            <p>
+              ► 一般妝：外出妝、職業婦女妝（二抽一）<br>
+              ► 卸妝操作<br>
+              ► 宴會妝：日宴妝、晚宴妝（二抽一）
+            </p>
+          </div>
+          <div class="course-item">
+            <h4>護膚技能</h4>
+            <p>
+              ► 工作前準備<br>
+              ► 臉部保養手技（按摩手法）<br>
+              ► 蒸臉、敷面及善後工作
+            </p>
+          </div>
+          <div class="course-item">
+            <h4>衛生技能</h4>
+            <p>
+              ► 化妝品安全衛生辨識<br>
+              ► 消毒液和消毒方法操作<br>
+              ► 洗手與手部消毒操作
+            </p>
+          </div>
+          <div class="course-item">
+            <h4>模擬實測</h4>
+            <p>
+              ► 完整流程演練<br>
+              ► 時間掌控訓練<br>
+              ► 一對一指導修正
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== 乙級課程區塊 ==================== -->
+  <div class="card" id="level-b">
+    <div class="course-divider">
+      <div class="divider-icon">⭐</div>
+      <div class="divider-title">美容乙級證照班</div>
+      <div class="divider-sub">專業進階｜90小時完整培訓｜2026年1月開課</div>
+    </div>
+    
+    <section class="section">
+      <div class="section-header">
+        <p class="section-desc">
+          乙級是美容專業的進階認證，適合想成為美容講師、獨立開店的從業者。<br>
+          課程涵蓋紙圖設計、六大妝容、專業護膚等完整術科訓練。
+        </p>
+      </div>
+      
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="icon">📚</div>
+          <div class="title">90小時完整課程</div>
+          <p class="text">15堂專業課程加上2次全真模擬考試</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📱</div>
+          <div class="title">線上3個月回看</div>
+          <p class="text">課堂錄製重點教學，不限次數複習</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">💳</div>
+          <div class="title">彈性分期付款</div>
+          <p class="text">最低每期 詳洽，輕鬆無壓力</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========== 乙級課程費用 ========== -->
+  <div class="card">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">PRICING · 乙級</div>
+        <h2 class="section-title">乙級課程費用方案</h2>
+      </div>
+      
+      <div class="grid-2">
+        <!-- 完整課程方案 -->
+        <div class="price-card featured">
+          <div class="plan-name">完整課程方案</div>
+          <div class="original-price">原價 詳洽</div>
+          <div class="price">詳洽 <span>一次付清</span></div>
+          <div class="installment">
+            <div class="installment-title">無卡分期選擇</div>
+            <div class="installment-item">► 分 9 期：每期約 詳洽</div>
+            <div class="installment-item">► 分 12 期：每期約 詳洽</div>
+          </div>
+          <p class="note">✓ 包含完整工具組與所有教材</p>
+        </div>
+        
+        <!-- 自備工具方案 -->
+        <div class="price-card">
+          <div class="plan-name">自備工具優惠</div>
+          <div class="price">詳洽</div>
+          <div class="installment">
+            <div class="installment-title">分期方案</div>
+            <div class="installment-item">► 分 9 期：每期約 詳洽</div>
+            <div class="installment-item">► 分 12 期：每期約 詳洽</div>
+          </div>
+          <p class="note">✓ 適合已有專業工具的學員<br>✓ 享受更優惠的學費</p>
+        </div>
+      </div>
+      
+      <div class="highlight-box">
+        <div class="icon">📱</div>
+        <div class="title">線上學習平台免費啟用</div>
+        <p class="text">所有課程內容完整錄製，課程結束後提供3個月線上學習權限，<br>讓您隨時回看重點教學，確保技術熟練應用！</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========== 乙級課程大綱 ========== -->
+  <div class="card">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">CURRICULUM · 乙級</div>
+        <h2 class="section-title">乙級完整課程大綱</h2>
+        <p class="section-desc">
+          乙級課程精心規劃學科與術科內容，從基礎理論到實務操作，全方位培養專業能力。<br>
+          每月安排第2、第3週上課，提供週一班與週六班供您選擇。
+        </p>
+      </div>
+      
+      <!-- 學科課程 -->
+      <div class="course-block">
+        <div class="block-title"><span class="icon">📖</span> 學科課程內容</div>
+        <div class="grid-2" style="margin-top:16px;">
+          <div class="course-item">
+            <h4>職業倫理與規範</h4>
+            <p>深入了解美容產業的職業道德、服務態度與專業行為準則，建立正確的職場觀念</p>
+          </div>
+          <div class="course-item">
+            <h4>化妝品成分與安全</h4>
+            <p>學習化妝品成分分析、產品選擇原則與安全使用方法，保障顧客肌膚健康</p>
+          </div>
+          <div class="course-item">
+            <h4>皮膚構造與生理</h4>
+            <p>掌握人體皮膚構造、生理機能與常見問題，奠定專業美容知識基礎</p>
+          </div>
+          <div class="course-item">
+            <h4>環保與節能實踐</h4>
+            <p>培養環保意識，學習節能減碳的實務應用，實踐永續美容理念</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 術科課程 -->
+      <div class="course-block">
+        <div class="block-title"><span class="icon">💄</span> 術科課程重點</div>
+        <div class="grid-2" style="margin-top:16px;">
+          <div class="course-item">
+            <h4>紙圖設計基礎</h4>
+            <p>完整學習眉型、眼型、鼻型、唇型與臉型修飾技術，操作10張設計圖，全面掌握考試要求與設計原理</p>
+          </div>
+          <div class="course-item">
+            <h4>彩妝技能實作</h4>
+            <p>實作黑白攝影妝、彩色攝影妝、大舞台妝、小舞台妝，以及清純型與華麗型新娘妝等六大妝容</p>
+          </div>
+          <div class="course-item">
+            <h4>護膚技能實作</h4>
+            <p>學習去角質技術、按摩手法、蒸臉敷臉流程、手部護理、脫毛技巧與皮膚資料卡管理</p>
+          </div>
+          <div class="course-item">
+            <h4>全真模擬考試</h4>
+            <p>進行2次完整模擬考試，包含紙圖、彩妝、護膚全流程演練，專業教師1對1指導，直擊考試要點</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========== 課程福利 ========== -->
+  <div class="card">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">BENEFITS · 乙級</div>
+        <h2 class="section-title">乙級課程報名福利</h2>
+      </div>
+      
+      <div class="grid-3">
+        <div class="benefit-card">
+          <div class="icon">📝</div>
+          <div class="title">免費教材題庫</div>
+          <p class="text">贈送完整學科教材與考試題庫，讓您輕鬆掌握考試重點</p>
+        </div>
+        <div class="benefit-card">
+          <div class="icon">👩‍🏫</div>
+          <div class="title">1對1模擬指導</div>
+          <p class="text">專業教師全程陪伴，提供個別化指導與建議</p>
+        </div>
+        <div class="benefit-card">
+          <div class="icon">🗓️</div>
+          <div class="title">彈性上課時間</div>
+          <p class="text">週一班與週六班選擇，每月第2、3週上課</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========== 講師介紹 ========== -->
+  <div class="card">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">INSTRUCTORS</div>
+        <h2 class="section-title">專業講師團隊</h2>
+      </div>
+      
+      <div class="grid-2">
+        <!-- 逸君 -->
+        <div class="instructor-section" style="margin-top:0;">
+          <div class="instructor-photo">
+            <img loading="lazy" src="Ruby-1.png" alt="王逸君 Ruby Wang">
+          </div>
+          <div class="instructor-info">
+            <div class="instructor-name">王逸君 Ruby Wang</div>
+            <div class="instructor-title">HOUR LIGHT 未來美容學苑 創辦人｜美容乙丙級講師｜30多年美業經驗</div>
+            <p class="instructor-bio">
+              15歲進入美容業，擁有美容乙級、美髮丙級等多張專業證照。<br>
+              健康產業管理碩士，30多年美業實戰經驗，曾任德育護理健康學院兼任講師。
+            </p>
+          </div>
+        </div>
+        
+        <!-- 朵朵 -->
+        <div class="instructor-section" style="margin-top:0;">
+          <div class="instructor-photo">
+            <img loading="lazy" src="https://hourlightkey.com/doris.jpg" alt="朵朵 Doris">
+          </div>
+          <div class="instructor-info">
+            <div class="instructor-name">朵朵 Doris</div>
+            <div class="instructor-title">嗨執甲概念美學共同創辦人｜美容證照講師｜桃園救國團藝文教室聘任講師</div>
+            <p class="instructor-bio">
+              美容乙丙級證照講師，5年內輔導百位學員通過檢定。<br>
+              以「拆解式教學」聞名，把複雜流程變成小學生都能懂的步驟。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========== 聯絡資訊 ========== -->
+  <div class="card">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">CONTACT</div>
+        <h2 class="section-title">聯絡我們</h2>
+      </div>
+      
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="icon">📍</div>
+          <div class="label">上課地點</div>
+          <div class="value">桃園市桃園區<br>藝文一街86-6號17樓</div>
+        </div>
+        <div class="contact-item">
+          <div class="icon">📞</div>
+          <div class="label">聯絡電話</div>
+          <div class="value">03-3165955</div>
+        </div>
+        <div class="contact-item">
+          <div class="icon">💬</div>
+          <div class="label">LINE ID</div>
+          <div class="value">@821djgwg</div>
+        </div>
+        <div class="contact-item">
+          <div class="icon">📧</div>
+          <div class="label">Email</div>
+          <div class="value"><a href="/cdn-cgi/l/email-protection#dcb5b2bab39cb4b3a9aeb0b5bbb4a8b7b9a5f2bfb3b1" style="color:var(--text-dark);text-decoration:none;"><span class="__cf_email__" data-cfemail="5d34333b321d3532282f31343a3529363824733e3230">[email&#160;protected]</span></a></div>
+        </div>
+      </div>
+      
+      <div class="cta-box">
+        <div class="icon">🎓</div>
+        <div class="title">準備好了嗎？第一步從這裡開始</div>
+        <p class="text">
+          丙級入門 詳洽｜乙級進階 詳洽<br>
+          提升您的專業技能，輕鬆通過考試，實現專業進階！
+        </p>
+        <div class="cta-row">
+          <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener" class="btn btn-primary">💬 LINE 諮詢報名</a>
+          <a href="tel:03-3165955" class="btn btn-secondary">📞 電話洽詢</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  
+
+</div><!-- /.container -->
+
+<!-- ========== 馥靈之鑰完整版權聲明 Footer ========== -->
+
+<!-- ========== 漏斗導引 CTA（v3.2 修復）========== -->
+<style>
+.hl-funnel-cta{background:linear-gradient(180deg,rgba(5,3,10,0) 0%,rgba(233,194,125,0.06) 100%);padding:60px 20px;text-align:center;border-top:1px solid rgba(233,194,125,0.15)}
+.hl-funnel-cta h3{color:#f8dfa5;font-size:1.4rem;margin-bottom:12px;font-weight:500}
+.hl-funnel-cta p{color:rgba(249,240,229,0.7);font-size:0.95rem;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+.hl-funnel-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hl-funnel-btns a{padding:12px 28px;border-radius:999px;text-decoration:none;font-size:0.9rem;font-weight:500;transition:all .3s ease}
+.hl-funnel-btn-primary{background:linear-gradient(135deg,#b8922a,#d4a853);color:#ffffff}
+.hl-funnel-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,194,125,0.3)}
+.hl-funnel-btn-secondary{border:1px solid rgba(233,194,125,0.4);color:#f8dfa5;background:transparent}
+.hl-funnel-btn-secondary:hover{background:rgba(233,194,125,0.1);transform:translateY(-2px)}
+.hl-funnel-btn-line{background:#05030a;color:#ffffff}
+.hl-funnel-btn-line:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(6,199,85,0.3)}
+</style>
+
+<section class="hl-funnel-cta">
+  <h3>考完證照，然後呢？</h3>
+  <p>技術是基礎，但讓您不可取代的，是懂得讀懂客人的心。</p>
+  <div class="hl-funnel-btns">
+      <a href="nail-course.html" class="hl-funnel-btn-primary">💅 光療美甲師培訓課程</a>
+      <a href="courses.html" class="hl-funnel-btn-secondary">📚 查看進修課程</a>
+      <a href="https://lin.ee/RdQBFAN" class="hl-funnel-btn-line" target="_blank" rel="noopener">💬 LINE 聊聊</a>
+  </div>
+</section>
+
+<!-- ========== Footer End ========== --><script src="assets/js/hourlight-global.js?v=20260309"></script>
+<script>
+// Footer 免責聲明可收合功能
+document.addEventListener('DOMContentLoaded', function() {
+  const disclaimer = document.querySelector('.hl-footer-disclaimer');
+  if (disclaimer) {
+    disclaimer.addEventListener('click', function() {
+      this.classList.toggle('expanded');
+    });
+  }
+});
+</script>
+
+<!-- ========== 浮動 LINE æéï¼ç
+  <script src="assets/js/hl-music.js?v=20260309"></script>
+
+
+<!-- HL 轉化 CTA（展示頁用） -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/hl-referral.js?v=20260323"></script>
+<script src="assets/js/hl-gate.js"></script>
+<script src="assets/js/hl-record.js"></script>
+<!-- ===== HOUR LIGHT 未來美容學苑 進修課程區 ===== -->
+<section style="max-width:900px;margin:0 auto 60px;padding:0 16px">
+
+  <div style="text-align:center;margin-bottom:36px">
+    <div style="font-size:.75rem;letter-spacing:.25em;color:rgba(184,146,42,.8);margin-bottom:8px;text-transform:uppercase">Hour Light Academy</div>
+    <h2 style="font-family:'LXGW WenKai TC','Noto Serif TC',serif;font-size:clamp(1.3rem,3.5vw,1.8rem);font-weight:400;color:#f8dfa5;letter-spacing:.1em;margin-bottom:12px">技術以外，還有眼界</h2>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.6);max-width:520px;margin:0 auto;line-height:2">
+      美業 3.5 萬家，全台灣都在捲價格。<br>
+      唯一的出路是：你提供的不再只是一個服務，而是讓人改變的體驗。
+    </p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+
+    <!-- 課程 1：認證覺察師 -->
+    <div style="border:1px solid rgba(248,223,165,.3);border-radius:20px;padding:24px;background:rgba(248,223,165,.03)">
+      <div style="font-size:.7rem;letter-spacing:.15em;color:rgba(184,146,42,.85);margin-bottom:8px">旗艦認證 · 實體密集班</div>
+      <div style="font-size:1rem;font-weight:600;color:#f8dfa5;margin-bottom:12px">🔑 認證馥靈覺察師培訓</div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:12px">
+        <strong style="color:rgba(255,200,80,.7);font-weight:500;display:block;margin-bottom:4px">▌ 市場痛點</strong>
+        美容師陪客人的時間比誰都長，卻沒有工具讓她說清楚自己怎麼了。學會這套系統，你能幫客人說清楚——客單價從此不一樣。
+      </div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.7);line-height:2;margin-bottom:16px">
+        ✓ 130 張牌卡操作認證<br>
+        ✓ 馥靈秘碼計算與解讀<br>
+        ✓ H.O.U.R. 覺察流程實作<br>
+        ✓ 命盤基礎判讀<br>
+        ✓ 學員解讀實習 + 認證發證
+      </div>
+      <div style="border-top:1px solid rgba(248,223,165,.12);padding-top:12px;font-size:.78rem;color:rgba(255,255,255,.45)">2 日實體密集班</div>
+    </div>
+
+    <!-- 課程 2：精油調配 -->
+    <div style="border:1px solid rgba(248,223,165,.3);border-radius:20px;padding:24px;background:rgba(248,223,165,.03)">
+      <div style="font-size:.7rem;letter-spacing:.15em;color:rgba(184,146,42,.85);margin-bottom:8px">進階技術 · 實體 + 線上補充</div>
+      <div style="font-size:1rem;font-weight:600;color:#f8dfa5;margin-bottom:12px">🌿 感官科學 × 精油調配</div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:12px">
+        <strong style="color:rgba(255,200,80,.7);font-weight:500;display:block;margin-bottom:4px">▌ 市場痛點</strong>
+        精油市場亂、假貨多，從業者說不清「為什麼用這支」。真正懂精油的人，從氣味讀得出身體語言。這才是高端 SPA 的底氣。
+      </div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.7);line-height:2;margin-bottom:16px">
+        ✓ 單方精油系統辨識（50 支）<br>
+        ✓ 情緒對應 × 身體對應調配邏輯<br>
+        ✓ 感官覺察工作坊手法<br>
+        ✓ SPA 精油處方箋設計<br>
+        ✓ 客製調香實作練習
+      </div>
+      <div style="border-top:1px solid rgba(248,223,165,.12);padding-top:12px;font-size:.78rem;color:rgba(255,255,255,.45)">1 日實體 + 線上補充</div>
+    </div>
+
+    <!-- 課程 3：品牌升級 -->
+    <div style="border:1px solid rgba(248,223,165,.3);border-radius:20px;padding:24px;background:rgba(248,223,165,.03)">
+      <div style="font-size:.7rem;letter-spacing:.15em;color:rgba(184,146,42,.85);margin-bottom:8px">創業實戰 · 線上 + 半日工作坊</div>
+      <div style="font-size:1rem;font-weight:600;color:#f8dfa5;margin-bottom:12px">💼 美業主的品牌升級術</div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:12px">
+        <strong style="color:rgba(255,200,80,.7);font-weight:500;display:block;margin-bottom:4px">▌ 市場痛點</strong>
+        技術做得很好，業績還是卡在同一個數字。問題不在技術，在定位。「做臉」跟「讓人改變的體驗」，值的錢差了一個零。
+      </div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.7);line-height:2;margin-bottom:16px">
+        ✓ 從技術師到品牌主的思維轉換<br>
+        ✓ 定價策略 × 客單價提升<br>
+        ✓ 社群內容規劃（不用每天想題目）<br>
+        ✓ 案主心理學：留客、回客、轉介<br>
+        ✓ AI 工具加速日常運營
+      </div>
+      <div style="border-top:1px solid rgba(248,223,165,.12);padding-top:12px;font-size:.78rem;color:rgba(255,255,255,.45)">線上預習 + 半日工作坊</div>
+    </div>
+
+    <!-- 課程 4：AI × 美業 -->
+    <div style="border:1px solid rgba(248,223,165,.3);border-radius:20px;padding:24px;background:rgba(248,223,165,.03)">
+      <div style="font-size:.7rem;letter-spacing:.15em;color:rgba(184,146,42,.85);margin-bottom:8px">數位工具 · 線上影片 + 直播 Q&amp;A</div>
+      <div style="font-size:1rem;font-weight:600;color:#f8dfa5;margin-bottom:12px">🤖 AI × 美業｜不被淘汰的進化術</div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:12px">
+        <strong style="color:rgba(255,200,80,.7);font-weight:500;display:block;margin-bottom:4px">▌ 市場痛點</strong>
+        不是不想用 AI，是不知道怎麼用在自己的工作上。這堂課只教美業人用得到的：文案一鍵生成、客人回覆不再空白發呆。
+      </div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.7);line-height:2;margin-bottom:16px">
+        ✓ AI 文案生成（IG、FB、Line）<br>
+        ✓ 客服話術庫建立<br>
+        ✓ 內容行事曆自動規劃<br>
+        ✓ 實機操作演練<br>
+        ✓ 附課後可直接使用的模板包
+      </div>
+      <div style="border-top:1px solid rgba(248,223,165,.12);padding-top:12px;font-size:.78rem;color:rgba(255,255,255,.45)">線上影片 + 直播 Q&amp;A</div>
+    </div>
+
+    <!-- 課程 5：企業培訓 -->
+    <div style="border:1px solid rgba(248,223,165,.3);border-radius:20px;padding:24px;background:rgba(248,223,165,.03)">
+      <div style="font-size:.7rem;letter-spacing:.15em;color:rgba(184,146,42,.85);margin-bottom:8px">B2B 企業課 · 客製化</div>
+      <div style="font-size:1rem;font-weight:600;color:#f8dfa5;margin-bottom:12px">🏢 企業員工覺察培訓</div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:12px">
+        <strong style="color:rgba(255,200,80,.7);font-weight:500;display:block;margin-bottom:4px">▌ 市場痛點</strong>
+        心理健康講座辦完就忘。用牌卡 + 覺察問卷 + 命理的方式，員工帶著屬於自己的座標回去，不是聽完就走的說教。
+      </div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.7);line-height:2;margin-bottom:16px">
+        ✓ 可申請勞動部在職進修補助<br>
+        ✓ 半日 / 全日 / 系列課客製化<br>
+        ✓ 提供課前問卷 + 課後報告<br>
+        ✓ 美業 SPA 連鎖、沙龍集團優先<br>
+        ✓ 含中文講義電子版授權
+      </div>
+      <div style="border-top:1px solid rgba(248,223,165,.12);padding-top:12px;font-size:.78rem;color:rgba(255,255,255,.45)">依場次規模報價</div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div style="text-align:center;margin-top:32px;padding:28px 24px;border:1px solid rgba(248,223,165,.2);border-radius:20px;background:rgba(248,223,165,.04)">
+    <div style="font-size:.95rem;color:#f8dfa5;margin-bottom:8px;font-family:'LXGW WenKai TC','Noto Serif TC',serif">課程開班通知 + 場次查詢</div>
+    <div style="font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:18px;line-height:1.9">目前部分課程預約制開班，名額有限。<br>LINE 告知想上哪堂，逸君老師親自回覆場次和報名方式。</div>
+    <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener"
+       style="display:inline-block;background:#b8922a;color:#05030a;padding:12px 36px;border-radius:24px;font-weight:700;font-size:.95rem;text-decoration:none;letter-spacing:.06em">
+      LINE 詢問開班資訊
+    </a>
+  </div>
+
+</section>
+<!-- ===== Footer ===== -->
+<footer class="hl-footer">
+  <div class="hl-footer-inner">
+    <div class="hl-footer-brand">
+      <div class="hl-footer-logo"><img src="LOGO-1.png" alt="" class="hl-logo-icon" aria-hidden="true" loading="lazy">馥靈之鑰 Hour Light</div>
+      <div class="hl-footer-tagline">讀懂自己，活對人生｜創辦人 王逸君</div>
+    </div>
+    <div class="hl-footer-social" style="display:flex;gap:16px;justify-content:center;align-items:center;margin:16px 0;flex-wrap:wrap">
+      <a href="https://www.facebook.com/share/1QoZr7swk4/?mibextid=wwXIfr" target="_blank" rel="noopener" title="Facebook 馥靈之鑰" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">f</a>
+      <a href="https://www.instagram.com/judyanee" target="_blank" rel="noopener" title="Instagram @judyanee" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">📸</a>
+      <a href="https://www.youtube.com/@judyanee" target="_blank" rel="noopener" title="YouTube @judyanee" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">▶</a>
+      <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener" title="LINE @hourlight" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">💬</a>
+      <a href="podcast.html" title="Podcast" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">🎙</a>
+    </div>
+    <div class="hl-footer-links">
+      <a href="app.html">🔑 會員工作台</a>
+      <a href="index.html">首頁</a>
+      <a href="fuling-mima.html">生命秘碼</a>
+      <a href="draw-hl.html">線上抽牌</a>
+      <a href="destiny-engine.html">命盤引擎</a>
+      <a href="services.html">服務項目</a>
+      <a href="courses.html">課程學苑</a>
+      <a href="book.html">著作</a>
+      <a href="founder.html">關於創辦人</a>
+      <a href="hourlight-sitemap.html">網站地圖</a>
+      <a href="privacy.html">隱私政策</a>
+      <a href="terms.html">服務條款</a>
+      <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener">LINE 諮詢</a>
+    </div>
+    <div class="hl-footer-legal-toggle" onclick="toggleLegalContent()">
+      <span>📜 法律聲明與免責條款</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="hl-footer-legal-content" id="legalContent">
+      <div class="hl-legal-section">
+        <div class="hl-legal-title">🌿 服務性質說明</div>
+        <div class="hl-legal-text">本網站提供之服務（芳香能量覺察、牌卡解讀、生命數字分析等）僅供<strong>個人壓力管理、情緒紓解、自我探索</strong>參考。本服務<strong>不構成亦不取代</strong>醫療診斷、專業臨床評估、法律或財務建議。如有身心健康疑慮，請諮詢合格醫療專業人員。</div>
+      </div>
+      <div class="hl-legal-section">
+        <div class="hl-legal-title">📄 智慧財產權聲明</div>
+        <div class="hl-legal-text">本網站所有內容（文字、圖片、程式碼、方法論、課程架構、牌卡系統、H.O.U.R. 方法論）均受著作權法保護。未經書面授權，禁止複製、轉載、改作或商業使用。</div>
+      </div>
+      <div class="hl-legal-section">
+        <div class="hl-legal-title">™ 商標聲明</div>
+        <div class="hl-legal-text">「馥靈之鑰」「Hour Light」「H.O.U.R.」「馥靈秘碼」及相關標誌為馥靈之鑰國際有限公司之商標（申請中）。未經授權不得使用或註冊近似商標。</div>
+      </div>
+    </div>
+    <div class="hl-footer-copyright">
+      © 2026 馥靈之鑰國際有限公司 Hour Light International Co., Ltd.｜統編：60303284<br>All Rights Reserved.
+    </div>
+  </div>
+</footer>
+<script>
+function toggleLegalContent(){
+  var t=document.querySelector('.hl-footer-legal-toggle');
+  var c=document.getElementById('legalContent');
+  if(t&&c){t.classList.toggle('active');c.classList.toggle('active');}
+}
+</script>
+<script src="assets/js/hl-topnav.js"></script>
+<script src="assets/js/hl-bottomnav.js"></script>
+<script src="assets/js/hl-email.js"></script>
+<script src="assets/js/hl-chat.js"></script>
+<script src="assets/js/hl-aroma-fx.js" defer></script>
+<script src="assets/js/hl-share.js"></script>
+<script src="assets/js/hl-tracker.js" data-tool="beauty-course" data-tool-name="美業課程" data-tool-type="tool"></script>
+</body>
+</html>
