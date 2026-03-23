@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXP7K53QG6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BXP7K53QG6');
+</script>
+<!-- Facebook Pixel -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1333106288588347');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1333106288588347&ev=PageView&noscript=1" loading="lazy"></noscript>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的足跡｜馥靈之鑰</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#b8922a;--gold2:#a6841f;--bg:#fdf8f2;--card:#ffffff;--border:#e8ddd0;--text:#2d2418;--mid:#7a6a58;--light:#ddd4c6;--faint:#d5c8b8;--serif:'Noto Serif TC',serif;--body:'LXGW WenKai TC','Noto Serif TC',serif}
+body h1,body h2,body h3,body h4,body p,body li,body span,body a,body label,body td,body th,body dt,body dd,body div,body figcaption,body blockquote,body cite,body em,body small,body [class*="desc"],body [class*="text"],body [class*="content"],body [class*="title"],body [class*="heading"],body [class*="label"],body [class*="info"],body [class*="note"],body [class*="hint"],body [class*="sub"]{text-shadow:none!important}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:var(--bg);font-family:var(--body);color:var(--text);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 10% 10%,rgba(233,194,125,.07) 0%,transparent 40%),radial-gradient(circle at 90% 90%,rgba(200,168,120,.05) 0%,transparent 40%);pointer-events:none;z-index:0}
+
+/* ===== TOP NAV ===== */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(253,248,242,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.tb-left{display:flex;align-items:center;gap:14px}
+.tb-logo{font-family:var(--serif);font-size:1rem;color:var(--text);text-decoration:none;letter-spacing:.06em}
+.tb-sep{color:var(--faint);font-size:.9rem}
+.tb-title{font-size:.95rem;color:var(--mid)}
+.tb-right{display:flex;align-items:center;gap:14px}
+.tb-user{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--mid)}
+.tb-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:.95rem;color:#2d1a00;font-weight:bold;overflow:hidden}
+.tb-avatar img{width:100%;height:100%;object-fit:cover}
+.btn-logout{padding:6px 14px;background:transparent;border:1px solid var(--border);border-radius:20px;font-family:var(--body);font-size:.95rem;color:var(--mid);cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-logout:hover{border-color:var(--faint);color:var(--text)}
+
+/* ===== LAYOUT ===== */
+.wrap{max-width:720px;margin:0 auto;padding:28px 20px 80px;position:relative;z-index:1}
+
+/* ===== TAB NAV ===== */
+.tabnav{display:flex;gap:0;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:5px;margin-bottom:24px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabnav::-webkit-scrollbar{display:none}
+.tnav{flex-shrink:0;padding:8px 16px;border-radius:8px;border:none;background:transparent;font-family:var(--body);font-size:.92rem;color:var(--mid);cursor:pointer;transition:all .2s;white-space:nowrap}
+.tnav.on{background:linear-gradient(135deg,rgba(233,194,125,.18),rgba(205,168,110,.12));color:var(--text);}
+
+/* ===== SECTION ===== */
+.sec{display:none}.sec.on{display:block}
+
+/* ===== OVERVIEW ===== */
+.welcome{margin-bottom:22px}
+.welcome h2{font-family:var(--serif);font-size:1.4rem;font-weight:500;margin-bottom:4px}
+.welcome p{font-size:.92rem;color:var(--mid);line-height:1.7}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 10px;text-align:center}
+.stat-n{font-family:var(--serif);font-size:1.6rem;font-weight:500;color:var(--text);line-height:1}
+.stat-l{font-size:.95rem;color:var(--light);margin-top:4px;letter-spacing:.02em}
+
+/* ===== CARD ===== */
+.bcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px}
+.bcard-title{font-size:.95rem;letter-spacing:.12em;color:var(--light);margin-bottom:14px;text-transform:uppercase}
+
+/* ===== HISTORY LIST ===== */
+.hlist{display:flex;flex-direction:column;gap:0}
+.hitem{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #f0e8de}
+.hitem:last-child{border-bottom:none}
+.hicon{width:36px;height:36px;border-radius:10px;background:rgba(233,194,125,.1);border:1px solid rgba(233,194,125,.2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;margin-top:1px}
+.hinfo{flex:1;min-width:0}
+.htool{font-size:.95rem;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdetail{font-size:.95rem;color:var(--light)}
+.htime{font-size:.95rem;color:var(--faint);white-space:nowrap;margin-top:3px}
+.empty{text-align:center;padding:40px 20px;color:var(--light);font-size:.92rem;line-height:2}
+.empty .eicon{font-size:2rem;margin-bottom:8px}
+
+/* ===== NOTES ===== */
+.note-input{width:100%;min-height:120px;padding:14px;border:1px solid var(--border);border-radius:10px;font-family:var(--body);font-size:.9rem;color:var(--text);background:#fdf8f2;resize:vertical;outline:none;transition:border-color .2s;line-height:1.7}
+.note-input:focus{border-color:var(--gold);background:#fff}
+.note-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.note-count{font-size:.95rem;color:var(--light)}
+.btn-save{padding:10px 22px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:8px;font-family:var(--body);font-size:.92rem;color:#2d1a00;cursor:pointer;transition:opacity .2s}
+.btn-save:hover{opacity:.88}
+.note-item{padding:14px 0;border-bottom:1px solid #f0e8de}
+.note-item:last-child{border-bottom:none}
+.note-text{font-size:.95rem;color:var(--text);line-height:1.8;margin-bottom:6px;white-space:pre-wrap}
+.note-meta{display:flex;justify-content:space-between;align-items:center}
+.note-ts{font-size:.95rem;color:var(--light)}
+.btn-del{background:none;border:none;font-size:.95rem;color:var(--faint);cursor:pointer;padding:0;font-family:var(--body);transition:color .2s}
+.btn-del:hover{color:#c05050}
+
+/* ===== PROFILE ===== */
+.pcard{display:flex;align-items:center;gap:16px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:16px}
+.pavatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;overflow:hidden}
+.pavatar img{width:100%;height:100%;object-fit:cover}
+.pname{font-family:var(--serif);font-size:1.15rem;font-weight:500;margin-bottom:2px}
+.pemail{font-size:.9rem;color:var(--mid)}
+.pjoined{font-size:.74rem;color:var(--light);margin-top:3px}
+.form-row{margin-bottom:14px}
+.form-label{display:block;font-size:.95rem;color:var(--mid);margin-bottom:5px}
+.form-input{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:9px;font-family:var(--body);font-size:.9rem;color:var(--text);background:#fdf8f2;outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--gold);background:#fff}
+.btn-upd{padding:10px 20px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:8px;font-family:var(--body);font-size:.92rem;color:#2d1a00;cursor:pointer;transition:opacity .2s}
+.btn-upd:hover{opacity:.88}
+.pwdmsg{font-size:.9rem;margin-top:8px;color:var(--mid)}
+.danger-zone{margin-top:48px;padding:0;border:none}
+.dz-toggle{font-size:.65rem;color:rgba(128,128,128,.2);cursor:pointer;text-align:right;padding:8px 0;user-select:none;transition:color .3s}
+.dz-toggle:hover{color:rgba(128,128,128,.35)}
+.dz-inner{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.dz-inner.show{max-height:200px}
+.dz-title{font-size:.7rem;color:rgba(128,128,128,.25);margin-bottom:6px}
+.dz-desc{font-size:.68rem;color:rgba(128,128,128,.2);margin-bottom:8px;line-height:1.6}
+.btn-del-acct{padding:5px 12px;background:transparent;border:1px solid rgba(128,128,128,.1);border-radius:6px;font-family:var(--body);font-size:.65rem;color:rgba(128,128,128,.2);cursor:pointer;transition:all .3s}
+.btn-del-acct:hover{border-color:rgba(192,80,80,.25);color:rgba(192,80,80,.4)}
+
+/* ===== QUICK LINKS ===== */
+.qlinks{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.qlink{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 8px;background:var(--bg);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--mid);font-size:.9rem;transition:all .25s;text-align:center}
+.qlink:hover{border-color:var(--gold);color:var(--text);background:rgba(233,194,125,.06)}
+.qlink span{font-size:1.4rem}
+
+/* ===== MISC ===== */
+.load-more{display:block;width:100%;padding:11px;background:transparent;border:1px solid var(--border);border-radius:9px;font-family:var(--body);font-size:.92rem;color:var(--mid);cursor:pointer;transition:all .2s;margin-top:12px}
+.load-more:hover{border-color:var(--gold);color:var(--text)}
+.msg-inline{font-size:.9rem;margin-top:8px;min-height:20px;color:var(--mid)}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+@media(max-width:500px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .topbar{padding:0 14px}
+  .wrap{padding:20px 14px 70px}
+  .tb-user .name{display:none}
+}
+</style>
+<link rel="stylesheet" href="assets/css/hl-design-tokens.css">
+</head>
+<body>
+
+<!-- 頂部導覽 -->
+<nav class="topbar">
+  <div class="tb-left">
+    <a href="index.html" class="tb-logo">馥靈之鑰</a>
+    <span class="tb-sep">｜</span>
+    <span class="tb-title">我的足跡</span>
+  </div>
+  <div class="tb-right">
+    <div class="tb-user">
+      <div class="tb-avatar" id="topAvatar">✦</div>
+      <span class="name" id="topName">載入中</span>
+    </div>
+    <button class="btn-logout" onclick="doLogout()">登出</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- Tab 導覽 -->
+  <div class="tabnav">
+    <button class="tnav on" onclick="tab('overview')">🏠 總覽</button>
+    <button class="tnav" onclick="tab('history')">📜 使用足跡</button>
+    <button class="tnav" onclick="tab('notes')">📝 我的筆記</button>
+    <button class="tnav" onclick="tab('profile')">👤 帳號設定</button>
+  </div>
+
+  <!-- ① 總覽 -->
+  <div class="sec on" id="sec-overview">
+    <div class="welcome">
+      <h2 id="greet">歡迎回來 ✦</h2>
+      <p>這裡會記錄您用過的所有工具和測驗。<br>您不需要做什麼，系統自動幫您存。</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-n" id="sDraws">-</div><div class="stat-l">抽牌次數</div></div>
+      <div class="stat"><div class="stat-n" id="sQuiz">-</div><div class="stat-l">完成測驗</div></div>
+      <div class="stat"><div class="stat-n" id="sCalc">-</div><div class="stat-l">命盤計算</div></div>
+      <div class="stat"><div class="stat-n" id="sDays">-</div><div class="stat-l">加入天數</div></div>
+    </div>
+
+    <div class="bcard">
+      <div class="bcard-title">最近的足跡</div>
+      <div class="hlist" id="recentList"><div class="empty"><div class="eicon">✦</div>您的足跡會出現在這裡</div></div>
+    </div>
+
+    <div class="bcard">
+      <div class="bcard-title">快速前往</div>
+      <div class="qlinks">
+        <a href="draw-hl.html" class="qlink"><span>🎴</span>馥靈抽牌</a>
+        <a href="fuling-mima.html" class="qlink"><span>🔮</span>馥靈秘碼</a>
+        <a href="quiz-mbti.html" class="qlink"><span>🧠</span>MBTI 測驗</a>
+        <a href="quiz-disc.html" class="qlink"><span>🦅</span>DISC 測驗</a>
+        <a href="destiny-engine.html" class="qlink"><span>⭐</span>命盤引擎</a>
+        <a href="draw-light.html" class="qlink"><span>✨</span>單張抽牌</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 使用足跡 -->
+  <div class="sec" id="sec-history">
+    <div class="bcard">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div class="bcard-title" style="margin-bottom:0">全部記錄</div>
+        <select id="histFilter" style="padding:6px 10px;border:1px solid var(--border);border-radius:7px;font-family:var(--body);font-size:.9rem;color:var(--mid);background:var(--bg);outline:none" onchange="loadHistory()">
+          <option value="all">全部類型</option>
+          <option value="draw">抽牌</option>
+          <option value="quiz">測驗</option>
+          <option value="calculator">命盤計算</option>
+        </select>
+      </div>
+      <div class="hlist" id="histList"><div class="empty"><div class="eicon"><span class="spinner"></span></div>載入中...</div></div>
+      <button class="load-more" id="loadMoreBtn" style="display:none" onclick="loadMore()">顯示更多</button>
+    </div>
+  </div>
+
+  <!-- ③ 我的筆記 -->
+  <div class="sec" id="sec-notes">
+    <div class="bcard" style="margin-bottom:16px">
+      <div class="bcard-title">寫下今天的覺察</div>
+      <textarea class="note-input" id="noteInput" placeholder="今天有什麼想法、感受，或是牌卡給您的訊息？&#10;&#10;這裡只有您自己看得到。"></textarea>
+      <div class="note-footer">
+        <span class="note-count" id="noteCount">0 字</span>
+        <button class="btn-save" onclick="saveNote()">存起來 💾</button>
+      </div>
+      <div class="msg-inline" id="noteMsg"></div>
+    </div>
+    <div class="bcard">
+      <div class="bcard-title">我的筆記</div>
+      <div id="noteList"><div class="empty"><div class="eicon"><span class="spinner"></span></div>載入中...</div></div>
+    </div>
+  </div>
+
+  <!-- ④ 帳號設定 -->
+  <div class="sec" id="sec-profile">
+    <div class="pcard" id="profileCard">
+      <div class="pavatar" id="pAvatar">✦</div>
+      <div>
+        <div class="pname" id="pName">載入中</div>
+        <div class="pemail" id="pEmail"></div>
+        <div class="pjoined" id="pJoined"></div>
+      </div>
+    </div>
+
+    <div class="bcard">
+      <div class="bcard-title">修改密碼</div>
+      <div class="form-row"><label class="form-label">新密碼</label><input type="password" id="newPwd" class="form-input" placeholder="至少 6 個字元"></div>
+      <div class="form-row"><label class="form-label">確認新密碼</label><input type="password" id="newPwd2" class="form-input" placeholder="再輸入一次"></div>
+      <button class="btn-upd" onclick="changePwd()">更新密碼</button>
+      <div class="pwdmsg" id="pwdMsg"></div>
+    </div>
+
+    <div class="danger-zone">
+      <div class="dz-toggle" onclick="this.nextElementSibling.classList.toggle('show')">帳號管理</div>
+      <div class="dz-inner">
+        <div class="dz-title">帳號移除</div>
+        <div class="dz-desc">移除後所有記錄將永久消失且無法恢復</div>
+        <button class="btn-del-acct" onclick="confirmDel()">移除帳號</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/hl-referral.js?v=20260323"></script>
+<script src="assets/js/hl-gate.js"></script>
+<script src="assets/js/hl-record.js"></script>
+<script>
+let auth,db,_uid,_lastDoc=null;
+
+if(typeof FIREBASE_CONFIG!=='undefined'&&FIREBASE_CONFIG.apiKey!=='YOUR_API_KEY'){
+  if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);
+  auth=firebase.auth();db=firebase.firestore();
+  auth.onAuthStateChanged(async u=>{
+    if(!u){location.href='app.html?redirect='+encodeURIComponent(location.href);return;}
+    _uid=u.uid;
+    initUI(u);
+    await loadUserData(u);
+    loadHistory();
+    loadNotes();
+  });
+}
+
+function tab(name){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tnav').forEach(b=>b.classList.remove('on'));
+  document.getElementById('sec-'+name).classList.add('on');
+  event.currentTarget.classList.add('on');
+}
+
+function initUI(u){
+  const name=u.displayName||u.email.split('@')[0];
+  document.getElementById('greet').textContent='嗨，'+name+' ✦';
+  document.getElementById('topName').textContent=name;
+  document.getElementById('pName').textContent=name;
+  document.getElementById('pEmail').textContent=u.email;
+  if(u.photoURL){
+    document.getElementById('topAvatar').innerHTML=`<img src="${u.photoURL}" alt="">`;
+    document.getElementById('pAvatar').innerHTML=`<img src="${u.photoURL}" alt="">`;
+  } else {
+    const ini=(name.charAt(0)||'✦').toUpperCase();
+    document.getElementById('topAvatar').textContent=ini;
+    document.getElementById('pAvatar').textContent=ini;
+  }
+}
+
+async function loadUserData(u){
+  try{
+    const snap=await db.doc(`users/${u.uid}`).get();
+    const d=snap.exists?snap.data():{};
+    document.getElementById('sDraws').textContent=d.totalDraws||0;
+    document.getElementById('sQuiz').textContent=d.totalQuizzes||0;
+    document.getElementById('sCalc').textContent=d.totalCalcs||0;
+    if(d.createdAt){
+      const days=Math.max(1,Math.floor((Date.now()-d.createdAt.toDate().getTime())/(864e5)));
+      document.getElementById('sDays').textContent=days;
+      document.getElementById('pJoined').textContent='加入於 '+d.createdAt.toDate().toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'});
+    }else{document.getElementById('sDays').textContent=1;}
+    // 最近足跡
+    const hs=await db.collection(`users/${u.uid}/history`).orderBy('timestamp','desc').limit(5).get();
+    const list=document.getElementById('recentList');
+    if(hs.empty){list.innerHTML='<div class="empty"><div class="eicon">✦</div>開始使用工具，足跡就會出現在這裡</div>';return;}
+    list.innerHTML=hs.docs.map(d=>histHTML(d.data())).join('');
+  }catch(e){void 0;}
+}
+
+const ICONS={draw:'🎴',quiz:'🧩',calculator:'🔮',explore:'🔍',premium:'💎',tool:'✦'};
+function histHTML(d){
+  const ts=d.timestamp?d.timestamp.toDate().toLocaleDateString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+  return`<div class="hitem">
+    <div class="hicon">${ICONS[d.type]||'✦'}</div>
+    <div class="hinfo">
+      <div class="htool">${d.title||d.page||''}</div>
+      <div class="hdetail">${d.detail||''}</div>
+    </div>
+    <div class="htime">${ts}</div>
+  </div>`;
+}
+
+async function loadHistory(){
+  _lastDoc=null;
+  const filter=document.getElementById('histFilter').value;
+  const list=document.getElementById('histList');
+  list.innerHTML='<div class="empty"><span class="spinner"></span>載入中...</div>';
+  try{
+    let q=db.collection(`users/${_uid}/history`).orderBy('timestamp','desc').limit(20);
+    if(filter!=='all')q=q.where('type','==',filter);
+    const snap=await q.get();
+    if(snap.empty){list.innerHTML='<div class="empty"><div class="eicon">📭</div>還沒有使用記錄</div>';document.getElementById('loadMoreBtn').style.display='none';return;}
+    _lastDoc=snap.docs[snap.docs.length-1];
+    list.innerHTML=snap.docs.map(d=>histHTML(d.data())).join('');
+    document.getElementById('loadMoreBtn').style.display=snap.docs.length>=20?'block':'none';
+  }catch(e){list.innerHTML='<div class="empty">載入失敗，請重新整理試試</div>';}
+}
+
+async function loadMore(){
+  if(!_lastDoc)return;
+  const filter=document.getElementById('histFilter').value;
+  let q=db.collection(`users/${_uid}/history`).orderBy('timestamp','desc').startAfter(_lastDoc).limit(20);
+  if(filter!=='all')q=q.where('type','==',filter);
+  const snap=await q.get();
+  if(snap.empty){document.getElementById('loadMoreBtn').style.display='none';return;}
+  _lastDoc=snap.docs[snap.docs.length-1];
+  document.getElementById('histList').innerHTML+=snap.docs.map(d=>histHTML(d.data())).join('');
+  if(snap.docs.length<20)document.getElementById('loadMoreBtn').style.display='none';
+}
+
+async function loadNotes(){
+  const nl=document.getElementById('noteList');
+  try{
+    const snap=await db.collection(`users/${_uid}/notes`).orderBy('createdAt','desc').limit(30).get();
+    if(snap.empty){nl.innerHTML='<div class="empty"><div class="eicon">📝</div>還沒有筆記，寫下第一條吧</div>';return;}
+    nl.innerHTML=snap.docs.map(doc=>{
+      const d=doc.data(),ts=d.createdAt?d.createdAt.toDate().toLocaleString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+      return`<div class="note-item"><div class="note-text">${escHtml(d.text)}</div><div class="note-meta"><span class="note-ts">${ts}</span><button class="btn-del" onclick="delNote('${doc.id}',this)">刪除</button></div></div>`;
+    }).join('');
+  }catch(e){nl.innerHTML='<div class="empty">載入失敗</div>';}
+}
+
+const noteInput=document.getElementById('noteInput');
+noteInput.addEventListener('input',()=>{document.getElementById('noteCount').textContent=noteInput.value.length+' 字';});
+
+async function saveNote(){
+  const txt=noteInput.value.trim();
+  if(!txt)return;
+  const msg=document.getElementById('noteMsg');
+  msg.textContent='存入中...';
+  try{
+    await db.collection(`users/${_uid}/notes`).add({text:txt,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+    noteInput.value='';document.getElementById('noteCount').textContent='0 字';
+    msg.textContent='✅ 已存入';setTimeout(()=>msg.textContent='',2000);
+    await loadNotes();
+  }catch(e){msg.textContent='存入失敗';}
+}
+
+async function delNote(id,btn){
+  if(!confirm('確定要刪除這條筆記嗎？'))return;
+  btn.closest('.note-item').style.opacity='.4';
+  try{await db.doc(`users/${_uid}/notes/${id}`).delete();await loadNotes();}
+  catch(e){btn.closest('.note-item').style.opacity='1';}
+}
+
+async function changePwd(){
+  const p1=document.getElementById('newPwd').value,p2=document.getElementById('newPwd2').value;
+  const msg=document.getElementById('pwdMsg');
+  if(p1.length<6)return msg.textContent='密碼至少 6 個字元';
+  if(p1!==p2)return msg.textContent='兩次密碼不一樣';
+  try{
+    await auth.currentUser.updatePassword(p1);
+    msg.style.color='#4a8a5a';msg.textContent='✅ 密碼已更新';
+    document.getElementById('newPwd').value='';document.getElementById('newPwd2').value='';
+    setTimeout(()=>{msg.textContent='';msg.style.color='';},3000);
+  }catch(e){
+    msg.style.color='#c05050';
+    msg.textContent=e.code==='auth/requires-recent-login'?'請先重新登入再修改密碼':e.message;
+  }
+}
+
+function confirmDel(){
+  if(!confirm('確定要移除帳號嗎？所有記錄將永久消失。'))return;
+  var check=prompt('請輸入「確認移除」四個字來確認：');
+  if(check!=='確認移除'){alert('輸入不符，取消操作。');return;}
+  if(!confirm('最後確認：這個動作無法復原，確定要繼續嗎？'))return;
+  const u=auth.currentUser;
+  u.delete().then(()=>{location.href='index.html';}).catch(e=>{
+    if(e.code==='auth/requires-recent-login')alert('請先重新登入再操作');
+    else alert(e.message);
+  });
+}
+
+async function doLogout(){
+  await auth.signOut();
+  location.href='index.html';
+}
+
+function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+</script>
+<script src="assets/js/hl-bottomnav.js"></script>
+<script src="assets/js/hl-email.js"></script>
+<script src="assets/js/hl-chat.js"></script>
+<script src="assets/js/hl-aroma-fx.js" defer></script>
+<script src="assets/js/hl-tracker.js" data-tool="member-dashboard" data-tool-name="會員儀表板" data-tool-type="tool"></script>
+</body>
+</html>

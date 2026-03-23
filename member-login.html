@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXP7K53QG6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BXP7K53QG6');
+</script>
+<!-- Facebook Pixel -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1333106288588347');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1333106288588347&ev=PageView&noscript=1" loading="lazy"></noscript>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>加入馥靈之鑰｜登入 / 註冊</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#b8922a;--gold2:#a6841f;--bg:#fdf8f2;--card:#ffffff;--border:#e8ddd0;--text:#2d2418;--mid:#7a6a58;--light:#ddd4c6;--serif:'Noto Serif TC',serif;--body:'LXGW WenKai TC','Noto Serif TC',serif;--red:#c05050;--green:#4a8a5a}
+body h1,body h2,body h3,body h4,body p,body li,body span,body a,body label,body td,body th,body dt,body dd,body div,body figcaption,body blockquote,body cite,body em,body small,body [class*="desc"],body [class*="text"],body [class*="content"],body [class*="title"],body [class*="heading"],body [class*="label"],body [class*="info"],body [class*="note"],body [class*="hint"],body [class*="sub"]{text-shadow:none!important}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:var(--bg);font-family:var(--body);color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 16px}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 20% 20%,rgba(233,194,125,.08) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(200,168,120,.06) 0%,transparent 50%);pointer-events:none}
+.logo{text-align:center;margin-bottom:28px}
+.logo a{text-decoration:none;font-family:var(--serif);font-size:1.3rem;font-weight:500;color:var(--text);letter-spacing:.1em}
+.logo .sub{margin-top:4px;font-size:.95rem;color:var(--light);letter-spacing:.2em}
+.card{width:100%;max-width:420px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 32px;box-shadow:0 8px 40px rgba(180,150,100,.12);position:relative}
+.tabs{display:flex;background:#f5ede4;border-radius:10px;padding:4px;margin-bottom:28px}
+.tab{flex:1;padding:9px;border:none;background:transparent;border-radius:8px;font-family:var(--body);font-size:.9rem;color:var(--mid);cursor:pointer;transition:all .2s}
+.tab.on{background:var(--card);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.blk{display:none}.blk.on{display:block}
+.ttl{font-family:var(--serif);font-size:1.35rem;font-weight:500;margin-bottom:5px}
+.dsc{font-size:.9rem;color:var(--mid);margin-bottom:22px;line-height:1.75}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:.95rem;color:var(--mid);margin-bottom:5px}
+.fld input{width:100%;padding:12px 15px;border:1px solid var(--border);border-radius:9px;font-family:var(--body);font-size:.93rem;color:var(--text);background:#fdf8f2;outline:none;transition:border-color .2s}
+.fld input:focus{border-color:var(--gold);background:#fff}
+.btn-main{width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:9px;font-family:var(--body);font-size:.97rem;color:#2d1a00;cursor:pointer;transition:opacity .2s;margin-bottom:12px;letter-spacing:.04em}
+.btn-main:hover{opacity:.88}
+.div{display:flex;align-items:center;gap:12px;margin:14px 0;font-size:.95rem;color:var(--light)}
+.div::before,.div::after{content:'';flex:1;height:1px;background:var(--border)}
+.btn-g{width:100%;padding:12px;background:#fff;border:1px solid var(--border);border-radius:9px;font-family:var(--body);font-size:.9rem;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:border-color .2s,box-shadow .2s}
+.btn-g:hover{border-color:#aaa;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.btn-g svg{width:19px;height:19px}
+.msg{min-height:22px;margin:10px 0 2px;font-size:.83rem;line-height:1.6;border-radius:8px;padding:0;transition:all .2s}
+.msg.err{color:var(--red);background:rgba(192,80,80,.06);padding:9px 13px;border:1px solid rgba(192,80,80,.15)}
+.msg.ok{color:var(--green);background:rgba(74,138,90,.07);padding:9px 13px;border:1px solid rgba(74,138,90,.15)}
+.forgot{display:block;text-align:right;font-size:.95rem;color:var(--light);cursor:pointer;margin-top:-6px;margin-bottom:14px;transition:color .2s;background:none;border:none;font-family:var(--body)}
+.forgot:hover{color:var(--gold2)}
+.foot{text-align:center;margin-top:22px;font-size:.95rem;color:var(--light);line-height:1.8}
+.foot a{color:var(--mid);text-decoration:none}
+.foot a:hover{color:var(--gold2)}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);backdrop-filter:blur(4px);z-index:999;align-items:center;justify-content:center}
+.modal.on{display:flex}
+.mbox{background:var(--card);border-radius:16px;padding:30px 26px;width:min(360px,90vw);box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.mttl{font-family:var(--serif);font-size:1.05rem;margin-bottom:7px}
+.mdsc{font-size:.9rem;color:var(--mid);margin-bottom:16px;line-height:1.7}
+.mbtns{display:flex;gap:10px;margin-top:14px}
+.mbtns button{flex:1;padding:11px;border-radius:8px;font-family:var(--body);font-size:.94rem;cursor:pointer;transition:all .2s}
+.mbtns .send{background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#2d1a00}
+.mbtns .cancel{background:transparent;border:1px solid var(--border);color:var(--mid)}
+.mbtns .cancel:hover{border-color:#aaa}
+.cover{display:none;position:absolute;inset:0;background:rgba(255,255,255,.85);border-radius:20px;align-items:center;justify-content:center;z-index:10;font-size:.95rem;color:var(--mid);gap:9px}
+.cover.on{display:flex}
+.spin{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(max-width:460px){.card{padding:26px 18px}}
+</style>
+<link rel="stylesheet" href="assets/css/hl-design-tokens.css">
+</head>
+<body>
+
+<div class="logo">
+  <a href="index.html">馥靈之鑰 Hour Light</a>
+  <div class="sub">HOURLIGHTKEY.COM</div>
+</div>
+
+<div class="card">
+  <div class="cover" id="cover"><div class="spin"></div><span>處理中...</span></div>
+
+  <div class="tabs">
+    <button class="tab on" id="tLogin" onclick="sw('login')">登入</button>
+    <button class="tab" id="tReg" onclick="sw('reg')">建立帳號</button>
+  </div>
+
+  <!-- 登入 -->
+  <div class="blk on" id="bLogin">
+    <div class="ttl">歡迎回來 ✦</div>
+    <div class="dsc">登入後，您使用過的工具、測驗結果<br>都會幫您自動留存記錄。</div>
+    <div class="fld"><label>電子郵件</label><input type="email" id="lEmail" placeholder="your@email.com"></div>
+    <div class="fld"><label>密碼</label><input type="password" id="lPwd" placeholder="輸入密碼"></div>
+    <button class="forgot" onclick="openForgot()">忘記密碼？</button>
+    <button class="btn-main" onclick="doLogin()">登入</button>
+    <div class="div">或</div>
+    <button class="btn-g" onclick="doGoogle()">
+      <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      用 Google 帳號登入
+    </button>
+    <div class="msg" id="mLogin"></div>
+  </div>
+
+  <!-- 建立帳號 -->
+  <div class="blk" id="bReg">
+    <div class="ttl">建立您的帳號 🌱</div>
+    <div class="dsc">完全免費，不需要信用卡。<br>您的使用足跡會安全保存，只有您自己看得到。</div>
+    <div class="fld"><label>您的名字（暱稱也可以）</label><input type="text" id="rName" placeholder="叫我什麼都好"></div>
+    <div class="fld"><label>電子郵件</label><input type="email" id="rEmail" placeholder="your@email.com"></div>
+    <div class="fld"><label>設定密碼（至少 6 個字元）</label><input type="password" id="rPwd" placeholder="設定密碼"></div>
+    <div class="fld"><label>再輸入一次密碼確認</label><input type="password" id="rPwd2" placeholder="確認密碼"></div>
+    <button class="btn-main" onclick="doReg()">建立帳號</button>
+    <div class="div">或</div>
+    <button class="btn-g" onclick="doGoogle()">
+      <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      用 Google 快速加入
+    </button>
+    <div class="msg" id="mReg"></div>
+  </div>
+
+  <div class="foot">← <a href="index.html">回到官網</a></div>
+</div>
+
+<!-- 忘記密碼 -->
+<div class="modal" id="forgotModal">
+  <div class="mbox">
+    <div class="mttl">重設密碼</div>
+    <div class="mdsc">輸入您的 Email，<br>我們會寄一封重設密碼的信給您。</div>
+    <div class="fld"><label>電子郵件</label><input type="email" id="fEmail" placeholder="your@email.com"></div>
+    <div class="msg" id="mForgot"></div>
+    <div class="mbtns">
+      <button class="cancel" onclick="closeForgot()">取消</button>
+      <button class="send" onclick="doForgot()">發送重設信</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/hl-referral.js?v=20260323"></script>
+<script>
+let auth,db;
+const ok=typeof FIREBASE_CONFIG!=='undefined'&&FIREBASE_CONFIG.apiKey!=='YOUR_API_KEY';
+if(ok){if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);auth=firebase.auth();db=firebase.firestore();auth.onAuthStateChanged(u=>{if(u){const rd=new URLSearchParams(location.search).get('redirect');location.href=rd||'app.html';}});}
+
+function sw(t){
+  document.getElementById('tLogin').classList.toggle('on',t==='login');
+  document.getElementById('tReg').classList.toggle('on',t==='reg');
+  document.getElementById('bLogin').classList.toggle('on',t==='login');
+  document.getElementById('bReg').classList.toggle('on',t==='reg');
+}
+function msg(id,txt,type){const e=document.getElementById(id);e.className='msg '+(type||'');e.textContent=txt;}
+function loading(s){document.getElementById('cover').classList.toggle('on',s);}
+const E={'auth/user-not-found':'找不到這個帳號，請確認 Email 或先建立帳號','auth/wrong-password':'密碼不對，再試一次？','auth/invalid-credential':'帳號或密碼有誤','auth/too-many-requests':'嘗試太多次了，請稍後再試','auth/invalid-email':'Email 格式不對','auth/email-already-in-use':'這個 Email 已有帳號，直接登入就好','auth/weak-password':'密碼太短，請至少設 6 個字元'};
+function em(e){return E[e.code]||e.message;}
+
+async function doLogin(){
+  if(!ok)return;
+  const email=document.getElementById('lEmail').value.trim(),pwd=document.getElementById('lPwd').value;
+  if(!email||!pwd)return msg('mLogin','請填寫 Email 和密碼','err');
+  loading(true);
+  try{await auth.signInWithEmailAndPassword(email,pwd);}
+  catch(e){loading(false);msg('mLogin',em(e),'err');}
+}
+
+async function doReg(){
+  if(!ok)return;
+  const name=document.getElementById('rName').value.trim(),email=document.getElementById('rEmail').value.trim(),pwd=document.getElementById('rPwd').value,pwd2=document.getElementById('rPwd2').value;
+  if(!name)return msg('mReg','名字不能空著啦','err');
+  if(!email)return msg('mReg','Email 不能空著','err');
+  if(pwd.length<6)return msg('mReg','密碼至少 6 個字元','err');
+  if(pwd!==pwd2)return msg('mReg','兩次密碼不一樣','err');
+  loading(true);
+  try{
+    const c=await auth.createUserWithEmailAndPassword(email,pwd);
+    await c.user.updateProfile({displayName:name});
+    await db.doc(`users/${c.user.uid}`).set({displayName:name,email,createdAt:firebase.firestore.FieldValue.serverTimestamp(),lastSeen:firebase.firestore.FieldValue.serverTimestamp(),totalDraws:0,totalQuizzes:0,totalCalcs:0,totalPageViews:0});
+    if(typeof window.hlReferral!=='undefined')try{window.hlReferral.bindToUser(c.user.uid);}catch(e){}
+    msg('mReg','🎉 歡迎加入！','ok');
+  }catch(e){loading(false);msg('mReg',em(e),'err');}
+}
+
+async function doGoogle(){
+  if(!ok)return;loading(true);
+  try{
+    const p=new firebase.auth.GoogleAuthProvider(),c=await auth.signInWithPopup(p),u=c.user,ref=db.doc(`users/${u.uid}`),snap=await ref.get();
+    if(!snap.exists)await ref.set({displayName:u.displayName||u.email.split('@')[0],email:u.email,createdAt:firebase.firestore.FieldValue.serverTimestamp(),lastSeen:firebase.firestore.FieldValue.serverTimestamp(),totalDraws:0,totalQuizzes:0,totalCalcs:0,totalPageViews:0});
+    if(typeof window.hlReferral!=='undefined')try{window.hlReferral.bindToUser(u.uid);}catch(e){}
+  }catch(e){loading(false);if(e.code!=='auth/popup-closed-by-user')msg('mLogin',em(e),'err');}
+}
+
+function openForgot(){document.getElementById('fEmail').value=document.getElementById('lEmail').value;document.getElementById('mForgot').className='msg';document.getElementById('mForgot').textContent='';document.getElementById('forgotModal').classList.add('on');}
+function closeForgot(){document.getElementById('forgotModal').classList.remove('on');}
+async function doForgot(){
+  if(!ok)return;
+  const email=document.getElementById('fEmail').value.trim();if(!email)return;
+  try{await auth.sendPasswordResetEmail(email);msg('mForgot','✅ 已發送！請去信箱收信','ok');setTimeout(closeForgot,3000);}
+  catch(e){msg('mForgot',em(e),'err');}
+}
+document.addEventListener('keydown',e=>{if(e.key!=='Enter')return;if(document.getElementById('bLogin').classList.contains('on'))doLogin();else doReg();});
+</script>
+<script src="assets/js/hl-bottomnav.js"></script>
+<script src="assets/js/hl-aroma-fx.js" defer></script>
+<script src="assets/js/hl-tracker.js" data-tool="member-login" data-tool-name="會員登入" data-tool-type="tool"></script>
+</body>
+</html>

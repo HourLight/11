@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXP7K53QG6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BXP7K53QG6');</script>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>九型人格測驗免費｜27題直白到讓您手抖｜Enneagram｜馥靈之鑰</title>
+<meta name="description" content="免費九型人格測驗 Enneagram｜27題，問的不是表面行為，是心底那個最深的恐懼和最久的渴望。1到9號，您是哪一個？知道了，才知道為什麼一直跌在同一個坑。">
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/hourlight-global.css">
+<link rel="stylesheet" href="assets/css/hl-design-tokens.css">
+<link rel="stylesheet" href="assets/css/hl-cosmos.css">
+<style>
+.quiz-wrap{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+.quiz-hero *,.quiz-card *{text-shadow:none!important}
+.quiz-hero{text-align:center;padding:48px 24px 36px;background: #ffffff;border:1px solid rgba(233,194,125,0.2);border-radius:24px;margin-bottom:32px;backdrop-filter:blur(12px)}
+.quiz-badge{display:inline-block;padding:5px 18px;border:1px solid rgba(233,194,125,0.5);border-radius:999px;font-size:0.95rem;letter-spacing:2px;color:#8b6914;margin-bottom:20px}
+.quiz-hero-icon{font-size:3rem;margin-bottom:16px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.quiz-hero h1{font-family:"LXGW WenKai TC",serif;font-size:clamp(1.6rem,4vw,2.1rem);background:linear-gradient(135deg,#b8922a,#b8922a,#b8922a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;line-height:1.4}
+.quiz-hero p{color:#4a3c2a;font-size:0.95rem;line-height:1.8;max-width:520px;margin:0 auto 24px}
+.quiz-hero-note{display:inline-flex;gap:6px;align-items:center;font-size:0.9rem;color:#5a4a30;padding:8px 18px;border-radius:999px;background:rgba(233,194,125,0.12);border:1px solid rgba(184,146,42,0.25)}
+.quiz-progress-wrap{margin-bottom:28px}
+.quiz-progress-label{display:flex;justify-content:space-between;font-size:0.9rem;color:#2a1f0e;margin-bottom:8px;text-shadow:none}
+.quiz-progress-bar{height:4px;background:rgba(233,194,125,0.1);border-radius:999px;overflow:hidden}
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,#b8922a,#b8922a);border-radius:999px;transition:width 0.5s ease}
+.quiz-card{background: #ffffff;border:1px solid rgba(233,194,125,0.2);border-radius:20px;padding:32px 28px;margin-bottom:20px;backdrop-filter:blur(10px);display:none;animation:slideIn 0.4s ease}
+.quiz-card.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.quiz-q-num{font-size:0.95rem;letter-spacing:1.5px;color:#8b6914;margin-bottom:10px;opacity:0.7}
+.quiz-question{font-size:clamp(1rem,2.5vw,1.15rem);color:#2a1f0e;line-height:1.7;margin-bottom:24px}
+.quiz-scenario{display:block;font-size:0.92rem;color:#5a4a30;margin-top:8px;font-style:italic;padding:10px 14px;background:rgba(233,194,125,0.06);border-left:2px solid rgba(184,146,42,0.3);border-radius:0 8px 8px 0}
+.quiz-options{display:flex;flex-direction:column;gap:10px}
+.quiz-option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:1px solid rgba(233,194,125,0.15);border-radius:12px;background:transparent;color:#2a1f0e;font-size:0.92rem;line-height:1.6;cursor:pointer;transition:all 0.25s ease;text-align:left;width:100%;font-family:inherit}
+.quiz-option:hover{border-color:rgba(233,194,125,0.82);background:rgba(233,194,125,0.06);color:#2a1f0e;transform:translateX(4px)}
+.quiz-option.selected{border-color:#b8922a;background:rgba(233,194,125,0.12);color:#2a1f0e}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:24px}
+.btn-prev,.btn-next{padding:11px 28px;border-radius:999px;font-size:0.9rem;font-family:inherit;cursor:pointer;transition:all 0.25s ease}
+.btn-prev{background:transparent;border:1px solid rgba(184,146,42,0.3);color:#5a4a30}
+.btn-prev:hover{border-color:rgba(233,194,125,0.7);color:#ffffff}
+.btn-next{background:linear-gradient(135deg,#b8922a,#a07820);border:none;color:#ffffff;font-weight:600}
+.btn-next:hover{opacity:0.9;transform:translateY(-2px);box-shadow:0 6px 20px rgba(233,194,125,0.3)}
+.btn-next:disabled{opacity:1;cursor:not-allowed;transform:none}
+/* 結果 */
+.quiz-result{display:none;animation:slideIn 0.5s ease}
+.quiz-result.active{display:block}
+.result-hero{text-align:center;padding:40px 24px 32px;background: #ffffff;border-radius:24px;border:1px solid rgba(233,194,125,0.2);margin-bottom:24px;backdrop-filter:blur(12px)}
+.result-hero-icon{font-size:4rem;margin-bottom:12px;display:block;animation:float 2.5s ease-in-out infinite}
+.result-type-label{font-size:0.95rem;letter-spacing:3px;color:#f8dfa5;opacity:0.7;margin-bottom:8px}
+.result-type-num{font-family:monospace;font-size:2.5rem;color:#f8dfa5;margin-bottom:4px}
+.result-type-name{font-family:"LXGW WenKai TC",serif;font-size:clamp(1.4rem,4vw,2rem);color:#2a1f0e;margin-bottom:10px}
+.result-subtitle{font-size:1rem;color:#2a1f0e;line-height:1.6;margin-bottom:20px}
+/* 分數概覽 */
+.enn-top3{display:flex;gap:10px;justify-content:center;margin:20px 0;flex-wrap:wrap}
+.enn-type-tag{padding:8px 16px;border-radius:999px;font-size:0.9rem;border:1px solid rgba(233,194,125,0.2);color:#2a1f0e}
+.enn-type-tag.top{border-color:rgba(233,194,125,0.7);color:#f8dfa5;background:rgba(233,194,125,0.1)}
+.result-section{background: #ffffff;border:1px solid rgba(233,194,125,0.15);border-radius:18px;padding:24px 22px;margin-bottom:16px;backdrop-filter:blur(8px)}
+.result-section-title{font-size:0.9rem;letter-spacing:2px;color:#f8dfa5;opacity:1;margin-bottom:14px;font-weight:500}
+.result-section-content{color:#2a1f0e;font-size:0.92rem;line-height:1.85}
+.result-section-content strong{color:#2a1f0e;font-weight:600}
+.hl-title-reveal{margin-bottom:24px;animation:titleGlow 0.8s ease-out}
+@keyframes titleGlow{from{opacity:0;transform:translateY(20px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.hl-title-card{background:linear-gradient(145deg,rgba(20,10,40,0.96),rgba(12,6,24,0.96));border:1px solid rgba(233,194,125,0.45);border-radius:24px;padding:36px 28px 32px;text-align:center;position:relative;overflow:hidden}
+.hl-title-card::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:240px;height:240px;background:radial-gradient(circle,rgba(233,194,125,0.12) 0%,transparent 70%);pointer-events:none}
+.hl-title-eyebrow{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-style:italic;letter-spacing:5px;color:rgba(233,194,125,0.7);margin-bottom:10px}
+.hl-title-icon{font-size:3.2rem;display:block;margin-bottom:14px;animation:float 3s ease-in-out infinite}
+.hl-title-main{font-family:'LXGW WenKai TC','Noto Serif TC',serif;font-size:clamp(1.7rem,5vw,2.4rem);font-weight:500;color:#2a1f0e;letter-spacing:4px;margin-bottom:8px;background:linear-gradient(135deg,#ffffff 30%,#b8922a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hl-title-sub{font-size:0.95rem;color:#6b5a42;line-height:1.7;margin-bottom:24px}
+.hl-title-divider{width:48px;height:1px;background:linear-gradient(90deg,transparent,rgba(233,194,125,0.5),transparent);margin:0 auto 24px}
+.hl-title-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;text-align:left}
+.hl-title-tag{background:rgba(255,255,255,0.04);border:1px solid rgba(233,194,125,0.18);border-radius:14px;padding:14px 16px}
+.hl-title-tag-label{font-size:0.95rem;letter-spacing:2px;color:rgba(233,194,125,0.82);margin-bottom:6px}
+.hl-title-tag-value{font-size:0.95rem;color:#f0e8d8;line-height:1.5;font-family:'LXGW WenKai TC',serif}
+.hl-title-quote{font-family:'LXGW WenKai TC',serif;font-size:1rem;color:rgba(233,194,125,0.85);line-height:1.85;padding:16px 20px;background:rgba(233,194,125,0.07);border-left:2px solid rgba(233,194,125,0.4);border-radius:0 12px 12px 0;text-align:left}
+.hl-title-combo-hint{font-size:0.95rem;color:#9e8a70;margin-top:18px;letter-spacing:1px}
+@media(max-width:480px){.hl-title-grid{grid-template-columns:1fr}.hl-title-card{padding:28px 18px 24px}}
+.result-hour-bridge{background:linear-gradient(135deg,#f8f0ff,#fef9f0);border:1px solid rgba(156,110,219,0.25);border-radius:20px;padding:28px 24px;margin-bottom:20px;text-align:center}
+.hour-bridge-label{font-size:0.95rem;letter-spacing:2px;color:#7a5bb5;margin-bottom:12px}
+.hour-bridge-text{font-family:"LXGW WenKai TC",serif;font-size:1.1rem;color:#2a1f0e;line-height:1.8;margin-bottom:16px}
+.hour-bridge-cta{display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#b8922a,#a07820);color:#ffffff;border-radius:999px;font-size:0.95rem;font-weight:500;text-decoration:none;transition:all 0.3s ease}
+.hour-bridge-cta:hover{opacity:0.9;transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,194,125,0.3);-webkit-text-fill-color:#2a1f0e}
+.share-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;padding:20px 16px;background:rgba(10,6,20,0.7);border-radius:16px;border:1px solid rgba(233,194,125,0.1);backdrop-filter:blur(10px)}
+.share-btn{padding:10px 22px;border-radius:999px;font-size:0.9rem;font-family:inherit;cursor:pointer;border:1px solid rgba(233,194,125,0.35);background:rgba(10,6,20,0.75);color:#ffffff;transition:all 0.25s ease;display:flex;align-items:center;gap:6px;backdrop-filter:blur(8px)}
+.share-btn:hover{border-color:rgba(233,194,125,0.7);color:#ffffff;background:rgba(233,194,125,0.07)}
+.btn-retry{width:100%;padding:13px;border-radius:12px;border:1px solid rgba(184,146,42,0.3);background:#ffffff;color:#5a4a30;font-size:0.95rem;font-family:inherit;cursor:pointer;transition:all 0.25s ease;margin-bottom:32px;backdrop-filter:blur(8px)}
+.btn-retry:hover{border-color:rgba(233,194,125,0.82);color:#ffffff}
+.more-quizzes{background: #ffffff;border:1px solid rgba(233,194,125,0.15);border-radius:18px;padding:24px 22px;margin-bottom:20px}
+.more-quizzes h3{font-size:0.9rem;letter-spacing:2px;color:#f8dfa5;opacity:1;margin-bottom:14px;text-align:center}
+.more-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.more-card{padding:14px;border:1px solid rgba(233,194,125,0.2);border-radius:12px;text-align:center;text-decoration:none;color:#2a1f0e;font-size:0.9rem;transition:all 0.25s ease;line-height:1.6;background:rgba(10,6,20,0.5)}
+.more-card:hover{border-color:rgba(233,194,125,0.35);background:rgba(233,194,125,0.05);color:#2a1f0e;-webkit-text-fill-color:#2a1f0e}
+.more-card-icon{font-size:1.5rem;display:block;margin-bottom:6px}
+
+/* ===== 奶油浮雕底圖覆蓋 ===== */
+.hl-cosmos {
+  background: transparent;
+}
+.hl-stars-layer, .hl-meteors, .hl-aura { opacity: 0.85; }
+
+/* ── 馥靈之鑰 LOGO 圖標 ── */
+.hl-logo-icon {
+  height: 1.15em;
+  width: 1.15em;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+  margin-right: 4px;
+  display: inline-block;
+  position: relative;
+  top: -0.08em;
+}
+.hl-logo-hero {
+  display: block;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 14px auto;
+  filter: drop-shadow(0 0 18px rgba(233,194,125,0.55));
+}
+
+/* light bg */
+.hl-bg-castle {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:#05030a;
+  opacity: 1;
+  filter: saturate(1.1) brightness(.72);
+  pointer-events: none;
+}
+
+.aroma-landing{background:linear-gradient(135deg,rgba(90,158,122,.08),rgba(233,194,125,.06));border:1px solid rgba(90,158,122,.2);border-radius:20px;padding:24px 22px;margin-bottom:20px;position:relative;overflow:hidden}
+.aroma-landing::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(90,158,122,.1),transparent 70%);pointer-events:none}
+.aroma-landing .al-label{font-size:.95rem;letter-spacing:2px;color:rgba(122,171,109,.7);margin-bottom:10px}
+.aroma-landing .al-text{font-family:'LXGW WenKai TC',serif;font-size:.92rem;color:rgba(249,240,229,.75);line-height:2;font-weight:500}
+.aroma-landing .al-oil{display:inline-block;margin-top:12px;padding:6px 16px;border-radius:999px;background:rgba(90,158,122,.1);border:1px solid rgba(90,158,122,.2);font-size:.95rem;color:rgba(122,171,109,.8)}
+</style>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0a0612">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="馥靈之鑰">
+<link rel="stylesheet" href="assets/css/hl-music.css">
+<link rel="canonical" href="https://hourlightkey.com/quiz-enneagram.html">
+<link rel="stylesheet" href="css/hl-quiz-premium.css">
+<!-- Facebook Pixel -->
+<script>!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1333106288588347');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1333106288588347&ev=PageView&noscript=1" loading="lazy"></noscript>
+<!-- End Facebook Pixel -->
+<meta property="og:image" content="https://hourlightkey.com/og-image.jpg"/>
+</head>
+<body>
+
+<div class="hl-bg-castle"></div>
+<div class="hl-cosmos">
+  <div class="hl-stars-layer hl-stars-1"></div><div class="hl-stars-layer hl-stars-2"></div><div class="hl-stars-layer hl-stars-3"></div>
+  <div class="hl-meteors"><div class="hl-meteor"></div><div class="hl-meteor"></div><div class="hl-meteor"></div><div class="hl-meteor"></div><div class="hl-meteor"></div><div class="hl-meteor"></div></div>
+  <div class="hl-aura hl-aura-1"></div><div class="hl-aura hl-aura-2"></div>
+</div>
+<nav class="hl-nav">
+  <div class="hl-nav-inner">
+    <a href="index.html" class="hl-nav-brand"><span class="hl-nav-brand-text">馥靈之鑰</span></a>
+    <button class="hl-nav-toggle" onclick="document.querySelector('.hl-nav-links').classList.toggle('is-open')"><span></span><span></span><span></span></button>
+    <div class="hl-nav-links">
+      <a href="services.html" class="hl-nav-link">服務項目</a><a href="courses.html" class="hl-nav-link">課程學苑</a>
+      <a href="fuling-mima.html" class="hl-nav-link">馥靈秘碼</a><a href="draw-hl.html" class="hl-nav-link">能量抽牌</a>
+      <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener" class="hl-nav-cta">LINE 諮詢</a>
+    </div>
+  </div>
+</nav>
+
+<div class="quiz-wrap">
+  <div class="quiz-hero">
+    <div class="quiz-badge">Enneagram · 九型人格測驗</div>
+    <div class="quiz-hero-icon">🌀</div>
+    <h1>揭開您最深的<br>恐懼與渴望</h1>
+    <p>不是問您「想成為什麼樣的人」｜那個誰都會答。這裡問的，是那些您半夜清醒時悄悄浮現的東西。<br>27題，可能讓您有點不舒服，但您會懂。</p>
+    <div class="quiz-hero-note">⏱️ 約 5 分鐘 ・ 完全免費 ・ 結果可分享</div>
+  </div>
+
+  <div class="quiz-progress-wrap" id="progressWrap" style="display:none">
+    <div class="quiz-progress-label"><span id="progressText">第 1 題，共 27 題</span><span id="progressPct">0%</span></div>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div id="startArea" style="text-align:center;margin-bottom:32px">
+    <button class="btn-next" onclick="startQuiz()" style="padding:14px 48px;font-size:1rem">準備好了，開始 🌀</button>
+  </div>
+  <div id="questionsArea"></div>
+
+  <div class="quiz-result" id="quizResult">
+    <div class="hl-title-reveal" id="hlTitleReveal"></div>
+    <div class="result-hero" id="resultHero"></div>
+    <div class="result-section" id="rFear"></div>
+    <div class="result-section" id="rDesire"></div>
+    <div class="result-section" id="rWork"></div>
+    <div class="result-section" id="rShadow"></div>
+    <div class="result-hour-bridge" id="resultHour"></div>
+    <div class="result-section" id="resultAroma" style="display:none"></div>
+    <div style="background:rgba(10,6,20,0.8);border:1px solid rgba(233,194,125,0.15);border-radius:16px;padding:20px 16px;margin-bottom:16px;backdrop-filter:blur(12px);">
+    <div class="share-row">
+      <button class="share-btn" onclick="saveResultImage()" style="background:rgba(10,6,20,0.85)!important;border:1px solid rgba(233,194,125,0.4)!important;color:#f8dfa5!important;">📥 儲存圖片</button>
+      <button class="share-btn" onclick="copyResult()" style="background:rgba(10,6,20,0.85)!important;border:1px solid rgba(233,194,125,0.4)!important;color:#f8dfa5!important;">📋 複製結果</button>
+      <button class="share-btn" onclick="shareToLine()" style="background:rgba(10,6,20,0.85)!important;border:1px solid rgba(233,194,125,0.4)!important;color:#f8dfa5!important;">💬 分享到 LINE</button>
+    </div>
+    <button class="btn-retry" onclick="restartQuiz()" style="background:rgba(10,6,20,0.85)!important;border:1px solid rgba(233,194,125,0.3)!important;color:#ffffff!important;">🔄 重新測一次（您剛才沒有誠實）</button>
+    </div>
+    <div class="more-quizzes">
+      <h3>✨ 想從不同角度再看看自己？ ✨</h3>
+      <div class="more-grid">
+        <a href="quiz-disc.html" class="more-card"><span class="more-card-icon">🦅</span>DISC 職場動物</a>
+        <a href="quiz-mbti.html" class="more-card"><span class="more-card-icon">🧠</span>MBTI 16型人格</a>
+        <a href="quiz-bigfive.html" class="more-card"><span class="more-card-icon">🌊</span>五大人格</a>
+        <a href="quiz-bloodtype.html" class="more-card"><span class="more-card-icon">🩸</span>血型個性</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>@media(max-width:768px){}@media(min-width:769px) and (max-width:900px){}</style>
+
+<script>
+// 九型人格，每題三個選項各對應一個型（每型3題，9型=27題）
+// 1=完美主義者, 2=給予者, 3=成就者, 4=個人主義者, 5=觀察者,
+// 6=忠誠者, 7=享樂主義者, 8=挑戰者, 9=和平主義者
+const questions=[
+  {q:'你最常拿來批評自己的那句話？',scenario:'（第一個讓你點頭的，就是答案）',opts:[
+    {text:'「你怎麼連這個都做不好」',v:1},
+    {text:'「你為什麼不去幫那個人」',v:2},
+    {text:'「別人對你的看法會改變」',v:3}]},
+  {q:'你最需要別人給你什麼？',scenario:'',opts:[
+    {text:'肯定你做的是對的',v:1},
+    {text:'告訴你他需要你',v:2},
+    {text:'看見你的能力，認可你',v:3}]},
+  {q:'你在關係裡最常有的感覺？',scenario:'',opts:[
+    {text:'我是不是讓這段關係失望了',v:1},
+    {text:'我有沒有給得夠多',v:2},
+    {text:'我表現得夠不夠好',v:3}]},
+  {q:'你最怕別人發現你什麼？',scenario:'',opts:[
+    {text:'我其實沒那麼特別',v:4},
+    {text:'我其實不如表面那麼懂',v:5},
+    {text:'我其實也不確定自己是對的',v:6}]},
+  {q:'你最典型的「壞習慣」？',scenario:'',opts:[
+    {text:'腦子裡太多想體驗的，很難停下來',v:7},
+    {text:'覺得被威脅時，直接正面對抗',v:8},
+    {text:'衝突時先讓大家平靜，自己的感受先放著',v:9}]},
+  {q:'最難的日子，你怎麼撐的？',scenario:'',opts:[
+    {text:'更嚴格管理自己，至少外表看起來沒問題',v:1},
+    {text:'專心照顧別人，有用處讓我有存在感',v:2},
+    {text:'埋頭做事，一直動就不用去感覺',v:3}]},
+  {q:'你最享受的時刻？',scenario:'',opts:[
+    {text:'做出一件自己真的覺得好的作品',v:4},
+    {text:'深入研究一件事，快要看透它了',v:5},
+    {text:'知道大家都信任我、跟我站同一邊',v:6}]},
+  {q:'只剩一個下午可以做任何事，你？',scenario:'',opts:[
+    {text:'去做一件一直想做卻還沒做的事',v:7},
+    {text:'把那件被阻止的事做一次',v:8},
+    {text:'跟最重要的人在一起，不用做什麼',v:9}]},
+  {q:'你最難說出口的一句話？',scenario:'',opts:[
+    {text:'「這件事我做錯了」',v:1},
+    {text:'「我也需要有人照顧我」',v:2},
+    {text:'「我失敗了，不知道下一步」',v:3}]},
+  {q:'別人說你最大的特點通常是？',scenario:'',opts:[
+    {text:'感受力很深，對美和情感特別敏銳',v:4},
+    {text:'很懂，說話有份量，分析最準',v:5},
+    {text:'非常忠誠，說到做到，可以信任',v:6}]},
+  {q:'你讓人開心的方式？',scenario:'',opts:[
+    {text:'帶他們做有趣的事，分享你的熱情',v:7},
+    {text:'直接說出別人不敢說的話，幫他們出頭',v:8},
+    {text:'讓他們感受到完全被接受',v:9}]},
+  {q:'你對「成功」的定義？',scenario:'',opts:[
+    {text:'做出讓自己驕傲的事，標準我自己定',v:1},
+    {text:'讓我愛的人覺得有我真好',v:2},
+    {text:'被看見、被認可，站在那個高度',v:3}]},
+  {q:'你最需要對方理解什麼？',scenario:'',opts:[
+    {text:'我是獨特的，不要拿我跟別人比',v:4},
+    {text:'我需要空間，不是冷漠，是我的方式',v:5},
+    {text:'我的擔心不是多餘的，是認真對待',v:6}]},
+  {q:'你最享受的「放電」方式？',scenario:'（真的喜歡的，不是應該的）',opts:[
+    {text:'計畫一件期待的事，光想就開心',v:7},
+    {text:'做一件有挑戰的事，感覺還有實力',v:8},
+    {text:'什麼都不做，躺著，把世界關在門外',v:9}]},
+  {q:'最不能接受別人說你什麼？',scenario:'（最刺的那個）',opts:[
+    {text:'「你太完美主義了，放鬆一點」',v:1},
+    {text:'「你有時候讓人喘不過氣」',v:2},
+    {text:'「你太在乎別人的眼光」',v:3}]},
+  {q:'什麼時候最容易低落？',scenario:'',opts:[
+    {text:'感覺被誤解，沒有人真正懂我',v:4},
+    {text:'資訊不夠，無法評估風險',v:5},
+    {text:'覺得付出沒被看見',v:6}]},
+  {q:'你最難學會的一課？',scenario:'',opts:[
+    {text:'不是所有事情都需要意義',v:7},
+    {text:'脆弱有時候是一種力量',v:8},
+    {text:'你自己也需要被照顧',v:9}]},
+  {q:'壓力最大時你怎麼「撐著」？',scenario:'（實際的，不是應該的）',opts:[
+    {text:'更嚴格管理一切，讓外表看起來沒事',v:1},
+    {text:'更主動照顧別人，對人有用讓我好過',v:2},
+    {text:'埋頭做事，一直動就不用感覺壓力',v:3}]},
+  {q:'朋友的哪句話會讓你瞬間崩潰？',scenario:'',opts:[
+    {text:'「你就是平凡人，沒什麼特別的」',v:4},
+    {text:'「你根本不懂這件事」',v:5},
+    {text:'「我以為你是可以信任的人」',v:6}]},
+  {q:'你最常對自己說「不能停」是因為？',scenario:'',opts:[
+    {text:'還有那麼多沒體驗過的',v:7},
+    {text:'不能讓別人覺得我被打倒',v:8},
+    {text:'要確保每個人都還好，才能休息',v:9}]},
+  {q:'你消失一個月，朋友最想你的是？',scenario:'',opts:[
+    {text:'那種特別的深度，跟你聊天就是不一樣',v:4},
+    {text:'你的分析和判斷，遇到問題就想問你',v:5},
+    {text:'有你在就覺得穩的那個感覺',v:6}]},
+  {q:'朋友說「我好高興認識你」，你最希望他接著說？',scenario:'',opts:[
+    {text:'「跟你在一起永遠不無聊」',v:7},
+    {text:'「你面前不用假裝」',v:8},
+    {text:'「心情最差的時候，最想靠近你」',v:9}]},
+  {q:'一件在意的事剛發生，你第一反應？',scenario:'（實際怎麼做，不是應該怎樣）',opts:[
+    {text:'搞清楚哪裡沒做好、下次怎麼不同',v:1},
+    {text:'想找人說，不說出來一直堵著',v:2},
+    {text:'先壓下去，繼續做手邊的事',v:3}]},
+  {q:'你最難接受的失去？',scenario:'',opts:[
+    {text:'那個讓你覺得自己獨特的感受',v:4},
+    {text:'資訊和理解，不知道發生了什麼',v:5},
+    {text:'一個你以為可以信任的人',v:6}]},
+  {q:'你最享受什麼感覺？',scenario:'（用身體感受選）',opts:[
+    {text:'期待感，等著好事發生的興奮',v:7},
+    {text:'掌控感，這件事我能搞定',v:8},
+    {text:'平靜感，世界安靜了，我也安靜了',v:9}]},
+  {q:'你最不能接受哪種人？',scenario:'',opts:[
+    {text:'草率的人，什麼都馬馬虎虎',v:1},
+    {text:'忘恩負義的人，幫了還被嫌',v:2},
+    {text:'假裝的人，表裡不一',v:3}]},
+  {q:'讓你真正快樂的事？',scenario:'（最核心的）',opts:[
+    {text:'世界因為我的存在，多了一點美和深度',v:4},
+    {text:'真正理解一件事，看穿它的本質',v:5},
+    {text:'做了一件對的事，不管有沒有人看見',v:6}]},
+  {q:'你最停不下來的原因？',scenario:'（累了還是放不下的那個）',opts:[
+    {text:'腦子裡一直有下一個想試的',v:7},
+    {text:'不能就這樣輸',v:8},
+    {text:'還有人需要我',v:9}]},
+];
+
+
+// ===== 馥靈稱號系統 =====
+const ennTitles = {
+  1: { icon:'⚗️', title:'煉金尋道者', sub:'你在追一個只有你看得見的標準。這不是固執，是使命。', castle:'覺察廳（O 區）', hour:'Own ✦ 智慧辨識', oil:'薰衣草 · 迷迭香', quote:'最難放下的重量，是你親手為自己打造的那把尺。' },
+  2: { icon:'🌹', title:'愛的給予者', sub:'你照顧了所有人。現在讓自己也成為那個被照顧的人。', castle:'靜心殿（H 區）', hour:'Heal ✦ 身心校準', oil:'玫瑰 · 天竺葵', quote:'你最需要聽到的那句話，是你最難說出口的那句話：「我也需要你。」' },
+  3: { icon:'🏆', title:'光榮鑄造師', sub:'你讓成功發生。但你有沒有問過自己：這是我想要的成功？', castle:'啟程塔（R 區）', hour:'Rise ✦ 行動進化', oil:'甜橙 · 雪松', quote:'你的價值不是你的成績單。摘掉所有頭銜之後，還剩下的那個你，才是真的你。' },
+  4: { icon:'🎨', title:'深海畫師', sub:'你把世界看得比任何人都深。這份深，是你最稀有的天賦。', castle:'靜心殿（H 區）', hour:'Heal ✦ 身心校準', oil:'廣藿香 · 依蘭', quote:'你感受的維度比別人多了好幾層。這份細膩，是禮物。' },
+  5: { icon:'🔭', title:'孤獨智者', sub:'你在看，你在理解，你在等一個真正懂你問的問題的人出現。', castle:'解鎖密室（U 區）', hour:'Unlock ✦ 潛能解鎖', oil:'乳香 · 薄荷', quote:'你把世界看得很清楚。你有沒有讓世界也清楚地看見你？' },
+  6: { icon:'⚓', title:'守護盟約者', sub:'你太認真對待這個世界，和你愛的人。這份認真，是稀缺的。', castle:'靜心殿（H 區）', hour:'Heal ✦ 身心校準', oil:'岩蘭草 · 廣藿香', quote:'安全感不是從外面找來的，它住在你早就擁有但還沒認出的那個地方。' },
+  7: { icon:'🎡', title:'光明追跡者', sub:'你讓每件事都充滿可能性。你的眼睛裡永遠有光。', castle:'解鎖密室（U 區）', hour:'Unlock ✦ 潛能解鎖', oil:'佛手柑 · 甜橙', quote:'你不是在逃，你是在找。只是有時候，你找的東西一直在你停下來的那個地方等你。' },
+  8: { icon:'🔥', title:'意志持火者', sub:'你扛著所有人走，但誰讓你也有卸下來的機會？', castle:'啟程塔（R 區）', hour:'Rise ✦ 行動進化', oil:'薑 · 黑胡椒', quote:'你最強的時候不是發怒的時候，是你允許自己脆弱但還是撐著的時候。' },
+  9: { icon:'☁️', title:'和諧守門人', sub:'你是讓一切都能運轉的人。現在，你的城堡裡有一個房間，只屬於你。', castle:'靜心殿（H 區）', hour:'Heal ✦ 身心校準', oil:'洋甘菊 · 岩蘭草', quote:'你為每個人留了位子。你為自己留了幾個？' }
+};
+
+function renderHlTitle(type, typeName) {
+  const t = ennTitles[type] || ennTitles[1];
+  document.getElementById('hlTitleReveal').innerHTML = `
+    <div class="screenshot-card" id="screenshotCard">
+      <div class="ss-brand">HOUR LIGHT ✦ 馥靈之鑰</div>
+      <div class="ss-icon">${t.icon}</div>
+      <div class="ss-title">${t.title}</div>
+      <div class="ss-sub">${t.sub}</div>
+      <div class="ss-tags">
+        <span class="ss-tag">第 ${type} 型</span>
+        <span class="ss-tag">${t.castle}</span>
+      </div>
+      <div class="ss-quote">「${t.quote}」</div>
+      <div class="ss-footer">hourlightkey.com ✦ 你的城堡，你的鑰匙</div>
+    </div>
+    <div class="hl-title-card">
+      <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+      <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+      <div class="hl-title-eyebrow">Hour Light ✦ 你的馥靈稱號</div>
+      <span class="hl-title-icon">${t.icon}</span>
+      <div class="hl-title-main">${t.title}</div>
+      <div class="hl-title-sub">${t.sub}</div>
+      <div class="hl-title-divider"></div>
+      <div class="hl-title-grid">
+        <div class="hl-title-tag"><div class="hl-title-tag-label">✦ 城堡守護宮</div><div class="hl-title-tag-value">${t.castle}</div></div>
+        <div class="hl-title-tag"><div class="hl-title-tag-label">✦ H.O.U.R. 天賦</div><div class="hl-title-tag-value">${t.hour}</div></div>
+        <div class="hl-title-tag" style="grid-column:1/-1"><div class="hl-title-tag-label">✦ 你的精油指引</div><div class="hl-title-tag-value">🌿 ${t.oil}</div></div>
+      </div>
+      <div class="hl-title-quote">「${t.quote}」</div>
+      <div class="hl-title-combo-hint">第 ${type} 型｜${typeName}</div>
+    </div>`;
+}
+
+const ennData={
+  1:{icon:'⚗️',name:'完美主義者',sub:'你不是挑剔，你是在追一個只有你看得見的標準',
+    fear:`<strong>你最深的恐懼是「犯錯」</strong>，不只是事情做錯，是「成為那個做錯事的人」。你內心有一把很嚴厲的尺，只要沒達到那個刻度，你就會責備自己。這把尺是你的動力，也是你最沉的重量。`,
+    desire:`<strong>你最渴望的是「正確」</strong>，不只是做對事情，而是做一個「對的人」。你相信如果努力夠了、做得夠好，你就值得被愛、被接受。說真的，你本來就值得，不需要靠完美換來。`,
+    work:`你是那種讓交出去的東西都過得了自己這關的人。這很珍貴，但你也要小心：有時候「夠好」就可以出發了，等到「完美」可能永遠都出不了門。`,
+    shadow:`你最深的功課是允許自己「不完美而且還是值得」。你對別人的要求往往是對自己的投影｜你批評別人的那些點，通常就是你最害怕在自己身上看到的東西。`,
+    hour:`你的「Own（智慧辨識）」超強｜你對什麼是對的、什麼是好的，有非常清晰的感知。但「Heal（身心校準）」是你常常跳過的那一步。馥靈之鑰想問你：什麼時候，你允許自己不完美地好好活著？`},
+  2:{icon:'🌹',name:'給予者',sub:'你照顧了所有人，但有人照顧過你嗎？',
+    fear:`<strong>你最深的恐懼是「不被需要」</strong>，是那種「如果我不夠有用、夠體貼、夠好，他就不會留下來了」的感覺。你用給予來確認自己的位置，用照顧換取愛的保障。`,
+    desire:`<strong>你最渴望的是「被愛」</strong>，不是因為你做了什麼，而是因為你本來就值得。你給出那麼多，其實你也在等有人告訴你：「你不需要為我做任何事，我就是想跟你在一起。」`,
+    work:`你是最懂得在工作中讓大家感到被照顧的人。問題是你有時候會模糊了「我真正的需求」和「讓別人開心」之間的界線，久而久之你也不確定自己要什麼了。`,
+    shadow:`你的功課是學會說「不」，以及學會「直接說出你需要什麼」，而不是用服務換感情。給出去的愛，如果底層是「這樣你才會愛我」，你和對方都會很累。`,
+    hour:`你的「Heal（身心校準）」能力全部用在別人身上了。馥靈之鑰最想對你說的一句話是：你也有需要被照顧的地方，這不需要不好意思，這就是身為人最真實的樣子。`},
+  3:{icon:'🏆',name:'成就者',sub:'你拚命往前，但你知道你在追什麼嗎？',
+    fear:`<strong>你最深的恐懼是「失敗」</strong>，不只是事沒做成，是「我不夠好、不值得被愛、不值得這個位置」的感覺。你用成就來證明自己的價值，但沒有人告訴過你：你的價值不是靠成就堆起來的。`,
+    desire:`<strong>你最渴望的是「被看見」</strong>｜不是被看見你的成果，是被看見你這個人。那個在成功背後還是會有點不安全感的你、那個也想偶爾停下來休息的你。`,
+    work:`你是天生的執行者，你的效率和目標感讓人佩服。但你的風險是：你太擅長把自己變成「完成任務的工具」，而忘了問問自己：「這是我真的想要的嗎？」`,
+    shadow:`你的功課是學會「不在舞台上的自己也是真實的自己」。你的形象管理能力很強，但那個沒有頭銜、沒有成就光環的你，你喜歡他嗎？`,
+    hour:`你的「Rise（行動進化）」是你最強的能力｜你很會讓事情發生。馥靈之鑰想幫你做一件最難的事：在動起來之前，先問問那個「不需要證明什麼」的你，你還好嗎？`},
+  4:{icon:'🎨',name:'個人主義者',sub:'你的感受比別人的深，但你不是少了什麼',
+    fear:`<strong>你最深的恐懼是「平凡」</strong>，是那種「我只是眾多普通人之一，沒有什麼特別的」的感覺。你需要知道自己是不同的、是有深度的、是值得被看見的。`,
+    desire:`<strong>你最渴望的是「被完整理解」</strong>｜不是大概懂，是真的懂。你的內心世界比外面看起來複雜太多了，你找了很久，還在找那個能真正懂你的人或事。`,
+    work:`你的創意和感受力是無可取代的資產。你能在別人看不見的地方看見意義，能在平凡的事物裡找到深度。你的功課是：不要讓「尋找意義」變成一種逃避行動的方式。`,
+    shadow:`你有時候會太沉浸在自己的感受裡，以至於把身邊的人看成「不夠懂我」而疏遠了。你最深的渴望｜「被理解」｜有時候需要你先走出自己的世界，才能讓別人走進來。`,
+    hour:`你的感受力天生就和「Heal（身心校準）」高度重疊。馥靈之鑰的牌卡和香氣工具，對你來說特別像在說你的語言｜因為你的感官世界就是你最真實的入口。`},
+  5:{icon:'🔭',name:'觀察者',sub:'你把世界看得很清楚，但你有讓世界看見你嗎？',
+    fear:`<strong>你最深的恐懼是「空洞」</strong>，是資源不夠、能力不夠、不足以應對世界的感覺。你用知識和理解武裝自己，因為「夠懂」讓你有安全感。`,
+    desire:`<strong>你最渴望的是「能力」</strong>｜真正的理解和洞察，讓你能在任何情況下都站得住腳。你不要被打個措手不及，你要看透那些別人還沒看透的東西。`,
+    work:`你的分析力和獨立性是你最強的武器。你不需要掌聲，你只需要夠多的資訊和夠安靜的空間。問題是你有時候會研究太久，讓行動等太久。`,
+    shadow:`你的功課是學會「夠了」｜不是真的知道全部了才能行動，而是帶著你現在知道的東西，往前走一步。完整的地圖是走出來的，不是等你想出來的。`,
+    hour:`你的「Own（智慧辨識）」能力是頂配｜你能看穿事物的本質。馥靈之鑰想幫你做的是：把那份洞察，從「向外看」，也轉一些來「向內看」｜那個一直在觀察世界的你，本身也是值得被看見的。`},
+  6:{icon:'⚓',name:'忠誠者',sub:'你的擔心不是多餘的，你只是太認真對待這個世界了',
+    fear:`<strong>你最深的恐懼是「沒有支撐」</strong>，是那種孤立無援、不知道該相信誰、不確定下一步安不安全的感覺。你用忠誠和警惕來保護自己和你愛的人。`,
+    desire:`<strong>你最渴望的是「安全感」</strong>｜不只是物質的安全，是那種「這個人、這個地方、這件事，我可以信任」的篤定感。這種感覺你找了很久，即使找到了還是有點不敢完全放心。`,
+    work:`你的忠誠和對細節的警惕讓你成為最可靠的夥伴。你預見問題的能力讓整個團隊少踩了很多坑。功課是：你的擔心有時候是在保護你，有時候只是在消耗你。`,
+    shadow:`你的功課是學會「區分真實的威脅和想象的威脅」。你的大腦非常擅長「如果…怎麼辦」，這是天賦，但有時候你跑的那個最壞的劇本，比現實遠多了。`,
+    hour:`你的「Heal（身心校準）」對自己用的時候不多，因為你通常把自己的擔心先壓下去。馥靈之鑰的覺察工具，幫你學會在擔心升起來的時候，先對自己說：「我在這裡，我很安全。」`},
+  7:{icon:'🎡',name:'享樂主義者',sub:'你把人生過得精彩，但那個安靜下來的你在哪裡？',
+    fear:`<strong>你最深的恐懼是「被困住」</strong>，是那種痛苦、限制、沉悶，無路可走的感覺。你用不停地體驗和計畫新的事來讓自己遠離那個可能性。`,
+    desire:`<strong>你最渴望的是「自由和滿足」</strong>，是那種生命充滿可能性、每一天都值得期待的感覺。你太清楚「還有更好的可能」，所以很難停下來。`,
+    work:`你的創意、熱情和點子是任何團隊都希望有的資產。你能看見可能性，能讓氣氛活起來。你的功課是：跟一件事在一起久一點，讓它從「有趣的點子」長成「真實的成果」。`,
+    shadow:`你的功課是學會「停在不舒服裡一下子」。不是要你受苦，是那些讓你想逃的感受，往往是你最需要理解的訊號。逃得再快，它都還在那裡等你。`,
+    hour:`你的「Unlock（潛能解鎖）」是你天生的能力｜你能看見可能性，也敢去追。馥靈之鑰想幫你做的，是讓你在那些安靜下來的瞬間，真的讓自己安靜｜不是找新刺激，是讓現在的自己被自己看見。`},
+  8:{icon:'🔥',name:'挑戰者',sub:'你的力量嚇到了很多人，包括有時候的你自己',
+    fear:`<strong>你最深的恐懼是「被控制」</strong>，是那種被限制、被支配、失去自主權的感覺。你用力量和直接讓自己永遠不在那個位置。`,
+    desire:`<strong>你最渴望的是「自主」</strong>，是自己決定自己的路，不被任何人或情況擺布的那種自由。你用強大來保護自己，也保護那些你認定值得保護的人。`,
+    work:`你是那種在任何環境都能讓自己站穩的人。你的直接和力量讓工作快速前進，讓軟弱的決策無所遁形。你的功課是：力量最強大的時候，是知道什麼時候不要用它。`,
+    shadow:`你的功課是學會「脆弱也是一種力量」。你保護自己、保護別人很厲害，但你有沒有讓別人保護你的機會？那個會受傷、也需要支持的你，讓人看見，並不會削弱你的強大。`,
+    hour:`你的「Rise（行動進化）」是你最自然的狀態｜你生來就知道怎麼往前走。馥靈之鑰最想給你的，是一個讓你可以不用那麼強的空間。你可以只是你，不需要證明任何事。`},
+  9:{icon:'☁️',name:'和平主義者',sub:'你讓所有人都平靜下來，你自己呢？',
+    fear:`<strong>你最深的恐懼是「斷裂和失去」</strong>，是那種被分離、被排除、連結斷掉的感覺。你用和平、包容、迴避衝突來維持那個讓你感到安全的連結。`,
+    desire:`<strong>你最渴望的是「平靜和合一」</strong>，是那種一切都好、大家都在、沒有張力和衝突的感覺。你為這個目標犧牲了很多，包括你自己的很多感受和需求。`,
+    work:`你是讓團隊能夠凝聚在一起的關鍵。你有天然的調和能力，能讓衝突降溫，能讓不同的人找到共識。你的功課是：你自己的意見，也是很重要的那一個。`,
+    shadow:`你的功課是學會「有時候，讓衝突發生才是真正的愛」。你太習慣讓自己消失在眾人的需求裡，直到連你自己都不確定你想要什麼。那個被壓在底層的你，也值得被聽見。`,
+    hour:`你的「Heal（身心校準）」能力是你帶給整個世界的禮物。但馥靈之鑰最想問你的一件事是：在你的城堡裡，你給自己留了幾個房間？那些屬於你自己、不需要照顧任何人的房間，你有沒有？`}
+};
+
+let answers={};
+let currentQ=0;
+
+function startQuiz(){
+  document.getElementById('startArea').style.display='none';
+  document.getElementById('progressWrap').style.display='block';
+  renderQuestion(0);
+}
+
+function renderQuestion(idx){
+  const area=document.getElementById('questionsArea');
+  area.innerHTML='';
+  questions.forEach((qd,i)=>{
+    const card=document.createElement('div');
+    card.className='quiz-card'+(i===idx?' active':'');
+    card.id='qcard-'+i;
+    const optsHTML=qd.opts.map((opt,oi)=>`
+      <button class="quiz-option${answers[i]===opt.v?' selected':''}" onclick="selectAnswer(${i},${opt.v},this)">
+        <span style="flex-shrink:0;opacity:1;font-size:0.9rem">${String.fromCharCode(65+oi)}</span>
+        <span>${opt.text}</span>
+      </button>`).join('');
+    card.innerHTML=`
+      <div class="quiz-q-num">第 ${i+1} 題 / ${questions.length}</div>
+      <div class="quiz-question">${qd.q}${qd.scenario?`<span class="quiz-scenario">${qd.scenario}</span>`:''}</div>
+      <div class="quiz-options">${optsHTML}</div>
+      <div class="quiz-nav">
+        ${i>0?`<button class="btn-prev" onclick="goTo(${i-1})">← 上一題</button>`:'<span></span>'}
+        ${i<questions.length-1
+          ?`<button class="btn-next" id="btnNext-${i}" ${answers[i]===undefined?'disabled':''} onclick="goTo(${i+1})">下一題 →</button>`
+          :`<button class="btn-next" id="btnNext-${i}" ${answers[i]===undefined?'disabled':''} onclick="showResult()">揭開答案 🌀</button>`}
+      </div>`;
+    area.appendChild(card);
+  });
+  updateProgress(idx);
+}
+
+function selectAnswer(qIdx,v,btn){
+  answers[qIdx]=v;
+  const card=document.getElementById('qcard-'+qIdx);
+  card.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const nb=document.getElementById('btnNext-'+qIdx);
+  if(nb)nb.disabled=false;
+}
+
+function goTo(idx){
+  currentQ=idx;
+  document.querySelectorAll('.quiz-card').forEach(c=>c.classList.remove('active'));
+  const t=document.getElementById('qcard-'+idx);
+  if(t){t.classList.add('active');t.scrollIntoView({behavior:'smooth',block:'start'});}
+  updateProgress(idx);
+}
+
+function updateProgress(idx){
+  const answered=Object.keys(answers).length;
+  const pct=Math.round(answered/questions.length*100);
+  document.getElementById('progressText').textContent=`第 ${idx+1} 題，共 ${questions.length} 題`;
+  document.getElementById('progressPct').textContent=`${pct}%`;
+  document.getElementById('progressFill').style.width=pct+'%';
+}
+
+function showResult(){
+  const scores={1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0};
+  Object.values(answers).forEach(v=>{if(scores[v]!==undefined)scores[v]++;});
+  const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const topType=parseInt(sorted[0][0]);
+  const result=ennData[topType];
+
+  document.getElementById('questionsArea').style.display='none';
+  document.getElementById('progressWrap').style.display='none';
+
+  document.getElementById('resultHero').innerHTML=`
+    <span class="result-hero-icon">${result.icon}</span>
+    <div class="result-type-label">九型人格測驗結果</div>
+    <div class="result-type-num">第 ${topType} 型</div>
+    <div class="result-type-name">${result.name}</div>
+    <div class="result-subtitle">${result.sub}</div>
+    <div class="enn-top3">
+      ${sorted.slice(0,3).map((e,i)=>`<span class="enn-type-tag${i===0?' top':''}">${i===0?'✦ ':''} 第 ${e[0]} 型 ${Object.values(ennData).find((_,idx)=>idx+1===parseInt(e[0]))?.icon||''} ${e[1]}票</span>`).join('')}
+    </div>`;
+
+  document.getElementById('rFear').innerHTML=`<div class="result-section-title">🌑 你最深的恐懼</div><div class="result-section-content">${result.fear}</div>`;
+  document.getElementById('rDesire').innerHTML=`<div class="result-section-title">✨ 你最深的渴望</div><div class="result-section-content">${result.desire}</div>`;
+  document.getElementById('rWork').innerHTML=`<div class="result-section-title">💼 職場上的你</div><div class="result-section-content">${result.work}</div>`;
+  document.getElementById('rShadow').innerHTML=`<div class="result-section-title">🪞 你的功課</div><div class="result-section-content">${result.shadow}</div>`;
+  renderHlTitle(topType, result.name);
+  
+  // ── 香氣著陸 ──
+  const enneagramAroma = {
+    '1': {text:`你的內在住著一個完美的尺規，丈量著世界應該是什麼樣子。當那根弦繃到快斷的時候，薰衣草能幫你鬆開｜不是放棄標準，是允許自己今天「夠好就好」。迷迭香的清冽則提醒你：你改變世界的方式，不一定要這麼用力。`, oil:'薰衣草 · 迷迭香'},
+    '2': {text:`你的心是一間永遠亮著燈的便利商店｜誰來你都開門。但你有沒有想過，那盞燈也需要有人幫它換電池？玫瑰是給你自己的那束花，不是轉送別人的。天竺葵能幫你畫一條溫柔的界線：「我也需要被愛。」`, oil:'玫瑰 · 天竺葵'},
+    '3': {text:`你跑得很快，快到有時候忘了問自己：我還在跑向我想去的地方嗎？佛手柑的陽光能讓你慢下來看看風景。雪松沉穩的底調告訴你：你不需要一直贏，你的價值不是獎牌決定的。`, oil:'佛手柑 · 雪松'},
+    '4': {text:`你的世界比別人多了幾層色彩，美得讓人心碎，也累得讓人心碎。茉莉在月光下綻放的那股深情，就是你｜獨特、濃烈、不可複製。岩蘭草帶著泥土的沉穩，提醒你：美不需要痛苦來證明。`, oil:'茉莉 · 岩蘭草'},
+    '5': {text:`你的腦袋像一座圖書館，安靜、有序、門常常是關著的。檀香的沉穩像你的內在空間｜深邃、不慌不忙。薄荷的涼意偶爾幫你把窗戶打開，讓外面的世界進來一點點：外面沒有你想的那麼危險。`, oil:'檀香 · 薄荷'},
+    '6': {text:`你的雷達永遠是開著的，掃描著所有可能的危險。洋甘菊像一雙溫暖的手按住你轉個不停的腦袋：「沒事的。」乳香從古老的神殿裡飄來，帶著一種你很少允許自己感受的東西｜信任。`, oil:'洋甘菊 · 乳香'},
+    '7': {text:`你像一袋被打翻的彩色糖果｜到處都是甜的、亮的、好玩的。甜橙是你的標配，但你也需要廣藿香的大地氣息把你拉回來。不是每個快樂都需要被追逐，有些最甜的，是你坐下來不動的時候自己長出來的。`, oil:'甜橙 · 廣藿香'},
+    '8': {text:`你的力量像一座火山｜在場的人都感覺得到熱度。黑胡椒的辛辣跟你一樣直接不囉嗦。但試試看在那股衝勁的底下加一層依蘭的甜潤｜讓人看見你的力量不只能推開東西，也能溫柔地擁抱。`, oil:'黑胡椒 · 依蘭'},
+    '9': {text:`你是一面湖水，平靜到讓人忘了底下有多深。薰衣草的安寧跟你同頻，但你不需要更多安靜了｜你需要薑的那股暖意從胃開始往上燒，提醒你：你的意見很重要，你的需求很重要，你值得被聽見。`, oil:'薰衣草 · 薑'},
+  };
+  const aromaData = enneagramAroma[topType];
+  if (aromaData) {
+    document.getElementById('resultAroma').style.display = 'block';
+    document.getElementById('resultAroma').innerHTML = `
+      <div class="aroma-landing">
+        <div class="al-label">🌿 馥靈香氣著陸 · AROMA ANCHOR</div>
+        <div class="al-text">${aromaData.text}</div>
+        <div class="al-oil">🌿 ${aromaData.oil}</div>
+      </div>`;
+  }
+  document.getElementById('resultHour').innerHTML=`
+    <div class="hour-bridge-label">✦ 馥靈之鑰 × 你的覺察密碼</div>
+    <div class="hour-bridge-text">${result.hour}</div>
+    <a href="draw-hl.html" class="hour-bridge-cta">抽一張牌，聽聽自己的聲音 ✨</a>`;
+
+  
+  try{localStorage.setItem('hl_quiz_enneagram',JSON.stringify({type:topType,label:result.name,ts:Date.now()}));}catch(e){}
+document.getElementById('quizResult').classList.add('active');
+  document.getElementById('quizResult').scrollIntoView({behavior:'smooth',block:'start'});
+  if(window.HL_track) window.HL_track("quiz_complete", {quizName:"九型人格測驗", result: topType+"型 "+result.name});
+  window._resultText='\u3010\u99a5\u9748\u4e4b\u9470\u4e5d\u578b\u4eba\u683c\u6e2c\u9a57\u3011 https://hourlightkey.com/quiz-enneagram.html';
+}
+
+function restartQuiz(){answers={};currentQ=0;document.getElementById('quizResult').classList.remove('active');document.getElementById('questionsArea').style.display='block';document.getElementById('progressWrap').style.display='block';renderQuestion(0);window.scrollTo({top:0,behavior:'smooth'});}
+
+</script>
+<script src="assets/js/hourlight-global.js?v=20260309"></script>
+  <script src="assets/js/hl-music.js?v=20260309"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/hl-referral.js?v=20260323"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="assets/js/hl-share.js"></script>
+<script src="assets/js/hl-tracker.js" data-tool="quiz-enneagram" data-tool-name="九型人格測驗" data-tool-type="quiz"></script>
+
+<!-- HL Auth Gate + Tracking -->
+<!-- ===== Footer ===== -->
+<footer class="hl-footer">
+  <div class="hl-footer-inner">
+    <div class="hl-footer-brand">
+      <div class="hl-footer-logo"><img src="LOGO-1.png" alt="" class="hl-logo-icon" aria-hidden="true" loading="lazy">馥靈之鑰 Hour Light</div>
+      <div class="hl-footer-tagline">讀懂自己，活對人生｜創辦人 王逸君</div>
+    </div>
+    <div class="hl-footer-social" style="display:flex;gap:16px;justify-content:center;align-items:center;margin:16px 0;flex-wrap:wrap">
+      <a href="https://www.facebook.com/share/1QoZr7swk4/?mibextid=wwXIfr" target="_blank" rel="noopener" title="Facebook 馥靈之鑰" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">f</a>
+      <a href="https://www.instagram.com/judyanee" target="_blank" rel="noopener" title="Instagram @judyanee" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">📸</a>
+      <a href="https://www.youtube.com/@judyanee" target="_blank" rel="noopener" title="YouTube @judyanee" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">▶</a>
+      <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener" title="LINE @hourlight" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">💬</a>
+      <a href="podcast.html" title="Podcast" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">🎙</a>
+    </div>
+    <div class="hl-footer-links">
+      <a href="app.html">🔑 會員工作台</a>
+      <a href="index.html">首頁</a>
+      <a href="fuling-mima.html">生命秘碼</a>
+      <a href="draw-hl.html">線上抽牌</a>
+      <a href="destiny-engine.html">命盤引擎</a>
+      <a href="services.html">服務項目</a>
+      <a href="courses.html">課程學苑</a>
+      <a href="book.html">著作</a>
+      <a href="founder.html">關於創辦人</a>
+      <a href="hourlight-sitemap.html">網站地圖</a>
+      <a href="privacy.html">隱私政策</a>
+      <a href="terms.html">服務條款</a>
+      <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener">LINE 諮詢</a>
+    </div>
+    <div class="hl-footer-legal-toggle" onclick="toggleLegalContent()">
+      <span>📜 法律聲明與免責條款</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="hl-footer-legal-content" id="legalContent">
+      <div class="hl-legal-section">
+        <div class="hl-legal-title">🌿 服務性質說明</div>
+        <div class="hl-legal-text">本網站提供之服務（芳香能量覺察、牌卡解讀、生命數字分析等）僅供<strong>個人壓力管理、情緒紓解、自我探索</strong>參考。本服務<strong>不構成亦不取代</strong>醫療診斷、專業臨床評估、法律或財務建議。如有身心健康疑慮，請諮詢合格醫療專業人員。</div>
+      </div>
+      <div class="hl-legal-section">
+        <div class="hl-legal-title">📄 智慧財產權聲明</div>
+        <div class="hl-legal-text">本網站所有內容（文字、圖片、程式碼、方法論、課程架構、牌卡系統、H.O.U.R. 方法論）均受著作權法保護。未經書面授權，禁止複製、轉載、改作或商業使用。</div>
+      </div>
+      <div class="hl-legal-section">
+        <div class="hl-legal-title">™ 商標聲明</div>
+        <div class="hl-legal-text">「馥靈之鑰」「Hour Light」「H.O.U.R.」「馥靈秘碼」及相關標誌為馥靈之鑰國際有限公司之商標（申請中）。未經授權不得使用或註冊近似商標。</div>
+      </div>
+    </div>
+    <div class="hl-footer-copyright">
+      © 2026 馥靈之鑰國際有限公司 Hour Light International Co., Ltd.｜統編：60303284<br>All Rights Reserved.
+    </div>
+  </div>
+</footer>
+<script>
+function toggleLegalContent(){
+  var t=document.querySelector('.hl-footer-legal-toggle');
+  var c=document.getElementById('legalContent');
+  if(t&&c){t.classList.toggle('active');c.classList.toggle('active');}
+}
+</script>
+<script src="assets/js/hl-topnav.js"></script>
+<script src="assets/js/hl-bottomnav.js"></script>
+<script src="assets/js/hl-gate.js"></script>
+<script src="assets/js/hl-record.js"></script>
+<script src="assets/js/hl-announce.js"></script>
+<script src="assets/js/hl-email.js"></script>
+<script src="assets/js/hl-chat.js"></script>
+<script src="assets/js/hl-aroma-fx.js" defer></script>
+</body>
+</html>

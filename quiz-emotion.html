@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXP7K53QG6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BXP7K53QG6');</script>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>情緒顆粒度測驗｜您的情緒有幾種顏色？｜馥靈之鑰</title>
+<meta name="description" content="免費情緒顆粒度測驗｜15題測出您辨識情緒的精準度。您能分辨100種情緒，還是只有「開心」跟「不開心」？">
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/hourlight-global.css">
+<link rel="stylesheet" href="assets/css/hl-design-tokens.css"><link rel="stylesheet" href="assets/css/hl-cosmos.css"><link rel="stylesheet" href="css/hl-quiz-premium.css">
+<style>
+.quiz-wrap{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+.quiz-hero *,.quiz-card *{text-shadow:none!important}
+.quiz-hero{text-align:center;padding:48px 24px 36px;background: #ffffff;border:1px solid rgba(233,194,125,0.2);border-radius:24px;margin-bottom:32px;backdrop-filter:blur(12px)}
+.quiz-badge{display:inline-block;padding:5px 18px;border:1px solid rgba(233,194,125,0.5);border-radius:999px;font-size:0.95rem;letter-spacing:2px;color:#8b6914;margin-bottom:20px}
+.quiz-hero-icon{font-size:3rem;margin-bottom:16px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.quiz-hero h1{font-family:"LXGW WenKai TC",serif;font-size:clamp(1.6rem,4vw,2.1rem);background:linear-gradient(135deg,#b8922a,#b8922a,#b8922a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;line-height:1.4}
+.quiz-hero p{color:#4a3c2a;font-size:0.95rem;line-height:1.8;max-width:520px;margin:0 auto 24px}
+.quiz-hero-note{display:inline-flex;gap:6px;align-items:center;font-size:0.9rem;color:#5a4a30;padding:8px 18px;border-radius:999px;background:rgba(233,194,125,0.12);border:1px solid rgba(184,146,42,0.25)}
+.quiz-progress-wrap{margin-bottom:28px}
+.quiz-progress-label{display:flex;justify-content:space-between;font-size:0.9rem;color:#2a1f0e;margin-bottom:8px}
+.quiz-progress-bar{height:4px;background:rgba(233,194,125,0.1);border-radius:999px;overflow:hidden}
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,#b8922a,#b8922a);border-radius:999px;transition:width 0.5s ease}
+.quiz-card{background: #ffffff;border:1px solid rgba(233,194,125,0.2);border-radius:20px;padding:32px 28px;margin-bottom:20px;backdrop-filter:blur(10px);display:none;animation:slideIn 0.4s ease}
+.quiz-card.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.quiz-q-num{font-size:0.95rem;letter-spacing:1.5px;color:#8b6914;margin-bottom:10px;opacity:0.7}
+.quiz-question{font-size:clamp(1rem,2.5vw,1.15rem);color:#2a1f0e;line-height:1.7;margin-bottom:24px}
+.quiz-scenario{display:block;font-size:0.92rem;color:#5a4a30;margin-top:8px;font-style:italic;padding:10px 14px;background:rgba(233,194,125,0.06);border-left:2px solid rgba(184,146,42,0.3);border-radius:0 8px 8px 0}
+.quiz-options{display:flex;flex-direction:column;gap:10px}
+.quiz-option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:1px solid rgba(233,194,125,0.15);border-radius:12px;background:transparent;color:#2a1f0e;font-size:0.92rem;line-height:1.6;cursor:pointer;transition:all 0.25s ease;text-align:left;width:100%;font-family:inherit}
+.quiz-option:hover{border-color:rgba(233,194,125,0.82);background:rgba(233,194,125,0.06);color:#2a1f0e;transform:translateX(4px)}
+.quiz-option.selected{border-color:#b8922a;background:rgba(233,194,125,0.12);color:#2a1f0e}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:24px}
+.btn-prev,.btn-next{padding:11px 28px;border-radius:999px;font-size:0.9rem;font-family:inherit;cursor:pointer;transition:all 0.25s ease}
+.btn-prev{background:transparent;border:1px solid rgba(184,146,42,0.3);color:#5a4a30}
+.btn-next{background:linear-gradient(135deg,#b8922a,#a07820);border:none;color:#ffffff;font-weight:600}
+.btn-next:disabled{opacity:0.5;cursor:not-allowed}
+.quiz-result{display:none;animation:slideIn 0.5s ease}
+.quiz-result.active{display:block}
+.likert-wrap{margin-bottom:8px}
+.likert-labels{display:flex;justify-content:space-between;font-size:0.95rem;color:#5a4a30;margin-bottom:8px;padding:0 4px}
+.likert-row{display:flex;justify-content:space-between;gap:8px}
+.likert-btn{flex:1;padding:12px 4px;border:1px solid rgba(184,146,42,0.2);border-radius:10px;background:transparent;color:#2a1f0e;font-size:0.9rem;cursor:pointer;transition:all 0.2s}
+.likert-btn.selected{border-color:#b8922a;background:rgba(233,194,125,0.15);color:#2a1f0e}
+.likert-btn:hover{border-color:rgba(233,194,125,0.75)}
+.ocean-bars{background: #ffffff;border:1px solid rgba(233,194,125,0.15);border-radius:18px;padding:24px 22px;margin-bottom:16px;backdrop-filter:blur(8px)}
+.ocean-item{margin-bottom:18px}.ocean-item:last-child{margin-bottom:0}
+.ocean-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.ocean-label{font-size:0.9rem;color:#7a6a55}.ocean-label strong{color:#2a1f0e;font-weight:600}.ocean-en{display:inline-block;width:18px;color:#f8dfa5}
+.ocean-score{font-family:'LXGW WenKai TC',serif;font-size:1.1rem;font-weight:600;color:#8b6914}
+.ocean-track{height:8px;background:rgba(233,194,125,0.08);border-radius:4px;overflow:hidden}
+.ocean-fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(0.22,1,0.36,1)}
+.result-section{background: #ffffff;border:1px solid rgba(233,194,125,0.15);border-radius:18px;padding:24px 22px;margin-bottom:16px;backdrop-filter:blur(8px)}
+.result-section-title{font-size:0.92rem;letter-spacing:1px;color:#8b6914;margin-bottom:14px;font-weight:500}
+.result-section-content{color:#2a1f0e;font-size:0.92rem;line-height:1.85}
+.result-section-content strong{color:#2a1f0e;font-weight:600}
+.result-hour-bridge{background:linear-gradient(135deg,#f8f0ff,#fef9f0);border:1px solid rgba(156,110,219,0.25);border-radius:20px;padding:28px 24px;margin-bottom:20px;text-align:center}
+.hour-bridge-label{font-size:0.95rem;letter-spacing:2px;color:#7a5bb5;margin-bottom:12px}
+.hour-bridge-text{font-family:"LXGW WenKai TC",serif;font-size:1.05rem;color:#3a2d18;line-height:1.8;margin-bottom:16px}
+.hour-bridge-cta{display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#b8922a,#a07820);color:#ffffff;border-radius:999px;font-size:0.95rem;font-weight:500;text-decoration:none;transition:all 0.3s}
+.share-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;padding:20px 16px;background:#ffffff;border-radius:16px;border:1px solid rgba(184,146,42,0.2)}
+.share-btn{padding:10px 22px;border-radius:999px;font-size:0.9rem;font-family:inherit;cursor:pointer;border:1px solid rgba(184,146,42,0.3);background:rgba(233,194,125,0.1);color:#5a4a30;transition:all 0.25s}
+.btn-retry{width:100%;padding:13px;border-radius:12px;border:1px solid rgba(184,146,42,0.3);background:#ffffff;color:#5a4a30;font-size:0.95rem;font-family:inherit;cursor:pointer;margin-bottom:32px}
+.more-quizzes{background: #ffffff;border:1px solid rgba(233,194,125,0.15);border-radius:18px;padding:24px 22px;margin-bottom:20px}
+.more-quizzes h3{font-size:0.92rem;letter-spacing:1px;color:#8b6914;margin-bottom:14px;text-align:center;font-family:'LXGW WenKai TC',serif;font-weight:500}
+.more-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.more-card{padding:14px;border:1px solid rgba(184,146,42,0.25);border-radius:12px;text-align:center;text-decoration:none;color:#5a4a30;font-size:0.9rem;transition:all 0.25s;background:rgba(233,194,125,0.06)}
+.more-card:hover{border-color:rgba(184,146,42,0.45);background:rgba(233,194,125,0.12);color:#2a1f0e}
+.more-card-icon{font-size:1.5rem;display:block;margin-bottom:6px}
+</style>
+<!-- Facebook Pixel -->
+<script>!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1333106288588347');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1333106288588347&ev=PageView&noscript=1" loading="lazy"></noscript>
+<!-- End Facebook Pixel -->
+<meta property="og:image" content="https://hourlightkey.com/og-image.jpg"/>
+<link rel="canonical" href="https://hourlightkey.com/quiz-emotion.html"/>
+</head><body>
+<div class="hl-cosmos">
+  <div class="hl-stars-layer hl-stars-1"></div>
+  <div class="hl-stars-layer hl-stars-2"></div>
+  <div class="hl-stars-layer hl-stars-3"></div>
+  <div class="hl-meteors">
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+    <div class="hl-meteor"></div>
+  </div>
+  <div class="hl-aura hl-aura-1"></div>
+  <div class="hl-aura hl-aura-2"></div>
+  <div class="hl-aura hl-aura-3"></div>
+</div>
+<div class="quiz-wrap">
+  <div class="quiz-hero">
+    <div class="quiz-badge">EMOTIONAL GRANULARITY</div>
+    <div class="quiz-hero-icon">🎨</div>
+    <h1>您的情緒有幾種顏色？</h1>
+    <p>能精準命名情緒的人，情緒調節能力越好。<br>15 題，測出您的情緒詞彙量。您的城堡有幾間房間？</p>
+    <div class="quiz-hero-note">🔮 15 題 · 約 3 分鐘 · 免費</div>
+  </div>
+  <div class="quiz-progress-wrap" id="progressWrap" style="display:none">
+    <div class="quiz-progress-label"><span id="progressText">第 1 題</span><span id="progressPct">0%</span></div>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div id="startArea" style="text-align:center;margin-bottom:32px">
+    <button class="btn-next" onclick="startQuiz()" style="padding:14px 48px;font-size:1rem">準備好了，開始 🎨</button>
+  </div>
+  <div id="questionsArea"></div>
+  <div class="quiz-result" id="quizResult">
+    <div class="hl-title-reveal" id="hlTitleReveal"></div>
+    <div class="result-hero" id="resultHero"></div>
+    <div class="ocean-bars" id="dimBars"></div>
+    <div id="resultSections"></div>
+    <div class="result-hour-bridge" id="resultHour"></div>
+    <div class="share-row"><button class="share-btn" onclick="saveResultImage()">📥 儲存圖片</button>
+      <button class="share-btn" onclick="copyResult()">📋 複製結果</button><button class="share-btn" onclick="shareToLine()">💬 分享到 LINE</button></div>
+    <button class="btn-retry" onclick="restartQuiz()">🔄 重新測一次</button>
+    <div class="more-quizzes"><h3>✨ 更多覺察測驗</h3><div class="more-grid">
+<a href="quiz-via.html" class="more-card"><span class="more-card-icon">✦</span>VIA 品格優勢</a>
+<a href="quiz-eq.html" class="more-card"><span class="more-card-icon">🧭</span>EQ 情緒智商</a>
+<a href="quiz-attachment.html" class="more-card"><span class="more-card-icon">🔗</span>依附型態</a>
+<a href="quiz-stress.html" class="more-card"><span class="more-card-icon">⚡</span>壓力反應</a>
+</div></div>
+  </div>
+</div>
+<script>
+const finishBtn='看我的情緒光譜 🎨';
+const questions=[
+  {q:'考試前的緊繃 vs 等體檢報告的不安，你能說出這兩種感覺哪裡不一樣。'},
+  {q:'朋友放你鴿子，你能分清自己是「難過」「失望」還是「覺得被忽視」。'},
+  {q:'形容心情的時候，你用的詞不只是「開心」「難過」「生氣」這三種。'},
+  {q:'放假在家無所事事 vs 覺得人生沒有方向，你能分辨這兩種感覺完全不一樣。'},
+  {q:'某個情緒冒出來的時候，你能馬上叫出它的名字，不是事後才想到。'},
+  {q:'朋友升職了，你能分清自己是「替他開心但也想要」還是「為什麼不是我」。'},
+  {q:'你試過同一秒鐘又興奮又害怕，而且你能同時感受到兩種。'},
+  {q:'「又想笑又想哭」這種矛盾的感受，你能具體說出它是什麼。'},
+  {q:'有人問你心情怎樣，你很少用「還好」「普通」「就那樣」帶過去。'},
+  {q:'生氣的時候，你知道自己是因為「被傷到了」還是因為「覺得不公平」。'},
+  {q:'喜歡一個人 vs 欣賞一個人 vs 愛一個人，這三種對你來說是完全不同的感覺。'},
+  {q:'你的身體會告訴你情緒：胃縮緊是焦慮、肩膀僵硬是壓力、胸口悶是委屈。'},
+  {q:'不舒服的時候，你不會只說「就是不爽」，你能講出更精確的感受。'},
+  {q:'看到暖心的影片想哭 vs 看到朋友受苦想哭，你感覺到的淚水是不同的。'},
+  {q:'學到一個新的情緒詞彙（比如「悵然」「惆悵」「釋然」），你會覺得「對，就是這個感覺」。'},
+];
+
+const likertLabels=['完全不是','大概不是','中間','大概是','完全是'];
+let answers={},currentQ=0;
+function startQuiz(){document.getElementById('startArea').style.display='none';document.getElementById('progressWrap').style.display='block';renderQuestion(0);}
+function renderQuestion(idx){
+  const area=document.getElementById('questionsArea');area.innerHTML='';
+  questions.forEach((qd,i)=>{
+    const card=document.createElement('div');card.className='quiz-card'+(i===idx?' active':'');card.id='qcard-'+i;
+    const isOpt=qd.opts&&qd.opts.length>0;
+    let inner='';
+    if(isOpt){
+      const optsHTML=qd.opts.map((opt,oi)=>`<button class="quiz-option${answers[i]===opt.v?' selected':''}" onclick="selectAnswer(${i},'${opt.v}',this)"><span style="flex-shrink:0;opacity:0.6;font-size:0.9rem">${String.fromCharCode(65+oi)}</span><span>${opt.text}</span></button>`).join('');
+      inner=`<div class="quiz-options">${optsHTML}</div>`;
+    } else {
+      const btns=[1,2,3,4,5].map(v=>`<button class="likert-btn${answers[i]===v?' selected':''}" onclick="selectAnswer(${i},${v},this)">${v}</button>`).join('');
+      inner=`<div class="likert-wrap"><div class="likert-labels">${likertLabels.map(l=>`<span>${l}</span>`).join('')}</div><div class="likert-row">${btns}</div></div>`;
+    }
+    card.innerHTML=`<div class="quiz-q-num">第 ${i+1} 題 / ${questions.length}</div><div class="quiz-question">${qd.q}${qd.scenario?`<span class="quiz-scenario">${qd.scenario}</span>`:''}</div>${inner}<div class="quiz-nav">${i>0?`<button class="btn-prev" onclick="goTo(${i-1})">← 上一題</button>`:'<span></span>'}${i<questions.length-1?`<button class="btn-next" id="btnNext-${i}" ${answers[i]===undefined?'disabled':''} onclick="goTo(${i+1})">下一題 →</button>`:`<button class="btn-next" id="btnNext-${i}" ${answers[i]===undefined?'disabled':''} onclick="showResult()">${finishBtn}</button>`}</div>`;
+    area.appendChild(card);
+  });updateProgress(idx);
+}
+function selectAnswer(qi,v,btn){answers[qi]=v;const card=document.getElementById('qcard-'+qi);card.querySelectorAll('.quiz-option,.likert-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const nb=document.getElementById('btnNext-'+qi);if(nb)nb.disabled=false;}
+function goTo(idx){currentQ=idx;document.querySelectorAll('.quiz-card').forEach(c=>c.classList.remove('active'));const t=document.getElementById('qcard-'+idx);if(t){t.classList.add('active');t.scrollIntoView({behavior:'smooth',block:'start'});}updateProgress(idx);}
+function updateProgress(idx){const a=Object.keys(answers).length;const p=Math.round(a/questions.length*100);document.getElementById('progressText').textContent=`第 ${idx+1} 題，共 ${questions.length} 題`;document.getElementById('progressPct').textContent=p+'%';document.getElementById('progressFill').style.width=p+'%';}
+function restartQuiz(){answers={};currentQ=0;document.getElementById('quizResult').classList.remove('active');document.getElementById('questionsArea').style.display='block';document.getElementById('progressWrap').style.display='block';renderQuestion(0);window.scrollTo({top:0,behavior:'smooth'});}
+
+function showResult(){
+  let total=0;questions.forEach((_,i)=>{total+=(answers[i]||3);});
+  const pct=Math.round((total-15)/60*100);
+  const level=pct>=70?'high':pct>=40?'mid':'low';
+  document.getElementById('questionsArea').style.display='none';document.getElementById('progressWrap').style.display='none';
+
+  const titles={
+    high:{icon:'🌈',title:'情緒調色盤大師',sub:'你的城堡有上百間房間，每間都有名字。你能用最精準的詞彙描述你的內在世界。',castle:'覺察廳（O 區）',hour:'Own ✦ 智慧辨識',oil:'佛手柑 · 迷迭香',quote:'你看見的不是黑白，是整個光譜。這份能力，是覺察的最高展現。'},
+    mid:{icon:'🎨',title:'色彩感知者',sub:'你的城堡有不少房間已經被命名了。你有基本的情緒辨識力，還有空間可以更細膩。',castle:'覺察廳（O 區）',hour:'Own ✦ 智慧辨識',oil:'天竺葵 · 甜橙',quote:'你已經看見了很多顏色。繼續練習，你會看見更多層次。'},
+    low:{icon:'🔲',title:'情緒探索者',sub:'你的城堡有很多房間還沒被命名。不是你沒有情緒，是你還沒學會用語言捕捉它們。',castle:'靜心殿（H 區）',hour:'Heal ✦ 身心校準',oil:'薰衣草 · 洋甘菊',quote:'你感受到的比你說出來的多很多。開始為它們取名字，你會更自由。'}
+  };
+  const results={
+    high:{desc:'你的情緒顆粒度非常高。當別人只能說「不開心」的時候，你能區分那是失望、委屈、受傷還是被忽略。這代表你的大腦有更精細的情緒分類系統。根據 Lisa Feldman Barrett 教授的研究，情緒顆粒度越高，你的情緒調節能力就越強。',shadow:'你的課題是：不要只用這份能力分析自己，也記得用它來理解跟你不一樣的人。有些人不是不感受，是他的詞彙還沒建立起來。'},
+    mid:{desc:'你有不錯的情緒辨識基礎，在大部分時候能說出自己的感受。但在壓力大或情緒複雜的時候，你可能會退回「就是不舒服」的模糊描述。這很正常，情緒顆粒度是可以練習的。',shadow:'你的課題是：開始練習在「不舒服」的後面多問一層：「是哪一種不舒服？」這個問題本身就在提升你的覺察力。'},
+    low:{desc:'你的情緒詞彙量目前比較有限，可能習慣用「開心」「不開心」「還好」來描述大部分的感受。這不代表你感受不到，而是你的「情緒語言」還在發展中。研究顯示，擴充情緒詞彙能直接提升壓力管理能力。',shadow:'你的課題是：從今天開始，每天問自己一次「我現在的感覺，最精準的詞是什麼？」馥靈之鑰的 130 張牌卡就像 130 個情緒詞彙｜它們幫你為感受命名。'}
+  };
+
+  const t=titles[level],r=results[level];
+  const roomCount=pct>=70?'80+':pct>=40?'40-60':'15-30';
+  document.getElementById('hlTitleReveal').innerHTML=`<div class="screenshot-card"><div class="ss-brand">HOUR LIGHT ✦ 馥靈之鑰</div><div class="ss-icon">${t.icon}</div><div class="ss-title">${t.title}</div><div class="ss-sub">你的城堡約有 ${roomCount} 間已命名的房間</div><div class="ss-tags"><span class="ss-tag">情緒顆粒度 ${pct}%</span><span class="ss-tag">${t.castle}</span></div><div class="ss-quote">「${t.quote}」</div><div class="ss-footer">hourlightkey.com ✦ 你的城堡，你的鑰匙</div></div><div class="hl-title-card"><div class="corner-deco tl"></div><div class="corner-deco tr"></div><div class="corner-deco bl"></div><div class="corner-deco br"></div><div class="hl-title-eyebrow">Hour Light ✦ 你的馥靈稱號</div><span class="hl-title-icon">${t.icon}</span><div class="hl-title-main">${t.title}</div><div class="hl-title-sub">${t.sub}</div><div class="hl-title-divider"></div><div class="hl-title-grid"><div class="hl-title-tag"><div class="hl-title-tag-label">✦ 城堡守護宮</div><div class="hl-title-tag-value">${t.castle}</div></div><div class="hl-title-tag"><div class="hl-title-tag-label">✦ H.O.U.R. 天賦</div><div class="hl-title-tag-value">${t.hour}</div></div><div class="hl-title-tag" style="grid-column:1/-1"><div class="hl-title-tag-label">✦ 你的精油指引</div><div class="hl-title-tag-value">🌿 ${t.oil}</div></div></div><div class="hl-title-quote">「${t.quote}」</div><div class="hl-title-combo-hint">情緒顆粒度 ${pct}%</div></div>`;
+  document.getElementById('resultHero').innerHTML=`<span class="result-hero-icon">${t.icon}</span><div class="result-type-label">情緒顆粒度 Emotional Granularity</div><div class="result-combo-name">${t.title}</div><div class="result-subtitle">你的城堡約有 ${roomCount} 間已命名的房間</div>`;
+  document.getElementById('dimBars').innerHTML=`<div class="ocean-item"><div class="ocean-top"><span class="ocean-label"><strong>情緒顆粒度</strong></span><span class="ocean-score">${pct}%</span></div><div class="ocean-track"><div class="ocean-fill" style="width:${pct}%;background:linear-gradient(90deg,#6a9fd8,#9c6edb,#e9739c,#f4a340,#5dba8a)"></div></div></div>`;
+  document.getElementById('resultSections').innerHTML=`<div class="result-section"><div class="result-section-title">🎨 你的情緒辨識力</div><div class="result-section-content">${r.desc}</div></div><div class="result-section"><div class="result-section-title">🔑 下一步</div><div class="result-section-content">${r.shadow}</div></div>`;
+  document.getElementById('resultHour').innerHTML=`<div class="hour-bridge-label">✦ 馥靈之鑰 × 你的情緒光譜</div><div class="hour-bridge-text">馥靈之鑰的 130 張牌卡 = 130 種情緒詞彙。每抽一張牌，就是在為你城堡裡的一間房間取名字。</div><a href="draw-hl.html" class="hour-bridge-cta">抽一張牌，為你的感受命名 ✦</a>`;
+  document.getElementById('quizResult').classList.add('active');window.scrollTo({top:0,behavior:'smooth'});
+  try{localStorage.setItem('hl_quiz_emotion',JSON.stringify({pct,level,ts:Date.now()}));}catch(e){}
+}
+</script>
+
+<footer style="text-align:center;padding:32px 20px;font-size:0.95rem;color:#9e8a70">
+  <p>馥靈之鑰 Hour Light ✦ <a href="https://hourlightkey.com" style="color:rgba(233,194,125,0.82);text-decoration:none">hourlightkey.com</a></p>
+  <p style="margin-top:4px">本測驗僅供自我覺察參考，非臨床診斷工具</p>
+</footer>
+<script src="assets/js/hourlight-global.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/hl-referral.js?v=20260323"></script>
+<script src="assets/js/hl-member.js?v=20260310"></script>
+<script src="assets/js/hl-gate.js"></script>
+<script src="assets/js/hl-record.js"></script>
+<script src="assets/js/hl-announce.js"></script>
+<script src="assets/js/hl-email.js"></script>
+<script src="assets/js/hl-chat.js"></script>
+<script src="assets/js/hl-aroma-fx.js" defer></script>
+
+<footer class="hl-footer">
+  <div class="hl-footer-inner">
+    <div class="hl-footer-brand">
+      <div class="hl-footer-logo"><img src="LOGO-1.png" alt="" class="hl-logo-icon" aria-hidden="true" loading="lazy">馥靈之鑰 Hour Light</div>
+      <div class="hl-footer-tagline">讀懂自己，活對人生｜創辦人 王逸君</div>
+    </div>
+    <div class="hl-footer-social" style="display:flex;gap:16px;justify-content:center;align-items:center;margin:16px 0;flex-wrap:wrap">
+      <a href="https://www.facebook.com/share/1QoZr7swk4/?mibextid=wwXIfr" target="_blank" rel="noopener" title="Facebook 馥靈之鑰" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">f</a>
+      <a href="https://www.instagram.com/judyanee" target="_blank" rel="noopener" title="Instagram @judyanee" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">📸</a>
+      <a href="https://www.youtube.com/@judyanee" target="_blank" rel="noopener" title="YouTube @judyanee" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">▶</a>
+      <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener" title="LINE @hourlight" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">💬</a>
+      <a href="podcast.html" title="Podcast" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(248,223,165,0.2);color:#f8dfa5;text-decoration:none;font-size:1.1rem;transition:all .3s;background:rgba(248,223,165,0.05)" onmouseover="this.style.borderColor='rgba(248,223,165,0.5)';this.style.boxShadow='0 0 12px rgba(248,223,165,0.2)'" onmouseout="this.style.borderColor='rgba(248,223,165,0.2)';this.style.boxShadow='none'">🎙</a>
+    </div>
+    <div class="hl-footer-links">
+      <a href="app.html">🔑 會員工作台</a><a href="index.html">首頁</a>
+      <a href="fuling-mima.html">生命秘碼</a><a href="draw-hl.html">線上抽牌</a>
+      <a href="destiny-engine.html">命盤引擎</a><a href="services.html">服務項目</a>
+      <a href="courses.html">課程學苑</a><a href="book.html">著作</a>
+      <a href="founder.html">關於創辦人</a><a href="hourlight-sitemap.html">網站地圖</a>
+      <a href="privacy.html">隱私政策</a><a href="terms.html">服務條款</a>
+      <a href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener">LINE 諮詢</a>
+    </div>
+    <div class="hl-footer-copyright">© 2026 馥靈之鑰國際有限公司 Hour Light International Co., Ltd.｜統編：60303284<br>All Rights Reserved.</div>
+  </div>
+</footer>
+<script src="assets/js/hl-topnav.js"></script>
+<script src="assets/js/hl-bottomnav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="assets/js/hl-share.js"></script>
+<script src="assets/js/hl-tracker.js" data-tool="quiz-emotion" data-tool-name="情緒顆粒度" data-tool-type="quiz"></script>
+</body></html>
