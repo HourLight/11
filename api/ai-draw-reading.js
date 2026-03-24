@@ -195,6 +195,8 @@ module.exports = async function handler(req, res) {
     var cards = body.cards || [];
     var question = (body.question || '').trim();
     var unlockCode = (body.unlockCode || '').trim().toUpperCase();
+    var uid = (body.uid || '').trim();
+    var userEmail = (body.email || '').trim();
 
     // 驗證張數
     if (![1, 3, 5, 7].includes(n)) {
@@ -342,10 +344,59 @@ ${GENERAL_PRINCIPLES}`;
       }
     }
 
+    // ── 存檔：付費解讀留底 ──
+    var readingId = null;
+    try {
+      var db2 = getFirestore();
+      if (db2) {
+        var cardCodes = cards.map(function(c) { return c.code || '?'; });
+        var cardTitles = cards.map(function(c) { return c.title || ''; });
+        var priceMap = { 1: 0, 3: 199, 5: 399, 7: 599 };
+        var readingDoc = {
+          uid: uid || '',
+          email: userEmail || '',
+          n: n,
+          spread: spread.title,
+          cardCodes: cardCodes,
+          cardTitles: cardTitles,
+          question: question || '',
+          unlockCode: unlockCode || '',
+          reading: text,
+          price: priceMap[n] || 0,
+          isPaid: n > 1,
+          tokens: (data.usage || {}).output_tokens || 0,
+          createdAt: new Date(),
+          source: 'ai-draw-reading'
+        };
+        var docRef = await db2.collection('readings').add(readingDoc);
+        readingId = docRef.id;
+
+        // 同時存到會員的 draw_history（如果有 uid）
+        if (uid) {
+          await db2.collection('users').doc(uid).collection('draw_history').add({
+            cardCodes: cardCodes,
+            cardTitles: cardTitles,
+            n: n,
+            spread: spread.title,
+            question: question || '',
+            isPaid: n > 1,
+            price: priceMap[n] || 0,
+            readingId: readingId,
+            hasReading: true,
+            createdAt: new Date()
+          });
+        }
+      }
+    } catch (saveErr) {
+      console.error('Reading save error:', saveErr.message);
+      // 存檔失敗不影響解讀回傳
+    }
+
     return res.status(200).json({
       reading: text,
       spread: spread.title,
       n: n,
+      readingId: readingId || null,
       usage: data.usage || {}
     });
 
