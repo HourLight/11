@@ -220,7 +220,38 @@
       box-shadow: 0 14px 34px rgba(0,0,0,0.95), 0 0 26px rgba(233,194,125,0.85);
     }
     .hl-v2-mode-btn:active { transform: translateY(-1px); }
-    .hl-v2-mode-btn small { display: block; font-size: 14px; opacity: 0.85; margin-top: 4px; }
+    @keyframes fadeSlideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+    .hl-v2-mode-btn small { display: block; font-size: 13px; opacity: 0.85; margin-top: 4px; font-weight: 500; letter-spacing: .02em; }
+    .hl-price-tip {
+      display: block;
+      font-size: 11px;
+      margin-top: 5px;
+      padding: 2px 8px;
+      border-radius: 8px;
+      background: rgba(0,0,0,.25);
+      color: rgba(255,255,255,.75);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .25s, transform .25s;
+      pointer-events: none;
+      font-weight: 600;
+      letter-spacing: .03em;
+    }
+    .hl-v2-mode-btn:hover .hl-price-tip,
+    .hl-v2-mode-btn:active .hl-price-tip,
+    .hl-v2-mode-btn:focus .hl-price-tip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hl-v2-mode-btn.free .hl-price-tip {
+      background: rgba(139,90,0,.2);
+      color: #8b5a00;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media(max-width:560px) {
+      .hl-price-tip { opacity: 1; transform: translateY(0); font-size: 10px; }
+    }
     .hl-v2-toolbar {
       display: flex;
       flex-wrap: wrap;
@@ -1105,28 +1136,28 @@
 
   <section class="hl-v2-glass">
     <h3 class="hl-v2-section-title">✨ 選擇抽牌張數</h3>
-    <div class="hl-v2-mode-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 600px; margin: 0 auto 12px;">
-      <button class="hl-v2-mode-btn free" data-n="1">抽 1 張<small>✨ 免費</small></button>
-      <button class="hl-v2-mode-btn" data-n="3">抽 3 張<small>$199 深度解讀</small></button>
-      <button class="hl-v2-mode-btn" data-n="5">抽 5 張<small>$399 深度解讀</small></button>
-      <button class="hl-v2-mode-btn" data-n="7">抽 7 張<small>$599 深度解讀</small></button>
+    <div class="hl-v2-mode-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 640px; margin: 0 auto 12px;">
+      <button class="hl-v2-mode-btn free" data-n="1">抽 1 張<small>此刻一個提醒</small><span class="hl-price-tip">✨ 免費</span></button>
+      <button class="hl-v2-mode-btn" data-n="3">抽 3 張<small>過去．現在．未來</small><span class="hl-price-tip">$199 智慧解讀</span></button>
+      <button class="hl-v2-mode-btn" data-n="5">抽 5 張<small>五面向深度掃描</small><span class="hl-price-tip">$399 智慧解讀</span></button>
+      <button class="hl-v2-mode-btn" data-n="7">抽 7 張<small>深層課題導航</small><span class="hl-price-tip">$599 智慧解讀</span></button>
     </div>
-    <div class="hl-v2-mode-grid" style="grid-template-columns: repeat(5, 1fr); max-width: 700px; margin: 0 auto 16px;">
-      <button class="hl-v2-mode-btn" data-n="9">抽 9 張<small>$1,800 覺察師解讀</small></button>
-      <button class="hl-v2-mode-btn" data-n="12">抽 12 張<small>$2,800 文字+語音</small></button>
-      <button class="hl-v2-mode-btn" data-n="15">抽 15 張<small>$3,600 視訊30分</small></button>
-      <button class="hl-v2-mode-btn" data-n="21">抽 21 張<small>$5,400 對談60分</small></button>
-      <button class="hl-v2-mode-btn" data-n="28">抽 28 張<small>$6,800 完整90分</small></button>
+    <div class="hl-v2-mode-grid" style="grid-template-columns: repeat(5, 1fr); max-width: 720px; margin: 0 auto 16px;">
+      <button class="hl-v2-mode-btn" data-n="9">抽 9 張<small>覺察師完整解盤</small><span class="hl-price-tip">$1,800 預約</span></button>
+      <button class="hl-v2-mode-btn" data-n="12">抽 12 張<small>十二宮全盤掃描</small><span class="hl-price-tip">$2,800 文字+語音</span></button>
+      <button class="hl-v2-mode-btn" data-n="15">抽 15 張<small>流年座標定位</small><span class="hl-price-tip">$3,600 線上對談</span></button>
+      <button class="hl-v2-mode-btn" data-n="21">抽 21 張<small>人生藍圖矩陣</small><span class="hl-price-tip">$5,400 對談＋完整報告</span></button>
+      <button class="hl-v2-mode-btn" data-n="28">抽 28 張<small>28鑰完整解碼</small><span class="hl-price-tip">$6,800 對談＋完整報告</span></button>
     </div>
-    <p class="hl-v2-hint">💡 <strong>1張免費</strong>｜<strong>3-7張 深度解讀</strong>（付款後交付）｜<strong>9張以上 覺察師深度解讀</strong>（需預約）<br>
+    <p class="hl-v2-hint">💡 <strong>1張</strong> 此刻快問快答｜<strong>3-7張</strong> 不同面向拆解您的問題｜<strong>9張以上</strong> 覺察師為您深度解盤<br>
     <a href="draw-hl-guide.html" style="color:rgba(233,194,125,.7);text-decoration:underline;font-size:.85rem">📋 各牌陣適合問什麼問題？</a></p>
-    <div style="margin-top:12px;padding:14px 16px;border-radius:12px;background:rgba(233,194,125,.04);border:1px solid rgba(233,194,125,.12);font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.9">
+    <div id="paymentInfoBlock" style="display:none;margin-top:12px;padding:14px 16px;border-radius:12px;background:rgba(233,194,125,.04);border:1px solid rgba(233,194,125,.12);font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.9;animation:fadeSlideIn .35s ease">
       <div style="color:rgba(233,194,125,.8);font-weight:700;margin-bottom:6px">💳 付款方式</div>
       ► 匯款帳號：國泰世華同德分行（013）<br>
       ► 帳號：248-50-624013-3 / 戶名：王逸君<br>
       ► 付款完成後，請將<strong>匯款截圖 + 抽牌結果複製內容</strong>一起貼到 LINE<br>
-      ► <strong>3-7張</strong>：深度解讀，付款確認後 30 分鐘內交付<br>
-      ► <strong>9張以上</strong>：覺察師人工深度解讀，24小時內回覆<br>
+      ► <strong>3-7張</strong>：智慧解讀，付款確認後 30 分鐘內交付<br>
+      ► <strong>9張以上</strong>：覺察師深度解讀，24小時內回覆<br>
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(233,194,125,.08);font-size:.78rem;color:rgba(255,255,255,.45);line-height:2">
         📌 一次抽牌限問一個問題（問題性質不同，牌卡分析容易混濁）<br>
         📌 解讀為文字檔，看不懂可以延伸提問，<strong>以 3 次為限</strong><br>
@@ -1144,7 +1175,7 @@
       <button class="hl-v2-btn hl-v2-btn-secondary" id="clearBtn">🔄 清除重抽</button>
       <a class="hl-v2-btn hl-v2-btn-primary" href="https://lin.ee/RdQBFAN" target="_blank" rel="noopener">🌿 LINE 預約</a>
     </div>
-    <p class="hl-v2-hint" id="guideHint">💫 抽牌後會顯示卡圖與卡號<br><strong>1張免費</strong>｜<strong>3-7張 深度解讀</strong>｜<strong>9張+ 覺察師解讀</strong><br><a href="draw-hl-guide.html" style="color:rgba(233,194,125,.7);font-size:.82rem">各牌陣適合問什麼？→</a></p>
+    <p class="hl-v2-hint" id="guideHint">💫 抽牌後會顯示卡圖與卡號<br><strong>1張</strong> 快速提醒｜<strong>3-7張</strong> 多面向覺察｜<strong>9張+</strong> 覺察師深度解盤<br><a href="draw-hl-guide.html" style="color:rgba(233,194,125,.7);font-size:.82rem">各牌陣適合問什麼？→</a></p>
     <div id="grid" class="hl-v2-card-grid"></div>
   </section>
 
@@ -1413,6 +1444,12 @@ let pendingN = 0;
 document.querySelectorAll('.hl-v2-mode-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     pendingN = parseInt(btn.dataset.n, 10);
+    // 付款資訊：免費隱藏，付費才顯示
+    var pBlock = document.getElementById('paymentInfoBlock');
+    if (pBlock) {
+      if (pendingN >= 3) { pBlock.style.display = 'block'; pBlock.style.animation = 'fadeSlideIn .35s ease'; }
+      else { pBlock.style.display = 'none'; }
+    }
     if (pendingN === 1) {
       userQuestion = '';
       drawCards(1);
@@ -1771,7 +1808,9 @@ clearBtn.addEventListener('click', () => {
   copyBtn.disabled = true;
   shareBtn.disabled = true;
   updateURL(null);
-  guideHint.innerHTML = '💫 抽牌後會顯示卡圖與卡號<br><strong>1張免費</strong>顯示牌卡涵義，<strong>3張以上請複製結果預約解讀</strong>';
+  guideHint.innerHTML = '💫 抽牌後會顯示卡圖與卡號<br><strong>1張</strong>快速覺察，<strong>3張以上</strong>可複製結果預約深度解讀';
+  var pBlock = document.getElementById('paymentInfoBlock');
+  if (pBlock) pBlock.style.display = 'none';
 });
 
 // ========== Toast通知 ==========
@@ -1934,11 +1973,26 @@ async function triggerAIReading() {
     return {
       code: code,
       title: info.title || info.name || '',
+      coreQuote: info.coreQuote || '',
+      keywords: info.keywords || '',
+      energy: info.energy || '',
+      tarot: info.tarot || '',
+      iching: info.iching || '',
+      numerology: info.numerology || '',
+      astroChakraElement: info.astroChakraElement || '',
+      ziwei: info.ziwei || '',
+      oils: info.oils || info.oil || '',
+      roleVoice: info.roleVoice || '',
+      qimen: info.qimen || '',
+      crystal: info.crystal || '',
+      frequency: info.frequency || '',
+      archetype: info.archetype || '',
+      shadow: info.shadow || '',
+      remedy: info.remedy || '',
+      modules: info.modules || '',
+      element: info.element || '',
       description: info['覺察'] || info.description || '',
-      action: info['行動指引'] || info.action || '',
-      oil: info.oil || info['精油'] || '',
-      element: info.element || info['五行'] || '',
-      hexagram: info.hexagram || info['卦象'] || ''
+      action: info['行動指引'] || info.action || ''
     };
   });
 

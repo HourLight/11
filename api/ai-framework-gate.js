@@ -60,15 +60,22 @@ module.exports = async function handler(req, res) {
     var plan = (userDoc.exists && userDoc.data().plan) || 'free';
     var limit = PLAN_LIMITS[plan] || 3;
 
+    // 週 key 計算（ISO 8601 週數，每週一歸零）
     var today = new Date();
-    var dateKey = new Date(today.getTime() + 8 * 3600000).toISOString().split('T')[0];
-    var dailyRef = db.collection('users').doc(uid).collection('ai_daily').doc(dateKey);
-    var dailyDoc = await dailyRef.get();
-    var count = (dailyDoc.exists && dailyDoc.data().count) || 0;
+    var twMs = today.getTime() + 8 * 3600000;
+    var tw = new Date(twMs);
+    var d = new Date(Date.UTC(tw.getUTCFullYear(), tw.getUTCMonth(), tw.getUTCDate()));
+    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+    var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+    var weekKey = d.getUTCFullYear() + '-W' + String(weekNo).padStart(2, '0');
+    var weeklyRef = db.collection('users').doc(uid).collection('ai_weekly').doc(weekKey);
+    var weeklyDoc = await weeklyRef.get();
+    var count = (weeklyDoc.exists && weeklyDoc.data().count) || 0;
 
     if (count >= limit) {
       return res.status(429).json({
-        error: '今日 AI 額度已用完',
+        error: '本週 智慧解讀額度已用完',
         code: 'QUOTA_EXCEEDED',
         plan: plan, used: count, limit: limit
       });
@@ -84,7 +91,7 @@ module.exports = async function handler(req, res) {
       return res.status(404).json({ error: system + ' 框架不存在' });
     }
 
-    await dailyRef.set({
+    await weeklyRef.set({
       count: count + 1,
       lastUsed: fb.firestore.FieldValue.serverTimestamp()
     }, { merge: true });

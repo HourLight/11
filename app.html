@@ -373,9 +373,9 @@ input,select,textarea{font-family:var(--body)}
 .cert-pending{background:rgba(201,160,96,.15);color:var(--gold3)}
 
 /* Admin */
-.admin-tabs{display:flex;gap:4px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:4px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none}
-.admin-tabs::-webkit-scrollbar{display:none}
-.admin-tab{flex-shrink:0;padding:9px 16px;border-radius:8px;border:none;background:transparent;font-size:.9rem;color:var(--mid);transition:all .2s}
+.admin-tabs{display:flex;flex-wrap:wrap;gap:4px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:4px;margin-bottom:20px}
+.admin-tab{flex:0 0 auto;padding:9px 14px;border-radius:8px;border:none;background:transparent;font-size:.82rem;color:var(--mid);transition:all .2s;white-space:nowrap}
+@media(max-width:860px){.admin-tab{padding:8px 11px;font-size:.78rem}}
 .admin-tab.on{background:var(--card);color:var(--text);box-shadow:0 1px 4px rgba(45,36,24,.1)}
 .admin-sub{display:none}
 .admin-sub.on{display:block}
@@ -860,6 +860,10 @@ input,select,textarea{font-family:var(--body)}
         <button class="sb-item" onclick="showPage('subscription')" id="sb-subscription"><span class="sb-icon">💎</span>訂閱方案</button>
         <button class="sb-item" onclick="showPage('settings')" id="sb-settings"><span class="sb-icon">⚙️</span>帳號設定</button>
       </div>
+      <div class="sb-section hide" id="sb-partner-section">
+        <div class="sb-section-label">推薦夥伴</div>
+        <button class="sb-item" onclick="showPage('partner')" id="sb-partner"><span class="sb-icon">💰</span>推薦夥伴中心</button>
+      </div>
       <div class="sb-section hide" id="sb-mentor-section">
         <div class="sb-section-label">導師後台</div>
         <button class="sb-item" onclick="showPage('students')" id="sb-students"><span class="sb-icon">🌟</span>學員管理<span class="sb-badge" id="student-count-badge">0</span></button>
@@ -1247,6 +1251,14 @@ input,select,textarea{font-family:var(--body)}
             <div class="mine-row-info"><div class="mine-row-label">LINE 聯絡我們</div><div class="mine-row-sub">升級方案、諮詢服務</div></div>
             <div class="mine-row-arr">↗</div>
           </a>
+          <div class="hide" id="mine-partner-section">
+            <div class="mine-section-label">推薦夥伴</div>
+            <button class="mine-row standalone" onclick="showPage('partner')">
+              <div class="mine-row-icon mri-gold">💰</div>
+              <div class="mine-row-info"><div class="mine-row-label">推薦夥伴中心</div><div class="mine-row-sub">查看推薦成效與分潤</div></div>
+              <div class="mine-row-arr">›</div>
+            </button>
+          </div>
           <div class="hide" id="mine-mentor-section">
             <div class="mine-section-label">導師後台</div>
             <button class="mine-row standalone" onclick="showPage('students')">
@@ -1292,9 +1304,9 @@ input,select,textarea{font-family:var(--body)}
         <div id="sub-status" style="margin-bottom:20px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);font-size:.9rem;line-height:1.8"></div>
 
         <div class="plan-list" id="plan-cards">
-          <div class="plan-item" id="plan-guest"><div class="plan-icon-wrap plan-icon-free">🌱</div><div class="plan-info"><div class="plan-name">免費會員</div><div class="plan-desc">AI 深度解讀指令每天 3 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">免費</div><div class="plan-unit">永久</div></div></div>
-          <div class="plan-item popular" id="plan-member"><div class="plan-badge pb-hot">推薦</div><div class="plan-icon-wrap plan-icon-member">🔑</div><div class="plan-info"><div class="plan-name">馥靈鑰友</div><div class="plan-desc">AI 深度解讀指令每天 15 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$399</div><div class="plan-unit">/ 月</div></div><button class="btn-subscribe" id="btn-sub-plus" onclick="subscribePlan('plus')" style="margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#c9a060,#a8813c);color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:all .3s">💳 立即訂閱</button></div>
-          <div class="plan-item" id="plan-premium"><div class="plan-icon-wrap plan-icon-premium">👑</div><div class="plan-info"><div class="plan-name">馥靈大師</div><div class="plan-desc">AI 深度解讀指令無每日上限｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$999</div><div class="plan-unit">/ 月</div></div><button class="btn-subscribe" id="btn-sub-pro" onclick="subscribePlan('pro')" style="margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#7a6a55,#5c4a35);color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:all .3s">💳 立即訂閱</button></div>
+          <div class="plan-item" id="plan-guest"><div class="plan-icon-wrap plan-icon-free">🌱</div><div class="plan-info"><div class="plan-name">免費會員</div><div class="plan-desc">智慧解讀指令每週 3 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">免費</div><div class="plan-unit">永久</div></div></div>
+          <div class="plan-item popular" id="plan-member"><div class="plan-badge pb-hot">推薦</div><div class="plan-icon-wrap plan-icon-member">🔑</div><div class="plan-info"><div class="plan-name">馥靈鑰友</div><div class="plan-desc">智慧解讀指令每週 15 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$399</div><div class="plan-unit">/ 月</div></div><button class="btn-subscribe" id="btn-sub-plus" onclick="subscribePlan('plus')" style="margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#c9a060,#a8813c);color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:all .3s">💳 立即訂閱</button></div>
+          <div class="plan-item" id="plan-premium"><div class="plan-icon-wrap plan-icon-premium">👑</div><div class="plan-info"><div class="plan-name">馥靈大師</div><div class="plan-desc">智慧解讀指令無上限｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$999</div><div class="plan-unit">/ 月</div></div><button class="btn-subscribe" id="btn-sub-pro" onclick="subscribePlan('pro')" style="margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#7a6a55,#5c4a35);color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:all .3s">💳 立即訂閱</button></div>
         </div>
 
         <div style="margin-top:16px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);font-size:.82rem;color:var(--mid);line-height:2">
@@ -1719,6 +1731,8 @@ input,select,textarea{font-family:var(--body)}
           <button class="admin-tab" onclick="switchAdminTab('links')" data-tab="links">🔗 資源</button>
           <button class="admin-tab" onclick="switchAdminTab('activate')" data-tab="activate">🎫 開通</button>
           <button class="admin-tab" onclick="switchAdminTab('referral')" data-tab="referral">📱 推薦碼</button>
+          <button class="admin-tab" onclick="switchAdminTab('bizpartner')" data-tab="bizpartner">🤝 美業合作</button>
+          <button class="admin-tab" onclick="switchAdminTab('analytics')" data-tab="analytics">📈 深度分析</button>
         </div>
         <div class="admin-sub on" id="admin-dashboard">
           <!-- Row 1: 核心指標 -->
@@ -1756,11 +1770,97 @@ input,select,textarea{font-family:var(--body)}
               </div>
             </div>
           </div>
-          <!-- Row 4: 最新動態 -->
-          <div class="adm-card">
-            <div class="adm-card-title">⚡ 最新 10 筆動態</div>
-            <div class="event-list" id="admin-recent-events"><div class="empty"><p>暫無數據</p></div></div>
+          <!-- Row 4: 視覺化儀表板 -->
+          <div class="adm-grid2">
+            <div class="adm-card">
+              <div class="adm-card-title">🎯 工具類型分布</div>
+              <div id="a-tool-donut" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+                <canvas id="toolDonutCanvas" width="160" height="160" style="flex-shrink:0"></canvas>
+                <div id="toolDonutLegend" style="font-size:.78rem;color:var(--mid);line-height:2.2"></div>
+              </div>
+            </div>
+            <div class="adm-card">
+              <div class="adm-card-title">📅 7日活躍熱力圖</div>
+              <div id="a-heatmap" style="display:flex;gap:6px;align-items:flex-end;height:100px;padding:10px 0"></div>
+              <div id="a-heatmap-labels" style="display:flex;gap:6px;margin-top:4px"></div>
+            </div>
           </div>
+          <div class="adm-grid2">
+            <div class="adm-card">
+              <div class="adm-card-title">⏰ 時段使用分布</div>
+              <div id="a-hour-chart" style="display:flex;gap:2px;align-items:flex-end;height:80px;padding:6px 0"></div>
+              <div style="display:flex;justify-content:space-between;font-size:.6rem;color:var(--light);margin-top:4px"><span>0時</span><span>6時</span><span>12時</span><span>18時</span><span>23時</span></div>
+            </div>
+            <div class="adm-card">
+              <div class="adm-card-title">📊 會員成長曲線</div>
+              <div id="a-growth-chart" style="height:100px;position:relative;padding:6px 0"></div>
+              <div id="a-growth-labels" style="display:flex;justify-content:space-between;font-size:.6rem;color:var(--light);margin-top:4px"></div>
+            </div>
+          </div>
+
+          <!-- ═══ 增強區：即時趨勢 + 回訪追蹤 ═══ -->
+          <div style="border-top:1px solid var(--border);margin:20px 0 16px;padding-top:16px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+              <div style="font-size:.92rem;font-weight:600;color:var(--gold)">📈 即時趨勢分析</div>
+              <div style="display:flex;gap:6px" id="trend-period-btns">
+                <button class="dur-btn on" onclick="setTrendPeriod(7,this)" data-p="7">7天</button>
+                <button class="dur-btn" onclick="setTrendPeriod(14,this)" data-p="14">14天</button>
+                <button class="dur-btn" onclick="setTrendPeriod(30,this)" data-p="30">30天</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 趨勢線圖 + 功能佔比 -->
+          <div class="adm-grid2">
+            <div class="adm-card">
+              <div class="adm-card-title">📈 每日操作量 vs 用戶數</div>
+              <div style="position:relative;height:200px"><canvas id="enh-trend-chart"></canvas></div>
+            </div>
+            <div class="adm-card">
+              <div class="adm-card-title">🎯 功能使用佔比（詳細）</div>
+              <div style="position:relative;height:200px"><canvas id="enh-pie-chart"></canvas></div>
+            </div>
+          </div>
+
+          <!-- 功能排行條狀圖 + 24h×7day 熱力矩陣 -->
+          <div class="adm-grid2">
+            <div class="adm-card">
+              <div class="adm-card-title">🔥 功能排行（視覺化）</div>
+              <div id="enh-feature-bars" style="max-height:280px;overflow-y:auto"></div>
+            </div>
+            <div class="adm-card">
+              <div class="adm-card-title">🌡️ 24小時 × 7天 熱力矩陣</div>
+              <div id="enh-heatmap-matrix" style="overflow-x:auto"></div>
+            </div>
+          </div>
+
+          <!-- 回訪用戶追蹤 -->
+          <div class="adm-card" style="margin-bottom:14px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+              <div class="adm-card-title" style="margin-bottom:0">🔄 回訪用戶追蹤</div>
+              <div style="display:flex;gap:12px;font-size:.75rem;color:var(--mid)">
+                <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:3px;background:#5b9bd5"></span>全勤</span>
+                <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:3px;background:#6bc47f"></span>3天+</span>
+                <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:3px;background:#e5a84b"></span>2天</span>
+              </div>
+            </div>
+            <div id="enh-retention-table"></div>
+            <div id="enh-retention-summary" style="margin-top:10px;text-align:center;font-size:.78rem;color:var(--mid)"></div>
+          </div>
+
+          <!-- 留存漏斗 + 新舊用戶比 -->
+          <div class="adm-grid2">
+            <div class="adm-card">
+              <div class="adm-card-title">📊 隔日留存漏斗</div>
+              <div style="position:relative;height:160px"><canvas id="enh-funnel-chart"></canvas></div>
+              <div id="enh-funnel-labels" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-size:.72rem;color:var(--mid);margin-top:8px"></div>
+            </div>
+            <div class="adm-card">
+              <div class="adm-card-title">🌱 每日新用戶 vs 回訪用戶</div>
+              <div style="position:relative;height:160px"><canvas id="enh-newret-chart"></canvas></div>
+            </div>
+          </div>
+
         </div>
         <!-- 公告管理 -->
         <div class="admin-sub" id="admin-announce">
@@ -1842,28 +1942,31 @@ input,select,textarea{font-family:var(--body)}
           <div class="card" style="margin-bottom:16px">
             <div class="card-head" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
               <span class="card-title">🌌 命盤計算紀錄</span>
-              <input type="text" id="calc-search" placeholder="搜尋姓名 / email / 生日…" style="flex:1;min-width:160px;padding:6px 12px;border:1px solid var(--border);border-radius:20px;font-size:.85rem;background:var(--card);color:var(--text);outline:none" oninput="filterCalcs()">
-              <select id="calc-gender-filter" onchange="filterCalcs()" style="padding:6px 10px;border:1px solid var(--border);border-radius:20px;font-size:.82rem;background:var(--card);color:var(--text);outline:none">
+              <input type="text" id="calc-search" placeholder="搜尋姓名 / email / 生日…" style="flex:1;min-width:140px;padding:6px 12px;border:1px solid var(--border);border-radius:20px;font-size:.82rem;background:var(--card);color:var(--text);outline:none" oninput="filterCalcs()">
+              <select id="calc-type-filter" onchange="filterCalcs()" style="padding:6px 10px;border:1px solid var(--border);border-radius:20px;font-size:.78rem;background:var(--card);color:var(--text);outline:none">
+                <option value="">全部類型</option>
+                <option value="個人">個人命盤</option>
+                <option value="合盤">雙人合盤</option>
+              </select>
+              <select id="calc-gender-filter" onchange="filterCalcs()" style="padding:6px 10px;border:1px solid var(--border);border-radius:20px;font-size:.78rem;background:var(--card);color:var(--text);outline:none">
                 <option value="">全部性別</option>
                 <option value="M">乾造（男）</option>
                 <option value="F">坤造（女）</option>
               </select>
-              <button onclick="exportCalcsCSV()" style="padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:.82rem;background:var(--card);color:var(--text);cursor:pointer">📥 匯出 CSV</button>
+              <button onclick="exportCalcsCSV()" style="padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:.78rem;background:var(--card);color:var(--text);cursor:pointer">📥 匯出 CSV</button>
             </div>
             <div class="card-body card-body-pt0">
               <div style="overflow-x:auto;margin-top:8px">
                 <table style="width:100%;border-collapse:collapse;font-size:.82rem">
                   <thead>
                     <tr style="border-bottom:1px solid var(--border);color:var(--mid)">
-                      <th style="text-align:left;padding:8px 10px;white-space:nowrap">時間</th>
-                      <th style="text-align:left;padding:8px 10px;white-space:nowrap">類型</th>
-                      <th style="text-align:left;padding:8px 10px;white-space:nowrap">email</th>
-                      <th style="text-align:left;padding:8px 10px;white-space:nowrap">姓名（甲）</th>
-                      <th style="text-align:left;padding:8px 10px;white-space:nowrap">生日（甲）</th>
-                      <th style="text-align:left;padding:8px 10px;white-space:nowrap">四柱（甲）</th>
-                      <th style="text-align:left;padding:8px 10px;white-space:nowrap">日主</th>
-                      <th style="text-align:left;padding:8px 10px;white-space:nowrap">姓名（乙）</th>
-                      <th style="text-align:left;padding:8px 10px;white-space:nowrap">生日（乙）</th>
+                      <th style="text-align:left;padding:8px 8px;white-space:nowrap;font-size:.7rem">時間</th>
+                      <th style="text-align:left;padding:8px 8px;white-space:nowrap;font-size:.7rem">類型</th>
+                      <th style="text-align:left;padding:8px 8px;white-space:nowrap;font-size:.7rem">會員</th>
+                      <th style="text-align:left;padding:8px 8px;white-space:nowrap;font-size:.7rem">姓名</th>
+                      <th style="text-align:left;padding:8px 8px;white-space:nowrap;font-size:.7rem">生日</th>
+                      <th style="text-align:left;padding:8px 8px;white-space:nowrap;font-size:.7rem">日主</th>
+                      <th style="text-align:left;padding:8px 8px;white-space:nowrap;font-size:.7rem">對象</th>
                     </tr>
                   </thead>
                   <tbody id="calc-tbody"></tbody>
@@ -1924,6 +2027,20 @@ input,select,textarea{font-family:var(--body)}
                 <h4 style="font-size:.95rem;color:var(--text);margin-bottom:12px">📋 最近開通紀錄</h4>
                 <div id="act-history" style="font-size:.85rem;color:var(--mid)">載入中⋯</div>
               </div>
+
+              <!-- 📚 NAHA 課程存取權 -->
+              <div style="margin-top:30px;border-top:1px solid var(--border);padding-top:20px">
+                <h4 style="font-size:.95rem;color:var(--text);margin-bottom:8px">📚 NAHA 課程存取開通</h4>
+                <p style="font-size:.82rem;color:var(--mid);margin-bottom:14px;line-height:1.7">輸入學生 Email，開通 NAHA 課程頁面的完整內容存取權。開通後學生登入即可看到被鎖住的教學內容。</p>
+                <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;max-width:480px">
+                  <div style="flex:1;min-width:200px">
+                    <label style="font-size:.82rem;color:var(--mid);margin-bottom:4px;display:block">學生 Email</label>
+                    <input type="email" id="naha-email" placeholder="輸入學生的 Email" class="member-search" style="width:100%"/>
+                  </div>
+                  <button class="btn-matrix-save" onclick="grantNahaAccess()" id="naha-btn" style="padding:12px 24px;white-space:nowrap">📚 開通課程</button>
+                </div>
+                <div id="naha-result" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.85rem"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1938,7 +2055,7 @@ input,select,textarea{font-family:var(--body)}
               <div style="display:flex;flex-direction:column;gap:14px;max-width:480px">
                 <div>
                   <label style="font-size:.82rem;color:var(--mid);margin-bottom:4px;display:block">推薦碼（英文數字，3-12 字元）</label>
-                  <input type="text" id="ref-code" placeholder="例如：yupingteacher" class="member-search" style="width:100%" maxlength="12"/>
+                  <input type="text" id="ref-code" placeholder="例如：PING" class="member-search" style="width:100%" maxlength="12"/>
                 </div>
                 <div>
                   <label style="font-size:.82rem;color:var(--mid);margin-bottom:4px;display:block">夥伴名稱（顯示用）</label>
@@ -1975,6 +2092,203 @@ input,select,textarea{font-family:var(--body)}
                 <h4 style="font-size:.95rem;color:var(--text);margin-bottom:12px">📋 已建立的推薦碼</h4>
                 <div id="ref-list" style="font-size:.85rem;color:var(--mid)">載入中⋯</div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🤝 美業合作 -->
+        <div class="admin-sub" id="admin-bizpartner">
+          <div class="card">
+            <div class="card-body">
+              <h3 style="font-size:1.1rem;margin-bottom:8px;color:var(--text)">🤝 美業合作夥伴管理</h3>
+              <p style="font-size:.82rem;color:var(--mid);margin-bottom:16px;line-height:1.7">合作商三檔方案：基礎 $600/月（3張×50次）、進階 $900/月（5張×30次）、旗艦 $1,200/月（9張×20次）。美甲 + SPA 共用額度。合作商產生一次性代碼給客人使用，用完自動轉 C 端付款。</p>
+
+              <!-- 新增合作商 -->
+              <div style="background:rgba(240,212,138,.03);border:1px solid rgba(240,212,138,.1);border-radius:14px;padding:18px;margin-bottom:20px">
+                <h4 style="font-size:.92rem;color:var(--text);margin-bottom:12px">➕ 新增合作商</h4>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;max-width:600px">
+                  <input type="text" id="biz-shop-name" placeholder="店名（例：朵朵美甲）" class="member-search" style="flex:1;min-width:180px"/>
+                  <input type="text" id="biz-contact" placeholder="聯絡人" class="member-search" style="width:120px"/>
+                  <input type="email" id="biz-email" placeholder="Email" class="member-search" style="flex:1;min-width:200px"/>
+                  <select id="biz-type" class="member-search" style="width:140px">
+                    <option value="nail">💅 美甲</option>
+                    <option value="spa">🧖‍♀️ SPA</option>
+                    <option value="both">💅+🧖‍♀️ 兩者</option>
+                  </select>
+                  <select id="biz-plan" class="member-search" style="width:260px">
+                    <option value="biz600">基礎 $600/月｜3張×50次</option>
+                    <option value="biz900">進階 $900/月｜5張×30次</option>
+                    <option value="biz1200">旗艦 $1,200/月｜9張×20次</option>
+                  </select>
+                  <button class="btn-matrix-save" onclick="addBizPartner()" style="padding:12px 24px;white-space:nowrap">➕ 新增</button>
+                </div>
+                <div id="biz-add-msg" style="font-size:.82rem;margin-top:8px;min-height:18px"></div>
+              </div>
+
+              <!-- 合作商列表 -->
+              <div style="margin-bottom:20px">
+                <h4 style="font-size:.92rem;color:var(--text);margin-bottom:12px">📋 合作商列表</h4>
+                <div id="biz-partner-list" style="font-size:.85rem;color:var(--mid)">載入中⋯</div>
+              </div>
+
+              <!-- 產生代碼 -->
+              <div style="background:rgba(240,212,138,.03);border:1px solid rgba(240,212,138,.1);border-radius:14px;padding:18px">
+                <h4 style="font-size:.92rem;color:var(--text);margin-bottom:12px">🎟️ 產生一次性代碼</h4>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;max-width:600px;align-items:flex-end">
+                  <div style="flex:1;min-width:200px">
+                    <label style="font-size:.78rem;color:var(--mid);display:block;margin-bottom:4px">選擇合作商</label>
+                    <select id="biz-code-partner" class="member-search" style="width:100%">
+                      <option value="">先新增合作商</option>
+                    </select>
+                  </div>
+                  <div style="width:100px">
+                    <label style="font-size:.78rem;color:var(--mid);display:block;margin-bottom:4px">產生數量</label>
+                    <input type="number" id="biz-code-count" value="10" min="1" max="50" class="member-search" style="width:100%"/>
+                  </div>
+                  <button class="btn-matrix-save" onclick="generateBizCodes()" style="padding:12px 24px;white-space:nowrap">🎟️ 產生代碼</button>
+                </div>
+                <div id="biz-code-msg" style="font-size:.82rem;margin-top:8px;min-height:18px"></div>
+                <div id="biz-code-list" style="margin-top:12px;display:none">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                    <span style="font-size:.85rem;color:var(--text);font-weight:700">產生的代碼</span>
+                    <button onclick="copyBizCodes()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(240,212,138,.3);background:rgba(240,212,138,.08);color:var(--gold);font-size:.78rem;cursor:pointer">📋 全部複製</button>
+                  </div>
+                  <div id="biz-codes-output" style="font-family:monospace;font-size:.82rem;color:var(--gold);line-height:2;background:rgba(0,0,0,.2);padding:12px;border-radius:10px;max-height:200px;overflow-y:auto"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- 📈 深度分析 -->
+        <div class="admin-sub" id="admin-analytics">
+          <div class="admin-stats" id="ana-top-stats">
+            <div class="admin-stat"><div class="as-n" id="ana-wau">-</div><div class="as-l">本週活躍</div></div>
+            <div class="admin-stat"><div class="as-n" id="ana-mau">-</div><div class="as-l">本月活躍</div></div>
+            <div class="admin-stat"><div class="as-n" id="ana-conv">-</div><div class="as-l">付費轉換率</div></div>
+            <div class="admin-stat"><div class="as-n" id="ana-rev">-</div><div class="as-l">本月營收估算</div></div>
+          </div>
+
+          <!-- 會員活躍排行 -->
+          <div class="adm-grid2">
+            <div class="adm-card">
+              <div class="adm-card-title">🏆 會員活躍 Top 15</div>
+              <div style="font-size:.75rem;color:var(--light);margin-bottom:8px">依總使用次數排序</div>
+              <div id="ana-active-rank" style="max-height:400px;overflow-y:auto"><div class="empty"><p>載入中⋯</p></div></div>
+            </div>
+            <div class="adm-card">
+              <div class="adm-card-title">📊 工具使用 Top 15（詳細）</div>
+              <div style="font-size:.75rem;color:var(--light);margin-bottom:8px">含分類和佔比</div>
+              <div id="ana-tool-detail" style="max-height:400px;overflow-y:auto"><div class="empty"><p>載入中⋯</p></div></div>
+            </div>
+          </div>
+
+          <!-- 會員健康燈號 -->
+          <div class="adm-card" style="margin-bottom:16px">
+            <div class="adm-card-title" style="justify-content:space-between">
+              🩺 會員健康分布
+              <div style="display:flex;gap:6px">
+                <button class="dur-btn on" onclick="filterHealth('all',this)" data-h="all">全部</button>
+                <button class="dur-btn" onclick="filterHealth('red',this)" data-h="red">🔴 流失風險</button>
+                <button class="dur-btn" onclick="filterHealth('yellow',this)" data-h="yellow">🟡 沉睡</button>
+                <button class="dur-btn" onclick="filterHealth('green',this)" data-h="green">🟢 活躍</button>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap" id="ana-health-summary"></div>
+            <div id="ana-health-list" style="max-height:360px;overflow-y:auto"><div class="empty"><p>載入中⋯</p></div></div>
+          </div>
+
+          <!-- 方案分布 + 到期預警 -->
+          <div class="adm-grid2">
+            <div class="adm-card">
+              <div class="adm-card-title">💎 方案分布</div>
+              <div id="ana-plan-dist"><div class="empty"><p>載入中⋯</p></div></div>
+            </div>
+            <div class="adm-card">
+              <div class="adm-card-title">⏰ 7 天內到期預警</div>
+              <div id="ana-expiry-warn"><div class="empty"><p>載入中⋯</p></div></div>
+            </div>
+          </div>
+
+          <!-- 推薦碼成效 -->
+          <div class="adm-card" style="margin-bottom:16px">
+            <div class="adm-card-title">📱 推薦碼成效追蹤</div>
+            <div id="ana-ref-perf"><div class="empty"><p>載入中⋯</p></div></div>
+          </div>
+
+          <!-- AI 用量 -->
+          <div class="adm-card" style="margin-bottom:16px">
+            <div class="adm-card-title">🤖 智慧解讀用量分析</div>
+            <div id="ana-ai-usage"><div class="empty"><p>載入中⋯</p></div></div>
+          </div>
+
+          <!-- 匯出 -->
+          <div style="text-align:center;padding:16px 0">
+            <button onclick="exportAnalyticsCSV()" style="padding:12px 28px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:10px;font-size:.92rem;color:#1a1008;font-weight:600;cursor:pointer;font-family:inherit">📥 匯出完整數據報告 CSV</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 推薦夥伴專屬頁面 -->
+      <div class="page hide" id="page-partner">
+        <button class="subpage-back" onclick="goBack()">‹ 返回</button>
+        <div class="page-head"><h1>推薦夥伴中心</h1><p>您的專屬推薦成效與分潤報表</p></div>
+
+        <!-- 夥伴 Hero -->
+        <div style="background:linear-gradient(135deg,#2d2418,#3d2e1a);border-radius:var(--radius);padding:24px;margin-bottom:16px;position:relative;overflow:hidden">
+          <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(201,160,96,.15),transparent 70%)"></div>
+          <div style="font-size:.78rem;color:rgba(240,232,208,.6);letter-spacing:.15em;margin-bottom:6px">PARTNER</div>
+          <div style="font-family:var(--serif);font-size:1.2rem;color:#fff;margin-bottom:4px" id="ptr-name">載入中⋯</div>
+          <div style="font-size:.82rem;color:rgba(240,232,208,.7)" id="ptr-code">推薦碼：-</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px">
+            <div style="text-align:center"><div style="font-family:var(--serif);font-size:1.4rem;color:var(--gold)" id="ptr-total-ref">0</div><div style="font-size:.68rem;color:rgba(240,232,208,.6)">推薦人數</div></div>
+            <div style="text-align:center"><div style="font-family:var(--serif);font-size:1.4rem;color:var(--gold)" id="ptr-paid-ref">0</div><div style="font-size:.68rem;color:rgba(240,232,208,.6)">付費轉換</div></div>
+            <div style="text-align:center"><div style="font-family:var(--serif);font-size:1.4rem;color:var(--gold)" id="ptr-revenue">$0</div><div style="font-size:.68rem;color:rgba(240,232,208,.6)">產生營收</div></div>
+            <div style="text-align:center"><div style="font-family:var(--serif);font-size:1.4rem;color:var(--gold)" id="ptr-commission">$0</div><div style="font-size:.68rem;color:rgba(240,232,208,.6)">累計分潤</div></div>
+          </div>
+        </div>
+
+        <!-- 分潤說明 -->
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-body">
+            <div style="font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:8px">💰 分潤計算方式</div>
+            <div style="font-size:.85rem;color:var(--mid);line-height:2">
+              ► 您推薦的會員每筆付款，扣除 10% 平台固定成本後<br>
+              ► 您可得 <strong style="color:var(--gold)">5% 分潤</strong><br>
+              ► 計算公式：付款金額 × 90% × 5% = 付款金額 × 4.5%<br>
+              ► 範例：會員付 $399 鑰友方案 → 您得 $399 × 4.5% = <strong style="color:var(--gold)">$17.9</strong><br>
+              ► 範例：會員付 $999 大師方案 → 您得 $999 × 4.5% = <strong style="color:var(--gold)">$44.9</strong><br>
+              ► 分潤每月結算，次月 10 號前匯入您的指定帳戶
+            </div>
+          </div>
+        </div>
+
+        <!-- 推薦會員明細 -->
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-head"><span class="card-title">推薦會員明細</span><span class="card-action" id="ptr-ref-count" style="color:var(--gold);font-size:.78rem">0 人</span></div>
+          <div class="card-body card-body-pt0">
+            <div id="ptr-member-list" style="max-height:400px;overflow-y:auto"><div class="empty"><p>載入中⋯</p></div></div>
+          </div>
+        </div>
+
+        <!-- 月度分潤明細 -->
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-head"><span class="card-title">月度分潤明細</span></div>
+          <div class="card-body card-body-pt0">
+            <div id="ptr-monthly-list"><div class="empty"><p>載入中⋯</p></div></div>
+          </div>
+        </div>
+
+        <!-- QR Code + 推薦連結 -->
+        <div class="card">
+          <div class="card-body" style="text-align:center">
+            <div style="font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:12px">📱 您的專屬推薦連結</div>
+            <div style="font-size:.82rem;color:var(--mid);margin-bottom:10px;word-break:break-all" id="ptr-url">-</div>
+            <img id="ptr-qr" src="" style="width:180px;height:180px;border-radius:10px;border:1px solid var(--border);margin-bottom:12px;display:none"/>
+            <div style="display:flex;gap:8px;justify-content:center">
+              <button onclick="copyPartnerURL()" class="btn-sm-gold">📋 複製連結</button>
+              <button onclick="downloadPartnerQR()" class="btn-sm-gold">💾 下載 QR</button>
             </div>
           </div>
         </div>
@@ -2412,6 +2726,8 @@ async function initApp() {
     document.getElementById('sb-mentor-section').classList.remove('hide');
     document.getElementById('mine-mentor-section').classList.remove('hide');
   }
+  // Check if user is a partner
+  checkPartnerStatus();
   if (['admin','curator'].includes(userRole)) {
     document.getElementById('sb-admin-section').classList.remove('hide');
     document.getElementById('mine-admin-section').classList.remove('hide');
@@ -2429,6 +2745,7 @@ function showPage(page) {
   // 角色驗證
   if (page==='admin' && !['admin','curator'].includes(userRole)) return;
   if ((page==='students'||page==='certification') && !['admin','curator','mentor'].includes(userRole)) return;
+  if (page==='partner') { /* any logged-in user with partner record */ }
   // 記錄返回堆疊（非 tab root 才記錄）
   if (!TAB_PAGES.includes(page) && currentPage !== page) backStack.push(currentPage);
 
@@ -2443,7 +2760,7 @@ function showPage(page) {
   });
 
   // Topbar 頁面名稱
-  const names = {home:'今日總覽',tools:'工具',history:'使用足跡',mine:'我的',notes:'覺察筆記',subscription:'訂閱方案',settings:'帳號設定',students:'學員管理',certification:'授權認證',admin:'管理後台'};
+  const names = {home:'今日總覽',tools:'工具',history:'使用足跡',mine:'我的',notes:'覺察筆記',subscription:'訂閱方案',settings:'帳號設定',students:'學員管理',certification:'授權認證',admin:'管理後台',partner:'推薦夥伴中心'};
   document.getElementById('tb-page-name').textContent = names[page]||page;
 
   currentPage = page;
@@ -2458,6 +2775,7 @@ function showPage(page) {
   if (page==='settings')     loadSettings();
   if (page==='admin')        loadAdmin();
   if (page==='students')     loadStudents();
+  if (page==='partner')      loadPartnerPortal();
 
   window.scrollTo(0,0);
   const mainEl = document.querySelector('.main');
@@ -2820,7 +3138,7 @@ function loadSubscription() {
 
       if (plan === 'free' || !plan) {
         userPlan = 'guest';
-        if (statusEl) statusEl.innerHTML = '🌱 目前方案：<strong>免費會員</strong>｜升級後可使用更多 AI 深度解讀次數';
+        if (statusEl) statusEl.innerHTML = '🌱 目前方案：<strong>免費會員</strong>｜升級後可使用更多 智慧解讀次數';
       } else {
         var pInfo = HL_PLANS[plan] || {};
         var expiryText = '';
@@ -3101,6 +3419,8 @@ function switchAdminTab(tab) {
   if (tab==='announce') loadAnnouncements();
   if (tab==='activate') loadActivateHistory();
   if (tab==='referral') loadRefList();
+  if (tab==='analytics') loadAnalytics();
+  if (tab==='bizpartner') loadBizPartners();
 }
 
 async function loadAdmin() {
@@ -3118,7 +3438,7 @@ async function loadAdminCalcs() {
   const tbody=document.getElementById('calc-tbody');
   const empty=document.getElementById('calc-empty');
   if(!tbody)return;
-  tbody.innerHTML='<tr><td colspan="9" style="padding:20px;text-align:center;color:var(--mid)">載入中…</td></tr>';
+  tbody.innerHTML='<tr><td colspan="7" style="padding:20px;text-align:center;color:var(--mid)">載入中…</td></tr>';
   try {
     // 同時抓個人命盤 + 合盤兩種記錄
     const [snapCalc, snapMatch] = await Promise.all([
@@ -3133,18 +3453,20 @@ async function loadAdminCalcs() {
     calcPage=1;
     renderCalcs();
   } catch(e) {
-    tbody.innerHTML='<tr><td colspan="9" style="padding:20px;text-align:center;color:var(--mid)">讀取失敗：'+e.message+'</td></tr>';
+    tbody.innerHTML='<tr><td colspan="7" style="padding:20px;text-align:center;color:var(--mid)">讀取失敗：'+e.message+'</td></tr>';
   }
 }
 
 function filterCalcs() {
   const q=(document.getElementById('calc-search').value||'').trim().toLowerCase();
   const g=(document.getElementById('calc-gender-filter').value||'');
+  const tp=(document.getElementById('calc-type-filter')?document.getElementById('calc-type-filter').value:'');
   filteredCalcs=allCalcs.filter(r=>{
     const d=r.detail||{};
-    const matchQ=!q||(d.nameZh||'').includes(q)||(r.email||'').toLowerCase().includes(q)||(d.solarDate||'').includes(q)||(d.lunarDate||'').includes(q);
-    const matchG=!g||(d.gender||'')===(g);
-    return matchQ&&matchG;
+    const matchQ=!q||(d.nameZh||'').includes(q)||(d.nameA||'').includes(q)||(r.email||'').toLowerCase().includes(q)||(d.solarDate||'').includes(q)||(d.solarDateA||'').includes(q);
+    const matchG=!g||((d.gender||'')===(g))||(d.genderA||'')===(g);
+    const matchT=!tp||(r._type||'')===(tp);
+    return matchQ&&matchG&&matchT;
   });
   calcPage=1; renderCalcs();
 }
@@ -3175,16 +3497,16 @@ function renderCalcs() {
     const dmA=escHtml(isMatch?d.dayMasterA||"-":d.dayMaster||"-");
     const nameB=isMatch?escHtml(d.nameB||"-"):"-";
     const dateB=isMatch?escHtml(d.solarDateB||"-"):"-";
+    var partner=isMatch?(escHtml((d.nameB||''))+' '+escHtml(d.solarDateB||'')):'';
+    var relTag=isMatch&&d.relType?'<div style="font-size:.65rem;color:var(--light)">'+escHtml(d.relType)+'</div>':'';
     return "<tr style=\"border-bottom:1px solid var(--border)\">"
-      +"<td style=\"padding:7px 10px;white-space:nowrap;color:var(--mid);font-size:.78rem\">"+ts+"</td>"
-      +"<td style=\"padding:7px 10px\">"+typeTag+"</td>"
-      +"<td style=\"padding:7px 10px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.8rem\">"+escHtml(r.email||"-")+"</td>"
-      +"<td style=\"padding:7px 10px;font-weight:500\">"+nameA+"</td>"
-      +"<td style=\"padding:7px 10px;white-space:nowrap;font-size:.82rem\">"+dateA+"</td>"
-      +"<td style=\"padding:7px 10px;white-space:nowrap;font-family:monospace;font-size:.78rem\">"+baziA+"</td>"
-      +"<td style=\"padding:7px 10px;font-weight:600;color:var(--accent)\">"+dmA+"</td>"
-      +"<td style=\"padding:7px 10px;color:var(--mid)\">"+nameB+"</td>"
-      +"<td style=\"padding:7px 10px;white-space:nowrap;font-size:.82rem;color:var(--mid)\">"+dateB+"</td>"
+      +"<td style=\"padding:6px 8px;white-space:nowrap;color:var(--mid);font-size:.75rem\">"+ts+"</td>"
+      +"<td style=\"padding:6px 8px\">"+typeTag+"</td>"
+      +"<td style=\"padding:6px 8px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.75rem\">"+escHtml(r.email||"-")+"</td>"
+      +"<td style=\"padding:6px 8px;font-weight:600;font-size:.85rem\">"+nameA+"</td>"
+      +"<td style=\"padding:6px 8px;white-space:nowrap;font-size:.78rem\">"+dateA+"</td>"
+      +"<td style=\"padding:6px 8px;font-weight:700;color:var(--gold);font-size:.85rem\">"+dmA+"</td>"
+      +"<td style=\"padding:6px 8px;color:var(--mid);font-size:.78rem\">"+partner+relTag+"</td>"
       +"</tr>";
   }).join("");
 }
@@ -3275,11 +3597,28 @@ async function loadAdminDashboard() {
     }).join('');}
     // 系統狀態
     try{document.getElementById('h-pages').className='health-dot ok';}catch(e){}
-    // 最近事件
-    const recentSnap = await db.collection('events').orderBy('ts','desc').limit(10).get();
-    const rList = document.getElementById('admin-recent-events');
-    if (recentSnap.empty) { rList.innerHTML='<div class="empty"><p>尚無事件</p></div>'; return; }
-    rList.innerHTML = recentSnap.docs.map(doc=>makeEventItem(doc.data())).join('');
+    // 視覺化儀表板
+    renderToolDonut(toolCount, eventsSnap.size);
+    renderHeatmap(eventsSnap);
+    renderHourChart(eventsSnap);
+    renderGrowthChart(usersSnap);
+    // ═══ 增強儀表板資料準備 ═══
+    try {
+      var enhEvents = [];
+      eventsSnap.forEach(function(doc) {
+        var d = doc.data();
+        var ts = d.ts && d.ts.toDate ? d.ts.toDate() : null;
+        if (!ts) return;
+        enhEvents.push({
+          _enhTool: d.toolName || d.page || '其他',
+          _enhEmail: (d.userEmail || d.email || '').toLowerCase(),
+          _enhDate: ts,
+          _enhDay: ts.getFullYear() + '-' + String(ts.getMonth()+1).padStart(2,'0') + '-' + String(ts.getDate()).padStart(2,'0'),
+          _enhHour: ts.getHours()
+        });
+      });
+      renderEnhancedDashboard(enhEvents);
+    } catch(enhErr) { console.warn('Enhanced dashboard error:', enhErr); }
   } catch(e) { console.warn('Admin dashboard error:',e); }
 }
 
@@ -3660,7 +3999,7 @@ async function activateMember(){
           name:userData.displayName||'',
           subject:'馥靈之鑰｜您的「'+pInfo.name+'」方案已開通 🎉',
           system:'會員系統',
-          content:'親愛的 '+(userData.displayName||'馥靈夥伴')+'：\n\n恭喜！您的「'+pInfo.name+'」方案已成功開通 🎉\n\n► 方案：'+pInfo.icon+' '+pInfo.name+'\n► 有效期：'+expiryLabel+'\n► AI 深度解讀指令：'+(plan==='pro'?'無限次':'每天 15 次')+'\n\n現在就前往體驗：\nhttps://hourlightkey.com/destiny-engine.html\n\n使用方式：\n1. 在命盤引擎輸入生辰資料\n2. 按「🔮 複製AI指令（會員）」\n3. 貼到 ChatGPT 或 Claude，獲得深度解讀\n\n有任何問題歡迎聯繫：\nLINE 官方帳號 @hourlight\n\n馥靈之鑰 Hour Light 敬上'
+          content:'親愛的 '+(userData.displayName||'馥靈夥伴')+'：\n\n恭喜！您的「'+pInfo.name+'」方案已成功開通 🎉\n\n► 方案：'+pInfo.icon+' '+pInfo.name+'\n► 有效期：'+expiryLabel+'\n► 智慧解讀指令：'+(plan==='pro'?'無限次':'每週 15 次')+'\n\n現在就前往體驗：\nhttps://hourlightkey.com/destiny-engine.html\n\n使用方式：\n1. 在命盤引擎輸入生辰資料\n2. 按「🔮 複製AI指令（會員）」\n3. 貼到 ChatGPT 或 Claude，獲得深度解讀\n\n有任何問題歡迎聯繫：\nLINE 官方帳號 @hourlight\n\n馥靈之鑰 Hour Light 敬上'
         })
       });
     }catch(mailErr){console.warn('Activate email failed',mailErr);}
@@ -3700,9 +4039,143 @@ async function loadActivateHistory(){
   }catch(e){el.textContent='載入失敗：'+e.message;}
 }
 
+/* ═══ 📚 NAHA 課程存取開通 ═══ */
+async function grantNahaAccess(){
+  var email=document.getElementById('naha-email').value.trim().toLowerCase();
+  var resultEl=document.getElementById('naha-result');
+  var btn=document.getElementById('naha-btn');
+
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    resultEl.style.display='block';resultEl.style.background='rgba(217,48,37,.08)';resultEl.style.color='#d93025';
+    resultEl.textContent='請輸入正確的 Email';return;
+  }
+
+  btn.disabled=true;btn.textContent='處理中⋯';
+  try{
+    var snap=await db.collection('users').where('email','==',email).limit(1).get();
+    if(snap.empty){
+      resultEl.style.display='block';resultEl.style.background='rgba(217,48,37,.08)';resultEl.style.color='#d93025';
+      resultEl.textContent='找不到此 Email 的會員。請確認對方已註冊帳號。';
+      btn.disabled=false;btn.textContent='📚 開通課程';return;
+    }
+    var userDoc=snap.docs[0];
+    var uid=userDoc.id;
+    var userData=userDoc.data();
+
+    await db.collection('users').doc(uid).update({naha_access:true});
+
+    // 發通知信
+    try{
+      await fetch('https://app.hourlightkey.com/api/send-report',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          email:email,name:userData.displayName||'',
+          subject:'馥靈之鑰｜您的 NAHA 芳療課程已開通 🎓',
+          system:'課程系統',
+          content:'親愛的 '+(userData.displayName||'同學')+'：\n\n您的 NAHA 國際芳療師認證課程存取權已開通 🎓\n\n現在登入即可查看完整教學內容：\nhttps://hourlightkey.com/naha-course.html\n\n有任何問題歡迎聯繫：\nLINE 官方帳號 @hourlight\n\n馥靈之鑰 Hour Light 敬上'
+        })
+      });
+    }catch(e){console.warn('NAHA email failed',e);}
+
+    resultEl.style.display='block';resultEl.style.background='rgba(52,168,83,.08)';resultEl.style.color='#34a853';
+    resultEl.innerHTML='✅ 已開通！<strong>'+(userData.displayName||email)+'</strong> 現在可以查看 NAHA 完整課程內容。通知信已寄出。';
+    document.getElementById('naha-email').value='';
+  }catch(e){
+    resultEl.style.display='block';resultEl.style.background='rgba(217,48,37,.08)';resultEl.style.color='#d93025';
+    resultEl.textContent='開通失敗：'+e.message;
+  }
+  btn.disabled=false;btn.textContent='📚 開通課程';
+}
+
+/* ═══ 🤝 美業合作 ═══ */
+async function addBizPartner(){
+  var name=document.getElementById('biz-shop-name').value.trim();
+  var contact=document.getElementById('biz-contact').value.trim();
+  var email=document.getElementById('biz-email').value.trim();
+  var type=document.getElementById('biz-type').value;
+  var msg=document.getElementById('biz-add-msg');
+  if(!name){msg.style.color='#d93025';msg.textContent='請輸入店名';return;}
+  try{
+    var plan=document.getElementById('biz-plan').value;
+    var planMap={biz600:{quota:50,spread:3,price:600},biz900:{quota:30,spread:5,price:900},biz1200:{quota:20,spread:9,price:1200}};
+    var p=planMap[plan]||planMap.biz600;
+    var nextMonth=new Date();nextMonth.setMonth(nextMonth.getMonth()+1);nextMonth.setDate(1);
+    await db.collection('biz_partners').add({
+      shopName:name,contact:contact,email:email,type:type,
+      plan:plan,monthlyQuota:p.quota,allowedSpread:p.spread,monthlyPrice:p.price,usedThisMonth:0,
+      quotaResetDate:nextMonth,active:true,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    });
+    msg.style.color='#34a853';msg.textContent='✅ 已新增 '+name;
+    document.getElementById('biz-shop-name').value='';
+    document.getElementById('biz-contact').value='';
+    document.getElementById('biz-email').value='';
+    loadBizPartners();
+  }catch(e){msg.style.color='#d93025';msg.textContent='新增失敗：'+e.message;}
+}
+
+async function loadBizPartners(){
+  var el=document.getElementById('biz-partner-list');
+  var sel=document.getElementById('biz-code-partner');
+  try{
+    var snap=await db.collection('biz_partners').orderBy('createdAt','desc').get();
+    if(snap.empty){el.textContent='尚未新增合作商';sel.innerHTML='<option value="">先新增合作商</option>';return;}
+    var h='';sel.innerHTML='';
+    snap.forEach(function(doc){
+      var d=doc.data();var remain=Math.max(0,(d.monthlyQuota||100)-(d.usedThisMonth||0));
+      var statusColor=d.active?'#34a853':'#d93025';
+      var statusText=d.active?'啟用中':'已停用';
+      h+='<div style="padding:12px;border:1px solid rgba(255,255,255,.06);border-radius:10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">';
+      h+='<div><strong style="color:var(--text)">'+({nail:'💅',spa:'🧖‍♀️',both:'💅🧖‍♀️'}[d.type]||'')+' '+(d.shopName||'')+'</strong>';
+      h+='<div style="font-size:.78rem;color:var(--mid)">'+(d.contact||'')+' · '+(d.email||'')+'</div></div>';
+      h+='<div style="text-align:right">';
+      h+='<div style="font-size:.85rem;color:var(--gold);font-weight:700">'+spreadLabel+' '+priceLabel+'｜剩餘 '+remain+' / '+(d.monthlyQuota||50)+' 次</div>';
+      h+='<div style="font-size:.72rem;color:'+statusColor+'">● '+statusText+'</div>';
+      h+='</div></div>';
+      if(d.active) sel.innerHTML+='<option value="'+doc.id+'">'+(d.shopName||doc.id)+'</option>';
+    });
+    el.innerHTML=h;
+  }catch(e){el.textContent='載入失敗';}
+}
+
+async function generateBizCodes(){
+  var partnerId=document.getElementById('biz-code-partner').value;
+  var count=parseInt(document.getElementById('biz-code-count').value)||10;
+  var msg=document.getElementById('biz-code-msg');
+  var listEl=document.getElementById('biz-code-list');
+  var outEl=document.getElementById('biz-codes-output');
+  if(!partnerId){msg.style.color='#d93025';msg.textContent='請選擇合作商';return;}
+  if(count<1||count>50){msg.style.color='#d93025';msg.textContent='數量 1-50';return;}
+  msg.style.color='var(--mid)';msg.textContent='產生中⋯';
+  try{
+    var codes=[];var batch=db.batch();
+    for(var i=0;i<count;i++){
+      var code=genCode();
+      var ref=db.collection('biz_partners').doc(partnerId).collection('biz_codes').doc();
+      batch.set(ref,{code:code,used:false,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+      codes.push(code);
+    }
+    await batch.commit();
+    msg.style.color='#34a853';msg.textContent='✅ 已產生 '+count+' 組代碼';
+    outEl.textContent=codes.join('\n');
+    listEl.style.display='';
+    window._lastBizCodes=codes;
+  }catch(e){msg.style.color='#d93025';msg.textContent='產生失敗：'+e.message;}
+}
+function genCode(){
+  var chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  var c='HL-';for(var i=0;i<6;i++)c+=chars[Math.floor(Math.random()*chars.length)];return c;
+}
+function copyBizCodes(){
+  if(!window._lastBizCodes)return;
+  navigator.clipboard.writeText(window._lastBizCodes.join('\n')).then(function(){
+    event.target.textContent='✅ 已複製';setTimeout(function(){event.target.textContent='📋 全部複製';},2000);
+  });
+}
+
 /* ═══ 📱 推薦碼 QR Code ═══ */
 function generateRefQR(){
-  const code=document.getElementById('ref-code').value.trim().toLowerCase().replace(/[^a-z0-9]/g,'');
+  const code=document.getElementById('ref-code').value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
   const name=document.getElementById('ref-name').value.trim();
   const page=document.getElementById('ref-page').value;
 
@@ -3845,6 +4318,446 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const ta=document.getElementById('note-input');
   if(ta) ta.addEventListener('input',()=>{ document.getElementById('note-char').textContent=ta.value.length; });
 });
+
+
+
+/* ═══ 視覺化儀表板 ═══ */
+
+function renderToolDonut(toolCount, totalEvents) {
+  var canvas = document.getElementById('toolDonutCanvas');
+  var legend = document.getElementById('toolDonutLegend');
+  if (!canvas || !legend) return;
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width, h = canvas.height, cx = w/2, cy = h/2, r = 65;
+
+  // Group into categories
+  var cats = {draw:0, quiz:0, calculator:0, other:0};
+  var catNames = {draw:'🃏 抽牌', quiz:'📊 測驗', calculator:'🔮 命理', other:'📄 其他'};
+  var catColors = {draw:'#c9a060', quiz:'#78b4c8', calculator:'#9070c0', other:'#b0a490'};
+  Object.entries(toolCount).forEach(function(e) {
+    var name = e[0].toLowerCase();
+    if (name.indexOf('draw') > -1 || name.indexOf('抽') > -1 || name.indexOf('牌') > -1) cats.draw += e[1];
+    else if (name.indexOf('quiz') > -1 || name.indexOf('測驗') > -1) cats.quiz += e[1];
+    else if (name.indexOf('calc') > -1 || name.indexOf('命盤') > -1 || name.indexOf('destiny') > -1 || name.indexOf('mima') > -1) cats.calculator += e[1];
+    else cats.other += e[1];
+  });
+
+  ctx.clearRect(0, 0, w, h);
+  var entries = Object.entries(cats).filter(function(e) { return e[1] > 0; });
+  if (!entries.length) { legend.textContent = '尚無數據'; return; }
+  var total = entries.reduce(function(s, e) { return s + e[1]; }, 0);
+  var startAngle = -Math.PI / 2;
+
+  entries.forEach(function(e) {
+    var key = e[0], val = e[1];
+    var sliceAngle = (val / total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, startAngle, startAngle + sliceAngle);
+    ctx.closePath();
+    ctx.fillStyle = catColors[key];
+    ctx.fill();
+    startAngle += sliceAngle;
+  });
+
+  // Center hole
+  ctx.beginPath();
+  ctx.arc(cx, cy, r * 0.55, 0, Math.PI * 2);
+  ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--card') || '#ffffff';
+  ctx.fill();
+
+  // Center text
+  ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text') || '#2d2418';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(total, cx, cy - 6);
+  ctx.font = '10px sans-serif';
+  ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--light') || '#9a8a74';
+  ctx.fillText('總使用', cx, cy + 10);
+
+  legend.innerHTML = entries.map(function(e) {
+    var pct = Math.round(e[1] / total * 100);
+    return '<div style="display:flex;align-items:center;gap:6px">'
+      + '<div style="width:10px;height:10px;border-radius:3px;background:' + catColors[e[0]] + ';flex-shrink:0"></div>'
+      + '<span>' + catNames[e[0]] + '</span>'
+      + '<span style="margin-left:auto;font-weight:600;color:var(--text)">' + e[1] + '</span>'
+      + '<span style="color:var(--light);font-size:.7rem">(' + pct + '%)</span>'
+      + '</div>';
+  }).join('');
+}
+
+function renderHeatmap(eventsSnap) {
+  var el = document.getElementById('a-heatmap');
+  var labels = document.getElementById('a-heatmap-labels');
+  if (!el) return;
+  var now = new Date();
+  var days = [];
+  for (var i = 6; i >= 0; i--) {
+    var d = new Date(now);
+    d.setDate(d.getDate() - i);
+    d.setHours(0, 0, 0, 0);
+    days.push({ date: d, count: 0, label: ['日','一','二','三','四','五','六'][d.getDay()] });
+  }
+  eventsSnap.forEach(function(doc) {
+    var ts = doc.data().ts;
+    if (!ts || !ts.toDate) return;
+    var t = ts.toDate();
+    for (var j = 0; j < days.length; j++) {
+      var next = new Date(days[j].date);
+      next.setDate(next.getDate() + 1);
+      if (t >= days[j].date && t < next) { days[j].count++; break; }
+    }
+  });
+  var maxC = Math.max.apply(null, days.map(function(d) { return d.count; })) || 1;
+  el.innerHTML = days.map(function(d) {
+    var h = Math.max(8, Math.round(d.count / maxC * 90));
+    var intensity = Math.min(1, d.count / maxC);
+    var bg = 'rgba(201,160,96,' + (0.15 + intensity * 0.85) + ')';
+    return '<div style="flex:1;height:' + h + 'px;background:' + bg + ';border-radius:4px 4px 0 0;position:relative;transition:height .5s">'
+      + '<div style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.65rem;color:var(--text);font-weight:600">' + d.count + '</div>'
+      + '</div>';
+  }).join('');
+  labels.innerHTML = days.map(function(d) {
+    return '<div style="flex:1;text-align:center;font-size:.6rem;color:var(--light)">' + (d.date.getMonth()+1) + '/' + d.date.getDate() + '<br>' + d.label + '</div>';
+  }).join('');
+}
+
+function renderHourChart(eventsSnap) {
+  var el = document.getElementById('a-hour-chart');
+  if (!el) return;
+  var hours = new Array(24).fill(0);
+  eventsSnap.forEach(function(doc) {
+    var ts = doc.data().ts;
+    if (!ts || !ts.toDate) return;
+    hours[ts.toDate().getHours()]++;
+  });
+  var maxH = Math.max.apply(null, hours) || 1;
+  el.innerHTML = hours.map(function(cnt, h) {
+    var ht = Math.max(3, Math.round(cnt / maxH * 70));
+    var peak = cnt === maxH && cnt > 0;
+    var bg = peak ? 'var(--gold)' : 'rgba(201,160,96,' + (0.15 + (cnt/maxH) * 0.6) + ')';
+    return '<div style="flex:1;height:' + ht + 'px;background:' + bg + ';border-radius:2px 2px 0 0;position:relative" title="' + h + '時 ' + cnt + '次">'
+      + (peak ? '<div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:.55rem;color:var(--gold);font-weight:700">' + cnt + '</div>' : '')
+      + '</div>';
+  }).join('');
+}
+
+function renderGrowthChart(usersSnap) {
+  var el = document.getElementById('a-growth-chart');
+  var labels = document.getElementById('a-growth-labels');
+  if (!el) return;
+  // Aggregate by week for last 8 weeks
+  var now = new Date();
+  var weeks = [];
+  for (var i = 7; i >= 0; i--) {
+    var start = new Date(now);
+    start.setDate(start.getDate() - i * 7);
+    start.setHours(0, 0, 0, 0);
+    weeks.push({ start: start, cumulative: 0, label: (start.getMonth()+1) + '/' + start.getDate() });
+  }
+  var allDates = [];
+  usersSnap.forEach(function(doc) {
+    var ct = doc.data().createdAt;
+    if (ct && ct.toDate) allDates.push(ct.toDate());
+  });
+  allDates.sort(function(a, b) { return a - b; });
+  // Count cumulative at each week point
+  weeks.forEach(function(w) {
+    var end = new Date(w.start);
+    end.setDate(end.getDate() + 7);
+    w.cumulative = allDates.filter(function(d) { return d < end; }).length;
+  });
+  var maxVal = Math.max.apply(null, weeks.map(function(w) { return w.cumulative; })) || 1;
+  var minVal = Math.min.apply(null, weeks.map(function(w) { return w.cumulative; }));
+  var range = maxVal - minVal || 1;
+
+  // SVG line chart
+  var svgW = el.clientWidth || 300;
+  var svgH = 100;
+  var points = weeks.map(function(w, i) {
+    var x = (i / (weeks.length - 1)) * (svgW - 20) + 10;
+    var y = svgH - 10 - ((w.cumulative - minVal) / range) * (svgH - 20);
+    return x + ',' + y;
+  });
+  var polyline = points.join(' ');
+  var area = '10,' + svgH + ' ' + polyline + ' ' + (svgW - 10) + ',' + svgH;
+
+  el.innerHTML = '<svg width="100%" height="' + svgH + '" viewBox="0 0 ' + svgW + ' ' + svgH + '" style="overflow:visible">'
+    + '<polygon points="' + area + '" fill="rgba(201,160,96,0.08)" />'
+    + '<polyline points="' + polyline + '" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linejoin="round" />'
+    + points.split(' ').map(function(p) {
+        var xy = p.split(',');
+        return '<circle cx="' + xy[0] + '" cy="' + xy[1] + '" r="3" fill="var(--gold)" />';
+      }).join('')
+    + '</svg>';
+
+  labels.innerHTML = '<span>' + weeks[0].label + '</span><span>最近 8 週</span><span>' + weeks[weeks.length-1].label + '</span>';
+}
+
+/* ═══ 增強儀表板 v1.0 ═══ */
+var enhTrendChart=null, enhPieChart=null, enhFunnelChart=null, enhNewRetChart=null;
+var enhPeriod=7, enhEventsCache=[];
+
+function setTrendPeriod(days, btn){
+  enhPeriod=days;
+  document.querySelectorAll('#trend-period-btns .dur-btn').forEach(function(b){b.classList.toggle('on',parseInt(b.dataset.p)===days);});
+  if(enhEventsCache.length) renderEnhancedDashboard(enhEventsCache);
+}
+
+function renderEnhancedDashboard(allEvts){
+  enhEventsCache=allEvts;
+  var now=new Date(); now.setHours(23,59,59,999);
+  var cutoff=new Date(now); cutoff.setDate(cutoff.getDate()-enhPeriod); cutoff.setHours(0,0,0,0);
+  var events=allEvts.filter(function(e){return e._enhDate>=cutoff;});
+  renderEnhTrend(events);
+  renderEnhPie(events);
+  renderEnhFeatureBars(events);
+  renderEnhHeatmapMatrix(events);
+  renderEnhRetention(events);
+  renderEnhFunnel(events);
+  renderEnhNewRet(events);
+}
+
+function renderEnhTrend(events){
+  var dayMap={};
+  events.forEach(function(e){
+    var dk=e._enhDay;
+    if(!dayMap[dk])dayMap[dk]={ops:0,users:{}};
+    dayMap[dk].ops++;
+    dayMap[dk].users[e._enhEmail]=1;
+  });
+  var days=Object.keys(dayMap).sort();
+  if(!days.length)return;
+  var labels=days.map(function(d){var p=d.split('-');return parseInt(p[1])+'/'+parseInt(p[2]);});
+  var opsData=days.map(function(d){return dayMap[d].ops;});
+  var usersData=days.map(function(d){return Object.keys(dayMap[d].users).length;});
+  if(enhTrendChart)enhTrendChart.destroy();
+  var canvas=document.getElementById('enh-trend-chart');
+  if(!canvas||typeof Chart==='undefined')return;
+  enhTrendChart=new Chart(canvas,{
+    type:'line',
+    data:{labels:labels,datasets:[
+      {label:'操作次數',data:opsData,borderColor:'#c9a060',backgroundColor:'rgba(201,160,96,0.08)',fill:true,tension:0.3,pointRadius:3,pointBackgroundColor:'#c9a060',yAxisID:'y'},
+      {label:'用戶數',data:usersData,borderColor:'#78b4c8',backgroundColor:'rgba(120,180,200,0.08)',fill:true,tension:0.3,pointRadius:3,pointBackgroundColor:'#78b4c8',yAxisID:'y1'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{color:'rgba(232,224,208,0.6)',font:{size:11},boxWidth:10}}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'rgba(232,224,208,0.35)',font:{size:10}}},
+        y:{position:'left',grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(201,160,96,0.6)',font:{size:10}},title:{display:true,text:'操作',color:'rgba(201,160,96,0.4)',font:{size:10}}},
+        y1:{position:'right',grid:{drawOnChartArea:false},ticks:{color:'rgba(120,180,200,0.6)',font:{size:10}},title:{display:true,text:'用戶',color:'rgba(120,180,200,0.4)',font:{size:10}}}
+      }
+    }
+  });
+}
+
+function renderEnhPie(events){
+  var tc={};
+  events.forEach(function(e){
+    var n=e._enhTool; if(n==='會員登入'||n==='測驗中心')return;
+    tc[n]=(tc[n]||0)+1;
+  });
+  var sorted=Object.entries(tc).sort(function(a,b){return b[1]-a[1];});
+  var top6=sorted.slice(0,6);
+  var other=sorted.slice(6).reduce(function(s,x){return s+x[1];},0);
+  if(other>0)top6.push(['其他',other]);
+  var colors=['#c9a060','#78b4c8','#9070c0','#e07850','#6bc47f','#e5a84b','#b0a490'];
+  if(enhPieChart)enhPieChart.destroy();
+  var canvas=document.getElementById('enh-pie-chart');
+  if(!canvas||typeof Chart==='undefined'||!top6.length)return;
+  enhPieChart=new Chart(canvas,{
+    type:'doughnut',
+    data:{labels:top6.map(function(x){return x[0];}),datasets:[{data:top6.map(function(x){return x[1];}),backgroundColor:colors}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'50%',
+      plugins:{legend:{position:'right',labels:{color:'rgba(232,224,208,0.6)',font:{size:10},boxWidth:10,padding:6}}}
+    }
+  });
+}
+
+function renderEnhFeatureBars(events){
+  var el=document.getElementById('enh-feature-bars');if(!el)return;
+  var tc={};
+  events.forEach(function(e){var n=e._enhTool;if(n==='會員登入'||n==='測驗中心')return;tc[n]=(tc[n]||0)+1;});
+  var sorted=Object.entries(tc).sort(function(a,b){return b[1]-a[1];}).slice(0,12);
+  if(!sorted.length){el.innerHTML='<div class="empty"><p>尚無數據</p></div>';return;}
+  var maxC=sorted[0][1];
+  var colors=['#c9a060','#78b4c8','#9070c0','#e07850','#6bc47f','#e5a84b','#b0a490','#b0a490','#b0a490','#b0a490','#b0a490','#b0a490'];
+  el.innerHTML=sorted.map(function(item,i){
+    var pct=Math.round(item[1]/maxC*100);
+    return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:.78rem">'+
+      '<span style="width:90px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);flex-shrink:0">'+item[0]+'</span>'+
+      '<div style="flex:1;height:14px;background:rgba(201,160,96,0.06);border-radius:3px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+colors[i]+';border-radius:3px;transition:width .6s"></div></div>'+
+      '<span style="min-width:45px;text-align:right;color:var(--mid);font-size:.72rem">'+item[1]+'</span></div>';
+  }).join('');
+}
+
+function renderEnhHeatmapMatrix(events){
+  var el=document.getElementById('enh-heatmap-matrix');if(!el)return;
+  var dayHour={};
+  events.forEach(function(e){
+    var dk=e._enhDay;var h=e._enhHour;
+    if(!dayHour[dk])dayHour[dk]={};
+    dayHour[dk][h]=(dayHour[dk][h]||0)+1;
+  });
+  var days=Object.keys(dayHour).sort().slice(-7);
+  if(!days.length){el.innerHTML='<div class="empty"><p>尚無數據</p></div>';return;}
+  var maxVal=0;
+  days.forEach(function(d){for(var h=0;h<24;h++){var v=dayHour[d]&&dayHour[d][h]||0;if(v>maxVal)maxVal=v;}});
+  var html='<div style="display:grid;grid-template-columns:42px repeat(24,minmax(0,1fr));gap:2px;font-size:.6rem">';
+  html+='<div></div>';
+  for(var h=0;h<24;h++)html+='<div style="text-align:center;color:var(--light)">'+(h%4===0?h:'')+'</div>';
+  days.forEach(function(d){
+    var p=d.split('-');
+    html+='<div style="color:var(--light);display:flex;align-items:center;justify-content:flex-end;padding-right:4px;font-size:.6rem">'+parseInt(p[1])+'/'+parseInt(p[2])+'</div>';
+    for(var h=0;h<24;h++){
+      var v=dayHour[d]&&dayHour[d][h]||0;
+      var intensity=maxVal>0?v/maxVal:0;
+      var bg=v===0?'rgba(201,160,96,0.03)':'rgba(201,160,96,'+(0.12+intensity*0.75).toFixed(2)+')';
+      var tc=intensity>0.4?'rgba(255,255,255,0.85)':'rgba(232,224,208,0.3)';
+      html+='<div style="height:20px;border-radius:2px;background:'+bg+';display:flex;align-items:center;justify-content:center;color:'+tc+';font-size:.55rem" title="'+parseInt(p[1])+'/'+parseInt(p[2])+' '+h+'時: '+v+'次">'+(v>0?v:'')+'</div>';
+    }
+  });
+  html+='</div>';
+  el.innerHTML=html;
+}
+
+function renderEnhRetention(events){
+  var el=document.getElementById('enh-retention-table');
+  var sumEl=document.getElementById('enh-retention-summary');
+  if(!el)return;
+  var userDays={};var userCounts={};
+  events.forEach(function(e){
+    if(!userDays[e._enhEmail])userDays[e._enhEmail]={};
+    userDays[e._enhEmail][e._enhDay]=1;
+    userCounts[e._enhEmail]=(userCounts[e._enhEmail]||0)+1;
+  });
+  var allDays=Object.keys(events.reduce(function(a,e){a[e._enhDay]=1;return a;},{})).sort();
+  var returning=[];
+  Object.keys(userDays).forEach(function(email){
+    var daySet=Object.keys(userDays[email]);
+    if(daySet.length>=2){
+      returning.push({email:email,days:userDays[email],dayCount:daySet.length,total:userCounts[email]});
+    }
+  });
+  returning.sort(function(a,b){return b.dayCount-a.dayCount||b.total-a.total;});
+  var showDays=allDays.slice(-7);
+  var maxDays=showDays.length;
+  if(!returning.length){
+    el.innerHTML='<div class="empty" style="padding:16px"><p>尚無回訪數據（需至少2天的資料）</p></div>';
+    if(sumEl)sumEl.textContent='';
+    return;
+  }
+  var totalUsers=Object.keys(userDays).length;
+  if(sumEl)sumEl.textContent='回訪用戶 '+returning.length+' / '+totalUsers+' 人（'+Math.round(returning.length/totalUsers*100)+'%）';
+  var html='<div style="font-size:.78rem">';
+  html+='<div style="display:grid;grid-template-columns:1fr repeat('+showDays.length+',36px) 50px;gap:0;padding:4px 0;border-bottom:1px solid var(--border);color:var(--light);font-size:.7rem">';
+  html+='<div>用戶</div>';
+  showDays.forEach(function(d){var p=d.split('-');html+='<div style="text-align:center">'+parseInt(p[1])+'/'+parseInt(p[2])+'</div>';});
+  html+='<div style="text-align:right">次數</div></div>';
+  var shown=Math.min(returning.length,20);
+  for(var i=0;i<shown;i++){
+    var u=returning[i];
+    var dotClass=u.dayCount>=maxDays?'#5b9bd5':u.dayCount>=3?'#6bc47f':'#e5a84b';
+    var displayEmail=u.email.split('@')[0];
+    if(displayEmail.length>14)displayEmail=displayEmail.substring(0,12)+'..';
+    html+='<div style="display:grid;grid-template-columns:1fr repeat('+showDays.length+',36px) 50px;gap:0;padding:5px 0;border-bottom:1px solid rgba(201,160,96,0.06);align-items:center">';
+    html+='<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:'+dotClass+';font-weight:500">'+displayEmail+'</div>';
+    showDays.forEach(function(d){
+      html+='<div style="text-align:center">'+(u.days[d]?'<div style="width:12px;height:12px;border-radius:50%;background:'+dotClass+';margin:0 auto"></div>':'')+'</div>';
+    });
+    html+='<div style="text-align:right;font-weight:600;color:var(--text)">'+u.total+'</div></div>';
+  }
+  html+='</div>';
+  if(returning.length>shown)html+='<div style="text-align:center;margin-top:8px;font-size:.72rem;color:var(--light)">顯示 '+shown+' / '+returning.length+' 位回訪用戶</div>';
+  el.innerHTML=html;
+}
+
+function renderEnhFunnel(events){
+  var dayMap={};
+  events.forEach(function(e){
+    if(!dayMap[e._enhDay])dayMap[e._enhDay]={};
+    dayMap[e._enhDay][e._enhEmail]=1;
+  });
+  var days=Object.keys(dayMap).sort();
+  if(days.length<2){
+    var lbl=document.getElementById('enh-funnel-labels');
+    if(lbl)lbl.innerHTML='<span>需至少2天數據</span>';
+    return;
+  }
+  var labels=[],data=[],texts=[];
+  for(var i=0;i<Math.min(days.length-1,7);i++){
+    var d1=days[i],d2=days[i+1];
+    var u1=dayMap[d1],u2=dayMap[d2];
+    var retained=0;
+    Object.keys(u1).forEach(function(em){if(u2[em])retained++;});
+    var u1size=Object.keys(u1).length;
+    var rate=u1size?Math.round(retained/u1size*100):0;
+    var p1=d1.split('-'),p2=d2.split('-');
+    var lb=parseInt(p1[1])+'/'+parseInt(p1[2])+'→'+parseInt(p2[1])+'/'+parseInt(p2[2]);
+    labels.push(lb);
+    data.push(retained);
+    texts.push(lb+' 留存 '+rate+'%（'+retained+'/'+u1size+'）');
+  }
+  if(enhFunnelChart)enhFunnelChart.destroy();
+  var canvas=document.getElementById('enh-funnel-chart');
+  if(!canvas||typeof Chart==='undefined')return;
+  enhFunnelChart=new Chart(canvas,{
+    type:'bar',data:{labels:labels,datasets:[{data:data,backgroundColor:'#c9a060',borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(232,224,208,0.35)',font:{size:10}}},
+        y:{grid:{display:false},ticks:{color:'rgba(232,224,208,0.5)',font:{size:10}}}
+      }
+    }
+  });
+  var lbl=document.getElementById('enh-funnel-labels');
+  if(lbl)lbl.innerHTML=texts.map(function(t){return '<span>'+t+'</span>';}).join('');
+}
+
+function renderEnhNewRet(events){
+  var dayMap={};var seenBefore={};
+  events.forEach(function(e){
+    if(!dayMap[e._enhDay])dayMap[e._enhDay]={newU:{},retU:{}};
+    dayMap[e._enhDay][seenBefore[e._enhEmail]?'retU':'newU'][e._enhEmail]=1;
+  });
+  var days=Object.keys(dayMap).sort();
+  days.forEach(function(d){
+    Object.keys(dayMap[d].newU).forEach(function(em){seenBefore[em]=1;});
+    Object.keys(dayMap[d].retU).forEach(function(em){seenBefore[em]=1;});
+  });
+  seenBefore={};var newData=[],retData=[],labels=[];
+  days.forEach(function(d){
+    var newU={},retU={};
+    Object.keys(dayMap[d].newU).concat(Object.keys(dayMap[d].retU)).forEach(function(em){
+      if(seenBefore[em])retU[em]=1; else newU[em]=1;
+    });
+    Object.keys(newU).forEach(function(em){seenBefore[em]=1;});
+    Object.keys(retU).forEach(function(em){seenBefore[em]=1;});
+    var p=d.split('-');
+    labels.push(parseInt(p[1])+'/'+parseInt(p[2]));
+    newData.push(Object.keys(newU).length);
+    retData.push(Object.keys(retU).length);
+  });
+  if(enhNewRetChart)enhNewRetChart.destroy();
+  var canvas=document.getElementById('enh-newret-chart');
+  if(!canvas||typeof Chart==='undefined')return;
+  enhNewRetChart=new Chart(canvas,{
+    type:'bar',
+    data:{labels:labels,datasets:[
+      {label:'新用戶',data:newData,backgroundColor:'rgba(120,180,200,0.6)',borderRadius:3},
+      {label:'回訪',data:retData,backgroundColor:'rgba(201,160,96,0.6)',borderRadius:3}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{color:'rgba(232,224,208,0.6)',font:{size:10},boxWidth:10}}},
+      scales:{
+        x:{stacked:true,grid:{display:false},ticks:{color:'rgba(232,224,208,0.35)',font:{size:10}}},
+        y:{stacked:true,grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(232,224,208,0.35)',font:{size:10}}}
+      }
+    }
+  });
+}
 
 /* ═══════════════════════════════════════════
    遊戲化系統 ｜ 第一～三層
@@ -4565,9 +5478,381 @@ document.addEventListener('HL_USER_READY',async e=>{
   // 預先建立日曆資料
   loadHistoryForCalendar(uid);
 });
+
+
+/* ═══════════════════════════════════════════
+   📈 深度分析儀表板
+═══════════════════════════════════════════ */
+
+var anaMembers=[], anaEvents=[], anaHealthFilter='all';
+
+async function loadAnalytics(){
+  if(!['admin','curator'].includes(userRole))return;
+  try{
+    var [usersSnap,eventsSnap]=await Promise.all([
+      db.collection('users').get(),
+      db.collection('events').get()
+    ]);
+    anaMembers=[];usersSnap.forEach(function(d){anaMembers.push({uid:d.id,...d.data()});});
+    anaEvents=[];eventsSnap.forEach(function(d){anaEvents.push(d.data());});
+
+    renderAnaTopStats();
+    renderActiveRank();
+    renderToolDetail();
+    renderHealthList();
+    renderPlanDist();
+    renderExpiryWarn();
+    renderRefPerf();
+    renderAIUsage();
+  }catch(e){console.warn('Analytics load error',e);}
+}
+
+function renderAnaTopStats(){
+  var now=new Date();
+  var weekAgo=new Date(now);weekAgo.setDate(weekAgo.getDate()-7);
+  var monthAgo=new Date(now);monthAgo.setDate(monthAgo.getDate()-30);
+  var wau=0,mau=0,paid=0,total=anaMembers.length;
+  var monthRev=0;
+  anaMembers.forEach(function(m){
+    var ls=m.lastSeen&&m.lastSeen.toDate?m.lastSeen.toDate():null;
+    if(ls&&ls>=weekAgo)wau++;
+    if(ls&&ls>=monthAgo)mau++;
+    if(m.plan&&m.plan!=='free'){
+      paid++;
+      if(m.plan==='plus')monthRev+=399;
+      if(m.plan==='pro')monthRev+=999;
+    }
+  });
+  var e=function(id){return document.getElementById(id);};
+  if(e('ana-wau'))e('ana-wau').textContent=wau;
+  if(e('ana-mau'))e('ana-mau').textContent=mau;
+  if(e('ana-conv'))e('ana-conv').textContent=total?Math.round(paid/total*100)+'%':'0%';
+  if(e('ana-rev'))e('ana-rev').textContent='$'+monthRev.toLocaleString();
+}
+
+function renderActiveRank(){
+  var el=document.getElementById('ana-active-rank');if(!el)return;
+  var sorted=anaMembers.map(function(m){
+    var total=(m.totalDraws||0)+(m.totalQuizzes||0)+(m.totalCalcs||0);
+    return{name:m.displayName||m.email||'匿名',email:m.email||'',total:total,draws:m.totalDraws||0,quizzes:m.totalQuizzes||0,calcs:m.totalCalcs||0,plan:m.plan||'free',lastSeen:m.lastSeen};
+  }).sort(function(a,b){return b.total-a.total;}).slice(0,15);
+  if(!sorted.length||sorted[0].total===0){el.innerHTML='<div class="empty"><p>尚無使用數據</p></div>';return;}
+  var pIcons={free:'🌱',plus:'🔑',pro:'👑'};
+  el.innerHTML=sorted.map(function(m,i){
+    var rc=i===0?'r1':i===1?'r2':i===2?'r3':'rn';
+    var ls=m.lastSeen&&m.lastSeen.toDate?m.lastSeen.toDate().toLocaleDateString('zh-TW'):'';
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--border);font-size:.82rem">'
+      +'<span class="rank-num '+rc+'">'+(i+1)+'</span>'
+      +'<div style="flex:1;min-width:0"><div style="color:var(--text);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(pIcons[m.plan]||'')+' '+escHtml(m.name)+'</div>'
+      +'<div style="font-size:.72rem;color:var(--light)">抽牌 '+m.draws+' ｜ 測驗 '+m.quizzes+' ｜ 命理 '+m.calcs+'</div></div>'
+      +'<div style="text-align:right"><div style="font-weight:700;color:var(--gold)">'+m.total+'</div><div style="font-size:.65rem;color:var(--light)">'+ls+'</div></div></div>';
+  }).join('');
+}
+
+function renderToolDetail(){
+  var el=document.getElementById('ana-tool-detail');if(!el)return;
+  var tc={};var totalE=anaEvents.length;
+  anaEvents.forEach(function(e){var n=e.toolName||e.page||'其他';tc[n]=(tc[n]||0)+1;});
+  var sorted=Object.entries(tc).sort(function(a,b){return b[1]-a[1];}).slice(0,15);
+  if(!sorted.length){el.innerHTML='<div class="empty"><p>尚無數據</p></div>';return;}
+  var typeMap={draw:'🃏',quiz:'📊',calculator:'🔮',page:'📄'};
+  el.innerHTML=sorted.map(function(item,i){
+    var name=item[0],cnt=item[1];
+    var pct=totalE?Math.round(cnt/totalE*100):0;
+    var rc=i===0?'r1':i===1?'r2':i===2?'r3':'rn';
+    return '<div style="display:flex;align-items:center;gap:8px;padding:8px 4px;border-bottom:1px solid var(--border);font-size:.82rem">'
+      +'<span class="rank-num '+rc+'">'+(i+1)+'</span>'
+      +'<div style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)">'+escHtml(name)+'</div>'
+      +'<div style="width:80px;height:6px;background:rgba(201,160,96,.1);border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+pct+'%;background:var(--gold);border-radius:3px"></div></div>'
+      +'<div style="width:60px;text-align:right;color:var(--gold);font-weight:600">'+cnt+'<span style="font-size:.65rem;color:var(--light);font-weight:400"> ('+pct+'%)</span></div></div>';
+  }).join('');
+}
+
+function renderHealthList(){
+  var el=document.getElementById('ana-health-list');
+  var sumEl=document.getElementById('ana-health-summary');
+  if(!el)return;
+  var now=new Date();
+  var week=7*86400000,month=30*86400000;
+  var green=[],yellow=[],red=[];
+  anaMembers.forEach(function(m){
+    var ls=m.lastSeen&&m.lastSeen.toDate?m.lastSeen.toDate():null;
+    var diff=ls?(now-ls):Infinity;
+    var total=(m.totalDraws||0)+(m.totalQuizzes||0)+(m.totalCalcs||0);
+    var obj={name:m.displayName||'匿名',email:m.email||'',plan:m.plan||'free',total:total,lastSeen:ls,diff:diff};
+    if(diff<=week)green.push(obj);
+    else if(diff<=month)yellow.push(obj);
+    else red.push(obj);
+  });
+  if(sumEl)sumEl.innerHTML='<div style="padding:8px 16px;background:rgba(52,168,83,.08);border-radius:8px;font-size:.82rem;color:#34a853;font-weight:600">🟢 活躍 '+green.length+'</div>'
+    +'<div style="padding:8px 16px;background:rgba(251,188,5,.08);border-radius:8px;font-size:.82rem;color:#fbbc05;font-weight:600">🟡 沉睡 '+yellow.length+'</div>'
+    +'<div style="padding:8px 16px;background:rgba(234,67,53,.08);border-radius:8px;font-size:.82rem;color:#ea4335;font-weight:600">🔴 流失 '+red.length+'</div>';
+  var list=[];
+  if(anaHealthFilter==='all')list=red.concat(yellow).concat(green);
+  else if(anaHealthFilter==='red')list=red;
+  else if(anaHealthFilter==='yellow')list=yellow;
+  else list=green;
+  if(!list.length){el.innerHTML='<div class="empty"><p>此分類無會員</p></div>';return;}
+  var pIcons={free:'🌱',plus:'🔑',pro:'👑'};
+  el.innerHTML=list.slice(0,50).map(function(m){
+    var dot=m.diff<=week?'#34a853':m.diff<=month?'#fbbc05':'#ea4335';
+    var ago=m.lastSeen?Math.floor(m.diff/86400000)+'天前':'從未上線';
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--border);font-size:.82rem">'
+      +'<div style="width:8px;height:8px;border-radius:50%;background:'+dot+';flex-shrink:0"></div>'
+      +'<div style="flex:1;min-width:0"><div style="color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(pIcons[m.plan]||'')+' '+escHtml(m.name)+'</div>'
+      +'<div style="font-size:.7rem;color:var(--light)">'+escHtml(m.email)+'</div></div>'
+      +'<div style="font-size:.78rem;color:var(--mid)">'+m.total+' 次</div>'
+      +'<div style="font-size:.72rem;color:var(--light);width:60px;text-align:right">'+ago+'</div></div>';
+  }).join('');
+}
+
+function filterHealth(type,btn){
+  anaHealthFilter=type;
+  document.querySelectorAll('#admin-analytics .dur-btn').forEach(function(b){b.classList.toggle('on',b.dataset.h===type);});
+  renderHealthList();
+}
+
+function renderPlanDist(){
+  var el=document.getElementById('ana-plan-dist');if(!el)return;
+  var dist={free:0,plus:0,pro:0};
+  anaMembers.forEach(function(m){var p=m.plan||'free';dist[p]=(dist[p]||0)+1;});
+  var total=anaMembers.length||1;
+  var items=[
+    {label:'🌱 免費會員',count:dist.free,color:'rgba(176,176,176,.3)'},
+    {label:'🔑 馥靈鑰友 $399',count:dist.plus,color:'rgba(201,160,96,.5)'},
+    {label:'👑 馥靈大師 $999',count:dist.pro,color:'rgba(100,150,220,.5)'}
+  ];
+  el.innerHTML=items.map(function(it){
+    var pct=Math.round(it.count/total*100);
+    return '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px"><span style="color:var(--text)">'+it.label+'</span><span style="color:var(--gold);font-weight:600">'+it.count+' 人 ('+pct+'%)</span></div>'
+      +'<div style="height:8px;background:rgba(201,160,96,.06);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+it.color+';border-radius:4px;transition:width .6s"></div></div></div>';
+  }).join('');
+}
+
+function renderExpiryWarn(){
+  var el=document.getElementById('ana-expiry-warn');if(!el)return;
+  var now=new Date();var week=new Date(now);week.setDate(week.getDate()+7);
+  var warns=anaMembers.filter(function(m){
+    if(!m.planExpiry||m.planExpiry==='permanent'||m.plan==='free')return false;
+    var exp=new Date(m.planExpiry);
+    return exp>now&&exp<=week;
+  }).sort(function(a,b){return new Date(a.planExpiry)-new Date(b.planExpiry);});
+  if(!warns.length){el.innerHTML='<div style="text-align:center;padding:16px;font-size:.85rem;color:var(--mid)">✅ 未來 7 天沒有到期會員</div>';return;}
+  el.innerHTML=warns.map(function(m){
+    var exp=new Date(m.planExpiry);
+    var days=Math.ceil((exp-now)/86400000);
+    var pName=m.plan==='plus'?'🔑 鑰友':'👑 大師';
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--border);font-size:.82rem">'
+      +'<div style="color:#ea4335;font-weight:700;width:40px;text-align:center">'+days+'天</div>'
+      +'<div style="flex:1;min-width:0"><div style="color:var(--text)">'+escHtml(m.displayName||m.email)+'</div>'
+      +'<div style="font-size:.72rem;color:var(--light)">'+pName+' ｜ 到期 '+exp.toLocaleDateString('zh-TW')+'</div></div></div>';
+  }).join('');
+}
+
+function renderRefPerf(){
+  var el=document.getElementById('ana-ref-perf');if(!el)return;
+  var refMap={};
+  anaMembers.forEach(function(m){
+    if(!m.referral_code)return;
+    if(!refMap[m.referral_code])refMap[m.referral_code]={code:m.referral_code,total:0,paid:0,revenue:0,commission:0};
+    refMap[m.referral_code].total++;
+    if(m.plan&&m.plan!=='free'){
+      refMap[m.referral_code].paid++;
+      var amt=m.plan==='plus'?399:m.plan==='pro'?999:0;
+      refMap[m.referral_code].revenue+=amt;
+      refMap[m.referral_code].commission+=Math.round(amt*0.045*10)/10;
+    }
+  });
+  var list=Object.values(refMap).sort(function(a,b){return b.total-a.total;});
+  if(!list.length){el.innerHTML='<div class="empty"><p>尚無推薦數據</p></div>';return;}
+  el.innerHTML='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.82rem"><thead><tr style="border-bottom:1px solid var(--border);color:var(--mid)"><th style="text-align:left;padding:8px">推薦碼</th><th style="text-align:center;padding:8px">推薦人數</th><th style="text-align:center;padding:8px">付費轉換</th><th style="text-align:center;padding:8px">轉換率</th><th style="text-align:right;padding:8px">產生營收</th><th style="text-align:right;padding:8px">應付分潤</th></tr></thead><tbody>'
+    +list.map(function(r){
+      var cvr=r.total?Math.round(r.paid/r.total*100):0;
+      return '<tr style="border-bottom:1px solid var(--border)"><td style="padding:8px;font-weight:600;color:var(--gold)">'+escHtml(r.code)+'</td>'
+        +'<td style="padding:8px;text-align:center">'+r.total+'</td>'
+        +'<td style="padding:8px;text-align:center;color:var(--gold)">'+r.paid+'</td>'
+        +'<td style="padding:8px;text-align:center">'+cvr+'%</td>'
+        +'<td style="padding:8px;text-align:right;font-weight:600">$'+r.revenue.toLocaleString()+'</td>'
+        +'<td style="padding:8px;text-align:right;color:var(--gold);font-weight:700">$'+r.commission.toLocaleString()+'</td></tr>';
+    }).join('')+'</tbody></table></div>';
+}
+
+function renderAIUsage(){
+  var el=document.getElementById('ana-ai-usage');if(!el)return;
+  el.innerHTML='<div style="font-size:.85rem;color:var(--mid);line-height:2">AI 用量統計需從 ai_weekly subcollection 彙總。<br>目前可從會員列表查看個別會員的使用狀態。<br>完整自動彙總將在下一版更新中加入。</div>';
+}
+
+function exportAnalyticsCSV(){
+  var rows=[['Email','名稱','身分','方案','到期日','抽牌','測驗','命理','總次數','最後上線','推薦碼','健康狀態']];
+  var now=new Date();var week=7*86400000;var month=30*86400000;
+  anaMembers.forEach(function(m){
+    var ls=m.lastSeen&&m.lastSeen.toDate?m.lastSeen.toDate():null;
+    var diff=ls?(now-ls):Infinity;
+    var health=diff<=week?'活躍':diff<=month?'沉睡':'流失風險';
+    var total=(m.totalDraws||0)+(m.totalQuizzes||0)+(m.totalCalcs||0);
+    var exp=m.planExpiry||'';
+    rows.push([m.email||'',m.displayName||'',m.role||'guest',m.plan||'free',exp,m.totalDraws||0,m.totalQuizzes||0,m.totalCalcs||0,total,ls?ls.toLocaleDateString('zh-TW'):'',m.referral_code||'',health]);
+  });
+  var csv='\uFEFF'+rows.map(function(r){return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='馥靈之鑰_會員數據_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+  showToast('CSV 已下載 ✓');
+}
+
+/* ═══════════════════════════════════════════
+   💰 推薦夥伴分潤系統
+═══════════════════════════════════════════ */
+
+var partnerData=null;
+
+async function checkPartnerStatus(){
+  if(!currentUser)return;
+  try{
+    var snap=await db.collection('partners').where('status','==','active').get();
+    var found=false;
+    snap.forEach(function(doc){
+      var d=doc.data();
+      if(d.createdBy===currentUser.email||(d.email&&d.email===currentUser.email)){
+        found=true;partnerData={id:doc.id,...d};
+      }
+    });
+    // Also check if user email matches any partner
+    if(!found){
+      var snap2=await db.collection('users').doc(currentUser.uid).get();
+      if(snap2.exists){
+        var ud=snap2.data();
+        // If user has a referral_code set as partner
+        if(ud.isPartner){found=true;}
+      }
+    }
+    if(found||['admin','curator'].includes(userRole)){
+      var ps=document.getElementById('sb-partner-section');if(ps)ps.classList.remove('hide');
+      var mp=document.getElementById('mine-partner-section');if(mp)mp.classList.remove('hide');
+    }
+  }catch(e){console.warn('Partner check error',e);}
+}
+
+async function loadPartnerPortal(){
+  if(!currentUser)return;
+  try{
+    // Find partner record for this user
+    var snap=await db.collection('partners').get();
+    var myPartner=null;
+    snap.forEach(function(doc){
+      var d=doc.data();
+      if(d.createdBy===currentUser.email||(d.email&&d.email===currentUser.email)){
+        myPartner={id:doc.id,...d};
+      }
+    });
+    // Admin can see all
+    if(!myPartner&&['admin','curator'].includes(userRole)){
+      // Show first partner for admin preview
+      if(snap.size>0){myPartner={id:snap.docs[0].id,...snap.docs[0].data()};}
+    }
+    if(!myPartner){
+      document.getElementById('ptr-name').textContent='尚未設定推薦夥伴資料';
+      return;
+    }
+    var code=myPartner.referral_code||myPartner.id;
+    document.getElementById('ptr-name').textContent=myPartner.name||'推薦夥伴';
+    document.getElementById('ptr-code').textContent='推薦碼：'+code;
+
+    // QR + URL
+    var url=myPartner.url||'https://hourlightkey.com/?ref='+code;
+    document.getElementById('ptr-url').textContent=url;
+    var qrEl=document.getElementById('ptr-qr');
+    if(qrEl){qrEl.src='https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data='+encodeURIComponent(url);qrEl.style.display='block';}
+
+    // Find referred users
+    var usersSnap=await db.collection('users').where('referral_code','==',code.toUpperCase()).get();
+    var referred=[];
+    usersSnap.forEach(function(d){referred.push({uid:d.id,...d.data()});});
+
+    var totalRef=referred.length;
+    var paidRef=0,totalRevenue=0,totalCommission=0;
+    var monthlyMap={};
+    referred.forEach(function(u){
+      if(u.plan&&u.plan!=='free'){
+        paidRef++;
+        var amt=u.plan==='plus'?399:u.plan==='pro'?999:0;
+        totalRevenue+=amt;
+        var comm=Math.round(amt*0.045*10)/10;
+        totalCommission+=comm;
+        // Monthly tracking
+        var refDate=u.referral_date&&u.referral_date.toDate?u.referral_date.toDate():new Date();
+        var mk=refDate.getFullYear()+'-'+String(refDate.getMonth()+1).padStart(2,'0');
+        if(!monthlyMap[mk])monthlyMap[mk]={month:mk,count:0,revenue:0,commission:0};
+        monthlyMap[mk].count++;
+        monthlyMap[mk].revenue+=amt;
+        monthlyMap[mk].commission+=comm;
+      }
+    });
+
+    document.getElementById('ptr-total-ref').textContent=totalRef;
+    document.getElementById('ptr-paid-ref').textContent=paidRef;
+    document.getElementById('ptr-revenue').textContent='$'+totalRevenue.toLocaleString();
+    document.getElementById('ptr-commission').textContent='$'+Math.round(totalCommission).toLocaleString();
+    document.getElementById('ptr-ref-count').textContent=totalRef+' 人';
+
+    // Member list
+    var mList=document.getElementById('ptr-member-list');
+    if(!referred.length){mList.innerHTML='<div class="empty"><p>尚無推薦會員<br>分享您的推薦連結開始累積</p></div>';}
+    else{
+      var pIcons={free:'🌱',plus:'🔑',pro:'👑'};
+      mList.innerHTML=referred.sort(function(a,b){
+        var ta=a.referral_date&&a.referral_date.toDate?a.referral_date.toDate():new Date(0);
+        var tb=b.referral_date&&b.referral_date.toDate?b.referral_date.toDate():new Date(0);
+        return tb-ta;
+      }).map(function(u){
+        var rd=u.referral_date&&u.referral_date.toDate?u.referral_date.toDate().toLocaleDateString('zh-TW'):'';
+        var plan=u.plan||'free';
+        var amt=plan==='plus'?399:plan==='pro'?999:0;
+        var comm=Math.round(amt*0.045*10)/10;
+        return '<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:.85rem">'
+          +'<div style="flex:1;min-width:0"><div style="color:var(--text);font-weight:500">'+escHtml(u.displayName||'匿名')+'</div>'
+          +'<div style="font-size:.72rem;color:var(--light)">'+rd+'</div></div>'
+          +'<div style="text-align:center"><span style="padding:2px 8px;border-radius:12px;font-size:.72rem;font-weight:600;'
+          +(plan!=='free'?'background:rgba(201,160,96,.15);color:var(--gold3)':'background:rgba(176,176,176,.1);color:var(--light)')
+          +'">'+(pIcons[plan]||'')+' '+(plan==='plus'?'鑰友':plan==='pro'?'大師':'免費')+'</span></div>'
+          +'<div style="width:60px;text-align:right;font-weight:600;color:var(--gold)">$'+comm+'</div></div>';
+      }).join('');
+    }
+
+    // Monthly list
+    var mlEl=document.getElementById('ptr-monthly-list');
+    var months=Object.values(monthlyMap).sort(function(a,b){return b.month.localeCompare(a.month);});
+    if(!months.length){mlEl.innerHTML='<div class="empty"><p>尚無分潤記錄</p></div>';}
+    else{
+      mlEl.innerHTML=months.map(function(m){
+        return '<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:.85rem">'
+          +'<div style="flex:1"><div style="color:var(--text);font-weight:500">'+m.month+'</div>'
+          +'<div style="font-size:.72rem;color:var(--light)">'+m.count+' 筆付費</div></div>'
+          +'<div style="text-align:right"><div style="font-size:.82rem;color:var(--mid)">營收 $'+m.revenue.toLocaleString()+'</div>'
+          +'<div style="font-weight:700;color:var(--gold)">分潤 $'+Math.round(m.commission).toLocaleString()+'</div></div></div>';
+      }).join('');
+    }
+
+  }catch(e){console.warn('Partner portal error',e);document.getElementById('ptr-name').textContent='載入失敗';}
+}
+
+function copyPartnerURL(){
+  var url=document.getElementById('ptr-url').textContent;
+  if(url&&url!=='-'){
+    if(navigator.clipboard)navigator.clipboard.writeText(url).then(function(){showToast('推薦連結已複製 ✓');});
+    else showToast('請手動複製連結');
+  }
+}
+function downloadPartnerQR(){
+  var img=document.getElementById('ptr-qr');
+  if(!img||!img.src)return;
+  var a=document.createElement('a');a.href=img.src;a.download='推薦碼-QR.png';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
 </script>
 <script src="assets/js/hl-email.js"></script>
 <script src="assets/js/hl-chat.js"></script>
 <script src="assets/js/hl-aroma-fx.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </body>
 </html>

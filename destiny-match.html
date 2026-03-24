@@ -46,9 +46,11 @@ a{color:var(--gd3);text-decoration:none}
 .hero p{font-size:.85rem;color:var(--inkm);margin-top:6px}
 
 /* ── 關係選擇 ── */
-.rel-row{text-align:center;margin:18px 0 10px}
-.rel-row label{font-size:.8rem;color:var(--inkm);margin-right:8px}
-.rel-row select{padding:8px 16px;border:1px solid var(--border2);border-radius:20px;background:rgba(240,212,138,.04);color:var(--gd);font-family:var(--body);font-size:.82rem;-webkit-appearance:none;cursor:pointer;outline:none}
+.rel-row{text-align:center;margin:20px 0 14px}
+.rel-row label{font-size:.88rem;color:#f0d48a;margin-right:10px;font-weight:700;letter-spacing:.06em}
+.rel-row select{padding:12px 36px 12px 18px;border:2px solid rgba(240,212,138,.5);border-radius:14px;background:rgba(240,212,138,.1);color:#f0d48a;font-family:var(--body);font-size:1rem;font-weight:700;-webkit-appearance:none;cursor:pointer;outline:none;letter-spacing:.04em;transition:all .3s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23f0d48a' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.rel-row select:focus{border-color:rgba(240,212,138,.8);box-shadow:0 0 16px rgba(240,212,138,.15)}
+.rel-row select option{background:#1a1520;color:#f4f0eb;font-size:.95rem;padding:8px}
 
 /* ── 雙人輸入 ── */
 .dual-input{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
@@ -64,10 +66,10 @@ a{color:var(--gd3);text-decoration:none}
 .fg{margin-bottom:12px}
 .fg label{display:block;font-size:.78rem;color:var(--inks);letter-spacing:.05em;margin-bottom:4px}
 .fg label .hint{color:var(--inkm);font-size:.68rem;margin-left:4px}
-.fg input,.fg select{width:100%;padding:9px 11px;border:1px solid rgba(240,212,138,.12);border-radius:var(--r2);background:#141020;color:var(--ink);font-family:var(--body);font-size:.85rem;outline:none;transition:border-color .3s;-webkit-appearance:none}
-.fg input:focus,.fg select:focus{border-color:rgba(240,212,138,.35)}
+.fg input,.fg select{width:100%;padding:9px 11px;border:1px solid rgba(240,212,138,.18);border-radius:var(--r2);background:#141020;color:#f4f0eb;font-family:var(--body);font-size:.85rem;outline:none;transition:border-color .3s;-webkit-appearance:none}
+.fg input:focus,.fg select:focus{border-color:rgba(240,212,138,.45)}
 .fg input::placeholder{color:rgba(200,188,170,.4)}
-.fg select option{background:#0c0816;color:var(--ink)}
+.fg select option{background:#1a1520;color:#f4f0eb;font-size:.88rem}
 .fg .row2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .fg .row3{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:7px}
 .wg-hint{font-size:.7rem;color:rgba(240,212,138,.45);margin-top:3px;min-height:1em;letter-spacing:.04em}
@@ -2333,6 +2335,14 @@ function _fbCopy(text){
   document.body.removeChild(ta);
 }
 function copyText(id,btn){
+  // AI 指令複製 → 走門控（登入 + 扣次數）
+  if(typeof hlAIGateCheck==='function'){
+    hlAIGateCheck(function(){ _doCopyText(id,btn); });
+  }else{
+    _doCopyText(id,btn);
+  }
+}
+function _doCopyText(id,btn){
   var el=document.getElementById(id);if(!el)return;
   _doCopy(el.textContent||el.innerText);
   if(btn){var t=btn.textContent;btn.textContent='✅ 已複製';setTimeout(function(){btn.textContent=t},1500);}
