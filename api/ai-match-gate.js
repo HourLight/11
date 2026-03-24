@@ -1,10 +1,9 @@
-// api/ai-framework-gate.js
-// 馥靈之鑰 AI 框架閘門 API v2.0
-// 2026/3/24 更新：週制→日制 + 加購次數 + 留底
+// api/ai-match-gate.js
+// 馥靈之鑰 合盤 AI 框架閘門 API v1.0
+// 2026/3/24
 //
-// 框架文字是核心知識產權，只有登入會員且有額度才能取得
-// POST { system: "bazi" } + Authorization: Bearer <firebase_token>
-// 回傳：{ ok, framework, quota: {used, limit, plan, bonus} }
+// POST { system: "bazi", relation: "love" } + Authorization: Bearer <token>
+// 回傳：{ ok, framework, quota }
 
 var admin = null;
 function getAdmin() {
@@ -18,37 +17,32 @@ function getAdmin() {
   return a;
 }
 
-// 從同目錄的 ai-prompt-test.js 取框架
-var _cachedSystems = null;
-function getSystems() {
-  if (_cachedSystems) return _cachedSystems;
+// 從 ai-match-1-test.js 取框架
+var _cached = null;
+function getMatchSystems() {
+  if (_cached) return _cached;
   var fs = require('fs');
   var path = require('path');
-  var code = fs.readFileSync(path.join(__dirname, 'ai-prompt-test.js'), 'utf8');
-  var defsEnd = code.indexOf('module.exports');
-  var defs = code.substring(0, defsEnd);
+  var code = fs.readFileSync(path.join(__dirname, 'ai-match-1-test.js'), 'utf8');
+  var sysEnd = code.indexOf('module.exports');
+  var defs = code.substring(0, sysEnd);
   try {
     var fn = new Function(defs + '\nreturn SYSTEMS;');
-    _cachedSystems = fn();
+    _cached = fn();
   } catch (e) {
-    console.error('SYSTEMS parse error:', e.message);
-    _cachedSystems = {};
+    console.error('MATCH SYSTEMS parse error:', e.message);
+    _cached = {};
   }
-  return _cachedSystems;
+  return _cached;
 }
 
-// 日制配額（對齊 hl-ai-gate.js v3）
 var DAILY_LIMITS = { free: 3, plus: 10, pro: 999999 };
 
-// 取得台灣日期 key
 function getDayKey() {
   var now = new Date();
   var twMs = now.getTime() + 8 * 3600000;
   var tw = new Date(twMs);
-  var y = tw.getUTCFullYear();
-  var m = String(tw.getUTCMonth() + 1).padStart(2, '0');
-  var d = String(tw.getUTCDate()).padStart(2, '0');
-  return y + '-' + m + '-' + d;
+  return tw.getUTCFullYear() + '-' + String(tw.getUTCMonth() + 1).padStart(2, '0') + '-' + String(tw.getUTCDate()).padStart(2, '0');
 }
 
 module.exports = async function handler(req, res) {
@@ -75,81 +69,71 @@ module.exports = async function handler(req, res) {
     var uid = decoded.uid;
     var db = fb.firestore();
 
-    // 取會員資料（方案 + 加購次數）
     var userDoc = await db.collection('users').doc(uid).get();
     var userData = userDoc.exists ? userDoc.data() : {};
     var plan = userData.plan || 'free';
     var bonus = userData.aiBonus || 0;
     var limit = DAILY_LIMITS[plan] || 3;
 
-    // 日制配額檢查
     var dayKey = getDayKey();
     var dailyRef = db.collection('users').doc(uid).collection('ai_daily').doc(dayKey);
     var dailyDoc = await dailyRef.get();
     var count = (dailyDoc.exists && dailyDoc.data().count) || 0;
 
-    // Pro 用戶無上限
-    if (plan === 'pro') {
-      // 直接放行，不扣次但記錄
-    } else if (count >= limit) {
-      // 每日額度用完，檢查加購
+    if (plan !== 'pro' && count >= limit) {
       if (bonus > 0) {
-        // 扣加購次數
         await db.collection('users').doc(uid).update({
           aiBonus: fb.firestore.FieldValue.increment(-1)
         });
         bonus = bonus - 1;
       } else {
-        // 沒有加購，擋住
         var hoursLeft = 24 - new Date(new Date().getTime() + 8 * 3600000).getUTCHours();
         return res.status(429).json({
           error: '今日智慧解讀額度已用完',
           code: 'QUOTA_EXCEEDED',
-          plan: plan, used: count, limit: limit, bonus: 0,
-          hoursLeft: hoursLeft
+          plan: plan, used: count, limit: limit, bonus: 0, hoursLeft: hoursLeft
         });
       }
     }
 
-    // 取框架
     var body = req.body || {};
     var system = body.system || '';
-    if (!system) return res.status(400).json({ error: '需要 system 參數' });
-
-    var systems = getSystems();
-    var sysData = systems[system];
-    if (!sysData || !sysData.framework) {
-      return res.status(404).json({ error: system + ' 框架不存在' });
+    var relation = body.relation || '';
+    if (!system || !relation) {
+      return res.status(400).json({ error: '需要 system 和 relation 參數' });
     }
 
-    // 記錄使用（日制）
+    var systems = getMatchSystems();
+    var sysData = systems[system];
+    if (!sysData) return res.status(404).json({ error: system + ' 框架不存在' });
+    var relData = sysData[relation];
+    if (!relData) return res.status(404).json({ error: system + '/' + relation + ' 框架不存在' });
+
+    // 記錄使用
     await dailyRef.set({
       count: fb.firestore.FieldValue.increment(1),
       lastUsed: fb.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
-
     count = count + 1;
 
-    // 組合框架
-    var fw = '';
-    if (sysData.framework) fw += sysData.framework;
-    if (sysData.books) fw += '\n\n' + sysData.books;
-    if (sysData.navigation) fw += '\n\n' + sysData.navigation;
+    // 組合框架文字
+    var fw = '【' + relData.title + '】\n\n';
+    if (relData.desc) fw += relData.desc + '\n\n';
+    if (relData.focus && relData.focus.length) {
+      fw += '══════ 解讀框架 ══════\n\n';
+      relData.focus.forEach(function(f) { fw += f + '\n\n'; });
+    }
+    if (relData.books) fw += '【參考書目】\n' + relData.books + '\n';
 
-    // 留底（Firestore）
+    // 留底
     try {
       await db.collection('readings').add({
-        uid: uid,
-        email: decoded.email || '',
-        type: 'ai-framework',
-        system: system,
-        plan: plan,
-        createdAt: new Date(),
-        source: 'ai-framework-gate'
+        uid: uid, email: decoded.email || '',
+        type: 'ai-match-framework',
+        system: system, relation: relation, plan: plan,
+        createdAt: new Date(), source: 'ai-match-gate'
       });
-    } catch (saveErr) {
-      // 留底失敗不影響回傳
-    }
+    } catch (e) {}
 
     return res.status(200).json({
       ok: true,
@@ -157,7 +141,7 @@ module.exports = async function handler(req, res) {
       quota: { used: count, limit: limit, plan: plan, bonus: bonus }
     });
   } catch (e) {
-    console.error('ai-framework-gate error:', e);
+    console.error('ai-match-gate error:', e);
     return res.status(500).json({ error: '伺服器錯誤，請稍後再試' });
   }
 };

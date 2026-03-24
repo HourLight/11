@@ -233,7 +233,7 @@ src="https://www.facebook.com/tr?id=1333106288588347&ev=PageView&noscript=1" loa
     <div class="section">
       <div class="sec-title">📜 AI 深度解讀指令</div>
       <div class="ai-box"><pre class="ai-pre" id="aiPre"></pre></div>
-      <button class="cp-btn" onclick="copyAI()">📋 複製 AI 指令</button>
+      <button class="cp-btn" onclick="copyData('aiPre',this)">📋 複製命盤資料</button><button class="cp-btn" style="margin-left:8px;background:rgba(160,124,220,.12);border-color:rgba(160,124,220,.3)" onclick="hlAICopy('aiPre','bazi',this)">🔮 複製智慧解讀指令</button>
     </div>
     <div class="cta-block">
       <h3>八字是您的底牌，馥靈幫您打出來</h3>
@@ -369,7 +369,7 @@ function doCalc(){
   document.getElementById('boneResult').innerHTML=bHTML;
 
   // AI
-  var ai='【AI解讀指令】請依據《滴天髓》《淵海子平》《三命通會》《子平真詮》《神峰通考》《窮通寶鑒》做深度八字解讀：\n\n';
+  var ai=';
   ai+='\u56db\u67f1\uff1a'+ec.getYear()+' '+ec.getMonth()+' '+ec.getDay()+' '+ec.getTime()+'\n';
   ai+='\u65e5\u4e3b\uff1a'+ec.getDay()[0]+'\n\u6027\u5225\uff1a'+(gen==='F'?'\u5973':'\u7537')+'\n';
   ai+='\u7d0d\u97f3\uff1a'+[ec.getYearNaYin(),ec.getMonthNaYin(),ec.getDayNaYin(),ec.getTimeNaYin()].map(s2t).join(' ')+'\n';
@@ -475,4 +475,13 @@ document.addEventListener('DOMContentLoaded',function(){
 <script src="assets/js/hl-chat.js"></script>
 <script src="assets/js/hl-aroma-fx.js" defer></script>
 <script>document.querySelectorAll(".origin-toggle").forEach(function(t){t.addEventListener("click",function(){this.parentElement.classList.toggle("open")})})</script>
+<script src="assets/js/hl-ai-copy.js">
+function copyData(id,btn){
+  var el=document.getElementById(id);if(!el)return;
+  navigator.clipboard.writeText(el.textContent).then(function(){
+    var orig=btn.textContent;btn.textContent='✅ 已複製命盤資料';
+    setTimeout(function(){btn.textContent=orig},2000);
+  });
+}
+</script>
 </body></html>

@@ -98,7 +98,7 @@
 
 </div></div></div>
 <div class="input-card"><span class="input-label">🎂 出生日期</span><div class="field-row"><input type="number" id="byear" class="fi" placeholder="年" min="1920" max="2030"/><input type="number" id="bmonth" class="fi" placeholder="月" min="1" max="12"/><input type="number" id="bday" class="fi" placeholder="日" min="1" max="31"/></div><button class="calc-btn" onclick="runCalc()">🌲 查詢守護樹</button></div>
-<div class="result" id="resultArea"><div class="sec"><div class="sec-title">🌲 您的守護樹</div><div id="resultContent"></div></div><div class="sec"><div class="ai-box"><h4>📜 AI 深度解讀指令</h4><pre class="ai-pre" id="aiPre"></pre><button class="cp-btn" onclick="copyAI()">📋 複製 AI 指令</button></div></div><div class="cta-block"><h3>一棵樹看一個面向</h3><div class="cta-btns"><a href="draw-hl.html" class="cta-btn p">✦ 抽牌</a><a href="destiny-engine.html" class="cta-btn s">二十四合一</a></div></div></div></div>
+<div class="result" id="resultArea"><div class="sec"><div class="sec-title">🌲 您的守護樹</div><div id="resultContent"></div></div><div class="sec"><div class="ai-box"><h4>📜 命盤資料</h4><pre class="ai-pre" id="aiPre"></pre><button class="cp-btn" onclick="copyData('aiPre',this)">📋 複製命盤資料</button><button class="cp-btn" style="margin-left:8px;background:rgba(160,124,220,.12);border-color:rgba(160,124,220,.3)" onclick="hlAICopy('aiPre','celtic',this)">🔮 複製智慧解讀指令</button></div></div><div class="cta-block"><h3>一棵樹看一個面向</h3><div class="cta-btns"><a href="draw-hl.html" class="cta-btn p">✦ 抽牌</a><a href="destiny-engine.html" class="cta-btn s">二十四合一</a></div></div></div></div>
 <script>
 
 function renderTreeSVG(treeName,color){
@@ -240,7 +240,7 @@ function runCalc(){
     '<div class="info-box"><div class="ib-label">課題</div><div class="ib-val">'+r.challenge+'</div></div>'+
     '<div class="info-box"><div class="ib-label">對應精油</div><div class="ib-val" style="color:var(--gd)">'+r.oil+' ('+r.oilEn+')</div></div>'+
     '<div class="info-box"><div class="ib-label">精油訊息</div><div class="ib-val">'+r.oilDesc+'</div></div></div>';
-  var ai="【AI解讀指令·居爾特樹曆（完整版）】\n出生日期："+Y+"/"+M+"/"+D+"\n";
+  var ai="出生日期："+Y+"/"+M+"/"+D+"\n";
   ai+="守護樹："+r.name+"（"+r.celtic+"）\n歐甘符文："+ogham+"\n對應精油："+r.oil+"\n\n";
   ai+="【特質】"+r.trait+"\n【天賦】"+r.gift+"\n【課題】"+r.challenge+"\n\n";
   ai+="【請解讀】\n壹、"+r.name+"的植物學特性如何映射人格\n貳、歐甘符文"+ogham+"的神秘學含義\n叁、天賦和課題在事業/感情/健康的展現\n肆、"+r.oil+"精油的使用方式和時機\n伍、與其他樹曆的相容性\n\n鑰匙遞給你，城堡自己開。";
@@ -248,6 +248,8 @@ function runCalc(){
   document.getElementById("resultArea").style.display="block";
   document.getElementById("resultArea").scrollIntoView({behavior:"smooth"});
 }
+
+function copyData(id,btn){var el=document.getElementById(id);if(!el)return;navigator.clipboard.writeText(el.textContent).then(function(){var o=btn.textContent;btn.textContent='✅ 已複製';setTimeout(function(){btn.textContent=o},2000)});}
 function copyAI(){var t=document.getElementById("aiPre").textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){sc()}).catch(function(){fb(t)})}else{fb(t)}}function fb(t){var a=document.createElement("textarea");a.value=t;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();try{document.execCommand("copy");sc()}catch(e){}document.body.removeChild(a)}function sc(){var b=document.querySelector(".cp-btn");if(b){var o=b.textContent;b.textContent="✓ 已複製";setTimeout(function(){b.textContent=o},2000)}}
 </script>
 <script>document.querySelectorAll(".origin-toggle").forEach(function(t){t.addEventListener("click",function(){this.parentElement.classList.toggle("open")})});</script>
@@ -272,4 +274,5 @@ function copyAI(){var t=document.getElementById("aiPre").textContent;if(navigato
 <script src="assets/js/hl-aroma-fx.js" defer></script>
 <script src="assets/js/hl-share.js"></script>
 <script src="assets/js/hl-tracker.js" data-tool="celtic-tree" data-tool-name="凱爾特樹曆" data-tool-type="tool"></script>
+<script src="assets/js/hl-ai-copy.js"></script>
 </body></html>

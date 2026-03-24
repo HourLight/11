@@ -38,19 +38,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="js/lunar.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script>
-// Chart.js 載入檢查：3秒後如果還沒載入就顯示提示
-setTimeout(function(){
-  if(typeof Chart==='undefined'){
-    console.warn('Chart.js 未載入，改用純 CSS 圖表');
-    document.querySelectorAll('canvas').forEach(function(c){
-      var p=c.parentElement;
-      if(p)p.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:.82rem;color:rgba(201,160,96,.5)">圖表載入中⋯ 若持續無顯示請重新整理頁面</div>';
-    });
-    window._chartFallback=true;
-  }
-},3000);
-</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -1572,8 +1560,8 @@ async function copyReadingText(readingId){
         <div id="sub-status" style="margin-bottom:20px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);font-size:.9rem;line-height:1.8"></div>
 
         <div class="plan-list" id="plan-cards">
-          <div class="plan-item" id="plan-guest"><div class="plan-icon-wrap plan-icon-free">🌱</div><div class="plan-info"><div class="plan-name">免費會員</div><div class="plan-desc">智慧解讀指令每週 3 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">免費</div><div class="plan-unit">永久</div></div></div>
-          <div class="plan-item popular" id="plan-member"><div class="plan-badge pb-hot">推薦</div><div class="plan-icon-wrap plan-icon-member">🔑</div><div class="plan-info"><div class="plan-name">馥靈鑰友</div><div class="plan-desc">智慧解讀指令每週 15 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$399</div><div class="plan-unit">/ 月</div></div><button class="btn-subscribe" id="btn-sub-plus" onclick="subscribePlan('plus')" style="margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#c9a060,#a8813c);color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:all .3s">💳 立即訂閱</button></div>
+          <div class="plan-item" id="plan-guest"><div class="plan-icon-wrap plan-icon-free">🌱</div><div class="plan-info"><div class="plan-name">免費會員</div><div class="plan-desc">智慧解讀指令每天 3 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">免費</div><div class="plan-unit">永久</div></div></div>
+          <div class="plan-item popular" id="plan-member"><div class="plan-badge pb-hot">推薦</div><div class="plan-icon-wrap plan-icon-member">🔑</div><div class="plan-info"><div class="plan-name">馥靈鑰友</div><div class="plan-desc">智慧解讀指令每天 10 次｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$399</div><div class="plan-unit">/ 月</div></div><button class="btn-subscribe" id="btn-sub-plus" onclick="subscribePlan('plus')" style="margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#c9a060,#a8813c);color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:all .3s">💳 立即訂閱</button></div>
           <div class="plan-item" id="plan-premium"><div class="plan-icon-wrap plan-icon-premium">👑</div><div class="plan-info"><div class="plan-name">馥靈大師</div><div class="plan-desc">智慧解讀指令無上限｜命理資料複製不限次｜馥靈抽牌不限次</div></div><div class="plan-price-wrap"><div class="plan-price">$999</div><div class="plan-unit">/ 月</div></div><button class="btn-subscribe" id="btn-sub-pro" onclick="subscribePlan('pro')" style="margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#7a6a55,#5c4a35);color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:all .3s">💳 立即訂閱</button></div>
         </div>
 
@@ -2083,11 +2071,11 @@ async function copyReadingText(readingId){
           <div class="adm-grid2">
             <div class="adm-card">
               <div class="adm-card-title">📈 每日操作量 vs 用戶數</div>
-              <div style="position:relative;height:200px"><canvas id="enh-trend-chart"></canvas></div>
+              <div id="enh-trend-chart" style="height:200px;overflow:hidden"></div>
             </div>
             <div class="adm-card">
               <div class="adm-card-title">🎯 功能使用佔比（詳細）</div>
-              <div style="position:relative;height:200px"><canvas id="enh-pie-chart"></canvas></div>
+              <div id="enh-pie-chart" style="min-height:180px"></div>
             </div>
           </div>
 
@@ -2121,12 +2109,12 @@ async function copyReadingText(readingId){
           <div class="adm-grid2">
             <div class="adm-card">
               <div class="adm-card-title">📊 隔日留存漏斗</div>
-              <div style="position:relative;height:160px"><canvas id="enh-funnel-chart"></canvas></div>
+              <div id="enh-funnel-chart" style="min-height:120px"></div>
               <div id="enh-funnel-labels" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-size:.72rem;color:var(--mid);margin-top:8px"></div>
             </div>
             <div class="adm-card">
               <div class="adm-card-title">🌱 每日新用戶 vs 回訪用戶</div>
-              <div style="position:relative;height:160px"><canvas id="enh-newret-chart"></canvas></div>
+              <div id="enh-newret-chart" style="height:160px;overflow:hidden"></div>
             </div>
           </div>
 
@@ -4375,7 +4363,7 @@ async function activateMember(){
           name:userData.displayName||'',
           subject:'馥靈之鑰｜您的「'+pInfo.name+'」方案已開通 🎉',
           system:'會員系統',
-          content:'親愛的 '+(userData.displayName||'馥靈夥伴')+'：\n\n恭喜！您的「'+pInfo.name+'」方案已成功開通 🎉\n\n► 方案：'+pInfo.icon+' '+pInfo.name+'\n► 有效期：'+expiryLabel+'\n► 智慧解讀指令：'+(plan==='pro'?'無限次':'每週 15 次')+'\n\n現在就前往體驗：\nhttps://hourlightkey.com/destiny-engine.html\n\n使用方式：\n1. 在命盤引擎輸入生辰資料\n2. 按「🔮 複製AI指令（會員）」\n3. 貼到 ChatGPT 或 Claude，獲得深度解讀\n\n有任何問題歡迎聯繫：\nLINE 官方帳號 @hourlight\n\n馥靈之鑰 Hour Light 敬上'
+          content:'親愛的 '+(userData.displayName||'馥靈夥伴')+'：\n\n恭喜！您的「'+pInfo.name+'」方案已成功開通 🎉\n\n► 方案：'+pInfo.icon+' '+pInfo.name+'\n► 有效期：'+expiryLabel+'\n► 智慧解讀指令：'+(plan==='pro'?'無限次':'每天 10 次')+'\n\n現在就前往體驗：\nhttps://hourlightkey.com/destiny-engine.html\n\n使用方式：\n1. 在命盤引擎輸入生辰資料\n2. 按「🔮 複製AI指令（會員）」\n3. 貼到 ChatGPT 或 Claude，獲得深度解讀\n\n有任何問題歡迎聯繫：\nLINE 官方帳號 @hourlight\n\n馥靈之鑰 Hour Light 敬上'
         })
       });
     }catch(mailErr){console.warn('Activate email failed',mailErr);}
@@ -4872,7 +4860,7 @@ function renderGrowthChart(usersSnap) {
 }
 
 /* ═══ 增強儀表板 v1.0 ═══ */
-var enhTrendChart=null, enhPieChart=null, enhFunnelChart=null, enhNewRetChart=null;
+// Chart.js 已移除，改用純 CSS 圖表
 var enhPeriod=7, enhEventsCache=[];
 
 function setTrendPeriod(days, btn){
@@ -4932,6 +4920,7 @@ function renderEnhancedDashboard(allEvts){
 }
 
 function renderEnhTrend(events){
+  var el=document.getElementById('enh-trend-chart');if(!el)return;
   var dayMap={};
   events.forEach(function(e){
     var dk=e._enhDay;
@@ -4940,31 +4929,29 @@ function renderEnhTrend(events){
     dayMap[dk].users[e._enhEmail]=1;
   });
   var days=Object.keys(dayMap).sort();
-  if(!days.length)return;
-  var labels=days.map(function(d){var p=d.split('-');return parseInt(p[1])+'/'+parseInt(p[2]);});
-  var opsData=days.map(function(d){return dayMap[d].ops;});
-  var usersData=days.map(function(d){return Object.keys(dayMap[d].users).length;});
-  if(enhTrendChart)enhTrendChart.destroy();
-  var canvas=document.getElementById('enh-trend-chart');
-  if(!canvas||typeof Chart==='undefined')return;
-  enhTrendChart=new Chart(canvas,{
-    type:'line',
-    data:{labels:labels,datasets:[
-      {label:'操作次數',data:opsData,borderColor:'#c9a060',backgroundColor:'rgba(201,160,96,0.08)',fill:true,tension:0.3,pointRadius:3,pointBackgroundColor:'#c9a060',yAxisID:'y'},
-      {label:'用戶數',data:usersData,borderColor:'#78b4c8',backgroundColor:'rgba(120,180,200,0.08)',fill:true,tension:0.3,pointRadius:3,pointBackgroundColor:'#78b4c8',yAxisID:'y1'}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'top',labels:{color:'rgba(232,224,208,0.6)',font:{size:11},boxWidth:10}}},
-      scales:{
-        x:{grid:{display:false},ticks:{color:'rgba(232,224,208,0.35)',font:{size:10}}},
-        y:{position:'left',grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(201,160,96,0.6)',font:{size:10}},title:{display:true,text:'操作',color:'rgba(201,160,96,0.4)',font:{size:10}}},
-        y1:{position:'right',grid:{drawOnChartArea:false},ticks:{color:'rgba(120,180,200,0.6)',font:{size:10}},title:{display:true,text:'用戶',color:'rgba(120,180,200,0.4)',font:{size:10}}}
-      }
-    }
-  });
+  if(!days.length){el.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--light);font-size:.85rem">尚無數據</div>';return;}
+  var maxOps=Math.max.apply(null,days.map(function(d){return dayMap[d].ops;}))||1;
+  var maxU=Math.max.apply(null,days.map(function(d){return Object.keys(dayMap[d].users).length;}))||1;
+  var legend='<div style="display:flex;gap:16px;justify-content:center;margin-bottom:10px;font-size:.72rem">'
+    +'<span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:3px;background:#c9a060;border-radius:2px"></span><span style="color:rgba(201,160,96,.7)">操作次數</span></span>'
+    +'<span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:3px;background:#78b4c8;border-radius:2px"></span><span style="color:rgba(120,180,200,.7)">用戶數</span></span></div>';
+  var bars=days.map(function(d){
+    var ops=dayMap[d].ops;var u=Object.keys(dayMap[d].users).length;
+    var hOps=Math.max(6,Math.round(ops/maxOps*140));
+    var hU=Math.max(6,Math.round(u/maxU*140));
+    var p=d.split('-');var lb=parseInt(p[1])+'/'+parseInt(p[2]);
+    return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">'
+      +'<div style="display:flex;gap:3px;align-items:flex-end;height:150px">'
+      +'<div style="width:12px;height:'+hOps+'px;background:rgba(201,160,96,.6);border-radius:3px 3px 0 0" title="操作 '+ops+'"></div>'
+      +'<div style="width:12px;height:'+hU+'px;background:rgba(120,180,200,.6);border-radius:3px 3px 0 0" title="用戶 '+u+'"></div></div>'
+      +'<div style="font-size:.55rem;color:var(--light)">'+lb+'</div>'
+      +'<div style="font-size:.55rem;color:var(--gold2)">'+ops+'<span style="color:var(--light)">/</span>'+u+'</div></div>';
+  }).join('');
+  el.innerHTML=legend+'<div style="display:flex;gap:4px;align-items:flex-end;padding:0 4px">'+bars+'</div>';
 }
 
 function renderEnhPie(events){
+  var el=document.getElementById('enh-pie-chart');if(!el)return;
   var tc={};
   events.forEach(function(e){
     var n=e._enhTool; if(n==='會員登入'||n==='測驗中心')return;
@@ -4974,17 +4961,19 @@ function renderEnhPie(events){
   var top6=sorted.slice(0,6);
   var other=sorted.slice(6).reduce(function(s,x){return s+x[1];},0);
   if(other>0)top6.push(['其他',other]);
+  if(!top6.length){el.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--light);font-size:.85rem">尚無數據</div>';return;}
   var colors=['#c9a060','#78b4c8','#9070c0','#e07850','#6bc47f','#e5a84b','#b0a490'];
-  if(enhPieChart)enhPieChart.destroy();
-  var canvas=document.getElementById('enh-pie-chart');
-  if(!canvas||typeof Chart==='undefined'||!top6.length)return;
-  enhPieChart=new Chart(canvas,{
-    type:'doughnut',
-    data:{labels:top6.map(function(x){return x[0];}),datasets:[{data:top6.map(function(x){return x[1];}),backgroundColor:colors}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'50%',
-      plugins:{legend:{position:'right',labels:{color:'rgba(232,224,208,0.6)',font:{size:10},boxWidth:10,padding:6}}}
-    }
-  });
+  var total=top6.reduce(function(s,x){return s+x[1];},0);
+  el.innerHTML=top6.map(function(item,i){
+    var pct=Math.round(item[1]/total*100);
+    var barW=Math.max(8,pct*2.5);
+    return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'
+      +'<div style="width:8px;height:8px;border-radius:2px;background:'+colors[i]+';flex-shrink:0"></div>'
+      +'<span style="width:80px;font-size:.78rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0">'+item[0]+'</span>'
+      +'<div style="flex:1;height:18px;background:rgba(201,160,96,.04);border-radius:4px;overflow:hidden">'
+      +'<div style="height:100%;width:'+pct+'%;background:'+colors[i]+';border-radius:4px;min-width:4px;transition:width .6s"></div></div>'
+      +'<span style="min-width:55px;text-align:right;font-size:.72rem;color:var(--mid);flex-shrink:0">'+item[1]+' ('+pct+'%)</span></div>';
+  }).join('');
 }
 
 function renderEnhFeatureBars(events){
@@ -5086,6 +5075,8 @@ function renderEnhRetention(events){
 }
 
 function renderEnhFunnel(events){
+  var el=document.getElementById('enh-funnel-chart');if(!el)return;
+  var lbl=document.getElementById('enh-funnel-labels');
   var dayMap={};
   events.forEach(function(e){
     if(!dayMap[e._enhDay])dayMap[e._enhDay]={};
@@ -5093,11 +5084,10 @@ function renderEnhFunnel(events){
   });
   var days=Object.keys(dayMap).sort();
   if(days.length<2){
-    var lbl=document.getElementById('enh-funnel-labels');
-    if(lbl)lbl.innerHTML='<span>需至少2天數據</span>';
+    el.innerHTML='<div style="text-align:center;padding:20px;color:var(--light);font-size:.82rem">需至少 2 天數據才能計算留存</div>';
     return;
   }
-  var labels=[],data=[],texts=[];
+  var rows=[];
   for(var i=0;i<Math.min(days.length-1,7);i++){
     var d1=days[i],d2=days[i+1];
     var u1=dayMap[d1],u2=dayMap[d2];
@@ -5107,28 +5097,23 @@ function renderEnhFunnel(events){
     var rate=u1size?Math.round(retained/u1size*100):0;
     var p1=d1.split('-'),p2=d2.split('-');
     var lb=parseInt(p1[1])+'/'+parseInt(p1[2])+'→'+parseInt(p2[1])+'/'+parseInt(p2[2]);
-    labels.push(lb);
-    data.push(retained);
-    texts.push(lb+' 留存 '+rate+'%（'+retained+'/'+u1size+'）');
+    rows.push({label:lb,retained:retained,total:u1size,rate:rate});
   }
-  if(enhFunnelChart)enhFunnelChart.destroy();
-  var canvas=document.getElementById('enh-funnel-chart');
-  if(!canvas||typeof Chart==='undefined')return;
-  enhFunnelChart=new Chart(canvas,{
-    type:'bar',data:{labels:labels,datasets:[{data:data,backgroundColor:'#c9a060',borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(232,224,208,0.35)',font:{size:10}}},
-        y:{grid:{display:false},ticks:{color:'rgba(232,224,208,0.5)',font:{size:10}}}
-      }
-    }
-  });
-  var lbl=document.getElementById('enh-funnel-labels');
-  if(lbl)lbl.innerHTML=texts.map(function(t){return '<span>'+t+'</span>';}).join('');
+  var maxR=Math.max.apply(null,rows.map(function(r){return r.total;}))||1;
+  el.innerHTML=rows.map(function(r){
+    var w=Math.max(10,Math.round(r.rate));
+    var color=r.rate>=50?'rgba(107,196,127,.7)':r.rate>=25?'rgba(201,160,96,.7)':'rgba(224,120,80,.7)';
+    return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">'
+      +'<span style="width:70px;font-size:.7rem;color:var(--mid);flex-shrink:0;text-align:right">'+r.label+'</span>'
+      +'<div style="flex:1;height:16px;background:rgba(201,160,96,.04);border-radius:4px;overflow:hidden">'
+      +'<div style="height:100%;width:'+w+'%;background:'+color+';border-radius:4px;min-width:4px;transition:width .5s"></div></div>'
+      +'<span style="min-width:80px;font-size:.68rem;color:var(--mid);flex-shrink:0">'+r.rate+'% ('+r.retained+'/'+r.total+')</span></div>';
+  }).join('');
+  if(lbl)lbl.innerHTML='';
 }
 
 function renderEnhNewRet(events){
+  var el=document.getElementById('enh-newret-chart');if(!el)return;
   var dayMap={};var seenBefore={};
   events.forEach(function(e){
     if(!dayMap[e._enhDay])dayMap[e._enhDay]={newU:{},retU:{}};
@@ -5152,23 +5137,23 @@ function renderEnhNewRet(events){
     newData.push(Object.keys(newU).length);
     retData.push(Object.keys(retU).length);
   });
-  if(enhNewRetChart)enhNewRetChart.destroy();
-  var canvas=document.getElementById('enh-newret-chart');
-  if(!canvas||typeof Chart==='undefined')return;
-  enhNewRetChart=new Chart(canvas,{
-    type:'bar',
-    data:{labels:labels,datasets:[
-      {label:'新用戶',data:newData,backgroundColor:'rgba(120,180,200,0.6)',borderRadius:3},
-      {label:'回訪',data:retData,backgroundColor:'rgba(201,160,96,0.6)',borderRadius:3}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'top',labels:{color:'rgba(232,224,208,0.6)',font:{size:10},boxWidth:10}}},
-      scales:{
-        x:{stacked:true,grid:{display:false},ticks:{color:'rgba(232,224,208,0.35)',font:{size:10}}},
-        y:{stacked:true,grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(232,224,208,0.35)',font:{size:10}}}
-      }
-    }
-  });
+  if(!days.length){el.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--light);font-size:.85rem">尚無數據</div>';return;}
+  var maxTotal=Math.max.apply(null,days.map(function(_,i){return newData[i]+retData[i];}))||1;
+  var legend='<div style="display:flex;gap:16px;justify-content:center;margin-bottom:8px;font-size:.72rem">'
+    +'<span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:rgba(120,180,200,.6)"></span><span style="color:rgba(120,180,200,.7)">新用戶</span></span>'
+    +'<span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:rgba(201,160,96,.6)"></span><span style="color:rgba(201,160,96,.7)">回訪</span></span></div>';
+  var bars=labels.map(function(lb,i){
+    var hNew=Math.max(3,Math.round(newData[i]/maxTotal*120));
+    var hRet=Math.max(3,Math.round(retData[i]/maxTotal*120));
+    if(newData[i]===0)hNew=0;if(retData[i]===0)hRet=0;
+    return '<div style="flex:1;display:flex;flex-direction:column;align-items:center">'
+      +'<div style="display:flex;flex-direction:column;justify-content:flex-end;height:120px">'
+      +'<div style="width:20px;background:rgba(201,160,96,.6);border-radius:3px 3px 0 0;height:'+hRet+'px"></div>'
+      +'<div style="width:20px;background:rgba(120,180,200,.6);border-radius:0 0 3px 3px;height:'+hNew+'px"></div></div>'
+      +'<div style="font-size:.55rem;color:var(--light);margin-top:4px">'+lb+'</div>'
+      +'<div style="font-size:.5rem;color:var(--mid)">'+newData[i]+'+'+retData[i]+'</div></div>';
+  }).join('');
+  el.innerHTML=legend+'<div style="display:flex;gap:4px;padding:0 4px">'+bars+'</div>';
 }
 
 /* ═══════════════════════════════════════════

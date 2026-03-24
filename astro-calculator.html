@@ -565,7 +565,7 @@ src="https://www.facebook.com/tr?id=1333106288588347&ev=PageView&noscript=1" loa
     <div class="ai-card">
       <div class="chart-title">📜 AI 深度解讀指令</div>
       <pre class="ai-pre" id="aiPre"></pre>
-      <button class="cp-btn" onclick="copyAI()">📋 複製 AI 指令</button>
+      <button class="cp-btn" onclick="copyData('aiPre',this)">📋 複製命盤資料</button><button class="cp-btn" style="margin-left:8px;background:rgba(160,124,220,.12);border-color:rgba(160,124,220,.3)" onclick="hlAICopy('aiPre','astro',this)">🔮 複製智慧解讀指令</button>
     </div>
     <div class="cta-block">
       <h3>星盤照見您的天賦，牌卡幫您在當下選擇</h3>
@@ -833,7 +833,7 @@ async function doCalc(){
     +'<div class="stat-group"><div class="sg-title">陰陽</div>'+barHTML('陽',polCnt.陽,total,'#FFCC66')+barHTML('陰',polCnt.陰,total,'#88AACC')+'</div>';
 
   // AI
-  var ai='【AI解讀指令】請依據托勒密《占星四書》、Liz Greene、Howard Sasportas做深度解讀：\n\n';
+  var ai=';
   P_ORDER.forEach(function(k,i){var p=planets[k];if(!p)return;ai+=P_NAMES[i]+'：'+p.sign+' '+p.deg+'°'+(p.retro?' ℞':'')+(houses?' 第'+planetHouse(p.lon,houses.cusps)+'宮':'')+'\n'});
   if(houses){ai+='上升：'+degToStr(houses.asc)+'\n天頂：'+degToStr(houses.mc)+'\n\n宮位守護：\n';for(var hi=0;hi<12;hi++){var cS=SIGNS[Math.floor(((houses.cusps[hi]%360)+360)%360/30)];ai+=(hi+1)+'宮 '+cS+' 守護'+SIGN_RULER[cS]+'\n'}}
   ai+='\n主要相位：\n'+asps.slice(0,15).map(function(a){return a.p1+' '+a.type+' '+a.p2+'（±'+a.orb+'°）'}).join('\n');
@@ -887,4 +887,13 @@ setTimeout(function(){loadEphemeris().catch(function(){})},1000);
 <script src="assets/js/hl-chat.js"></script>
 <script src="assets/js/hl-aroma-fx.js" defer></script>
 <script>document.querySelectorAll(".origin-toggle").forEach(function(t){t.addEventListener("click",function(){this.parentElement.classList.toggle("open")})})</script>
+<script src="assets/js/hl-ai-copy.js">
+function copyData(id,btn){
+  var el=document.getElementById(id);if(!el)return;
+  navigator.clipboard.writeText(el.textContent).then(function(){
+    var orig=btn.textContent;btn.textContent='✅ 已複製命盤資料';
+    setTimeout(function(){btn.textContent=orig},2000);
+  });
+}
+</script>
 </body></html>

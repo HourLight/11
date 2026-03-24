@@ -1,11 +1,11 @@
 /* ═══════════════════════════════════════
-   hl-announce.js — 馥靈全站公告彈窗 v2
-   2026/3/24 更新：正式上線版
+   hl-announce.js — 馥靈全站公告彈窗 v3
+   2026/3/24 更新：收費預告版
    ═══════════════════════════════════════ */
 (function(){
 'use strict';
 
-var ANNOUNCE_VER = '2026-03-24-v2';
+var ANNOUNCE_VER = '2026-03-24-v4';
 var DISMISS_KEY = 'hl_announce_' + ANNOUNCE_VER;
 
 try { if(sessionStorage.getItem(DISMISS_KEY)) return; } catch(e){}
@@ -21,47 +21,57 @@ overlay.innerHTML = `
   
   <div class="hla-header">
     <div class="hla-brand">HOUR LIGHT ✦ 馥靈之鑰</div>
-    <div class="hla-title">🔑 使用說明</div>
+    <div class="hla-title">🔑 這裡怎麼玩</div>
   </div>
   
   <div class="hla-body">
     <div class="hla-section">
       <div class="hla-icon">✨</div>
       <div class="hla-text">
-        <strong>命盤計算、基礎測驗、每週抽牌，通通免費</strong><br>
-        結果頁有「複製智慧解讀指令」按鈕，貼到 Claude、Gemini 等工具即可獲得深度解讀。
+        <strong>命盤計算、測驗、抽牌，不用花一毛錢</strong><br>
+        所有工具都可以免費使用。算完之後，命盤資料可以隨意複製、寄信箱，完全免費不限次數。
+      </div>
+    </div>
+    
+    <div class="hla-section">
+      <div class="hla-icon">💡</div>
+      <div class="hla-text">
+        <strong>「智慧解讀指令」是什麼？</strong><br>
+        我們為每套命理系統打造了專業解讀框架（含書目、分析結構、座標哲學），點「🔮 複製智慧解讀指令」就會把資料＋框架一起複製，貼到 ChatGPT、Claude、Gemini 就能拿到高品質的深度解讀。這個按鈕每天可以免費用 3 次，午夜自動恢復。
       </div>
     </div>
     
     <div class="hla-section">
       <div class="hla-icon">🔑</div>
       <div class="hla-text">
-        <strong>免費會員每週 3 次智慧解讀指令</strong><br>
-        需要更多？馥靈鑰友每週 15 次（$399/月）、馥靈大師無限次（$999/月）。<br>
-        <a href="pricing.html" style="color:#f8dfa5">查看完整方案 →</a>
+        <strong>如果您覺得 3 次不太夠用</strong><br>
+        馥靈鑰友（$399/月）每天 10 次，馥靈大師（$999/月）無限次。<br>
+        也可以單買 10 次 $199，買了永久有效不會過期。<br>
+        <a href="pricing.html" style="color:#f8dfa5">完整方案說明 →</a>
       </div>
     </div>
     
     <div class="hla-section">
       <div class="hla-icon">🔮</div>
       <div class="hla-text">
-        <strong>寵物溝通、家族覺察、SPA 處方箋、美甲能量為付費服務</strong><br>
-        抽牌後付款即可生成完整智慧解讀報告，單次計費。
+        <strong>馥靈抽牌（130 張智慧牌卡）</strong><br>
+        1 張免費隨時抽。3 張以上搭配深度解讀，單次付費。<br>
+        覺察師親自解讀的 9 張以上服務，另外預約。
       </div>
     </div>
     
     <div class="hla-section">
       <div class="hla-icon">🔒</div>
       <div class="hla-text">
-        <strong>隱私提醒</strong><br>
-        使用外部工具時，建議關閉「分享對話以改善模型」等設定，保護您的個人資訊。
+        <strong>小提醒</strong><br>
+        使用外部 AI 工具時，建議關閉「分享對話以改善模型」的設定，保護您的個人資訊。
       </div>
     </div>
     
     <div class="hla-section hla-highlight">
       <div class="hla-icon">💬</div>
       <div class="hla-text">
-        遇到問題或有建議？隨時聯繫我們。<br>
+        有任何問題，隨時敲我們。<br>
         <span style="color:#f8dfa5">LINE 官方帳號 @hourlight</span>
       </div>
     </div>
@@ -69,7 +79,7 @@ overlay.innerHTML = `
   
   <div class="hla-footer">
     <button class="hla-btn" onclick="document.getElementById('hlAnnounce').remove();try{sessionStorage.setItem('${DISMISS_KEY}','1')}catch(e){}">
-      我知道了，開始探索 ✨
+      知道了，開始探索 ✨
     </button>
   </div>
 </div>

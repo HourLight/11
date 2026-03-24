@@ -126,7 +126,7 @@ a{color:var(--gd3);text-decoration:none}
 /* ── AI 指令區 ── */
 .ai-box{background:rgba(8,5,18,.6);border:1px solid rgba(240,212,138,.12);border-radius:10px;padding:14px 16px;margin-top:14px}
 .ai-box h4{font-family:var(--serif);font-size:.8rem;color:var(--gd3);letter-spacing:.08em;margin-bottom:8px}
-.ai-box pre{font-size:.75rem;color:var(--inkm);line-height:1.8;white-space:pre-wrap;word-break:break-word;max-height:260px;overflow-y:auto;font-family:var(--body)}
+.ai-box pre{font-size:.75rem;color:var(--inkm);line-height:1.8;white-space:pre-wrap;word-break:break-word;max-height:120px;overflow:hidden;font-family:var(--body);-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 100%);mask-image:linear-gradient(180deg,#000 30%,transparent 100%)}
 
 /* ── 複製按鈕 ── */
 .cp{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border:1px solid rgba(240,212,138,.2);border-radius:20px;background:rgba(240,212,138,.04);color:var(--gd);font-size:.75rem;font-family:var(--body);letter-spacing:.06em;cursor:pointer;transition:all .3s;margin-top:8px;margin-right:6px}
@@ -1043,22 +1043,8 @@ var ZW_REL={
 var BZ_REL={};
 var ZW_API={};
 var AST_API={};
-// AI框架從 API 載入（保護內容不被右鍵偷看）
-(function(){
-  var API_BASE=location.hostname==='localhost'?'':'https://app.hourlightkey.com';
-  fetch(API_BASE+'/api/ai-match-1-test?system=bazi')
-    .then(function(r){return r.json()})
-    .then(function(d){BZ_REL=d;console.log('[AI框架] 八字載入完成，'+Object.keys(d).length+'種關係')})
-    .catch(function(e){console.warn('[AI框架] 八字載入失敗，使用離線模式',e)});
-  fetch(API_BASE+'/api/ai-match-1-test?system=ziwei')
-    .then(function(r){return r.json()})
-    .then(function(d){ZW_API=d;console.log('[AI框架] 紫微載入完成，'+Object.keys(d).length+'種關係')})
-    .catch(function(e){console.warn('[AI框架] 紫微載入失敗',e)});
-  fetch(API_BASE+'/api/ai-match-1-test?system=astro')
-    .then(function(r){return r.json()})
-    .then(function(d){AST_API=d;console.log('[AI框架] 占星載入完成，'+Object.keys(d).length+'種關係')})
-    .catch(function(e){console.warn('[AI框架] 占星載入失敗',e)});
-})();
+// 合盤框架已移至 server 端 ai-match-gate.js，前端不再預載
+// 按鈕「🔮 複製智慧解讀指令」會即時呼叫 API 取框架
 
 var AST_REL={
   romantic:{
@@ -2334,6 +2320,69 @@ function _fbCopy(text){
   try{document.execCommand('copy')}catch(e){}
   document.body.removeChild(ta);
 }
+
+// ═══ 合盤智慧解讀指令複製（走 server 端門控 + 框架）═══
+function hlMatchCopy(preId, system, btn) {
+  var pre = document.getElementById(preId);
+  if (!pre) return;
+  var data = pre.textContent;
+  var rel = gv('relType') || 'any';
+
+  if (typeof firebase === 'undefined' || !firebase.auth || !firebase.auth().currentUser) {
+    if (confirm('🔮 智慧解讀指令為會員功能（免費註冊即可）\n\n每日 3 次免費額度，登入後立即可用。\n\n點「確定」前往登入頁面')) {
+      window.open('member-login.html?from=destiny-match', '_blank');
+    }
+    return;
+  }
+
+  var user = firebase.auth().currentUser;
+  var origText = btn.textContent;
+  btn.textContent = '🔮 載入中...';
+  btn.disabled = true;
+
+  user.getIdToken().then(function(token) {
+    return fetch('https://app.hourlightkey.com/api/ai-match-gate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({ system: system, relation: rel })
+    });
+  }).then(function(r) { return r.json(); })
+  .then(function(result) {
+    if (result.error) {
+      if (result.code === 'QUOTA_EXCEEDED') {
+        var hl = result.hoursLeft || '?';
+        alert('⏰ 今日智慧解讀額度已用完（' + result.used + '/' + result.limit + '）\n\n約 ' + hl + ' 小時後自動恢復。\n\n► 免費會員每日 3 次\n► 馥靈鑰友 $399/月：每日 10 次\n► 馥靈大師 $999/月：無限次\n► 單買 10 次 $199，永久有效');
+      } else if (result.code === 'AUTH_REQUIRED' || result.code === 'TOKEN_INVALID') {
+        alert('🔑 登入已過期，請重新登入');
+      } else {
+        alert(result.error);
+      }
+      btn.textContent = origText; btn.disabled = false;
+      return;
+    }
+    // 組合：合盤資料 + server 框架
+    var fullText = data + '\n\n' + result.framework;
+    navigator.clipboard.writeText(fullText).then(function() {
+      var q = result.quota || {};
+      var remain = q.plan === 'pro' ? '∞' : ((q.limit||3) - (q.used||0) + (q.bonus||0));
+      btn.textContent = '✅ 已複製（今日剩餘 ' + remain + ' 次）';
+      btn.style.background = 'rgba(160,124,220,.25)';
+      setTimeout(function() {
+        btn.textContent = origText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 2500);
+    });
+  }).catch(function(e) {
+    console.error('hlMatchCopy error:', e);
+    btn.textContent = origText; btn.disabled = false;
+    alert('網路錯誤，請稍後再試');
+  });
+}
+
 function copyText(id,btn){
   // AI 指令複製 → 走門控（登入 + 扣次數）
   if(typeof hlAIGateCheck==='function'){
@@ -2458,7 +2507,7 @@ function renderMatch(a,b){
     return '<div class="dual-panel"><div class="person-result a-result"><div class="pr-label">🌙 '+labelA+'</div>'+htmlA+'</div><div class="person-result b-result"><div class="pr-label">☀️ '+labelB+'</div>'+htmlB+'</div></div>';
   }
   function mkCpBtn(txt,cls,cbk){return "<button class='cp "+cls+"' onclick='("+cbk+")(this)'>"+txt+"</button>"}
-  function mkPre(id,text){return '<div class="ai-box"><h4>📜 AI指令</h4><pre id="'+id+'">'+escHtml(text)+'</pre></div>'}
+  function mkPre(id,text){return '<div class="ai-box"><h4>📜 命盤資料</h4><pre id="'+id+'">'+escHtml(text)+'</pre></div>'}
   function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 
   /* ── ① 八字 ── */
@@ -2503,19 +2552,15 @@ function renderMatch(a,b){
     return t;
   }
   var bzA=bazi_ai(a,nameA),bzB=bazi_ai(b,nameB);
-  var _bzR=BZ_REL[rel]||BZ_REL[relCat(rel)]||BZ_REL.any||{title:'八字合盤深度解讀指令',focus:[],books:''};
-  var bzCombined=bzA+'\n'+bzB+'\n\n【'+_bzR.title+'】\n';
-  bzCombined+='甲日主：'+a.ec.getDayGan()+'('+a.dayWx+') × 乙日主：'+b.ec.getDayGan()+'('+b.dayWx+')\n\n';
-  _bzR.focus.forEach(function(f){bzCombined+=f+'\n';});
-  bzCombined+='\n【🔴 用神不是絕對好壞，是你選擇站哪個位置看世界】\n\n';
-  bzCombined+='【參考書目】\n'+_bzR.books+'\n';
+  // 八字合盤：pre 只放資料，框架由 server 端回傳
+  var bzCombined=bzA+'\n'+bzB+'\n\n八字合盤資料\n甲日主：'+a.ec.getDayGan()+'('+a.dayWx+') × 乙日主：'+b.ec.getDayGan()+'('+b.dayWx+')\n';
   var h0=mkDual(nameA,bazi_html(a),nameB,bazi_html(b));
   var preIdA='bz_ai_a',preIdB='bz_ai_b',preIdC='bz_ai_c';
   h0+=mkPre(preIdA,bzA);h0+=mkPre(preIdB,bzB);
-    h0+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="'+preIdC+'">'+escHtml(bzCombined)+'</pre></div>';
+    h0+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="'+preIdC+'">'+escHtml(bzCombined)+'</pre></div>';
   h0+=mkCpBtn('📋 複製甲方','',  'function(b){copyData("'+preIdA+'",b)}');
   h0+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("'+preIdB+'",b)}');
-  h0+=mkCpBtn('📋 複製合盤指令','combined','function(b){copyText("'+preIdC+'",b)}');
+  h0+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("'+preIdC+'","bazi",b)}');
   mkPanel(h0);
 
   /* ── ② 紫微 ── */
@@ -2554,18 +2599,14 @@ function renderMatch(a,b){
   }
   var zwA=zw_ai(a,nameA),zwB=zw_ai(b,nameB);
   var _zwCat=relCat(rel);
-  var _zwR=ZW_REL[_zwCat]||ZW_REL.any;
-  var zwC=zwA+'\n'+zwB+'\n\n【'+_zwR.title+'】\n';
-  zwC+='甲命宮：'+DZ[a.zw.ming]+'　乙命宮：'+DZ[b.zw.ming]+'\n\n';
-  _zwR.focus.forEach(function(f){zwC+=f+'\n';});
-  zwC+='\n【🔴 煞星不是壞事，化忌不是災難，它們是升級的入口】\n\n';
-  zwC+='【參考書目】\n'+_zwR.books+'\n';
+  // 紫微合盤：pre 只放資料
+  var zwC=zwA+'\n'+zwB+'\n\n紫微合盤資料\n甲命宮：'+DZ[a.zw.ming]+'　乙命宮：'+DZ[b.zw.ming]+'\n';
   var h1=mkDual(nameA,zw_html(a),nameB,zw_html(b));
   h1+=mkPre('zw_a',zwA);h1+=mkPre('zw_b',zwB);
-    h1+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="zw_c">'+escHtml(zwC)+'</pre></div>';
+    h1+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="zw_c">'+escHtml(zwC)+'</pre></div>';
   h1+=mkCpBtn('📋 複製甲方','','function(b){copyData("zw_a",b)}');
   h1+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("zw_b",b)}');
-  h1+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("zw_c",b)}');
+  h1+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("zw_c","ziwei",b)}');
   mkPanel(h1);
 
   /* ── ③ 占星 ── */
@@ -2610,16 +2651,13 @@ function renderMatch(a,b){
   }
   var astA=ast_ai(a,nameA),astB=ast_ai(b,nameB);
   var _astCat=relCat(rel);
-  var _astR=AST_REL[_astCat]||AST_REL.any;
-  var astC=astA+'\n'+astB+'\n\n【西洋占星合盤深度解讀指令（'+REL_LABEL[_astCat]+'版）】\n\n';
-  _astR.focus.forEach(function(f){astC+=f+'\n';});
-  astC+='\n【參考書目】\n'+_astR.books+'\n';
+  // 占星合盤：框架由 server 端回傳
   var h2=mkDual(nameA,ast_html(a),nameB,ast_html(b));
   h2+=mkPre('ast_a',astA);h2+=mkPre('ast_b',astB);
-    h2+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="ast_c">'+escHtml(astC)+'</pre></div>';
+    h2+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="ast_c">'+escHtml(astC)+'</pre></div>';
   h2+=mkCpBtn('📋 複製甲方','','function(b){copyData("ast_a",b)}');
   h2+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("ast_b",b)}');
-  h2+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("ast_c",b)}');
+  h2+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("ast_c","astro",b)}');
   mkPanel(h2);
 
   /* ── ④ 人類圖 ── */
@@ -2695,10 +2733,10 @@ function renderMatch(a,b){
     +'▍Richard Rudd《Gene Keys》，64閘門的關係面向，合盤閘門的深層意識解讀\n';
   var h3=mkDual(nameA,hd_html(a),nameB,hd_html(b));
   h3+=mkPre('hd_a',hdA);h3+=mkPre('hd_b',hdB);
-  h3+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="hd_c">'+escHtml(hdC)+'</pre></div>';
+  h3+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="hd_c">'+escHtml(hdC)+'</pre></div>';
   h3+=mkCpBtn('📋 複製甲方','','function(b){copyData("hd_a",b)}');
   h3+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("hd_b",b)}');
-  h3+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("hd_c",b)}');
+  h3+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("hd_c","hd",b)}');
   mkPanel(h3);
 
   /* ── ⑤ 七政四餘 ── */
@@ -2757,10 +2795,10 @@ function renderMatch(a,b){
     +'▍Robert Hand《Planets in Transit》，西方行運邏輯與七政四餘流年形成對照驗證\n';
   var h4=mkDual(nameA,qz_html(a),nameB,qz_html(b));
   h4+=mkPre('qz_a',qzA);h4+=mkPre('qz_b',qzB);
-  h4+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="qz_c">'+escHtml(qzC)+'</pre></div>';
+  h4+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="qz_c">'+escHtml(qzC)+'</pre></div>';
   h4+=mkCpBtn('📋 複製甲方','','function(b){copyData("qz_a",b)}');
   h4+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("qz_b",b)}');
-  h4+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("qz_c",b)}');
+  h4+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("qz_c","qizheng",b)}');
   mkPanel(h4);
 
   /* ── ⑥ 瑪雅 ── */
@@ -2828,10 +2866,10 @@ function renderMatch(a,b){
     +'▍朱衍舞 Rafeeka（亞洲時間法則創辦人）《巫師13年曆》（2023，三一二八出版）系列｜身體共振與感受，精油與月亮曆的同頻應用\n';
   var h5=mkDual(nameA,maya_html(a),nameB,maya_html(b));
   h5+=mkPre('my_a',myA);h5+=mkPre('my_b',myB);
-  h5+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="my_c">'+escHtml(myC)+'</pre></div>';
+  h5+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="my_c">'+escHtml(myC)+'</pre></div>';
   h5+=mkCpBtn('📋 複製甲方','','function(b){copyData("my_a",b)}');
   h5+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("my_b",b)}');
-  h5+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("my_c",b)}');
+  h5+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("my_c","maya",b)}');
   mkPanel(h5);
 
   /* ── ⑦ 靈數 ── */
@@ -2909,10 +2947,10 @@ function renderMatch(a,b){
     +'▍Glynis McCants《Glynis Has Your Number》，數字特質在人際關係中的配對應用\n';
   var h6=mkDual(nameA,num_html(a),nameB,num_html(b));
   h6+=mkPre('nm_a',nmA);h6+=mkPre('nm_b',nmB);
-  h6+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="nm_c">'+escHtml(nmC)+'</pre></div>';
+  h6+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="nm_c">'+escHtml(nmC)+'</pre></div>';
   h6+=mkCpBtn('📋 複製甲方','','function(b){copyData("nm_a",b)}');
   h6+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("nm_b",b)}');
-  h6+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("nm_c",b)}');
+  h6+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("nm_c","lifepath",b)}');
   mkPanel(h6);
 
   /* ── ⑧ 馥靈秘碼 ── */
@@ -2995,10 +3033,10 @@ function renderMatch(a,b){
     +'▍Hans Decoz《Numerology: Key to Your Inner Self》，兩人數字的「交互關係」與節奏碰撞框架\n';
   var h7=mkDual(nameA,fl_html(a),nameB,fl_html(b));
   h7+=mkPre('fl_a',flA);h7+=mkPre('fl_b',flB);
-  h7+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="fl_c">'+escHtml(flC)+'</pre></div>';
+  h7+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="fl_c">'+escHtml(flC)+'</pre></div>';
   h7+=mkCpBtn('📋 複製甲方','','function(b){copyData("fl_a",b)}');
   h7+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("fl_b",b)}');
-  h7+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("fl_c",b)}');
+  h7+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("fl_c","fuling",b)}');
   mkPanel(h7);
 
   /* ── ⑨ 生命密碼（三角形）── */
@@ -3135,10 +3173,10 @@ function renderMatch(a,b){
 
     var h8=mkDual(nameA,tri_html(a),nameB,tri_html(b));
   h8+=mkPre('tri_a',triA);h8+=mkPre('tri_b',triB);
-  h8+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="tri_c">'+escHtml(triC)+'</pre></div>';
+  h8+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="tri_c">'+escHtml(triC)+'</pre></div>';
   h8+=mkCpBtn('📋 複製甲方','','function(b){copyData("tri_a",b)}');
   h8+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("tri_b",b)}');
-  h8+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("tri_c",b)}');
+  h8+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("tri_c","triangle",b)}');
   mkPanel(h8);
 
   /* ── ⑩ 大六壬 ── */
@@ -3203,10 +3241,10 @@ function renderMatch(a,b){
     +'▍張志春《六壬神課金口訣》｜簡化版快速起課法，適合入門理解框架\n';
   var h9=mkDual(nameA,lr_html(a),nameB,lr_html(b));
   h9+=mkPre('lr_a',lrA);h9+=mkPre('lr_b',lrB);
-  h9+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="lr_c">'+escHtml(lrC)+'</pre></div>';
+  h9+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="lr_c">'+escHtml(lrC)+'</pre></div>';
   h9+=mkCpBtn('📋 複製甲方','','function(b){copyData("lr_a",b)}');
   h9+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("lr_b",b)}');
-  h9+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("lr_c",b)}');
+  h9+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("lr_c","liuren",b)}');
   mkPanel(h9);
 
   /* ── ⑪ 九星氣學 ── */
@@ -3274,10 +3312,10 @@ function renderMatch(a,b){
     +'▍田口二州《九星術秘傳》｜方位移轉與流年飛星的進階應用，合住方位的精密系統\n';
   var hA=mkDual(nameA,nsk_html(a),nameB,nsk_html(b));
   hA+=mkPre('nsk_a',nskA);hA+=mkPre('nsk_b',nskB);
-  hA+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="nsk_c">'+escHtml(nskC)+'</pre></div>';
+  hA+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="nsk_c">'+escHtml(nskC)+'</pre></div>';
   hA+=mkCpBtn('📋 複製甲方','','function(b){copyData("nsk_a",b)}');
   hA+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("nsk_b",b)}');
-  hA+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("nsk_c",b)}');
+  hA+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("nsk_c","ninestar",b)}');
   mkPanel(hA);
 
   /* ── ⑫ 生日色彩 ── */
@@ -3342,10 +3380,10 @@ function renderMatch(a,b){
     +'▍Theo Gimbel《Healing with Colour and Light》，色光療法的人際關係應用，互補色在空間設計中的能量平衡\n';
   var hB=mkDual(nameA,clr_html(a),nameB,clr_html(b));
   hB+=mkPre('clr_a',clrA);hB+=mkPre('clr_b',clrB);
-  hB+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="clr_c">'+escHtml(clrC)+'</pre></div>';
+  hB+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="clr_c">'+escHtml(clrC)+'</pre></div>';
   hB+=mkCpBtn('📋 複製甲方','','function(b){copyData("clr_a",b)}');
   hB+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("clr_b",b)}');
-  hB+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("clr_c",b)}');
+  hB+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("clr_c","color",b)}');
   mkPanel(hB);
 
   /* ── ⑬ 凱龍莉莉絲 ── */
@@ -3407,10 +3445,10 @@ function renderMatch(a,b){
     +'▍Liz Greene《The Astrology of Fate》，業力占星，深層心理情結在關係中的投射與整合\n';
   var hC=mkDual(nameA,cl_html(a),nameB,cl_html(b));
   hC+=mkPre('cl_a',clxA);hC+=mkPre('cl_b',clxB);
-  hC+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="cl_c">'+escHtml(clxC)+'</pre></div>';
+  hC+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="cl_c">'+escHtml(clxC)+'</pre></div>';
   hC+=mkCpBtn('📋 複製甲方','','function(b){copyData("cl_a",b)}');
   hC+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("cl_b",b)}');
-  hC+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("cl_c",b)}');
+  hC+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("cl_c","chiron",b)}');
   mkPanel(hC);
 
   /* ── ⑭ 吠陀 ── */
@@ -3474,10 +3512,10 @@ function renderMatch(a,b){
     +'▍Hart deFouw & Robert Svoboda《Light on Relationships》，吠陀合盤聖經，東西方橋樑\n';
   var hD=mkDual(nameA,ved_html(a),nameB,ved_html(b));
   hD+=mkPre('ved_a',vedA);hD+=mkPre('ved_b',vedB);
-  hD+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="ved_c">'+escHtml(vedC)+'</pre></div>';
+  hD+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="ved_c">'+escHtml(vedC)+'</pre></div>';
   hD+=mkCpBtn('📋 複製甲方','','function(b){copyData("ved_a",b)}');
   hD+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("ved_b",b)}');
-  hD+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("ved_c",b)}');
+  hD+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("ved_c","vedic",b)}');
   mkPanel(hD);
 
   /* ── ⑮ 姓名 ── */
@@ -3550,10 +3588,10 @@ function renderMatch(a,b){
     +'▍何榮柱《姓名學大全》｜整合五格+生肖+音韻的現代版合盤應用\n';
   var hE=mkDual(nameA,ng_html(a),nameB,ng_html(b));
   hE+=mkPre('ng_a',ngA);hE+=mkPre('ng_b',ngB);
-  hE+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="ng_c">'+escHtml(ngC)+'</pre></div>';
+  hE+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="ng_c">'+escHtml(ngC)+'</pre></div>';
   hE+=mkCpBtn('📋 複製甲方','','function(b){copyData("ng_a",b)}');
   hE+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("ng_b",b)}');
-  hE+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("ng_c",b)}');
+  hE+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("ng_c","name",b)}');
   mkPanel(hE);
 
   /* ── ⑯ 卡巴拉 ── */
@@ -3621,10 +3659,10 @@ function renderMatch(a,b){
     +'▍Hans Decoz《Numerology: Key to Your Inner Self》，表達數/內在渴望/人格面具三角分析，最清晰的數字卡巴拉入門\n';
   var hF=mkDual(nameA,kb_html(a),nameB,kb_html(b));
   hF+=mkPre('kb_a',kbA);hF+=mkPre('kb_b',kbB);
-  hF+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="kb_c">'+escHtml(kbC)+'</pre></div>';
+  hF+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="kb_c">'+escHtml(kbC)+'</pre></div>';
   hF+=mkCpBtn('📋 複製甲方','','function(b){copyData("kb_a",b)}');
   hF+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("kb_b",b)}');
-  hF+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("kb_c",b)}');
+  hF+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("kb_c","kabbalah",b)}');
   mkPanel(hF);
 
 
@@ -3942,10 +3980,10 @@ function renderMatch(a,b){
   xiuC+='兩人宿曜的安壞成危關係？宮位（青龍/白虎/朱雀/玄武）能量互補還是衝突？\n';
   var hG1=mkDual(nameA,xiu_html(a),nameB,xiu_html(b));
   hG1+=mkPre('xiu_a',xiuA);hG1+=mkPre('xiu_b',xiuB);
-  hG1+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="xiu_c">'+escHtml(xiuC)+'</pre></div>';
+  hG1+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="xiu_c">'+escHtml(xiuC)+'</pre></div>';
   hG1+=mkCpBtn('📋 複製甲方','','function(b){copyData("xiu_a",b)}');
   hG1+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("xiu_b",b)}');
-  hG1+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("xiu_c",b)}');
+  hG1+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("xiu_c","xiuyao",b)}');
   mkPanel(hG1);
 
   // ═══ ⑱ 梅花合盤 ═══
@@ -3956,10 +3994,10 @@ function renderMatch(a,b){
   meiC+='兩人卦象的五行生剋？體用關係是否互補？動爻的方向是否指向對方？\n';
   var hG2=mkDual(nameA,mei_html(a),nameB,mei_html(b));
   hG2+=mkPre('mei_a',meiA);hG2+=mkPre('mei_b',meiB);
-  hG2+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="mei_c">'+escHtml(meiC)+'</pre></div>';
+  hG2+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="mei_c">'+escHtml(meiC)+'</pre></div>';
   hG2+=mkCpBtn('📋 複製甲方','','function(b){copyData("mei_a",b)}');
   hG2+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("mei_b",b)}');
-  hG2+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("mei_c",b)}');
+  hG2+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("mei_c","meihua",b)}');
   mkPanel(hG2);
 
   // ═══ ⑲ 基因天命合盤 ═══
@@ -3980,10 +4018,10 @@ function renderMatch(a,b){
   gkC+='【參考書目】\n▍Richard Rudd《Gene Keys》｜合盤閘門的深層意識解讀\n';
   var hG3=mkDual(nameA,gk_html(a),nameB,gk_html(b));
   hG3+=mkPre('gk_a',gkA);hG3+=mkPre('gk_b',gkB);
-  hG3+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="gk_c">'+escHtml(gkC)+'</pre></div>';
+  hG3+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="gk_c">'+escHtml(gkC)+'</pre></div>';
   hG3+=mkCpBtn('📋 複製甲方','','function(b){copyData("gk_a",b)}');
   hG3+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("gk_b",b)}');
-  hG3+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("gk_c",b)}');
+  hG3+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("gk_c","genekeys",b)}');
   mkPanel(hG3);
 
   // ═══ ⑳ 彩虹數字合盤 ═══
@@ -4008,10 +4046,10 @@ function renderMatch(a,b){
   rbC+='【參考書目】\n▍David A. Tad（彩虹數字學創始人）／麗子《麗子の彩虹數字學》（2020）\n▍紫衣格格《讓人生更順利的生命靈數》\n';
   var hG4=mkDual(nameA,rb_html(a),nameB,rb_html(b));
   hG4+=mkPre('rb_a',rbA);hG4+=mkPre('rb_b',rbB);
-  hG4+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="rb_c">'+escHtml(rbC)+'</pre></div>';
+  hG4+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="rb_c">'+escHtml(rbC)+'</pre></div>';
   hG4+=mkCpBtn('📋 複製甲方','','function(b){copyData("rb_a",b)}');
   hG4+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("rb_b",b)}');
-  hG4+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("rb_c",b)}');
+  hG4+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("rb_c","rainbow",b)}');
   mkPanel(hG4);
 
   // ═══ ㉑ 撲克牌合盤 ═══
@@ -4032,10 +4070,10 @@ function renderMatch(a,b){
   pkC+='【參考書目】\n▍Robert Camp《The Cards of Your Destiny》\n▍Sharon Jeffers《Love Cards》\n';
   var hG5=mkDual(nameA,poker_html(a),nameB,poker_html(b));
   hG5+=mkPre('pk_a',pkA);hG5+=mkPre('pk_b',pkB);
-  hG5+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="pk_c">'+escHtml(pkC)+'</pre></div>';
+  hG5+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="pk_c">'+escHtml(pkC)+'</pre></div>';
   hG5+=mkCpBtn('📋 複製甲方','','function(b){copyData("pk_a",b)}');
   hG5+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("pk_b",b)}');
-  hG5+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("pk_c",b)}');
+  hG5+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("pk_c","cardology",b)}');
   mkPanel(hG5);
 
   // ═══ ㉒ 居爾特樹曆合盤 ═══
@@ -4058,10 +4096,10 @@ function renderMatch(a,b){
   trC+='【參考書目】\n▍Liz & Colin Murray《The Celtic Tree Oracle》\n▍Robert Graves《The White Goddess》\n';
   var hG6=mkDual(nameA,tree_html(a),nameB,tree_html(b));
   hG6+=mkPre('tr_a',trA);hG6+=mkPre('tr_b',trB);
-  hG6+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="tr_c">'+escHtml(trC)+'</pre></div>';
+  hG6+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="tr_c">'+escHtml(trC)+'</pre></div>';
   hG6+=mkCpBtn('📋 複製甲方','','function(b){copyData("tr_a",b)}');
   hG6+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("tr_b",b)}');
-  hG6+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("tr_c",b)}');
+  hG6+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("tr_c","celtic",b)}');
   mkPanel(hG6);
 
   // ═══ ㉓ 鐵板神數合盤 ═══
@@ -4091,10 +4129,10 @@ function renderMatch(a,b){
   tbxC+='【參考書目】\n▍梁湘潤《合婚實務》\n▍何建忠《八字心理推命學》\n▍鍾義明《命理鑑定學》\n';
   var hG7=mkDual(nameA,tb_html(a),nameB,tb_html(b));
   hG7+=mkPre('tb_a',tbxA);hG7+=mkPre('tb_b',tbxB);
-  hG7+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="tb_c">'+escHtml(tbxC)+'</pre></div>';
+  hG7+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="tb_c">'+escHtml(tbxC)+'</pre></div>';
   hG7+=mkCpBtn('📋 複製甲方','','function(b){copyData("tb_a",b)}');
   hG7+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("tb_b",b)}');
-  hG7+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("tb_c",b)}');
+  hG7+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("tb_c","tieban",b)}');
   mkPanel(hG7);
 
   /* ── ㉔ 太乙神數面板 ── */
@@ -4177,10 +4215,10 @@ function renderMatch(a,b){
 
   var hTY=mkDual(nameA,ty_html(a),nameB,ty_html(b));
   hTY+=mkPre('ty_a',tyA_ai);hTY+=mkPre('ty_b',tyB_ai);
-  hTY+='<div class="ai-box"><h4>📜 合盤AI指令</h4><pre id="ty_c">'+escHtml(tyC)+'</pre></div>';
+  hTY+='<div class="ai-box"><h4>📜 合盤資料</h4><pre id="ty_c">'+escHtml(tyC)+'</pre></div>';
   hTY+=mkCpBtn('📋 複製甲方','','function(b){copyData("ty_a",b)}');
   hTY+=mkCpBtn('📋 複製乙方','teal','function(b){copyData("ty_b",b)}');
-  hTY+=mkCpBtn('📋 複製合盤','combined','function(b){copyText("ty_c",b)}');
+  hTY+=mkCpBtn('🔮 複製智慧解讀指令','combined','function(b){hlMatchCopy("ty_c","taiyi",b)}');
   mkPanel(hTY);
 
   /* ── 🔮 整合合盤 AI 指令 ── */
