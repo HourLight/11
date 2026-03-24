@@ -21,13 +21,11 @@ service cloud.firestore {
       allow read: if request.auth != null && request.auth.uid == userId;
       allow write: if request.auth != null && request.auth.uid == userId;
 
-      // ═══ AI 每日計次 ═══
-      // users/{uid}/ai_daily/{YYYY-MM-DD} → { count: N, lastUsed: timestamp }
-      // 每天一個新 doc，隔天自動歸零（不需要清除）
-      match /ai_daily/{dayKey} {
-        // 本人讀
+      // ═══ AI 每週計次 ═══
+      // users/{uid}/ai_weekly/{YYYY-WNN} → { count: N, lastUsed: timestamp }
+      // 每週一自然歸零（key 不同）
+      match /ai_weekly/{weekKey} {
         allow read: if request.auth != null && request.auth.uid == userId;
-        // 本人寫（只允許 increment count 和 set lastUsed）
         allow write: if request.auth != null && request.auth.uid == userId
           && request.resource.data.keys().hasOnly(['count', 'lastUsed'])
           && request.resource.data.count is int
@@ -113,6 +111,32 @@ service cloud.firestore {
       allow read: if request.auth != null;
       allow create: if request.auth != null;
       allow update, delete: if false; // server 負責更新狀態
+    }
+
+    // ═══ 美業合作商 ═══
+    match /biz_partners/{partnerId} {
+      // 管理員讀寫
+      allow read, write: if request.auth != null
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'curator'];
+      // 一般用戶可讀（驗證額度用）+ 可更新 usedThisMonth
+      allow read: if true;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(['usedThisMonth', 'quotaResetDate']);
+
+      // 合作商代碼子集合
+      match /biz_codes/{codeId} {
+        allow read: if true;
+        allow write: if request.auth != null
+          && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'curator'];
+        // 一般用戶可標記 used
+        allow update: if request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['used', 'usedAt']);
+      }
+    }
+
+    // collectionGroup 查詢（跨合作商查 biz_codes）
+    match /{path=**}/biz_codes/{codeId} {
+      allow read: if true;
     }
   }
 }

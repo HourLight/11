@@ -7,7 +7,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>家族覺察｜那些家裡不說的事｜馥靈之鑰</title>
-<meta name="description" content="馥靈之鑰家族覺察：問卷 + 130 張牌卡抽牌 + AI 即時解讀。家族的故事不會消失，它只是換了一個人繼續演。"/>
+<meta name="description" content="馥靈之鑰家族覺察：問卷 + 130 張牌卡抽牌 + 即時智慧解讀。家族的故事不會消失，它只是換了一個人繼續演。"/>
 <link rel="icon" href="favicon.ico"/>
 <link rel="canonical" href="https://hourlightkey.com/family-reading.html"/>
 <link rel="stylesheet" href="assets/css/hourlight-global.css"/>
@@ -117,7 +117,7 @@ body::before{content:'';position:fixed;inset:0;background:rgba(5,3,10,.92);z-ind
   <div class="fm-title">🌳 家族覺察</div>
   <div class="fm-sub">那些家裡不說的事，其實一直在影響您。</div>
   <div class="fm-divider"></div>
-  <p class="fm-p" style="text-align:center">家族的故事不會消失。<br>它只是換了一個人，繼續演同一齣戲。<br><br>選家族狀態 → 填問卷 → 抽牌 → AI 即時解讀。<br>看見那個劇本，才有機會改寫。</p>
+  <p class="fm-p" style="text-align:center">家族的故事不會消失。<br>它只是換了一個人，繼續演同一齣戲。<br><br>選家族狀態 → 填問卷 → 抽牌 → 即時智慧解讀。<br>看見那個劇本，才有機會改寫。</p>
   <button class="fm-btn" onclick="goScene(1)">開始覺察 🔑</button>
   <div class="fm-hint">約 5-8 分鐘｜免費</div>
 </div>
@@ -382,7 +382,23 @@ function buildPrompt(){
 }
 
 // AI
-async function runReading(){
+
+function runReading(){
+  // 付款牆攔截
+  if(typeof hlPaywall!=='undefined'){
+    var frPriceMap={3:199,5:399,7:599};
+    if(frPriceMap[currentSpread]){
+      hlPaywall.show({n:currentSpread,priceMap:frPriceMap,serviceName:'家族覺察智慧解讀'});
+      return;
+    }
+  }
+  if(typeof hlAIGateCheck==='function'){
+    hlAIGateCheck(function(){ _runReadingOriginal(); });
+  }else{
+    _runReadingOriginal();
+  }
+}
+async function _runReadingOriginal(){
   document.getElementById('readingLoading').style.display='block';
   document.getElementById('readingBox').style.display='none';
   document.getElementById('readingActions').style.display='none';
@@ -412,6 +428,7 @@ function copyReading(){var t=document.getElementById('readingBox').textContent;n
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="assets/js/firebase-config.js"></script>
 <script src="assets/js/hl-referral.js?v=20260323"></script>
+<script src="assets/js/hl-ai-gate.js"></script>
 <script src="assets/js/hl-gate.js"></script>
 <script src="assets/js/hl-record.js"></script>
 <script src="assets/js/hl-member.js?v=20260314"></script>
@@ -442,6 +459,7 @@ function copyReading(){var t=document.getElementById('readingBox').textContent;n
 <script src="assets/js/hl-topnav.js"></script>
 <script src="assets/js/hl-bottomnav.js"></script>
 <script src="assets/js/hl-email.js"></script>
+<script src="assets/js/hl-paywall.js"></script>
 <script src="assets/js/hl-chat.js"></script>
 <script src="assets/js/hl-aroma-fx.js" defer></script>
 <script src="assets/js/hl-share.js"></script>
