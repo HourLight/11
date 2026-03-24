@@ -251,7 +251,7 @@ src="https://www.facebook.com/tr?id=1333106288588347&ev=PageView&noscript=1" loa
     <div class="ai-card">
       <div class="ai-title">📜 AI 深度解讀指令</div>
       <pre class="ai-pre" id="aiPre"></pre>
-      <button class="cp-btn" onclick="copyAI()">📋 複製 AI 指令</button>
+      <button class="cp-btn" onclick="copyData('aiPre',this)">📋 複製命盤資料</button><button class="cp-btn" style="margin-left:8px;background:rgba(160,124,220,.12);border-color:rgba(160,124,220,.3)" onclick="hlAICopy('aiPre','ziwei',this)">🔮 複製智慧解讀指令</button>
     </div>
     <div class="cta-block">
       <h3>紫微看結構，馥靈幫您活出來</h3>
@@ -464,7 +464,7 @@ function doCalc(){
   // AI
   var zwData='';
   GN.forEach(function(gn){var p=null;zw.palaces.forEach(function(x){if(x.name==gn)p=x});if(!p)return;zwData+=p.name+'('+p.tg+p.dz+')大限'+p.dx+': '+(p.ms.length?p.ms.map(function(s){return s.n+'('+s.b+')'+(s.h?'化'+s.h:'')}).join(','):'空宮')+' | 吉:'+p.lj.join(',')+'|煞:'+p.ls.join(',')+' | '+p.cs+' '+p.bs+'\n'});
-  var ai='【AI解讀指令】請依據《紫微斗數全書》《斗數宣微》《飛星紫微》做深度解讀：\n\n';
+  var ai=';
   ai+='命宮：'+DZ[zw.ming]+'宮 ｜ 身宮：'+DZ[zw.shen]+'宮（'+zw.shGN+'）\n';
   ai+='五行局：'+zw.juS+' ｜ 命主：'+zw.mzhu+' 身主：'+zw.szhu+'\n';
   ai+='生年四化：祿'+zw.sh4.祿+' 權'+zw.sh4.權+' 科'+zw.sh4.科+' 忌'+zw.sh4.忌+'\n\n十二宮完整資料：\n'+zwData;
@@ -517,4 +517,13 @@ function copyAI(){navigator.clipboard.writeText(window._ai||'').then(function(){
 <script src="assets/js/hl-chat.js"></script>
 <script src="assets/js/hl-aroma-fx.js" defer></script>
 <script>document.querySelectorAll(".origin-toggle").forEach(function(t){t.addEventListener("click",function(){this.parentElement.classList.toggle("open")})})</script>
+<script src="assets/js/hl-ai-copy.js">
+function copyData(id,btn){
+  var el=document.getElementById(id);if(!el)return;
+  navigator.clipboard.writeText(el.textContent).then(function(){
+    var orig=btn.textContent;btn.textContent='✅ 已複製命盤資料';
+    setTimeout(function(){btn.textContent=orig},2000);
+  });
+}
+</script>
 </body></html>
