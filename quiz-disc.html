@@ -140,7 +140,7 @@
 }
 .quiz-question {
   font-size: clamp(1rem, 2.5vw, 1.15rem);
-  color: var(--hl-ink, #ffffff);
+  color: #2a1f0e;
   line-height: 1.7;
   margin-bottom: 24px;
   font-weight: 500;
@@ -183,13 +183,13 @@
 .quiz-option:hover {
   border-color: rgba(233,194,125,0.82);
   background: rgba(233,194,125,0.06);
-  color: var(--hl-ink, #ffffff);
+  color: #2a1f0e;
   transform: translateX(4px);
 }
 .quiz-option.selected {
   border-color: var(--hl-gold, #b8922a);
   background: rgba(233,194,125,0.12);
-  color: var(--hl-ink, #ffffff);
+  color: #2a1f0e;
 }
 .quiz-option-icon {
   font-size: 1.3rem;
@@ -221,7 +221,7 @@
 }
 .btn-prev:hover {
   border-color: rgba(233,194,125,0.7);
-  color: var(--hl-ink, #ffffff);
+  color: #2a1f0e;
 }
 .btn-next {
   background: linear-gradient(135deg, #b8922a, #b8922a);
@@ -338,7 +338,7 @@
   line-height: 1.85;
 }
 .result-section-content strong {
-  color: var(--hl-ink, #ffffff);
+  color: #2a1f0e;
   font-weight: 500;
 }
 
@@ -377,7 +377,7 @@
 .hour-bridge-text {
   font-family: "LXGW WenKai TC", serif;
   font-size: 1.1rem;
-  color: var(--hl-ink, #ffffff);
+  color: #2a1f0e;
   line-height: 1.8;
   margin-bottom: 16px;
 }
@@ -429,7 +429,7 @@
 }
 .share-btn:hover {
   border-color: rgba(233,194,125,0.7);
-  color: var(--hl-ink, #ffffff);
+  color: #2a1f0e;
   background: rgba(233,194,125,0.07);
 }
 
@@ -449,7 +449,7 @@
 }
 .btn-retry:hover {
   border-color: rgba(233,194,125,0.82);
-  color: var(--hl-ink, #ffffff);
+  color: #2a1f0e;
 }
 
 /* 其他測驗推薦 */
@@ -487,8 +487,8 @@
 .more-card:hover {
   border-color: rgba(233,194,125,0.35);
   background: rgba(233,194,125,0.05);
-  color: var(--hl-ink, #ffffff);
-  -webkit-text-fill-color: var(--hl-ink, #ffffff);
+  color: #2a1f0e;
+  -webkit-text-fill-color: #2a1f0e;
 }
 .more-card-icon { font-size: 1.5rem; display: block; margin-bottom: 6px; }
 
@@ -1133,7 +1133,7 @@ function showResult() {
     'S': {text:`你的存在像一棵大樹｜不出聲，但所有人都靠著你。岩蘭草的泥土氣息跟你一樣踏實可靠。但你也需要薄荷偶爾吹進來的那股涼意，提醒你：「穩」不代表你不能偶爾做一次出乎意料的事。`, oil:'岩蘭草 · 薄荷'},
     'C': {text:`你的世界有一套精密的座標系統，每樣東西都有它該在的位置。茶樹的清冽跟你的邏輯一樣乾淨俐落。但試試在那份精確裡滴一點依蘭的甜｜完美的事物不一定冰冷，可以有溫度的。`, oil:'茶樹 · 依蘭'},
   };
-  const daKey = primary;
+  const daKey = topType;
   const aromaD = discAroma[daKey];
   if (aromaD) {
     document.getElementById('resultAroma').style.display = 'block';

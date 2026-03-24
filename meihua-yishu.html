@@ -235,9 +235,9 @@ body{min-height:100vh;font-family:'LXGW WenKai TC','Noto Serif TC',serif;color:v
   </div>
   <div class="sec">
     <div class="ai-box">
-      <h4>📜 AI 深度解讀指令</h4>
+      <h4>📜 命盤資料</h4>
       <pre class="ai-pre" id="aiPre"></pre>
-      <button class="cp-btn" onclick="copyAI()">📋 複製 AI 指令</button>
+      <button class="cp-btn" onclick="copyData('aiPre',this)">📋 複製命盤資料</button><button class="cp-btn" style="margin-left:8px;background:rgba(160,124,220,.12);border-color:rgba(160,124,220,.3)" onclick="hlAICopy('aiPre','meihua',this)">🔮 複製智慧解讀指令</button>
     </div>
   </div>
   <div class="cta-block">
@@ -369,7 +369,7 @@ function runCalc(){
   // AI指令
   var stems=['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
   var branches=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
-  var ai='【AI解讀指令·梅花易數終身卦（完整版）】\n';
+  var ai='';
   ai+='農曆出生：'+Y+'年'+M+'月'+D+'日 '+branches[hr]+'時\n';
   ai+='年干：'+stems[stemIdx]+'（序'+stemNum+'）\n';
   ai+='起卦數：年干'+stemNum+'+月'+M+'+日'+D+'='+sum+'，時支序'+hr+'\n\n';
@@ -423,6 +423,8 @@ function runCalc(){
   document.getElementById('secMain').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
+
+function copyData(id,btn){var el=document.getElementById(id);if(!el)return;navigator.clipboard.writeText(el.textContent).then(function(){var o=btn.textContent;btn.textContent='✅ 已複製';setTimeout(function(){btn.textContent=o},2000)});}
 function copyAI(){
   var text=document.getElementById('aiPre').textContent;
   if(navigator.clipboard&&navigator.clipboard.writeText){
@@ -473,4 +475,5 @@ function showCopied(){var b=document.querySelector('.cp-btn');if(b){var o=b.text
 <script src="assets/js/hl-email.js"></script>
 <script src="assets/js/hl-chat.js"></script>
 <script src="assets/js/hl-aroma-fx.js" defer></script>
+<script src="assets/js/hl-ai-copy.js"></script>
 </body></html>

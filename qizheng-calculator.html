@@ -244,7 +244,7 @@ src="https://www.facebook.com/tr?id=1333106288588347&ev=PageView&noscript=1" loa
     <div class="ai-card">
       <div class="chart-title">📜 AI 深度解讀指令（仿測測 App 格式）</div>
       <pre class="ai-pre" id="aiPre"></pre>
-      <button class="cp-btn" onclick="copyAI()">📋 複製 AI 指令</button>
+      <button class="cp-btn" onclick="copyData('aiPre',this)">📋 複製命盤資料</button><button class="cp-btn" style="margin-left:8px;background:rgba(160,124,220,.12);border-color:rgba(160,124,220,.3)" onclick="hlAICopy('aiPre','qizheng',this)">🔮 複製智慧解讀指令</button>
     </div>
     <div class="cta-block">
       <h3>七政看天命，馥靈幫您在當下落地</h3>
@@ -456,7 +456,7 @@ async function doCalc(){
   document.getElementById('relations').innerHTML=relHTML;
 
   // AI
-  var ai='【AI解讀指令】請依據《果老星宗》《三辰通載》《星學大成》《天文書》做七政四餘深度解讀：\n\n';
+  var ai=';
   ai+='┌ 星體參數 ────────────────────────┐\n';
   ai+='│ 星體　　　宿度　　　　　宮度　　　　化曜              │\n';
   if(mingXiu)ai+='│ 命主　　　'+mingXiu.name+fmtDeg(mingXiu.deg)+'　　（命度主：'+mingQiyao+'）　　│\n';
@@ -516,4 +516,13 @@ setTimeout(function(){loadEphemeris().catch(function(){})},1000);
 <script src="assets/js/hl-chat.js"></script>
 <script src="assets/js/hl-aroma-fx.js" defer></script>
 <script>document.querySelectorAll(".origin-toggle").forEach(function(t){t.addEventListener("click",function(){this.parentElement.classList.toggle("open")})})</script>
+<script src="assets/js/hl-ai-copy.js">
+function copyData(id,btn){
+  var el=document.getElementById(id);if(!el)return;
+  navigator.clipboard.writeText(el.textContent).then(function(){
+    var orig=btn.textContent;btn.textContent='✅ 已複製命盤資料';
+    setTimeout(function(){btn.textContent=orig},2000);
+  });
+}
+</script>
 </body></html>
