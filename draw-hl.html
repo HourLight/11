@@ -1500,6 +1500,10 @@ function drawCards(n) {
   renderCards(n === 1);
   copyBtn.disabled = false;
   shareBtn.disabled = false;
+  // 存檔到 Firestore
+  var _codes = selected.map(function(i){ return allFiles[i].replace('.png',''); });
+  var _titles = _codes.map(function(c){ var info = window.cardData ? window.cardData[c] : {}; return info.title || c; });
+  saveDrawToFirestore(selected.length, _codes, _titles, userQuestion);
   updateURL(selected.map(i => allFiles[i].replace('.png', '')).join(','));
   showAISection(n);
 }
@@ -2025,7 +2029,9 @@ async function triggerAIReading() {
         n: n,
         cards: cards,
         question: userQuestion || '',
-        unlockCode: unlockCode
+        unlockCode: unlockCode,
+        uid: (window.firebase && firebase.auth().currentUser) ? firebase.auth().currentUser.uid : '',
+        email: (window.firebase && firebase.auth().currentUser) ? (firebase.auth().currentUser.email || '') : ''
       })
     });
 
@@ -2362,6 +2368,24 @@ function toggleLegalContent(){
 <script src="assets/js/hl-announce.js"></script>
 <script src="assets/js/hl-email.js"></script>
 <script src="assets/js/hl-chat.js"></script>
-<script src="assets/js/hl-aroma-fx.js" defer></script>
+<script src="assets/js/hl-aroma-fx.js" defer>
+// ── 抽牌紀錄存檔（所有張數，含免費）──
+function saveDrawToFirestore(n, cardCodes, cardTitles, question) {
+  try {
+    if (!window.firebase || !firebase.auth().currentUser) return;
+    var user = firebase.auth().currentUser;
+    var db = firebase.firestore();
+    db.collection('users').doc(user.uid).collection('draw_history').add({
+      cardCodes: cardCodes,
+      cardTitles: cardTitles,
+      n: n,
+      question: question || '',
+      isPaid: n > 1,
+      hasReading: false,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).catch(function(e) { console.warn('Draw save error:', e); });
+  } catch(e) {}
+}
+</script>
 </body>
 </html>

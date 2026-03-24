@@ -38,6 +38,19 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="js/lunar.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+// Chart.js 載入檢查：3秒後如果還沒載入就顯示提示
+setTimeout(function(){
+  if(typeof Chart==='undefined'){
+    console.warn('Chart.js 未載入，改用純 CSS 圖表');
+    document.querySelectorAll('canvas').forEach(function(c){
+      var p=c.parentElement;
+      if(p)p.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:.82rem;color:rgba(201,160,96,.5)">圖表載入中⋯ 若持續無顯示請重新整理頁面</div>';
+    });
+    window._chartFallback=true;
+  }
+},3000);
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -536,6 +549,251 @@ input,select,textarea{font-family:var(--body)}
 .mt-12{margin-top:12px}.mt-16{margin-top:16px}
 .btn-sm-gold{padding:8px 18px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:9px;font-size:.9rem;color:#1a1008;font-weight:500}
 .qi-desc{font-size:.73rem;color:var(--light)}
+
+
+
+/* ═══ 📜 解讀紀錄系統 ═══ */
+var allReadings=[], filteredReadings=[], readingPage=1;
+var READING_PAGE=15;
+
+async function loadReadings(){
+  var el=document.getElementById('reading-list');
+  if(!el)return;
+  el.innerHTML='<div style="text-align:center;padding:20px;color:var(--light)">載入中⋯</div>';
+  try{
+    var snap=await db.collection('readings').orderBy('createdAt','desc').limit(500).get();
+    allReadings=[];
+    snap.forEach(function(doc){allReadings.push({id:doc.id,...doc.data()});});
+    filteredReadings=[...allReadings];
+    readingPage=1;
+    renderReadingStats();
+    renderReadings();
+  }catch(e){el.innerHTML='<div class="empty"><p>讀取失敗：'+e.message+'<br>（readings collection 可能尚未建立，需要有第一筆 AI 解讀才會產生）</p></div>';}
+}
+
+function filterReadings(){
+  var q=(document.getElementById('reading-search').value||'').trim().toLowerCase();
+  var nf=document.getElementById('reading-n-filter').value;
+  filteredReadings=allReadings.filter(function(r){
+    var matchQ=!q||(r.email||'').toLowerCase().includes(q)||(r.cardCodes||[]).join(' ').toLowerCase().includes(q)||(r.question||'').toLowerCase().includes(q)||(r.cardTitles||[]).join(' ').includes(q);
+    var matchN=!nf||String(r.n)===nf;
+    return matchQ&&matchN;
+  });
+  readingPage=1;renderReadings();
+}
+
+function renderReadingStats(){
+  var el=document.getElementById('reading-stats');if(!el)return;
+  var total=allReadings.length;
+  var paid=allReadings.filter(function(r){return r.isPaid;}).length;
+  var totalRev=allReadings.reduce(function(s,r){return s+(r.price||0);},0);
+  var byN={1:0,3:0,5:0,7:0};
+  allReadings.forEach(function(r){if(byN[r.n]!==undefined)byN[r.n]++;});
+  el.innerHTML='<div style="padding:8px 14px;background:var(--bg);border-radius:8px;font-size:.82rem"><span style="color:var(--light)">總解讀</span> <strong style="color:var(--gold)">'+total+'</strong></div>'
+    +'<div style="padding:8px 14px;background:var(--bg);border-radius:8px;font-size:.82rem"><span style="color:var(--light)">付費</span> <strong style="color:var(--gold)">'+paid+'</strong></div>'
+    +'<div style="padding:8px 14px;background:var(--bg);border-radius:8px;font-size:.82rem"><span style="color:var(--light)">累計營收</span> <strong style="color:var(--gold)">$'+totalRev.toLocaleString()+'</strong></div>'
+    +'<div style="padding:8px 14px;background:var(--bg);border-radius:8px;font-size:.82rem"><span style="color:var(--light)">1張</span> '+byN[1]+' ｜ <span style="color:var(--light)">3張</span> '+byN[3]+' ｜ <span style="color:var(--light)">5張</span> '+byN[5]+' ｜ <span style="color:var(--light)">7張</span> '+byN[7]+'</div>';
+}
+
+function renderReadings(){
+  var el=document.getElementById('reading-list');if(!el)return;
+  var total=Math.ceil(filteredReadings.length/READING_PAGE)||1;
+  var info=document.getElementById('reading-page-info');
+  if(info)info.textContent='第 '+readingPage+' / '+total+' 頁（共 '+filteredReadings.length+' 筆）';
+  var prev=document.getElementById('reading-prev');if(prev)prev.style.opacity=readingPage<=1?'.4':'1';
+  var next=document.getElementById('reading-next');if(next)next.style.opacity=readingPage>=total?'.4':'1';
+  var slice=filteredReadings.slice((readingPage-1)*READING_PAGE, readingPage*READING_PAGE);
+  if(!slice.length){el.innerHTML='<div class="empty"><p>尚無解讀紀錄</p></div>';return;}
+  el.innerHTML=slice.map(function(r){
+    var t=r.createdAt;
+    var ts='';
+    if(t&&t.toDate)ts=t.toDate().toLocaleString('zh-TW',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    else if(t instanceof Date)ts=t.toLocaleString('zh-TW',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    else if(typeof t==='string')ts=t.slice(0,16);
+    var codes=(r.cardCodes||[]).join(' → ');
+    var titles=(r.cardTitles||[]).join(' → ');
+    var priceBadge=r.isPaid?'<span style="padding:1px 7px;border-radius:8px;background:rgba(201,160,96,.15);color:var(--gold3);font-size:.7rem;font-weight:600">$'+(r.price||0)+'</span>':'<span style="padding:1px 7px;border-radius:8px;background:rgba(176,176,176,.1);color:var(--light);font-size:.7rem">免費</span>';
+    var nBadge='<span style="padding:1px 7px;border-radius:8px;background:rgba(201,160,96,.08);color:var(--gold2);font-size:.72rem;font-weight:600">'+r.n+'張</span>';
+    var hasText=r.reading&&r.reading.length>50;
+    return '<div style="padding:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px">'
+      +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">'
+      +'<span style="font-size:.75rem;color:var(--light)">'+ts+'</span>'
+      +nBadge+' '+priceBadge
+      +'<span style="font-size:.78rem;color:var(--mid);margin-left:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px">'+escHtml(r.email||'匿名')+'</span>'
+      +'</div>'
+      +'<div style="font-size:.85rem;color:var(--text);font-weight:600;margin-bottom:4px">'+escHtml(titles)+'</div>'
+      +'<div style="font-size:.72rem;color:var(--light);font-family:monospace;margin-bottom:6px">'+escHtml(codes)+'</div>'
+      +(r.question?'<div style="font-size:.82rem;color:var(--mid);margin-bottom:6px;padding:6px 10px;background:var(--bg);border-radius:8px">❓ '+escHtml(r.question)+'</div>':'')
+      +(hasText?'<details style="margin-top:6px"><summary style="font-size:.78rem;color:var(--gold2);cursor:pointer">📜 展開解讀全文（'+r.reading.length+' 字）</summary><div style="margin-top:8px;padding:12px;background:var(--bg);border-radius:10px;font-size:.82rem;color:var(--text);line-height:2;white-space:pre-wrap;max-height:400px;overflow-y:auto">'+escHtml(r.reading)+'</div></details>':'')
+      +'</div>';
+  }).join('');
+}
+
+function readingPageNav(dir){
+  var total=Math.ceil(filteredReadings.length/READING_PAGE)||1;
+  readingPage=Math.max(1,Math.min(total,readingPage+dir));
+  renderReadings();
+}
+
+function exportReadingsCSV(){
+  var rows=[['時間','Email','張數','鑰盤','牌卡編號','牌卡名稱','問題','金額','解讀字數']];
+  filteredReadings.forEach(function(r){
+    var t=r.createdAt;
+    var ts='';
+    if(t&&t.toDate)ts=t.toDate().toLocaleString('zh-TW');
+    else if(typeof t==='string')ts=t;
+    rows.push([ts,r.email||'',r.n||'',(r.spread||''),(r.cardCodes||[]).join(' '),(r.cardTitles||[]).join(' '),r.question||'',r.price||0,(r.reading||'').length]);
+  });
+  var csv='\uFEFF'+rows.map(function(r){return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='解讀紀錄_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+  showToast('CSV 已下載 ✓');
+}
+
+
+
+/* ═══ 📜 管理員：解讀紀錄系統 ═══ */
+var allReadings=[], filteredReadings=[], readingPage=1, READING_PAGE=15;
+
+async function loadReadings(){
+  var el=document.getElementById('reading-list');
+  if(!el)return;
+  el.innerHTML='<div style="text-align:center;padding:20px;color:var(--light)">載入中⋯</div>';
+  try{
+    var snap=await db.collection('readings').orderBy('createdAt','desc').limit(500).get();
+    allReadings=[];snap.forEach(function(doc){allReadings.push({id:doc.id,...doc.data()});});
+    filteredReadings=[...allReadings];readingPage=1;
+    renderReadingStats();renderReadings();
+  }catch(e){
+    el.innerHTML='<div class="empty"><p>readings collection 尚未建立<br>第一筆 AI 解讀完成後才會自動產生<br><small style="color:var(--light)">'+e.message+'</small></p></div>';
+  }
+}
+
+function filterReadings(){
+  var q=(document.getElementById('reading-search').value||'').trim().toLowerCase();
+  var nf=document.getElementById('reading-n-filter').value;
+  filteredReadings=allReadings.filter(function(r){
+    var matchQ=!q||(r.email||'').toLowerCase().includes(q)||(r.cardCodes||[]).join(' ').toLowerCase().includes(q)||(r.question||'').toLowerCase().includes(q)||(r.cardTitles||[]).join(' ').includes(q);
+    return matchQ&&(!nf||String(r.n)===nf);
+  });
+  readingPage=1;renderReadings();
+}
+
+function renderReadingStats(){
+  var el=document.getElementById('reading-stats');if(!el)return;
+  var total=allReadings.length;
+  var paid=allReadings.filter(function(r){return r.isPaid;}).length;
+  var totalRev=allReadings.reduce(function(s,r){return s+(r.price||0);},0);
+  var byN={};allReadings.forEach(function(r){byN[r.n]=(byN[r.n]||0)+1;});
+  el.innerHTML='<div style="padding:8px 14px;background:var(--bg);border-radius:8px;font-size:.82rem"><span style="color:var(--light)">總解讀</span> <strong style="color:var(--gold)">'+total+'</strong></div>'
+    +'<div style="padding:8px 14px;background:var(--bg);border-radius:8px;font-size:.82rem"><span style="color:var(--light)">付費</span> <strong style="color:var(--gold)">'+paid+'</strong></div>'
+    +'<div style="padding:8px 14px;background:var(--bg);border-radius:8px;font-size:.82rem"><span style="color:var(--light)">累計營收</span> <strong style="color:var(--gold)">$'+totalRev.toLocaleString()+'</strong></div>';
+}
+
+function renderReadings(){
+  var el=document.getElementById('reading-list');if(!el)return;
+  var total=Math.ceil(filteredReadings.length/READING_PAGE)||1;
+  var info=document.getElementById('reading-page-info');
+  if(info)info.textContent='第 '+readingPage+' / '+total+' 頁（共 '+filteredReadings.length+' 筆）';
+  var slice=filteredReadings.slice((readingPage-1)*READING_PAGE, readingPage*READING_PAGE);
+  if(!slice.length){el.innerHTML='<div class="empty"><p>尚無解讀紀錄</p></div>';return;}
+  el.innerHTML=slice.map(function(r){
+    var t=r.createdAt;var ts='';
+    if(t&&t.toDate)ts=t.toDate().toLocaleString('zh-TW',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    else if(t instanceof Date)ts=t.toLocaleString('zh-TW',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    var titles=(r.cardTitles||[]).join(' → ');
+    var codes=(r.cardCodes||[]).join(' ');
+    var priceBadge=r.isPaid?'<span style="padding:1px 7px;border-radius:8px;background:rgba(201,160,96,.15);color:var(--gold3);font-size:.7rem;font-weight:600">$'+(r.price||0)+'</span>':'<span style="padding:1px 7px;border-radius:8px;background:rgba(176,176,176,.1);color:var(--light);font-size:.7rem">免費</span>';
+    var hasText=r.reading&&r.reading.length>50;
+    return '<div style="padding:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px">'
+      +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">'
+      +'<span style="font-size:.75rem;color:var(--light)">'+ts+'</span>'
+      +'<span style="padding:1px 7px;border-radius:8px;background:rgba(201,160,96,.08);color:var(--gold2);font-size:.72rem;font-weight:600">'+r.n+'張</span> '+priceBadge
+      +'<span style="font-size:.78rem;color:var(--mid);margin-left:auto;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escHtml(r.email||'匿名')+'</span></div>'
+      +'<div style="font-size:.85rem;color:var(--text);font-weight:600;margin-bottom:4px">'+escHtml(titles)+'</div>'
+      +'<div style="font-size:.72rem;color:var(--light);font-family:monospace;margin-bottom:6px">'+escHtml(codes)+'</div>'
+      +(r.question?'<div style="font-size:.82rem;color:var(--mid);margin-bottom:6px;padding:6px 10px;background:var(--bg);border-radius:8px">❓ '+escHtml(r.question)+'</div>':'')
+      +(hasText?'<details style="margin-top:6px"><summary style="font-size:.78rem;color:var(--gold2);cursor:pointer">📜 展開解讀全文（'+r.reading.length+' 字）</summary><div style="margin-top:8px;padding:12px;background:var(--bg);border-radius:10px;font-size:.82rem;color:var(--text);line-height:2;white-space:pre-wrap;max-height:400px;overflow-y:auto">'+escHtml(r.reading)+'</div></details>':'')
+      +'</div>';
+  }).join('');
+}
+
+function readingPageNav(dir){var total=Math.ceil(filteredReadings.length/READING_PAGE)||1;readingPage=Math.max(1,Math.min(total,readingPage+dir));renderReadings();}
+
+function exportReadingsCSV(){
+  var rows=[['時間','Email','張數','鑰盤','牌卡編號','牌卡名稱','問題','金額','解讀字數']];
+  filteredReadings.forEach(function(r){var t=r.createdAt;var ts='';if(t&&t.toDate)ts=t.toDate().toLocaleString('zh-TW');rows.push([ts,r.email||'',r.n||'',(r.spread||''),(r.cardCodes||[]).join(' '),(r.cardTitles||[]).join(' '),r.question||'',r.price||0,(r.reading||'').length]);});
+  var csv='\uFEFF'+rows.map(function(r){return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='解讀紀錄_'+new Date().toISOString().slice(0,10)+'.csv';a.click();showToast('CSV 已下載 ✓');
+}
+
+/* ═══ 📜 會員端：我的解讀紀錄 ═══ */
+async function loadMyReadings(){
+  if(!currentUser)return;
+  var el=document.getElementById('my-readings-list');
+  var countEl=document.getElementById('my-readings-count');
+  if(!el)return;
+  try{
+    var snap=await db.collection('users').doc(currentUser.uid).collection('draw_history').orderBy('createdAt','desc').limit(30).get();
+    if(snap.empty){el.innerHTML='<div class="empty"><p>尚無抽牌紀錄<br>使用馥靈抽牌後會自動保存在這裡</p></div>';if(countEl)countEl.textContent='0 筆';return;}
+    var items=[];snap.forEach(function(doc){items.push({id:doc.id,...doc.data()});});
+    if(countEl)countEl.textContent=items.length+' 筆';
+    el.innerHTML=items.map(function(r){
+      var t=r.createdAt;var ts='';
+      if(t&&t.toDate)ts=t.toDate().toLocaleString('zh-TW',{month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+      var codes=(r.cardCodes||[]).join(' → ');
+      var titles=(r.cardTitles||[]).join(' → ');
+      var paidTag=r.isPaid?'<span style="padding:1px 7px;border-radius:8px;background:rgba(201,160,96,.15);color:var(--gold3);font-size:.7rem;font-weight:600">$'+(r.price||0)+' 已付</span>':'<span style="padding:1px 7px;border-radius:8px;background:rgba(176,176,176,.1);color:var(--light);font-size:.7rem">免費</span>';
+      var readingLink=r.readingId?'<button onclick="viewMyReading(\''+r.readingId+'\')" style="padding:4px 12px;border:1px solid rgba(201,160,96,.2);border-radius:8px;background:transparent;color:var(--gold2);font-size:.75rem;cursor:pointer;font-family:inherit">📜 查看解讀</button>':'';
+      return '<div style="padding:12px 0;border-bottom:1px solid var(--border)">'
+        +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">'
+        +'<span style="font-size:.75rem;color:var(--light)">'+ts+'</span>'
+        +'<span style="padding:1px 7px;border-radius:8px;background:rgba(201,160,96,.08);color:var(--gold2);font-size:.72rem;font-weight:600">'+(r.n||'?')+'張 '+(r.spread||'')+'</span>'
+        +paidTag+'</div>'
+        +'<div style="font-size:.88rem;color:var(--text);font-weight:500;margin-bottom:2px">'+escHtml(titles||codes)+'</div>'
+        +(r.question?'<div style="font-size:.78rem;color:var(--mid)">❓ '+escHtml(r.question)+'</div>':'')
+        +'<div style="margin-top:6px">'+readingLink+'</div>'
+        +'</div>';
+    }).join('');
+  }catch(e){
+    el.innerHTML='<div class="empty"><p>載入失敗<br><small>'+e.message+'</small></p></div>';
+  }
+}
+
+async function viewMyReading(readingId){
+  if(!readingId)return;
+  try{
+    var doc=await db.collection('readings').doc(readingId).get();
+    if(!doc.exists){showToast('找不到解讀紀錄');return;}
+    var r=doc.data();
+    // Show in modal
+    var modal=document.getElementById('modal-member-detail');
+    if(!modal)return;
+    document.getElementById('detail-title').textContent='📜 解讀紀錄';
+    document.getElementById('detail-sub').textContent=(r.cardTitles||[]).join(' → ');
+    document.getElementById('detail-stats').innerHTML='<div style="background:var(--bg);border-radius:10px;padding:12px;text-align:center"><div style="font-size:1.5rem;font-weight:500;color:var(--gold)">'+r.n+'</div><div style="font-size:.73rem;color:var(--mid);margin-top:4px">張牌</div></div>'
+      +'<div style="background:var(--bg);border-radius:10px;padding:12px;text-align:center"><div style="font-size:1.5rem;font-weight:500;color:var(--gold)">'+(r.reading||'').length+'</div><div style="font-size:.73rem;color:var(--mid);margin-top:4px">字</div></div>'
+      +'<div style="background:var(--bg);border-radius:10px;padding:12px;text-align:center"><div style="font-size:1.5rem;font-weight:500;color:var(--gold)">$'+(r.price||0)+'</div><div style="font-size:.73rem;color:var(--mid);margin-top:4px">金額</div></div>';
+    var content='';
+    if(r.question)content+='<div style="padding:8px 12px;background:var(--bg);border-radius:8px;margin-bottom:10px;font-size:.85rem;color:var(--mid)">❓ '+escHtml(r.question)+'</div>';
+    content+='<div style="font-size:.85rem;color:var(--text);line-height:2;white-space:pre-wrap;max-height:400px;overflow-y:auto;padding:12px;background:var(--bg);border-radius:10px">'+escHtml(r.reading||'無解讀內容')+'</div>';
+    content+='<div style="margin-top:10px;text-align:right"><button onclick="copyReadingText(\''+readingId+'\')" style="padding:6px 16px;border:1px solid rgba(201,160,96,.2);border-radius:8px;background:transparent;color:var(--gold2);font-size:.78rem;cursor:pointer;font-family:inherit">📋 複製解讀全文</button></div>';
+    document.getElementById('detail-history-list').innerHTML=content;
+    modal.classList.remove('hide');
+  }catch(e){showToast('載入失敗：'+e.message);}
+}
+
+async function copyReadingText(readingId){
+  try{
+    var doc=await db.collection('readings').doc(readingId).get();
+    if(doc.exists&&doc.data().reading){
+      await navigator.clipboard.writeText(doc.data().reading);
+      showToast('解讀全文已複製 ✓');
+    }
+  }catch(e){showToast('複製失敗');}
+}
 
 /* ═══════════════════════════════════════════
    遊戲化系統 CSS ｜ 第一～三層
@@ -1043,6 +1301,15 @@ input,select,textarea{font-family:var(--body)}
       <!-- History -->
       <div class="page hide" id="page-history">
         <div class="page-head"><h1>使用足跡</h1><p>您在馥靈留下的每一次覺察，都在這裡。</p></div>
+
+        <!-- 我的解讀紀錄 -->
+        <div class="card" style="margin-bottom:16px" id="my-readings-card">
+          <div class="card-head"><span class="card-title">📜 我的解讀紀錄</span><span class="card-action" id="my-readings-count" style="color:var(--gold);font-size:.78rem">-</span></div>
+          <div class="card-body card-body-pt0">
+            <div id="my-readings-list"><div class="empty"><p>尚無解讀紀錄<br>使用智慧解讀後會自動保存在這裡</p></div></div>
+          </div>
+        </div>
+
 
         <!-- 覺察日曆 -->
         <div class="awareness-calendar" id="awareness-calendar">
@@ -1733,6 +2000,7 @@ input,select,textarea{font-family:var(--body)}
           <button class="admin-tab" onclick="switchAdminTab('activate')" data-tab="activate">🎫 開通</button>
           <button class="admin-tab" onclick="switchAdminTab('referral')" data-tab="referral">📱 推薦碼</button>
           <button class="admin-tab" onclick="switchAdminTab('bizpartner')" data-tab="bizpartner">🤝 美業合作</button>
+          <button class="admin-tab" onclick="switchAdminTab('readings')" data-tab="readings">📜 解讀紀錄</button>
           <button class="admin-tab" onclick="switchAdminTab('analytics')" data-tab="analytics">📈 深度分析</button>
         </div>
         <div class="admin-sub on" id="admin-dashboard">
@@ -2236,6 +2504,35 @@ input,select,textarea{font-family:var(--body)}
           </div>
         </div>
       </div>
+
+        <!-- 📜 解讀紀錄 -->
+        <div class="admin-sub" id="admin-readings">
+          <div class="card">
+            <div class="card-head" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span class="card-title">📜 付費解讀紀錄</span>
+              <input type="text" id="reading-search" placeholder="搜尋 email / 牌卡 / 問題…" style="flex:1;min-width:140px;padding:6px 12px;border:1px solid var(--border);border-radius:20px;font-size:.82rem;background:var(--card);color:var(--text);outline:none" oninput="filterReadings()">
+              <select id="reading-n-filter" onchange="filterReadings()" style="padding:6px 10px;border:1px solid var(--border);border-radius:20px;font-size:.78rem;background:var(--card);color:var(--text);outline:none">
+                <option value="">全部張數</option>
+                <option value="1">1 張</option>
+                <option value="3">3 張</option>
+                <option value="5">5 張</option>
+                <option value="7">7 張</option>
+              </select>
+              <button onclick="exportReadingsCSV()" style="padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:.78rem;background:var(--card);color:var(--text);cursor:pointer">📥 匯出</button>
+            </div>
+            <div class="card-body card-body-pt0">
+              <!-- 統計摘要 -->
+              <div id="reading-stats" style="display:flex;gap:12px;margin:12px 0;flex-wrap:wrap"></div>
+              <!-- 列表 -->
+              <div id="reading-list" style="max-height:600px;overflow-y:auto"><div class="empty"><p>載入中⋯</p></div></div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:12px;font-size:.82rem;color:var(--mid)">
+                <span id="reading-page-info">-</span>
+                <button id="reading-prev" onclick="readingPageNav(-1)" style="padding:4px 12px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);cursor:pointer;font-size:.8rem">← 上頁</button>
+                <button id="reading-next" onclick="readingPageNav(1)" style="padding:4px 12px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);cursor:pointer;font-size:.8rem">下頁 →</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- 📈 深度分析 -->
         <div class="admin-sub" id="admin-analytics">
@@ -2844,7 +3141,7 @@ function showPage(page) {
   // 載入對應資料
   if (page==='home')         loadHome();
   if (page==='tools')        renderTools('all');
-  if (page==='history')      { loadHistory(true); if(auth&&auth.currentUser) loadHistoryForCalendar(auth.currentUser.uid); }
+  if (page==='history')      { loadHistory(true); loadMyReadings(); if(auth&&auth.currentUser) loadHistoryForCalendar(auth.currentUser.uid); }
   if (page==='mine')         loadMine();
   if (page==='notes')        loadNotes();
   if (page==='subscription') loadSubscription();
@@ -3495,6 +3792,7 @@ function switchAdminTab(tab) {
   if (tab==='announce') loadAnnouncements();
   if (tab==='activate') loadActivateHistory();
   if (tab==='referral') loadRefList();
+  if (tab==='readings') loadReadings();
   if (tab==='analytics') loadAnalytics();
   if (tab==='bizpartner') loadBizPartners();
 }
@@ -4589,6 +4887,46 @@ function renderEnhancedDashboard(allEvts){
   var cutoff=new Date(now); cutoff.setDate(cutoff.getDate()-enhPeriod); cutoff.setHours(0,0,0,0);
   var events=allEvts.filter(function(e){return e._enhDate>=cutoff;});
   console.log('[增強儀表板] 總事件:'+allEvts.length+', 篩選後:'+events.length+', 期間:'+enhPeriod+'天, Chart.js:'+(typeof Chart!=='undefined'));
+
+  // 如果沒有事件，所有容器顯示空值提示
+  if(!events.length){
+    var emptyMsg='<div style="display:flex;align-items:center;justify-content:center;height:100%;min-height:80px;font-size:.85rem;color:var(--light)">📊 此期間尚無數據，會員使用工具後會自動出現</div>';
+    ['enh-trend-chart','enh-pie-chart','enh-funnel-chart','enh-newret-chart'].forEach(function(id){
+      var c=document.getElementById(id);if(c&&c.parentElement)c.parentElement.innerHTML=emptyMsg;
+    });
+    ['enh-feature-bars','enh-heatmap-matrix','enh-retention-table'].forEach(function(id){
+      var el=document.getElementById(id);if(el)el.innerHTML=emptyMsg;
+    });
+    return;
+  }
+
+  // Chart.js 可能還沒載入，等一下再試
+  if(typeof Chart==='undefined'){
+    console.warn('[增強儀表板] Chart.js 尚未載入，啟動純 CSS 模式');
+    // 純 CSS fallback for canvas charts
+    renderEnhFeatureBars(events);
+    renderEnhHeatmapMatrix(events);
+    renderEnhRetention(events);
+    // Canvas charts: show summary text instead
+    var trendEl=document.getElementById('enh-trend-chart');
+    if(trendEl&&trendEl.parentElement){
+      var dayMap={};events.forEach(function(e){var dk=e._enhDay;if(!dayMap[dk])dayMap[dk]=0;dayMap[dk]++;});
+      var days=Object.keys(dayMap).sort().slice(-7);
+      var bars=days.map(function(d){var cnt=dayMap[d];return '<div style="flex:1;text-align:center"><div style="height:'+(Math.max(8,cnt*4))+'px;background:var(--gold);border-radius:3px 3px 0 0;margin:0 2px"></div><div style="font-size:.6rem;color:var(--light);margin-top:4px">'+d.slice(5)+'</div></div>';}).join('');
+      trendEl.parentElement.innerHTML='<div style="display:flex;align-items:flex-end;height:160px;padding:20px 10px 0">'+bars+'</div>';
+    }
+    var pieEl=document.getElementById('enh-pie-chart');
+    if(pieEl&&pieEl.parentElement){
+      var tc={};events.forEach(function(e){tc[e._enhTool]=(tc[e._enhTool]||0)+1;});
+      var sorted=Object.entries(tc).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+      var total=events.length;
+      pieEl.parentElement.innerHTML='<div style="padding:10px">'+sorted.map(function(s){var pct=Math.round(s[1]/total*100);return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:.82rem"><div style="width:'+(pct*2)+'px;height:14px;background:var(--gold);border-radius:3px;min-width:4px"></div><span style="color:var(--text)">'+s[0]+'</span><span style="color:var(--light);font-size:.72rem">'+s[1]+' ('+pct+'%)</span></div>';}).join('')+'</div>';
+    }
+    renderEnhFunnel(events);
+    renderEnhNewRet(events);
+    return;
+  }
+
   var fns=[renderEnhFeatureBars,renderEnhHeatmapMatrix,renderEnhRetention,renderEnhTrend,renderEnhPie,renderEnhFunnel,renderEnhNewRet];
   fns.forEach(function(fn){try{fn(events);}catch(e){console.warn('[增強儀表板] '+fn.name+' 錯誤:',e);}});
 }
